@@ -8,32 +8,33 @@ import ServicesSection from './components/ServicesSection';
 import InfoSection from './components/InfoSection';
 import Footer from './components/Footer';
 
-// Ayrı bir HTML dosyasına ihtiyaç duymadan uygulama içinde çalışan Debugger
+// Klasör yapısını kontrol etmek için Debugger
 const AssetDebugger: React.FC = () => (
   <div className="min-h-screen bg-zinc-950 p-10 pt-32 text-white">
     <div className="max-w-4xl mx-auto">
-      <h1 className="text-4xl font-bold mb-8 text-cray-gold">Varlık Kontrol Paneli (React Modu)</h1>
+      <h1 className="text-4xl font-bold mb-8 text-cray-gold">Varlık Kontrol Paneli (v2 - Klasör Odaklı)</h1>
       <div className="bg-zinc-900 p-6 rounded-xl border border-cray-gold/30 mb-10">
-        <h2 className="text-xl font-bold mb-4">Sistem Bilgisi</h2>
-        <p className="text-gray-300">Bu sayfa React içinden render ediliyor, yani sunucu taraflı 404 hatası almazsınız.</p>
+        <h2 className="text-xl font-bold mb-4">Klasör Yapılandırması</h2>
+        <p className="text-gray-300 mb-2">Hedeflenen Yol: <code className="text-cray-gold">/gorsel/c1.jpg</code></p>
+        <p className="text-sm text-gray-400 italic">Eğer aşağıdaki görselde hata görüyorsanız, GitHub'da 'gorsel' isimli bir klasör açıp içine 'c1.jpg' dosyasını yüklediğinizden emin olun.</p>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         <div className="space-y-4">
-          <h3 className="font-bold">c1.jpg Testi</h3>
-          <div className="aspect-video bg-zinc-800 rounded-lg overflow-hidden flex items-center justify-center border border-white/10">
+          <h3 className="font-bold">Yeni Klasör Testi (gorsel/c1.jpg)</h3>
+          <div className="aspect-video bg-zinc-800 rounded-lg overflow-hidden flex items-center justify-center border border-white/10 shadow-2xl">
             <img 
-              src="./c1.jpg" 
-              alt="c1.jpg" 
+              src="./gorsel/c1.jpg" 
+              alt="gorsel/c1.jpg" 
               className="w-full h-full object-cover" 
-              onError={(e) => (e.currentTarget.parentElement!.innerHTML = '<span class="text-red-500 p-4 text-center text-sm">c1.jpg bulunamadı.<br/>Lütfen GitHub reposunda ana dizinde olduğundan emin olun.</span>')}
+              onError={(e) => (e.currentTarget.parentElement!.innerHTML = '<div class="text-red-500 p-6 text-center text-sm font-medium">Görsel bulunamadı.<br/><br/>Hata: 404 (Not Found)<br/>Beklenen Konum: /gorsel/c1.jpg</div>')}
             />
           </div>
         </div>
         <div className="space-y-4">
-          <h3 className="font-bold">CDN Fallback Testi</h3>
+          <h3 className="font-bold">Yedek Sistem (CDN)</h3>
           <div className="aspect-video bg-zinc-800 rounded-lg overflow-hidden flex items-center justify-center border border-white/10">
-            <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=400" alt="CDN Test" className="w-full h-full object-cover" />
+            <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=400" alt="CDN Test" className="w-full h-full object-cover opacity-60" />
           </div>
         </div>
       </div>
