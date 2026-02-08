@@ -15,7 +15,7 @@ const steps: ProcessStep[] = [
 
 const Hero: React.FC = () => {
   // Klasör yapısına uygun yeni yol
-  const localBg = "./gorsel/c1.jpg";
+  const localBg = "/gorsel/c1.jpg";
   // Paylaştığınız görseldeki ambiyansa en yakın yüksek kaliteli yedek görsel
   const fallbackBg = "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=2832&auto=format&fit=crop";
 
