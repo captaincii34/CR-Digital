@@ -16,9 +16,18 @@ const steps: ProcessStep[] = [
 const Hero: React.FC = () => {
   return (
     <section className="relative pt-32 pb-20 overflow-hidden bg-black text-white min-h-screen flex flex-col items-center">
-      {/* Görsel yolu c1.jpg olarak düzeltildi */}
-      <img src="c1.jpg" alt="Process Background" className="absolute top-0 left-0 w-full h-full object-cover z-0" />
-      <div className="absolute top-0 left-0 w-full h-full bg-black/65 z-[1]"></div>
+      {/* Arka plan görseli - Yol ./c1.jpg olarak güncellendi */}
+      <img 
+        src="./c1.jpg" 
+        alt="CRAY Digital Background" 
+        className="absolute top-0 left-0 w-full h-full object-cover z-0"
+        loading="eager"
+        onError={(e) => {
+          console.error("Görsel yüklenemedi: c1.jpg");
+          // Fallback olarak koyu bir degrade bırakıyoruz
+        }}
+      />
+      <div className="absolute top-0 left-0 w-full h-full bg-black/60 z-[1]"></div>
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-transparent to-black z-[2]"></div>
 
       <div className="relative z-10 w-full max-w-[1280px] px-8 pt-12">

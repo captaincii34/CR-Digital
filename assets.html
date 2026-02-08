@@ -4,79 +4,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CRAY Digital - Asset Manager & Setup Guide</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <title>CRAY Digital - Asset Debugger</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { background-color: #050505; font-family: 'Open Sans', sans-serif; color: white; }
-    .gold-glow { box-shadow: 0 0 20px rgba(255, 177, 0, 0.15); }
-    .gold-border { border: 1px solid rgba(255, 177, 0, 0.2); }
+    body { background-color: #050505; color: white; font-family: sans-serif; }
+    .gold-border { border: 1px solid rgba(255, 177, 0, 0.3); }
     .gold-text { color: #ffb100; }
-    .gold-bg { background-color: #ffb100; }
-    .card-gradient { background: linear-gradient(145deg, #0f0f0f 0%, #050505 100%); }
-    .step-badge { width: 32px; height: 32px; background: #ffb100; color: black; border-radius: 50%; display: flex; items-center; justify-center; font-bold; flex-shrink: 0; }
   </style>
 </head>
-<body class="min-h-screen py-16 px-6">
+<body class="p-10">
   <div class="max-w-4xl mx-auto">
+    <h1 class="text-4xl font-bold mb-8 gold-text">Görsel Kontrol Paneli</h1>
     
-    <!-- Setup Instructions -->
-    <div class="mb-12 p-8 rounded-[2rem] card-gradient gold-border gold-glow">
-      <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
-        <span class="gold-text">⚠️</span> Görüntüleme Sorunu Çözümü
-      </h2>
+    <div class="bg-zinc-900 p-6 rounded-xl gold-border mb-10">
+      <h2 class="text-xl font-bold mb-4">Sunucu Durumu ve İpuçları</h2>
+      <ul class="list-disc ml-5 space-y-2 text-gray-300">
+        <li>Cloud Run üzerinde dosyalarınızın <strong>public</strong> klasöründe olduğundan emin olun.</li>
+        <li>Dosya adı büyük/küçük harf duyarlıdır: <code>c1.jpg</code> ve <code>C1.JPG</code> farklıdır.</li>
+        <li>Doğrudan erişim linkini kontrol edin: <a href="./c1.jpg" target="_blank" class="underline gold-text">Buraya tıklayarak c1.jpg'yi açmayı deneyin</a>.</li>
+      </ul>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div class="space-y-4">
+        <h3 class="font-bold">Göreceli Yol (./c1.jpg)</h3>
+        <div class="aspect-video bg-zinc-800 rounded-lg overflow-hidden flex items-center justify-center border border-white/10">
+          <img src="./c1.jpg" alt="Test c1.jpg" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<span class=\'text-red-500\'>YÜKLENEMEDİ (404)</span>'"/>
+        </div>
+      </div>
       
-      <div class="space-y-8">
-        <div class="flex gap-4">
-          <div class="step-badge">1</div>
-          <div>
-            <h4 class="font-bold mb-1">Görselleri Adlandırın</h4>
-            <p class="text-gray-400 text-sm">İndirdiğiniz görselleri ana klasöre şu isimlerle kaydedin: <code class="bg-white/10 px-2 py-1 rounded gold-text">c1.jpg</code> ve <code class="bg-white/10 px-2 py-1 rounded gold-text">path-bg.jpg</code></p>
-          </div>
-        </div>
-
-        <div class="flex gap-4">
-          <div class="step-badge">2</div>
-          <div>
-            <h4 class="font-bold mb-1">Yerel Sunucu Kullanın</h4>
-            <p class="text-gray-400 text-sm">Dosyayı doğrudan çift tıklayarak açmayın. VS Code kullanıyorsanız <span class="text-white font-medium italic">"Live Server"</span> eklentisiyle veya terminalde <code class="bg-white/10 px-2 py-1 rounded text-white">npx serve</code> komutuyla çalıştırın.</p>
-          </div>
-        </div>
-
-        <div class="flex gap-4">
-          <div class="step-badge">3</div>
-          <div>
-            <h4 class="font-bold mb-1">Yollar Güncellendi</h4>
-            <p class="text-gray-400 text-sm">Hero.tsx dosyasındaki yol hatalarını düzelttim. Artık klasörünüzdeki görseller otomatik olarak görünecektir.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="mt-10 flex justify-center">
-        <a href="index.html" class="gold-bg text-black px-10 py-4 rounded-2xl font-bold hover:scale-105 transition-transform">
-          Siteyi Tekrar Dene
-        </a>
-      </div>
-    </div>
-
-    <!-- Asset Previews -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div class="rounded-2xl overflow-hidden gold-border bg-[#111]">
-        <img src="path-bg.jpg" alt="Preview 1" class="w-full aspect-video object-cover" />
-        <div class="p-4 text-center border-t border-white/10">
-          <span class="text-xs gold-text uppercase font-bold">path-bg.jpg</span>
-        </div>
-      </div>
-      <div class="rounded-2xl overflow-hidden gold-border bg-[#111]">
-        <img src="c1.jpg" alt="Preview 2" class="w-full aspect-video object-cover" />
-        <div class="p-4 text-center border-t border-white/10">
-          <span class="text-xs gold-text uppercase font-bold">c1.jpg</span>
+      <div class="space-y-4">
+        <h3 class="font-bold">Ana Yol (/c1.jpg)</h3>
+        <div class="aspect-video bg-zinc-800 rounded-lg overflow-hidden flex items-center justify-center border border-white/10">
+          <img src="/c1.jpg" alt="Test /c1.jpg" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<span class=\'text-red-500\'>YÜKLENEMEDİ (404)</span>'"/>
         </div>
       </div>
     </div>
 
+    <div class="mt-12 text-center">
+      <a href="index.html" class="bg-white text-black px-8 py-3 rounded-lg font-bold">Ana Sayfaya Dön</a>
+    </div>
   </div>
 </body>
 </html>
