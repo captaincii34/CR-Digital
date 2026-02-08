@@ -16,7 +16,7 @@ const steps: ProcessStep[] = [
 const Hero: React.FC = () => {
   return (
     <section className="relative pt-32 pb-20 overflow-hidden bg-black text-white min-h-screen flex flex-col items-center">
-      <img src="https://picsum.photos/id/180/1920/1080" alt="Process Background" className="absolute top-0 left-0 w-full h-full object-cover z-0" />
+      <img src="hero-bg.jpg" alt="Process Background" className="absolute top-0 left-0 w-full h-full object-cover z-0" />
       <div className="absolute top-0 left-0 w-full h-full bg-black/65 z-[1]"></div>
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-transparent to-black z-[2]"></div>
 

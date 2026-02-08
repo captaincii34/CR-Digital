@@ -37,7 +37,7 @@ const reasons = [
 const WhyUsSection: React.FC = () => {
   return (
     <section className="relative py-20 bg-black text-white min-h-[600px] overflow-hidden">
-      <img src="https://picsum.photos/id/182/1920/1080" alt="Why Us Background" className="absolute top-0 left-0 w-full h-full object-cover z-0" />
+      <img src="path-bg.jpg" alt="Why Us Background" className="absolute top-0 left-0 w-full h-full object-cover z-0" />
       <div className="absolute top-0 left-0 w-full h-full bg-black/70 z-[1]"></div>
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black via-transparent to-black z-[2]"></div>
 
