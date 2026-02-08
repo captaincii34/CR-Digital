@@ -58,7 +58,7 @@ const ServicesSection: React.FC = () => {
   return (
     <section id="section3" className="relative py-20 overflow-hidden bg-black text-white">
       {/* Önizleme için canlı URL eklendi (Orijinal dosya adı: target-bg.jpg) */}
-      <img src="https://images.unsplash.com/photo-1639762681057-408e52192e55?auto=format&fit=crop&q=80&w=2000" alt="Services Background" className="absolute top-0 left-0 w-full h-full object-cover z-0" />
+      <img src="/gorsel/ag1.jpg" alt="Services Background" className="absolute top-0 left-0 w-full h-full object-cover z-0" />
       <div className="absolute top-0 left-0 w-full h-full bg-black/70 z-[1]"></div>
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black via-transparent to-black z-[2]"></div>
 

@@ -90,7 +90,7 @@ const App: React.FC = () => {
               title="Mevcut Kripto Projenizi Bir Üst Seviyeye Taşıyalım"
               desc="Birçok proje doğru strateji, pazarlama ve teknik optimizasyon eksikliği nedeniyle potansiyelini kullanamıyor."
               points={["Projenizi analiz ederiz", "Eksikleri tespit ederiz", "Yeniden konumlandırır ve büyütürüz"]}
-              image="https://images.unsplash.com/photo-1621761191319-c6fb62004040?auto=format&fit=crop&q=80&w=2000"
+              image="/gorsel/y.jpg"
               reverse
               cta="Projemi Değerlendirin"
             />
@@ -99,7 +99,7 @@ const App: React.FC = () => {
               title="Yatırım Gücünüz Var Ama Ne Yapacağınıza Karar Veremediniz mi?"
               desc="Web3 ve kripto dünyasında doğru yatırım, sadece sermaye değil doğru strateji gerektirir."
               points={["Yatırım fırsatlarını analiz eder", "Riskleri değerlendirir", "Size uygun Web3 modellerini belirleriz"]}
-              image="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2000"
+              image="/gorsel/z.jpg"
               cta="Yatırım Danışmanlığı Al"
             />
             <section className="py-20 border-t border-cray-gold/10 bg-gradient-to-b from-transparent to-cray-gold/5 text-center text-white">

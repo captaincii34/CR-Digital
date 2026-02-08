@@ -38,7 +38,7 @@ const WhyUsSection: React.FC = () => {
   return (
     <section className="relative py-20 bg-black text-white min-h-[600px] overflow-hidden">
       {/* Önizleme için canlı URL eklendi (Orijinal dosya adı: path-bg.jpg) */}
-      <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2000" alt="Why Us Background" className="absolute top-0 left-0 w-full h-full object-cover z-0" />
+      <img src="/gorsel/fh.jpg" alt="Why Us Background" className="absolute top-0 left-0 w-full h-full object-cover z-0" />
       <div className="absolute top-0 left-0 w-full h-full bg-black/70 z-[1]"></div>
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black via-transparent to-black z-[2]"></div>
 
