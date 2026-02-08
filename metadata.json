@@ -1,0 +1,8 @@
+{
+  "name": "CRAY Digital ",
+  "description": "A high-end, 360-degree digital marketing and consultancy platform for crypto and Web3 projects, featuring AI-powered project evaluation and comprehensive service roadmaps.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
