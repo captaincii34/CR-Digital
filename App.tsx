@@ -11,30 +11,31 @@ import Footer from './components/Footer';
 const AssetDebugger: React.FC = () => (
   <div className="min-h-screen bg-zinc-950 p-10 pt-32 text-white font-sans">
     <div className="max-w-4xl mx-auto">
-      <h1 className="text-4xl font-bold mb-8 text-cray-gold">Cloud Run /public Klasör Testi</h1>
+      <h1 className="text-4xl font-bold mb-8 text-cray-gold">Cloud Run /dist Klasörü Testi</h1>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
         <div className="bg-zinc-900 p-6 rounded-xl border border-white/10">
-          <h2 className="text-xl font-bold mb-4 text-green-400">Yol 1: public/gorsel/c1.jpg</h2>
-          <p className="text-sm text-gray-400 mb-4">Kod içi erişim: <code className="text-white">/gorsel/c1.jpg</code></p>
+          <h2 className="text-xl font-bold mb-4 text-green-400">Yol 1: /dist/gorsel/c1.jpg</h2>
           <div className="aspect-video bg-black rounded-lg overflow-hidden border border-white/5 flex items-center justify-center">
-            <img src="/gorsel/c1.jpg" alt="Public Gorsel Path" className="max-w-full max-h-full object-contain" onError={(e) => (e.currentTarget.parentElement!.innerHTML = '<span class="text-red-500 text-xs">404: /gorsel/c1.jpg Bulunamadı</span>')} />
+            <img src="/dist/gorsel/c1.jpg" alt="Dist Path 1" className="max-w-full max-h-full object-contain" onError={(e) => (e.currentTarget.parentElement!.innerHTML = '<span class="text-red-500 text-xs">404: /dist/gorsel/c1.jpg Bulunamadı</span>')} />
           </div>
         </div>
 
         <div className="bg-zinc-900 p-6 rounded-xl border border-white/10">
-          <h2 className="text-xl font-bold mb-4 text-blue-400">Yol 2: public/c1.jpg</h2>
-          <p className="text-sm text-gray-400 mb-4">Kod içi erişim: <code className="text-white">/c1.jpg</code></p>
+          <h2 className="text-xl font-bold mb-4 text-blue-400">Yol 2: /gorsel/c1.jpg</h2>
           <div className="aspect-video bg-black rounded-lg overflow-hidden border border-white/5 flex items-center justify-center">
-            <img src="/c1.jpg" alt="Public Root Path" className="max-w-full max-h-full object-contain" onError={(e) => (e.currentTarget.parentElement!.innerHTML = '<span class="text-red-500 text-xs">404: /c1.jpg Bulunamadı</span>')} />
+            <img src="/gorsel/c1.jpg" alt="Root Path 1" className="max-w-full max-h-full object-contain" onError={(e) => (e.currentTarget.parentElement!.innerHTML = '<span class="text-red-500 text-xs">404: /gorsel/c1.jpg Bulunamadı</span>')} />
           </div>
         </div>
       </div>
 
       <div className="bg-zinc-900/50 p-6 rounded-xl border border-cray-gold/20 text-sm">
-        <p className="text-gray-400">
-          <strong>Not:</strong> Cloud Run deploy aldığında, <code className="text-white">public</code> klasörünün içeriği uygulamanızın kök dizinine taşınır. 
-          Eğer GitHub'da dosyaları doğru klasöre (public/gorsel/c1.jpg) koyduysanız, deploy sonrası görselleriniz yukarıdaki test alanlarında belirecektir.
+        <h3 className="font-bold mb-2">Cloud Run İpucu:</h3>
+        <p className="text-gray-400 mb-4">
+          Google Cloud Run, bazen <code className="text-white">public</code> klasörünü doğrudan görmez. GitHub'da manuel olarak oluşturduğumuz <code className="text-white">dist</code> klasörü, sunucunun dosyaları "statik varlık" olarak tanımasını sağlar.
+        </p>
+        <p className="text-cray-gold font-medium">
+          → <a href="/dist/gorsel/c1.jpg" target="_blank" className="underline">Görsele Doğrudan Gitmeyi Dene</a>
         </p>
       </div>
 

@@ -14,30 +14,37 @@ const steps: ProcessStep[] = [
 ];
 
 const Hero: React.FC = () => {
-  // Cloud Run/Vite projelerinde 'public' klasörü içeriği '/' kökünden servis edilir.
-  // Bu nedenle yolların başına '/' koymak en sağlıklı yöntemdir.
-  const primaryPath = "/gorsel/c1.jpg";
-  const rootPath = "/c1.jpg";
+  // Denenecek yollar sırasıyla: 
+  // 1. Cloud Run'ın servis ettiği dist yolu
+  // 2. Public üzerinden gelen yol
+  // 3. Kök dizin yolu
+  const assetPaths = [
+    "/dist/gorsel/c1.jpg",
+    "/gorsel/c1.jpg",
+    "/dist/c1.jpg",
+    "/c1.jpg"
+  ];
+
   const fallbackBg = "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=2832&auto=format&fit=crop";
 
   return (
     <section className="relative pt-32 pb-20 overflow-hidden bg-black text-white min-h-screen flex flex-col items-center">
-      {/* Arka plan görseli - Public Klasör Odaklı Fallback */}
+      {/* Arka plan görseli - Brute Force Yol Deneme Mekanizması */}
       <img 
-        src={primaryPath}
+        src={assetPaths[0]}
         alt="CRAY Digital Background" 
         className="absolute top-0 left-0 w-full h-full object-cover z-0 opacity-40 transition-opacity duration-1000"
         loading="eager"
         onError={(e) => {
           const img = e.currentTarget;
-          // Eğer /gorsel/c1.jpg bulunamazsa kök dizindeki /c1.jpg'i dene
-          if (img.src.includes("/gorsel/")) {
-            console.warn("public/gorsel/c1.jpg bulunamadı, kök dizin deneniyor...");
-            img.src = rootPath;
-          } 
-          // O da yoksa Unsplash yedeğini kullan
-          else if (img.src.includes("c1.jpg")) {
-            console.error("Hiçbir yerel görsel bulunamadı, CDN devrede.");
+          const currentSrc = new URL(img.src).pathname;
+          const currentIndex = assetPaths.indexOf(currentSrc);
+
+          if (currentIndex >= 0 && currentIndex < assetPaths.length - 1) {
+            console.log(`Yol başarısız: ${currentSrc}, sıradaki deneniyor: ${assetPaths[currentIndex + 1]}`);
+            img.src = assetPaths[currentIndex + 1];
+          } else {
+            console.error("Tüm yerel yollar başarısız oldu, CDN yükleniyor.");
             img.src = fallbackBg;
           }
         }}
