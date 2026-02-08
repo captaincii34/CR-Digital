@@ -28,7 +28,7 @@ const App: React.FC = () => {
             "Eksikleri tespit ederiz",
             "Yeniden konumlandırır ve büyütürüz"
           ]}
-          image="mobile-bg.jpg"
+          image="https://images.unsplash.com/photo-1621761191319-c6fb62004040?auto=format&fit=crop&q=80&w=2000"
           reverse
           cta="Projemi Değerlendirin"
         />
@@ -43,7 +43,7 @@ const App: React.FC = () => {
             "Riskleri değerlendirir",
             "Size uygun Web3 modellerini belirleriz"
           ]}
-          image="path-bg.jpg"
+          image="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2000"
           cta="Yatırım Danışmanlığı Al"
         />
 

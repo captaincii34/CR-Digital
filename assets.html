@@ -4,145 +4,79 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CRAY Digital - Asset Manager</title>
+  <title>CRAY Digital - Asset Manager & Setup Guide</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { background-color: #000; font-family: 'Open Sans', sans-serif; }
+    body { background-color: #050505; font-family: 'Open Sans', sans-serif; color: white; }
+    .gold-glow { box-shadow: 0 0 20px rgba(255, 177, 0, 0.15); }
     .gold-border { border: 1px solid rgba(255, 177, 0, 0.2); }
     .gold-text { color: #ffb100; }
     .gold-bg { background-color: #ffb100; }
+    .card-gradient { background: linear-gradient(145deg, #0f0f0f 0%, #050505 100%); }
+    .step-badge { width: 32px; height: 32px; background: #ffb100; color: black; border-radius: 50%; display: flex; items-center; justify-center; font-bold; flex-shrink: 0; }
   </style>
 </head>
-<body class="text-white min-h-screen flex flex-col items-center py-12 px-6">
-  <div class="max-w-5xl w-full">
-    <!-- Header -->
-    <div class="flex justify-between items-center mb-8 bg-[#111] p-6 rounded-2xl gold-border shadow-2xl">
-      <div>
-        <h1 class="gold-text font-bold text-2xl tracking-tight uppercase">Dijital Asset Kütüphanesi</h1>
-        <p class="text-gray-400 text-sm mt-1">Yüklenen yüksek çözünürlüklü medya dosyaları ve iç bağlantılar.</p>
-      </div>
-      <a href="index.html" class="gold-bg text-black px-6 py-2.5 rounded-lg font-bold hover:scale-105 transition-all shadow-[0_4px_12px_rgba(255,177,0,0.3)]">
-        Ana Sayfaya Dön
-      </a>
-    </div>
-
-    <!-- Asset List -->
-    <div class="grid grid-cols-1 gap-12">
+<body class="min-h-screen py-16 px-6">
+  <div class="max-w-4xl mx-auto">
+    
+    <!-- Setup Instructions -->
+    <div class="mb-12 p-8 rounded-[2rem] card-gradient gold-border gold-glow">
+      <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
+        <span class="gold-text">⚠️</span> Görüntüleme Sorunu Çözümü
+      </h2>
       
-      <!-- Kart 1: c1.jpg -->
-      <div class="bg-[#09090b] rounded-3xl overflow-hidden gold-border shadow-2xl transition-all hover:border-[#ffb100]/50">
-        <div class="aspect-video relative group overflow-hidden bg-[#1a1a1a]">
-          <img src="c1.jpg" alt="Hero Background" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
-          <div class="absolute bottom-6 left-6">
-            <span class="bg-black/80 gold-text px-3 py-1 rounded text-xs font-bold gold-border uppercase tracking-widest">Main Hero</span>
+      <div class="space-y-8">
+        <div class="flex gap-4">
+          <div class="step-badge">1</div>
+          <div>
+            <h4 class="font-bold mb-1">Görselleri Adlandırın</h4>
+            <p class="text-gray-400 text-sm">İndirdiğiniz görselleri ana klasöre şu isimlerle kaydedin: <code class="bg-white/10 px-2 py-1 rounded gold-text">c1.jpg</code> ve <code class="bg-white/10 px-2 py-1 rounded gold-text">path-bg.jpg</code></p>
           </div>
         </div>
-        
-        <div class="p-8">
-          <div class="flex flex-wrap justify-between items-start gap-4 mb-6">
-            <div>
-              <h2 class="text-2xl font-bold mb-1 italic">Ana Hero Görseli (c1.jpg)</h2>
-              <p class="text-gray-400 font-light max-w-xl">Ana sayfa giriş bölümünde kullanılan, projenin vizyonunu temsil eden merkezi görsel.</p>
-            </div>
-          </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="bg-black/40 p-4 rounded-xl gold-border">
-              <p class="text-[0.65rem] uppercase text-gray-500 font-bold mb-1 tracking-wider">Dosya Yolu</p>
-              <p class="text-sm font-mono gold-text truncate">/c1.jpg</p>
-            </div>
-            <div class="bg-black/40 p-4 rounded-xl gold-border">
-              <p class="text-[0.65rem] uppercase text-gray-500 font-bold mb-1 tracking-wider">Durum</p>
-              <p class="text-sm text-green-400 font-bold flex items-center gap-2">
-                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span> Yayında
-              </p>
-            </div>
-            <div class="bg-black/40 p-4 rounded-xl gold-border">
-              <p class="text-[0.65rem] uppercase text-gray-500 font-bold mb-1 tracking-wider">Kullanım</p>
-              <p class="text-sm text-white font-medium">Hero Section Background</p>
-            </div>
+        <div class="flex gap-4">
+          <div class="step-badge">2</div>
+          <div>
+            <h4 class="font-bold mb-1">Yerel Sunucu Kullanın</h4>
+            <p class="text-gray-400 text-sm">Dosyayı doğrudan çift tıklayarak açmayın. VS Code kullanıyorsanız <span class="text-white font-medium italic">"Live Server"</span> eklentisiyle veya terminalde <code class="bg-white/10 px-2 py-1 rounded text-white">npx serve</code> komutuyla çalıştırın.</p>
           </div>
+        </div>
 
-          <div class="mt-8 flex flex-col sm:flex-row gap-4">
-            <a href="c1.jpg" target="_blank" class="flex-1 bg-white/5 border border-white/10 text-white text-center py-4 rounded-xl font-bold hover:bg-white/10 transition-all">
-              Tam Boyut Görüntüle
-            </a>
-            <button onclick="copyLink('c1.jpg')" class="flex-1 gold-bg text-black py-4 rounded-xl font-bold hover:opacity-90 transition-all shadow-lg">
-              Bağlantıyı Kopyala
-            </button>
+        <div class="flex gap-4">
+          <div class="step-badge">3</div>
+          <div>
+            <h4 class="font-bold mb-1">Yollar Güncellendi</h4>
+            <p class="text-gray-400 text-sm">Hero.tsx dosyasındaki yol hatalarını düzelttim. Artık klasörünüzdeki görseller otomatik olarak görünecektir.</p>
           </div>
         </div>
       </div>
 
-      <!-- Kart 2: path-bg.jpg -->
-      <div class="bg-[#09090b] rounded-3xl overflow-hidden gold-border shadow-2xl transition-all hover:border-[#ffb100]/50">
-        <div class="aspect-video relative group overflow-hidden bg-[#1a1a1a]">
-          <img src="path-bg.jpg" alt="Glowing Digital Path" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
-          <div class="absolute bottom-6 left-6">
-            <span class="bg-black/80 gold-text px-3 py-1 rounded text-xs font-bold gold-border uppercase tracking-widest">Roadmap Concept</span>
-          </div>
-        </div>
-        
-        <div class="p-8">
-          <div class="flex flex-wrap justify-between items-start gap-4 mb-6">
-            <div>
-              <h2 class="text-2xl font-bold mb-1 italic">Parlayan Dijital Yol (path-bg.jpg)</h2>
-              <p class="text-gray-400 font-light max-w-xl">Kripto projelerinin yol haritasını ve geleceğe uzanan dijital akışı temsil eden konsept görsel.</p>
-            </div>
-          </div>
+      <div class="mt-10 flex justify-center">
+        <a href="index.html" class="gold-bg text-black px-10 py-4 rounded-2xl font-bold hover:scale-105 transition-transform">
+          Siteyi Tekrar Dene
+        </a>
+      </div>
+    </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="bg-black/40 p-4 rounded-xl gold-border">
-              <p class="text-[0.65rem] uppercase text-gray-500 font-bold mb-1 tracking-wider">Dosya Yolu</p>
-              <p class="text-sm font-mono gold-text truncate">/path-bg.jpg</p>
-            </div>
-            <div class="bg-black/40 p-4 rounded-xl gold-border">
-              <p class="text-[0.65rem] uppercase text-gray-500 font-bold mb-1 tracking-wider">Durum</p>
-              <p class="text-sm text-green-400 font-bold flex items-center gap-2">
-                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span> Yayında
-              </p>
-            </div>
-            <div class="bg-black/40 p-4 rounded-xl gold-border">
-              <p class="text-[0.65rem] uppercase text-gray-500 font-bold mb-1 tracking-wider">Kullanım</p>
-              <p class="text-sm text-white font-medium">Why Us / Roadmap Section</p>
-            </div>
-          </div>
-
-          <div class="mt-8 flex flex-col sm:flex-row gap-4">
-            <a href="path-bg.jpg" target="_blank" class="flex-1 bg-white/5 border border-white/10 text-white text-center py-4 rounded-xl font-bold hover:bg-white/10 transition-all">
-              Tam Boyut Görüntüle
-            </a>
-            <button onclick="copyLink('path-bg.jpg')" class="flex-1 gold-bg text-black py-4 rounded-xl font-bold hover:opacity-90 transition-all shadow-lg">
-              Bağlantıyı Kopyala
-            </button>
-          </div>
+    <!-- Asset Previews -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="rounded-2xl overflow-hidden gold-border bg-[#111]">
+        <img src="path-bg.jpg" alt="Preview 1" class="w-full aspect-video object-cover" />
+        <div class="p-4 text-center border-t border-white/10">
+          <span class="text-xs gold-text uppercase font-bold">path-bg.jpg</span>
         </div>
       </div>
-
+      <div class="rounded-2xl overflow-hidden gold-border bg-[#111]">
+        <img src="c1.jpg" alt="Preview 2" class="w-full aspect-video object-cover" />
+        <div class="p-4 text-center border-t border-white/10">
+          <span class="text-xs gold-text uppercase font-bold">c1.jpg</span>
+        </div>
+      </div>
     </div>
 
-    <!-- Info Footer -->
-    <div class="mt-12 text-center border-t border-white/5 pt-8">
-      <p class="text-gray-500 text-xs tracking-widest uppercase">CRAY Digital Internal Asset Manager • 2024</p>
-    </div>
   </div>
-
-  <script>
-    function copyLink(fileName) {
-      const dummy = document.createElement('input');
-      const text = window.location.origin + '/' + fileName;
-      document.body.appendChild(dummy);
-      dummy.value = text;
-      dummy.select();
-      document.execCommand('copy');
-      document.body.removeChild(dummy);
-      alert('Görsel bağlantısı panoya kopyalandı: ' + text);
-    }
-  </script>
 </body>
 </html>

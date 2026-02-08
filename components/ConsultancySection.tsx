@@ -19,7 +19,8 @@ const ConsultancySection: React.FC = () => {
 
   return (
     <section id="section1" className="relative py-20 overflow-hidden bg-black text-white min-h-[600px]">
-      <img src="consultancy-bg.jpg" alt="Consultancy Background" className="absolute top-0 left-0 w-full h-full object-cover z-0" />
+      {/* Önizleme için canlı URL eklendi (Orijinal dosya adı: consultancy-bg.jpg) */}
+      <img src="https://images.unsplash.com/photo-1642104704074-907c0698cbd9?auto=format&fit=crop&q=80&w=2000" alt="Consultancy Background" className="absolute top-0 left-0 w-full h-full object-cover z-0" />
       <div className="absolute top-0 left-0 w-full h-full bg-black/65 z-[1]"></div>
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black via-transparent to-black z-[2]"></div>
 
