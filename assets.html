@@ -2,48 +2,15 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CRAY Digital - Asset Debugger</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body { background-color: #050505; color: white; font-family: sans-serif; }
-    .gold-border { border: 1px solid rgba(255, 177, 0, 0.3); }
-    .gold-text { color: #ffb100; }
-  </style>
+    <meta charset="UTF-8">
+    <title>Yönlendiriliyor...</title>
+    <script>
+        // Eğer bu dosya doğrudan açılırsa, React içindeki debugger'a yönlendir
+        window.location.href = "index.html#assets";
+    </script>
 </head>
-<body class="p-10">
-  <div class="max-w-4xl mx-auto">
-    <h1 class="text-4xl font-bold mb-8 gold-text">Görsel Kontrol Paneli</h1>
-    
-    <div class="bg-zinc-900 p-6 rounded-xl gold-border mb-10">
-      <h2 class="text-xl font-bold mb-4">Sunucu Durumu ve İpuçları</h2>
-      <ul class="list-disc ml-5 space-y-2 text-gray-300">
-        <li>Cloud Run üzerinde dosyalarınızın <strong>public</strong> klasöründe olduğundan emin olun.</li>
-        <li>Dosya adı büyük/küçük harf duyarlıdır: <code>c1.jpg</code> ve <code>C1.JPG</code> farklıdır.</li>
-        <li>Doğrudan erişim linkini kontrol edin: <a href="./c1.jpg" target="_blank" class="underline gold-text">Buraya tıklayarak c1.jpg'yi açmayı deneyin</a>.</li>
-      </ul>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-      <div class="space-y-4">
-        <h3 class="font-bold">Göreceli Yol (./c1.jpg)</h3>
-        <div class="aspect-video bg-zinc-800 rounded-lg overflow-hidden flex items-center justify-center border border-white/10">
-          <img src="./c1.jpg" alt="Test c1.jpg" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<span class=\'text-red-500\'>YÜKLENEMEDİ (404)</span>'"/>
-        </div>
-      </div>
-      
-      <div class="space-y-4">
-        <h3 class="font-bold">Ana Yol (/c1.jpg)</h3>
-        <div class="aspect-video bg-zinc-800 rounded-lg overflow-hidden flex items-center justify-center border border-white/10">
-          <img src="/c1.jpg" alt="Test /c1.jpg" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<span class=\'text-red-500\'>YÜKLENEMEDİ (404)</span>'"/>
-        </div>
-      </div>
-    </div>
-
-    <div class="mt-12 text-center">
-      <a href="index.html" class="bg-white text-black px-8 py-3 rounded-lg font-bold">Ana Sayfaya Dön</a>
-    </div>
-  </div>
+<body>
+    <p>Lütfen bekleyin, varlık kontrol paneline yönlendiriliyorsunuz...</p>
+    <p>Eğer yönlendirme çalışmazsa <a href="index.html#assets">buraya tıklayın</a>.</p>
 </body>
 </html>
