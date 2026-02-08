@@ -14,37 +14,29 @@ const steps: ProcessStep[] = [
 ];
 
 const Hero: React.FC = () => {
-  // Denenecek yollar sırasıyla: 
-  // 1. Cloud Run'ın servis ettiği dist yolu
-  // 2. Public üzerinden gelen yol
-  // 3. Kök dizin yolu
-  const assetPaths = [
-    "/dist/gorsel/c1.jpg",
-    "/gorsel/c1.jpg",
-    "/dist/c1.jpg",
-    "/c1.jpg"
-  ];
-
+  // Sunucuda dist klasörü beklendiği için ana yolu buraya kuruyoruz.
+  const distPath = "/dist/gorsel/bb1.jpg";
+  const publicPath = "/gorsel/bb1.jpg";
   const fallbackBg = "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=2832&auto=format&fit=crop";
 
   return (
     <section className="relative pt-32 pb-20 overflow-hidden bg-black text-white min-h-screen flex flex-col items-center">
-      {/* Arka plan görseli - Brute Force Yol Deneme Mekanizması */}
+      {/* Arka plan görseli - dist klasörü öncelikli */}
       <img 
-        src={assetPaths[0]}
+        src={distPath}
         alt="CRAY Digital Background" 
-        className="absolute top-0 left-0 w-full h-full object-cover z-0 opacity-40 transition-opacity duration-1000"
+        className="absolute top-0 left-0 w-full h-full object-cover z-0 opacity-50 transition-opacity duration-1000"
         loading="eager"
         onError={(e) => {
           const img = e.currentTarget;
-          const currentSrc = new URL(img.src).pathname;
-          const currentIndex = assetPaths.indexOf(currentSrc);
-
-          if (currentIndex >= 0 && currentIndex < assetPaths.length - 1) {
-            console.log(`Yol başarısız: ${currentSrc}, sıradaki deneniyor: ${assetPaths[currentIndex + 1]}`);
-            img.src = assetPaths[currentIndex + 1];
-          } else {
-            console.error("Tüm yerel yollar başarısız oldu, CDN yükleniyor.");
+          // dist bulunamazsa public yolunu dene
+          if (img.src.includes("/dist/")) {
+            console.warn("dist/gorsel/bb1.jpg bulunamadı, public deneniyor...");
+            img.src = publicPath;
+          } 
+          // O da yoksa CDN'e dön
+          else if (!img.src.includes("unsplash")) {
+            console.error("Yerel görseller bulunamadı, CDN devrede.");
             img.src = fallbackBg;
           }
         }}
@@ -66,6 +58,7 @@ const Hero: React.FC = () => {
           </h3>
         </div>
 
+        {/* Process Diagram */}
         <div className="relative h-[20rem] my-12 mx-auto max-w-[75rem] hidden lg:block">
           <svg className="absolute w-full h-full top-0 left-0 pointer-events-none" viewBox="0 0 1200 320" preserveAspectRatio="none">
             <path 
