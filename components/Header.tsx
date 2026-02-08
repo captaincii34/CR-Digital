@@ -89,44 +89,50 @@ const Header: React.FC = () => {
                   </svg>
                 </button>
                 
-                {/* Ana Dropdown Panel */}
+                {/* Ana Dropdown Panel - overflow-hidden kaldırıldı */}
                 <div className={`absolute top-full left-0 w-[440px] pt-4 transition-all duration-300 origin-top-left ${
                   isServicesOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none'
                 }`}>
-                  <div className="bg-[#0f0f11] border border-cray-gold/20 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.9)] overflow-hidden flex">
-                    <div className="py-2 w-full relative">
+                  <div className="bg-[#0f0f11] border border-cray-gold/20 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.9)] flex flex-col relative">
+                    <div className="py-2 w-full">
                       {servicesList.map((service) => (
                         <div 
                           key={service.id}
                           className="relative"
                           onMouseEnter={() => service.subServices && setActiveSubMenu(service.id)}
+                          onMouseLeave={() => setActiveSubMenu(null)}
                         >
                           <a 
                             href={`#service-${service.id.toLowerCase()}`}
-                            className="flex items-center justify-between gap-4 px-6 py-3.5 hover:bg-cray-gold/10 text-gray-400 hover:text-white transition-all border-b border-white/5 last:border-0 group/item no-underline"
+                            className={`flex items-center justify-between gap-4 px-6 py-3.5 transition-all border-b border-white/5 last:border-0 group/item no-underline ${
+                              activeSubMenu === service.id ? 'bg-cray-gold/15 text-white' : 'text-gray-400 hover:text-white hover:bg-cray-gold/10'
+                            }`}
                           >
                             <div className="flex items-center gap-4">
                               <span className="text-xl group-hover/item:scale-110 transition-transform shrink-0">{service.icon}</span>
                               <span className="text-[0.82rem] font-bold tracking-tight leading-snug">{service.title}</span>
                             </div>
                             {service.subServices && (
-                              <svg className="w-4 h-4 text-cray-gold/40 group-hover/item:text-cray-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <svg className={`w-4 h-4 transition-colors ${activeSubMenu === service.id ? 'text-cray-gold' : 'text-cray-gold/30'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                               </svg>
                             )}
                           </a>
 
-                          {/* Yan Açılır Alt Menü (Nested Sub-menu) */}
+                          {/* Yan Açılır Alt Menü (Fly-out) */}
                           {service.subServices && activeSubMenu === service.id && (
-                            <div className="absolute left-[calc(100%-4px)] top-[-8px] w-[320px] pt-2 pl-4 animate-fade-in">
-                              <div className="bg-[#151518] border border-cray-gold/30 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.8)] py-3">
+                            <div className="absolute left-[calc(100%-2px)] top-[-10px] w-[340px] pt-2 pl-4 z-50">
+                              <div className="bg-[#151518] border border-cray-gold/40 rounded-xl shadow-[0_30px_60px_rgba(0,0,0,1)] py-4 backdrop-blur-xl">
+                                <div className="px-6 mb-2">
+                                  <span className="text-[0.65rem] text-cray-gold font-bold uppercase tracking-widest opacity-50">ALT HİZMETLER</span>
+                                </div>
                                 {service.subServices.map((sub, sIdx) => (
                                   <a 
                                     key={sIdx}
                                     href="#"
-                                    className="block px-6 py-2.5 text-[0.75rem] font-semibold text-gray-400 hover:text-cray-gold transition-colors hover:bg-white/5 no-underline"
+                                    className="block px-6 py-2.5 text-[0.78rem] font-bold text-gray-300 hover:text-cray-gold transition-colors hover:bg-white/5 no-underline leading-tight"
                                   >
-                                    <span className="mr-2 text-cray-gold/60">•</span>
+                                    <span className="mr-3 text-cray-gold">•</span>
                                     {sub.title}
                                   </a>
                                 ))}
@@ -191,9 +197,9 @@ const Header: React.FC = () => {
                     
                     {/* Mobil Alt Menü Accordion */}
                     {service.subServices && activeSubMenu === service.id && (
-                      <div className="flex flex-col gap-3 pl-12 border-l border-cray-gold/20 mt-1 py-2 animate-fade-in">
+                      <div className="flex flex-col gap-4 pl-12 border-l border-cray-gold/20 mt-1 py-2 animate-fade-in">
                         {service.subServices.map((sub, sIdx) => (
-                          <a key={sIdx} href="#" onClick={() => setIsMenuOpen(false)} className="text-[0.8rem] text-gray-400 font-medium no-underline">
+                          <a key={sIdx} href="#" onClick={() => setIsMenuOpen(false)} className="text-[0.85rem] text-gray-400 font-bold no-underline leading-tight">
                             {sub.title}
                           </a>
                         ))}
