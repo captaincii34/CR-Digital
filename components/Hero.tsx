@@ -14,14 +14,13 @@ const steps: ProcessStep[] = [
 ];
 
 const Hero: React.FC = () => {
-  // Sunucuda dist klasörü beklendiği için ana yolu buraya kuruyoruz.
-  const distPath = "/dist/gorsel/bb1.jpg";
-  const publicPath = "/gorsel/bb1.jpg";
+  // Görsel yolları c1.jpg olarak güncellendi
+  const distPath = "/dist/gorsel/c1.jpg";
+  const publicPath = "/gorsel/c1.jpg";
   const fallbackBg = "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=2832&auto=format&fit=crop";
 
   return (
     <section className="relative pt-32 pb-20 overflow-hidden bg-black text-white min-h-screen flex flex-col items-center">
-      {/* Arka plan görseli - dist klasörü öncelikli */}
       <img 
         src={distPath}
         alt="CRAY Digital Background" 
@@ -29,14 +28,9 @@ const Hero: React.FC = () => {
         loading="eager"
         onError={(e) => {
           const img = e.currentTarget;
-          // dist bulunamazsa public yolunu dene
           if (img.src.includes("/dist/")) {
-            console.warn("dist/gorsel/bb1.jpg bulunamadı, public deneniyor...");
             img.src = publicPath;
-          } 
-          // O da yoksa CDN'e dön
-          else if (!img.src.includes("unsplash")) {
-            console.error("Yerel görseller bulunamadı, CDN devrede.");
+          } else if (!img.src.includes("unsplash")) {
             img.src = fallbackBg;
           }
         }}
@@ -58,7 +52,6 @@ const Hero: React.FC = () => {
           </h3>
         </div>
 
-        {/* Process Diagram */}
         <div className="relative h-[20rem] my-12 mx-auto max-w-[75rem] hidden lg:block">
           <svg className="absolute w-full h-full top-0 left-0 pointer-events-none" viewBox="0 0 1200 320" preserveAspectRatio="none">
             <path 
