@@ -111,7 +111,7 @@ const App: React.FC = () => {
             <section className="final-cta-section">
               <style>{`
                 .final-cta-section {
-                  padding: 100px 0;
+                  padding: 80px 0;
                   border-top: 1px solid rgba(255, 177, 0, 0.1);
                   background: linear-gradient(to bottom, transparent, rgba(255, 177, 0, 0.05));
                   text-align: center;

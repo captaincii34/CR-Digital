@@ -39,7 +39,7 @@ const WhyUsSection: React.FC = () => {
       <style>{`
         .why-us-section {
           position: relative;
-          padding: 100px 0;
+          padding: 80px 0;
           background-color: #000;
           color: #fff;
           min-height: 600px;

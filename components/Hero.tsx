@@ -69,7 +69,7 @@ const Hero: React.FC = () => {
           z-index: 10;
           width: 100%;
           max-width: 1280px;
-          padding: 0 32px;
+          padding: 32px 32px;
         }
 
         .hero-header {
