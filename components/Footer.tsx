@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="site-footer">
+    <footer id="site-footer" className="site-footer">
       <style>{`
         .site-footer {
           background-color: #000;

@@ -35,7 +35,7 @@ const reasons = [
 
 const WhyUsSection: React.FC = () => {
   return (
-    <section id="section-why-us" className="why-us-section">
+    <section id="section-why" className="why-us-section">
       <style>{`
         .why-us-section {
           position: relative;

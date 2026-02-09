@@ -17,17 +17,16 @@ const servicesList: ServiceItem[] = [
     id: 'A', 
     title: "A'DAN Z'YE KRİPTO PROJE DANIŞMANLIĞI", 
     icon: '💎',
-    link: '#danismanlik',
+    link: '#crypto-proje-danismanlik',
     subServices: [
       { title: "Kripto Proje Danışmanlığı" },
-      { title: "Fikir ve Konsept Doğrulama" },
-      { title: "İş Modeli ve Strateji" },
-      { title: "Yol Haritası ve Kilometre Taşı Planlaması" },
-      { title: "Bütçe Odaklı Proje Yapılandırma" },
-      { title: "Uçtan Uca Proje Yönetimi" },
-      { title: "Çok Disiplinli Ekip Koordinasyonu" },
-      { title: "Lansman, Büyüme ve Ölçeklendirme Danışmanlığı" },
-      { title: "Lansman Sonrası Optimizasyon ve Danışmanlık" }
+      { title: "Kripto Fikir ve Konsept Danışmanlığı" },
+      { title: "Kripto İş Modeli ve Strateji Danışmanlığı" },
+      { title: "Kripto Yol Haritası ve Tocenomics Danışmanlığı" },
+      { title: "Bütçe Odaklı Kripto Proje Danışmanlığı" },
+      { title: "Uçtan Uca Kripto Proje Yönetim Danışmanlığı" },
+      { title: "Lansman ve Büyüme Danışmanlığı" },
+      { title: "Dijital Pazarlama ve Tanıtım Danışmanlığı" }
     ]
   },
   { id: 'B', title: "TOKEN VE BLOKZİNCİR GELİŞTİRME", icon: '🔗' },
@@ -84,7 +83,7 @@ const Header: React.FC = () => {
   const activeService = servicesList.find(s => s.id === activeSubMenu);
 
   return (
-    <header className={`cray-header ${scrolled ? 'scrolled' : ''}`}>
+    <header id="cray-header" className={`cray-header ${scrolled ? 'scrolled' : ''}`}>
       <div className="nav-container">
         {/* LOGO - Tıklandığında ana sayfaya döner */}
         <a href="#" onClick={handleHomeClick} className="logo-box">

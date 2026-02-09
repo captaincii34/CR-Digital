@@ -1,23 +1,25 @@
 import React from 'react';
 
 const InfoSection: React.FC<{
+  id: string;
+  className: string;
   title: string;
   desc: string;
   points: string[];
   image: string;
   reverse?: boolean;
   cta: string;
-}> = ({ title, desc, points, image, reverse, cta }) => {
+}> = ({ id, className, title, desc, points, image, reverse, cta }) => {
   return (
-    <section className={`info-section ${reverse ? 'reverse-gradient' : ''}`}>
+    <section id={id} className={className}>
       <style>{`
-        .info-section {
+        .info-section-left, .info-section-right {
           padding: 60px 0;
           background-color: #000;
           color: #fff;
         }
 
-        .reverse-gradient {
+        .info-section-left {
           border-top: 1px solid rgba(255, 177, 0, 0.1);
           background: linear-gradient(to bottom, rgba(255, 177, 0, 0.05), transparent);
         }

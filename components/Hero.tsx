@@ -18,7 +18,7 @@ const Hero: React.FC = () => {
   const fallbackBg = "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=2832&auto=format&fit=crop";
 
   return (
-    <section className="hero-container">
+    <section id="hero-container" className="hero-container">
       <style>{`
         .hero-container {
           position: relative;

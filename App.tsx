@@ -83,6 +83,8 @@ const App: React.FC = () => {
         return <AssetDebugger />;
       case '#hizmet-detay':
         return <ServiceDetailView />;
+      case '#crypto-proje-danismanlik':
+        return <ConsultancyDetailView />;
       case '#danismanlik':
         return <ConsultancyDetailView />;
       default:
@@ -92,6 +94,8 @@ const App: React.FC = () => {
             <ConsultancySection />
             <WhyUsSection />
             <InfoSection 
+              id="info-section-left"
+              className="info-section-left"
               title="Kripto Projenizi Bir Üst Seviyeye Taşıyalım"
               desc="Kripto projenizi; doğru strateji, pazarlama ve teknik optimizasyon ile buluşturarak ulaşmak istediği noktaya birlikte taşıyoruz."
               points={[
@@ -106,6 +110,8 @@ const App: React.FC = () => {
             />
             <ServicesSection />
             <InfoSection 
+              id="info-section-right"
+              className="info-section-right"
               title="Yatırım Gücünüzü Doğru Strateji İle Kullanın, Büyüme Sağlayın!"
               desc="Web3 ve kripto dünyasında doğru yatırım, sadece sermaye değil doğru strateji gerektirir. Doğru strateji ve dijital pazarlama süreçleri ile hızlı ve daha az maaliyetle işi neticelendir!"
               points={[
@@ -118,7 +124,7 @@ const App: React.FC = () => {
               cta="Strateji Danışmanlığı Al"
             />
             
-            <section className="final-cta-section">
+            <section id="final-cta-section" className="final-cta-section">
               <style>{`
                 .final-cta-section {
                   padding: 60px 0;
