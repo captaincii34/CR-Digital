@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 interface SubService {
   title: string;
+  isHeader?: boolean;
   link?: string;
 }
 
@@ -30,15 +31,155 @@ const servicesList: ServiceItem[] = [
       { title: "Dijital Pazarlama ve Tanıtım Danışmanlığı" }
     ]
   },
-  { id: 'B', title: "TOKEN VE BLOKZİNCİR GELİŞTİRME", icon: '🔗', link: '#hizmetler/token-ve-blokzincir-gelistirme' },
-  { id: 'C', title: "BLOKZİNCİR VE YAZILIM GELİŞTİRME", icon: '💻', link: '#hizmetler/blokzincir-ve-yazilim-gelistirme' },
-  { id: 'D', title: "TOKEN LANSMAN VE LİSTELEME HİZMETLERİ", icon: '📊', link: '#hizmetler/token-lansman-ve-listeleme' },
-  { id: 'E', title: "KRİPTO VE WEB3 PAZARLAMA HİZMETLERİ", icon: '📣', link: '#hizmetler/kripto-ve-web3-pazarlama' },
-  { id: 'F', title: "SOSYAL MEDYA VE TOPLULUK YÖNETİMİ", icon: '👥', link: '#hizmetler/sosyal-medya-ve-topluluk-yonetimi' },
-  { id: 'G', title: "İÇERİK ÜRETİMİ (VİDEO VE TASARIM)", icon: '🎬', link: '#hizmetler/icerik-uretimi' },
-  { id: 'H', title: "PİYASA YAPICILIĞI VE LİKİDİTE ÇÖZÜMLERİ", icon: '🌊', link: '#hizmetler/piyasa-yapiciligi-ve-likidite' },
-  { id: 'I', title: "YATIRIM DANIŞMANLIĞI VE FON TOPLAMA", icon: '💸', link: '#hizmetler/yatirim-danismanligi' },
-  { id: 'J', title: "İŞ ORTAKLIKLARI VE İŞ GELİŞTİRME", icon: '🤝', link: '#hizmetler/is-ortakliklari-ve-is-gelistirme' },
+  { 
+    id: 'B', 
+    title: "TOKEN VE BLOKZİNCİR GELİŞTİRME", 
+    icon: '🔗', 
+    link: '#hizmetler/token-ve-blokzincir-gelistirme',
+    subServices: [
+      { title: "Token Proje Danışmanlığı" },
+      { title: "Blokzincir & Ağ Seçimi" },
+      { title: "Akıllı Kontrat (Smart Contract) Geliştirme" },
+      { title: "Tokenomics Tasarımı" },
+      { title: "Whitepaper & Litepaper Hazırlığı" },
+      { title: "Pitch Deck & Yatırımcı Sunumları" },
+      { title: "Roadmap & Go-To-Market (GTM) Planlaması" },
+      { title: "Audit Hazırlık Süreçleri (Partner Tabanlı)" }
+    ]
+  },
+  { 
+    id: 'C', 
+    title: "BLOKZİNCİR VE YAZILIM GELİŞTİRME", 
+    icon: '💻', 
+    link: '#hizmetler/blokzincir-ve-yazilim-gelistirme',
+    subServices: [
+      { title: "Blokzincir Geliştirme", isHeader: true, link: "#hizmetler/blokzincir-gelistirme" },
+      { title: "Akıllı Kontrat Geliştirme" },
+      { title: "Token & NFT Kontratları" },
+      { title: "Merkeziyetsiz Uygulama (DApp) Geliştirme" },
+      { title: "DAO Altyapı Kurulumu" },
+      { title: "Cüzdan Entegrasyonları" },
+      { title: "Web3 & Platform Yazılımları", isHeader: true, link: "#hizmetler/web3-ve-platform-yazilimlari" },
+      { title: "Web3 Uyumlu Website Geliştirme" },
+      { title: "Özel Yönetim Panelleri (Dashboard)" },
+      { title: "Analitik ve Raporlama Panelleri" },
+      { title: "Backend & API Geliştirme" },
+      { title: "Uygulama & Oyun Geliştirme", isHeader: true, link: "#hizmetler/uygulama-ve-oyun-gelistirme" },
+      { title: "Web3 Mobil Uygulama Geliştirme" },
+      { title: "Telegram Bot & Mini App Geliştirme" },
+      { title: "Blokzincir Tabanlı Oyun Geliştirme" },
+      { title: "GameFi / Play-to-Earn Sistemleri" },
+      { title: "Sunucu & Altyapı Kurulumu" }
+    ]
+  },
+  { 
+    id: 'D', 
+    title: "TOKEN LANSMAN VE LİSTELEME HİZMETLERİ", 
+    icon: '📊', 
+    link: '#hizmetler/token-lansman-ve-listeleme',
+    subServices: [
+      { title: "Token Lansman Stratejisi" },
+      { title: "DEX Lansman Yönetimi" },
+      { title: "CEX Listeleme Danışmanlığı" },
+      { title: "Launchpad Hazırlık Süreçleri" },
+      { title: "Listeleme Öncesi Pazarlama Stratejisi" },
+      { title: "Listeleme Sonrası Büyüme Stratejisi" },
+      { title: "Borsa İletişim ve Süreç Yönetimi" },
+      { title: "Listeleme Dokümantasyonu & Kontrol Listeleri" }
+    ]
+  },
+  { 
+    id: 'E', 
+    title: "KRİPTO VE WEB3 PAZARLAMA HİZMETLERİ", 
+    icon: '📣', 
+    link: '#hizmetler/kripto-ve-web3-pazarlama',
+    subServices: [
+      { title: "Web3 Büyüme Stratejisi" },
+      { title: "Kripto Performans Pazarlaması" },
+      { title: "Influencer & KOL Pazarlaması" },
+      { title: "PR & Medya Yayınları" },
+      { title: "Kampanya & Hype Yönetimi" },
+      { title: "Landing Page & Funnel Optimizasyonu" },
+      { title: "Analitik, Takip & KPI Raporlaması" },
+      { title: "Web3 Uyumlu Pazarlama Otomasyonu" }
+    ]
+  },
+  { 
+    id: 'F', 
+    title: "SOSYAL MEDYA VE TOPLULUK YÖNETİMİ", 
+    icon: '👥', 
+    link: '#hizmetler/sosyal-medya-ve-topluluk-yonetimi',
+    subServices: [
+      { title: "X (Twitter) İçerik ve Büyüme Yönetimi" },
+      { title: "Telegram Topluluk Yönetimi" },
+      { title: "Discord Topluluk Yönetimi" },
+      { title: "7/24 Topluluk Moderasyonu" },
+      { title: "Ambassador Programı Kurulumu" },
+      { title: "Etkileşim Kampanyaları" },
+      { title: "FUD & Kriz Yönetimi" },
+      { title: "Topluluk Analitiği & Raporlama" }
+    ]
+  },
+  { 
+    id: 'G', 
+    title: "İÇERİK ÜRETİMİ (VİDEO VE TASARIM)", 
+    icon: '🎬', 
+    link: '#hizmetler/icerik-uretimi',
+    subServices: [
+      { title: "Marka Kimliği Tasarımı" },
+      { title: "Web3 UI / UX Tasarımı" },
+      { title: "Motion Grafik & Explainer Video" },
+      { title: "Kısa Format Video İçerikleri (Reels / Shorts)" },
+      { title: "Meme & Trend İçerik Üretimi" },
+      { title: "Duyuru & Listeleme İçerik Kitleri" },
+      { title: "Sosyal Medya Görsel Paketleri" }
+    ]
+  },
+  { 
+    id: 'H', 
+    title: "PİYASA YAPICILIĞI VE LİKİDİTE ÇÖZÜMLERİ", 
+    icon: '🌊', 
+    link: '#hizmetler/piyasa-yapiciligi-ve-likidite',
+    subServices: [
+      { title: "Piyasa Yapıcılığı Stratejisi" },
+      { title: "Likidite Planlaması" },
+      { title: "Market Maker Seçimi & Koordinasyonu" },
+      { title: "Piyasa Yapıcılığı Sistem Danışmanlığı" },
+      { title: "Bot Altyapısı Danışmanlığı" },
+      { title: "Spread & Volatilite Optimizasyonu" },
+      { title: "DEX & CEX Likidite Yönetimi" },
+      { title: "Performans Takibi & Raporlama" }
+    ]
+  },
+  { 
+    id: 'I', 
+    title: "YATIRIM DANIŞMANLIĞI VE FON TOPLAMA", 
+    icon: '💸', 
+    link: '#hizmetler/yatirim-danismanligi',
+    subServices: [
+      { title: "Yatırıma Hazırlık Analizi" },
+      { title: "Fon Toplama Stratejisi & Planlaması" },
+      { title: "Seed / Private / Strategic Yatırım Turları" },
+      { title: "Yatırımcı Araştırması & Hedefleme" },
+      { title: "Pitch Deck & Data Room Hazırlığı" },
+      { title: "Değerleme & Token Dağılım Danışmanlığı" },
+      { title: "Stratejik Yatırımcı Bağlantıları" },
+      { title: "Ortak Yatırım & Syndicate Yapılanması" },
+      { title: "Yatırımcı İlişkileri Yönetimi" }
+    ]
+  },
+  { 
+    id: 'J', 
+    title: "İŞ ORTAKLIKLARI VE İŞ GELİŞTİRME", 
+    icon: '🤝', 
+    link: '#hizmetler/is-ortakliklari-ve-is-gelistirme',
+    subServices: [
+      { title: "Stratejik Partnerlikler" },
+      { title: "Ekosistem İş Birlikleri" },
+      { title: "Cross-Marketing Planlaması" },
+      { title: "Kurumsal İş Geliştirme" }
+    ]
+  },
 ];
 
 const Header: React.FC = () => {
@@ -124,18 +265,36 @@ const Header: React.FC = () => {
                   </div>
 
                   {activeSubMenu && (
-                    <div className="mega-menu-right animate-in fade-in duration-300">
+                    <div className="mega-menu-right animate-in fade-in duration-300 no-scrollbar" style={{ overflowY: 'auto', maxHeight: '600px' }}>
                       <div className="mega-menu-header">
                         <div className="mega-menu-header-icon">{activeService?.icon}</div>
                         <h4 className="mega-menu-header-title">{activeService?.title}</h4>
                       </div>
 
-                      <div style={{ display: 'grid', gap: '2px' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '4px' }}>
                         {(activeService?.subServices || [{ title: activeService?.title || '' }]).map((sub, i) => (
-                          <a key={i} href={activeService?.link} onClick={closeAll} className="sub-nav-link">
-                            <span className="dot"></span>
-                            {sub.title}
-                          </a>
+                          <div key={i} style={{ gridColumn: sub.isHeader ? 'span 2' : 'span 1' }}>
+                            {sub.isHeader ? (
+                              <a href={sub.link || activeService?.link} onClick={closeAll} style={{ 
+                                color: 'var(--cray-gold)', 
+                                fontSize: '12px', 
+                                fontWeight: '800', 
+                                textTransform: 'uppercase', 
+                                margin: '20px 0 10px 12px',
+                                borderLeft: '3px solid var(--cray-gold)',
+                                paddingLeft: '8px',
+                                display: 'block',
+                                textDecoration: 'none'
+                              }}>
+                                🔹 {sub.title}
+                              </a>
+                            ) : (
+                              <a href={sub.link || activeService?.link} onClick={closeAll} className="sub-nav-link">
+                                <span className="dot"></span>
+                                {sub.title}
+                              </a>
+                            )}
+                          </div>
                         ))}
                       </div>
                     </div>
@@ -158,7 +317,7 @@ const Header: React.FC = () => {
         </button>
       </div>
 
-      <div className={`mobile-overlay ${isMobileMenuOpen ? 'open' : ''}`}>
+      <div className={`mobile-overlay ${isMobileMenuOpen ? 'open' : ''} no-scrollbar`} style={{ overflowY: 'auto' }}>
         <ul className="mobile-nav-list">
           <li className="mobile-nav-item"><a href="#" onClick={handleHomeClick} className="mobile-nav-link">Ana Sayfa</a></li>
           <li className="mobile-nav-item"><a href="#" onClick={closeAll} className="mobile-nav-link">Hakkımızda</a></li>
@@ -192,10 +351,16 @@ const Header: React.FC = () => {
                     {s.subServices && mobileActiveServiceId === s.id && (
                       <div style={{ marginTop: '10px', display: 'flex', flexDirection: 'column', gap: '2px' }}>
                         {s.subServices.map((sub, si) => (
-                          <a key={si} href={s.link} onClick={closeAll} className="sub-nav-link">
-                            <span className="dot"></span>
-                            {sub.title}
-                          </a>
+                          <div key={si}>
+                            {sub.isHeader ? (
+                              <a href={sub.link || s.link} onClick={closeAll} style={{ color: 'var(--cray-gold)', fontSize: '11px', fontWeight: '800', margin: '15px 0 5px 12px', display: 'block', textDecoration: 'none' }}>🔹 {sub.title}</a>
+                            ) : (
+                              <a href={sub.link || s.link} onClick={closeAll} className="sub-nav-link">
+                                <span className="dot"></span>
+                                {sub.title}
+                              </a>
+                            )}
+                          </div>
                         ))}
                       </div>
                     )}
@@ -209,7 +374,7 @@ const Header: React.FC = () => {
           <li className="mobile-nav-item"><a href="#" onClick={closeAll} className="mobile-nav-link">Referanslar</a></li>
         </ul>
 
-        <div style={{ marginTop: 'auto' }}>
+        <div style={{ marginTop: 'auto', paddingBottom: '40px' }}>
           <a href="#section1" onClick={closeAll} className="cta-button" style={{ display: 'block', textAlign: 'center', fontSize: '16px', padding: '20px' }}>Ücretsiz Teklif Al</a>
         </div>
       </div>
