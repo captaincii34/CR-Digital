@@ -56,32 +56,153 @@ const services = [
 
 const ServicesSection: React.FC = () => {
   return (
-    <section id="section3" className="relative py-20 overflow-hidden bg-black text-white">
-      {/* Önizleme için canlı URL eklendi (Orijinal dosya adı: target-bg.jpg) */}
-      <img src="/gorsel/ag1.jpg" alt="Services Background" className="absolute top-0 left-0 w-full h-full object-cover z-0" />
-      <div className="absolute top-0 left-0 w-full h-full bg-black/70 z-[1]"></div>
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black via-transparent to-black z-[2]"></div>
+    <section id="section3" className="services-section">
+      <style>{`
+        .services-section {
+          position: relative;
+          padding: 80px 0;
+          overflow: hidden;
+          background-color: #000;
+          color: #fff;
+        }
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-8">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Web3 & Crypto İçin Uçtan Uca Hizmetler</h1>
-          <p className="text-gray-300 max-w-2xl mx-auto text-lg font-light">
+        .services-bg {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          z-index: 0;
+        }
+
+        .services-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.7);
+          z-index: 1;
+        }
+
+        .services-gradient {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(to bottom, #000, transparent, #000);
+          z-index: 2;
+        }
+
+        .services-container {
+          position: relative;
+          z-index: 10;
+          max-width: 1400px;
+          margin: 0 auto;
+          padding: 0 32px;
+        }
+
+        .services-header {
+          text-align: center;
+          margin-bottom: 64px;
+        }
+
+        .services-title {
+          margin-bottom: 16px;
+        }
+
+        .services-subtitle {
+          color: #d1d5db;
+          max-width: 672px;
+          margin: 0 auto;
+        }
+
+        .services-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 24px;
+        }
+
+        @media (min-width: 768px) {
+          .services-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (min-width: 1024px) {
+          .services-grid { grid-template-columns: repeat(5, 1fr); }
+        }
+
+        .service-card {
+          padding: 32px;
+          border-radius: 12px;
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          text-align: center;
+          cursor: pointer;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 16px;
+          transition: 0.3s;
+        }
+
+        .service-card:hover {
+          background: rgba(255, 177, 0, 0.05);
+          border-color: var(--cray-gold);
+          transform: translateY(-4px);
+          box-shadow: 0 8px 24px rgba(255, 177, 0, 0.2);
+        }
+
+        .service-icon-box {
+          width: 56px;
+          height: 56px;
+          color: var(--cray-gold);
+          transition: 0.3s;
+        }
+
+        .service-card:hover .service-icon-box {
+          transform: scale(1.1);
+        }
+
+        .service-name {
+          color: #fff;
+          line-height: 1.25;
+          transition: color 0.3s;
+        }
+
+        .service-card:hover .service-name {
+          color: var(--cray-gold);
+        }
+
+        .service-summary {
+          color: #9ca3af;
+        }
+      `}</style>
+
+      <img src="/gorsel/ag1.jpg" alt="Services Background" className="services-bg" />
+      <div className="services-overlay"></div>
+      <div className="services-gradient"></div>
+
+      <div className="services-container">
+        <div className="services-header">
+          <h2 className="services-title">Web3 & Crypto İçin Uçtan Uca Hizmetler</h2>
+          <p className="services-subtitle">
             Her projeye ihtiyacına göre yaklaşır, tek bir hizmetten komple 360° çözüme kadar esnek modeller sunarız.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        <div className="services-grid">
           {services.map((service, idx) => (
-            <div key={idx} className="group p-8 rounded-xl border border-white/15 text-center cursor-pointer flex flex-col items-center gap-4 transition-all duration-300 hover:bg-cray-gold/5 hover:border-cray-gold hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(255,177,0,0.2)]">
-              <div className="w-14 h-14 text-cray-gold transition-all duration-300 group-hover:scale-110">
+            <div key={idx} className="service-card">
+              <div className="service-icon-box">
                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   {service.icon}
                 </svg>
               </div>
-              <h3 className="text-white text-lg font-bold leading-tight group-hover:text-cray-gold transition-colors">
+              <h4 className="service-name">
                 {service.title}
-              </h3>
-              <p className="text-gray-400 text-sm font-light leading-snug">
+              </h4>
+              <p className="service-summary">
                 {service.desc}
               </p>
             </div>

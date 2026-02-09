@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const reasons = [
@@ -36,33 +35,173 @@ const reasons = [
 
 const WhyUsSection: React.FC = () => {
   return (
-    <section className="relative py-20 bg-black text-white min-h-[600px] overflow-hidden">
-      {/* Önizleme için canlı URL eklendi (Orijinal dosya adı: path-bg.jpg) */}
-      <img src="/gorsel/fh.jpg" alt="Why Us Background" className="absolute top-0 left-0 w-full h-full object-cover z-0" />
-      <div className="absolute top-0 left-0 w-full h-full bg-black/70 z-[1]"></div>
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black via-transparent to-black z-[2]"></div>
+    <section id="section-why-us" className="why-us-section">
+      <style>{`
+        .why-us-section {
+          position: relative;
+          padding: 100px 0;
+          background-color: #000;
+          color: #fff;
+          min-height: 600px;
+          overflow: hidden;
+        }
 
-      <div className="relative z-10 max-w-[1280px] mx-auto px-8">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold">Neden Bizimle Çalışmalısınız?</h1>
+        .why-us-bg {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          z-index: 0;
+          opacity: 0.4;
+        }
+
+        .why-us-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.75);
+          z-index: 1;
+        }
+
+        .why-us-gradient {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(to bottom, #000, transparent 40%, transparent 60%, #000);
+          z-index: 2;
+        }
+
+        .why-us-container {
+          position: relative;
+          z-index: 10;
+          max-width: 1280px;
+          margin: 0 auto;
+          padding: 0 32px;
+        }
+
+        .why-us-header {
+          text-align: center;
+          margin-bottom: 70px;
+        }
+
+        .why-us-title {
+          margin-bottom: 16px;
+        }
+
+        .reasons-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+
+        @media (min-width: 768px) {
+          .reasons-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (min-width: 1024px) {
+          .reasons-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .reason-card {
+          padding: 40px 32px;
+          border-radius: 20px;
+          text-align: center;
+          transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .reason-card:hover {
+          background: rgba(255, 177, 0, 0.06);
+          border-color: rgba(255, 177, 0, 0.3);
+          transform: translateY(-8px);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .reason-icon-box {
+          width: 54px;
+          height: 54px;
+          background-color: var(--cray-gold);
+          border-radius: 14px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto 24px;
+          transition: 0.3s;
+          box-shadow: 0 10px 20px rgba(255, 177, 0, 0.2);
+        }
+
+        .reason-card:hover .reason-icon-box {
+          transform: rotate(10deg) scale(1.1);
+        }
+
+        .reason-title {
+          margin-bottom: 16px;
+          line-height: 1.3;
+        }
+
+        .reason-desc {
+          color: #d1d5db;
+          line-height: 1.6;
+        }
+
+        .why-us-footer {
+          text-align: center;
+          margin-top: 80px;
+        }
+
+        .btn-more {
+          background: var(--cray-gold);
+          color: #000;
+          padding: 18px 36px;
+          border-radius: 12px;
+          font-weight: 700 !important;
+          display: inline-block;
+          text-decoration: none;
+          transition: 0.3s;
+          text-transform: capitalize;
+          letter-spacing: 0px;
+          font-size: 14px !important;
+          box-shadow: 0 8px 25px rgba(255, 177, 0, 0.3);
+        }
+
+        .btn-more:hover { 
+          transform: translateY(-3px); 
+          box-shadow: 0 12px 35px rgba(255, 177, 0, 0.5);
+        }
+      `}</style>
+
+      <img src="/gorsel/fh.jpg" alt="Why Us Background" className="why-us-bg" />
+      <div className="why-us-overlay"></div>
+      <div className="why-us-gradient"></div>
+
+      <div className="why-us-container">
+        <div className="why-us-header">
+          <h2 className="why-us-title">Neden Bizimle Çalışmalısınız?</h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="reasons-grid">
           {reasons.map((reason, idx) => (
-            <div key={idx} className="group p-8 rounded-lg text-center transition-all duration-300 hover:bg-cray-gold/5">
-              <div className="w-12 h-12 bg-cray-gold rounded-full flex items-center justify-center mx-auto mb-4 transition-transform duration-300 group-hover:scale-110 group-hover:shadow-[0_8px_24px_rgba(255,177,0,0.3)]">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <div key={idx} className="reason-card">
+              <div className="reason-icon-box">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   {reason.icon}
                 </svg>
               </div>
-              <h3 className="text-xl font-bold mb-3">{reason.title}</h3>
-              <p className="text-gray-300 font-light leading-snug">{reason.desc}</p>
+              <h4 className="reason-title">{reason.title}</h4>
+              <p className="reason-desc">{reason.desc}</p>
             </div>
           ))}
         </div>
 
-        <div className="text-center mt-16">
-          <a href="#" className="bg-cray-gold text-black px-8 py-4 rounded-lg font-bold inline-block transition-all duration-300 hover:scale-105">
+        <div className="why-us-footer">
+          <a href="#section1" className="btn-more">
             Daha Fazla Bilgi Al
           </a>
         </div>
