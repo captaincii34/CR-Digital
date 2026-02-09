@@ -7,6 +7,7 @@ import WhyUsSection from './components/WhyUsSection';
 import ServicesSection from './components/ServicesSection';
 import InfoSection from './components/InfoSection';
 import Footer from './components/Footer';
+import ConsultancyDetailView from './components/ConsultancyDetailView';
 
 // Örnek bir "Yeni Sayfa" bileşeni (Detay Sayfası)
 const ServiceDetailView: React.FC = () => (
@@ -68,7 +69,10 @@ const App: React.FC = () => {
   const [view, setView] = useState(window.location.hash);
 
   useEffect(() => {
-    const handleHashChange = () => setView(window.location.hash);
+    const handleHashChange = () => {
+      setView(window.location.hash);
+      window.scrollTo(0, 0); // Sayfa değiştiğinde en üste çık
+    };
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
@@ -80,6 +84,8 @@ const App: React.FC = () => {
         return <AssetDebugger />;
       case '#hizmet-detay':
         return <ServiceDetailView />;
+      case '#danismanlik':
+        return <ConsultancyDetailView />;
       default:
         return (
           <main>

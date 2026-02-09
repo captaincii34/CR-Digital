@@ -111,12 +111,11 @@
       padding: 0;
     }
 
-    /* Ana Menü Font Kontrolü */
     .nav-link {
       color: #fff;
       text-decoration: none;
       font-weight: 700;
-      font-size: 12px; /* Buradan tüm ana linklerin boyutu değişir */
+      font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 1.5px;
       transition: color 0.3s;
@@ -129,14 +128,14 @@
       color: var(--cray-gold);
     }
 
-    /* Alt Menü (Dropdown/Mobile Sub) Font Kontrolü */
+    /* --- ALT MENÜ VE MEGA MENÜ LİNKLERİ --- */
     .sub-nav-link {
       color: #9ca3af;
       text-decoration: none;
-      font-size: 14px; /* TEK MERKEZDEN TÜM ALT MENÜ BOYUTU */
+      font-size: 12px; /* Kullanıcı talebi: 12px */
       font-weight: 600;
-      text-transform: none; /* Alt menüler normal yazım olsun diye */
-      padding: 10px 14px;
+      text-transform: none;
+      padding: 4px 14px; /* Kullanıcı talebi: 4px 14px */
       border-radius: 10px;
       display: flex;
       align-items: center;
@@ -150,11 +149,6 @@
       background: rgba(255, 177, 0, 0.05);
     }
 
-    .sub-nav-link.active {
-      color: var(--cray-gold);
-    }
-
-    /* Alt Menüdeki Nokta (Indicator) */
     .sub-nav-link .dot {
       width: 6px;
       height: 6px;
@@ -163,7 +157,7 @@
       flex-shrink: 0;
     }
 
-    /* Dropdown - Mega Menu */
+    /* Mega Menu Yapısı */
     .has-mega-menu {
       position: relative;
     }
@@ -205,24 +199,26 @@
       background: rgba(20, 20, 22, 0.8);
       border-right: 1px solid rgba(255, 255, 255, 0.05);
       padding: 20px 0;
-      max-height: 70vh;
+      max-height: 100%; /* Kullanıcı talebi: 100% */
       overflow-y: auto;
     }
 
     .mega-menu-right {
       flex: 1;
-      padding: 40px;
+      padding: 20px; /* Kullanıcı talebi: 20px */
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), transparent);
     }
 
+    /* Mega Menü Satırları */
     .menu-item-row {
-      padding: 16px 32px;
+      padding: 6px 50px 6px 24px; /* Kullanıcı talebi: 6px 50px 6px 24px */
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start; /* Kullanıcı talebi: left (flex-start) */
       cursor: pointer;
       transition: all 0.3s;
       color: #9ca3af;
+      gap: 15px;
     }
 
     .menu-item-row:hover, .menu-item-row.active {
@@ -232,6 +228,47 @@
 
     .menu-item-row.active {
       border-left: 4px solid var(--cray-gold);
+    }
+
+    .menu-item-content {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex: 1;
+    }
+
+    .menu-item-icon {
+      font-size: 20px;
+      width: 24px;
+      text-align: center;
+    }
+
+    .menu-item-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .mega-menu-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 25px;
+    }
+
+    .mega-menu-header-icon {
+      padding: 12px;
+      background: rgba(255,177,0,0.1);
+      border-radius: 12px;
+      font-size: 28px;
+    }
+
+    .mega-menu-header-title {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
     }
 
     /* CTA Button */

@@ -9,6 +9,7 @@ interface ServiceItem {
   id: string;
   title: string;
   icon: string;
+  link?: string;
   subServices?: SubService[];
 }
 
@@ -17,6 +18,7 @@ const servicesList: ServiceItem[] = [
     id: 'A', 
     title: "A) A'DAN Z'YE KRİPTO PROJE DANIŞMANLIĞI", 
     icon: '💎',
+    link: '#danismanlik',
     subServices: [
       { title: "Kripto Proje Danışmanlığı" },
       { title: "Fikir ve Konsept Doğrulama" },
@@ -63,13 +65,30 @@ const Header: React.FC = () => {
     setMobileActiveServiceId(null);
   };
 
+  const handleHomeClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    // Hash'i temizle ve ana sayfayı tetikle
+    window.location.hash = '';
+    // Sayfanın en üstüne yumuşak geçiş yap
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    closeAll();
+  };
+
+  const handleServiceClick = (item: ServiceItem) => {
+    if (item.link) {
+      window.location.hash = item.link;
+      closeAll();
+      setActiveSubMenu(null);
+    }
+  };
+
   const activeService = servicesList.find(s => s.id === activeSubMenu);
 
   return (
     <header className={`cray-header ${scrolled ? 'scrolled' : ''}`}>
       <div className="nav-container">
-        {/* LOGO */}
-        <a href="#" className="logo-box">
+        {/* LOGO - Tıklandığında ana sayfaya döner */}
+        <a href="#" onClick={handleHomeClick} className="logo-box">
           <div className="logo-icon">CR</div>
           <div className="logo-text">
             <span className="logo-title">CRAY</span>
@@ -80,7 +99,7 @@ const Header: React.FC = () => {
         {/* MASAÜSTÜ NAVIGASYON */}
         <div className="main-nav">
           <ul className="nav-links">
-            <li><a href="#" className="nav-link">Ana Sayfa</a></li>
+            <li><a href="#" onClick={handleHomeClick} className="nav-link">Ana Sayfa</a></li>
             <li><a href="#" className="nav-link">Hakkımızda</a></li>
             
             <li className="has-mega-menu" onMouseLeave={() => setActiveSubMenu(null)}>
@@ -99,10 +118,11 @@ const Header: React.FC = () => {
                         key={item.id} 
                         className={`menu-item-row ${activeSubMenu === item.id ? 'active' : ''}`}
                         onMouseEnter={() => setActiveSubMenu(item.id)}
+                        onClick={() => handleServiceClick(item)}
                       >
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                          <span style={{ fontSize: '20px' }}>{item.icon}</span>
-                          <span style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '1px' }}>{item.title}</span>
+                        <div className="menu-item-content">
+                          <span className="menu-item-icon">{item.icon}</span>
+                          <span className="menu-item-title">{item.title}</span>
                         </div>
                         {item.subServices && (
                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
@@ -115,16 +135,16 @@ const Header: React.FC = () => {
 
                   {activeSubMenu && (
                     <div className="mega-menu-right animate-in fade-in duration-300">
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '30px' }}>
-                        <div style={{ padding: '15px', background: 'rgba(255,177,0,0.1)', borderRadius: '15px', fontSize: '32px' }}>
+                      <div className="mega-menu-header">
+                        <div className="mega-menu-header-icon">
                           {activeService?.icon}
                         </div>
-                        <h4 style={{ margin: 0, fontSize: '20px', fontWeight: 800 }}>{activeService?.title.split(') ')[1]}</h4>
+                        <h4 className="mega-menu-header-title">{activeService?.title.split(') ')[1]}</h4>
                       </div>
 
-                      <div style={{ display: 'grid', gap: '4px' }}>
+                      <div style={{ display: 'grid', gap: '2px' }}>
                         {activeService?.subServices?.map((sub, i) => (
-                          <a key={i} href="#" className="sub-nav-link">
+                          <a key={i} href={activeService.link || "#"} onClick={closeAll} className="sub-nav-link">
                             <span className="dot"></span>
                             {sub.title}
                           </a>
@@ -154,7 +174,7 @@ const Header: React.FC = () => {
       {/* MOBIL OVERLAY */}
       <div className={`mobile-overlay ${isMobileMenuOpen ? 'open' : ''}`}>
         <ul className="mobile-nav-list">
-          <li className="mobile-nav-item"><a href="#" onClick={closeAll} className="mobile-nav-link">Ana Sayfa</a></li>
+          <li className="mobile-nav-item"><a href="#" onClick={handleHomeClick} className="mobile-nav-link">Ana Sayfa</a></li>
           <li className="mobile-nav-item"><a href="#" onClick={closeAll} className="mobile-nav-link">Hakkımızda</a></li>
           
           <li className="mobile-nav-item">
@@ -169,8 +189,14 @@ const Header: React.FC = () => {
               <div className="mobile-sub-menu">
                 {servicesList.map(s => (
                   <div key={s.id} style={{ marginBottom: '15px' }}>
-                    <div onClick={() => setMobileActiveServiceId(mobileActiveServiceId === s.id ? null : s.id)} style={{ display: 'flex', justifyContent: 'space-between', color: mobileActiveServiceId === s.id ? 'var(--cray-gold)' : '#fff', fontWeight: 700, fontSize: '16px', cursor: 'pointer' }}>
-                      <span>{s.icon} {s.title}</span>
+                    <div onClick={() => {
+                      if (s.link) {
+                        handleServiceClick(s);
+                      } else {
+                        setMobileActiveServiceId(mobileActiveServiceId === s.id ? null : s.id);
+                      }
+                    }} style={{ display: 'flex', justifyContent: 'space-between', color: mobileActiveServiceId === s.id ? 'var(--cray-gold)' : '#fff', fontWeight: 700, fontSize: '16px', cursor: 'pointer' }}>
+                      <span style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>{s.icon} {s.title}</span>
                       {s.subServices && (
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" style={{ transform: mobileActiveServiceId === s.id ? 'rotate(180deg)' : '' }}>
                           <path d="M19 9l-7 7-7-7" />
@@ -178,9 +204,9 @@ const Header: React.FC = () => {
                       )}
                     </div>
                     {s.subServices && mobileActiveServiceId === s.id && (
-                      <div style={{ marginTop: '10px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                      <div style={{ marginTop: '10px', display: 'flex', flexDirection: 'column', gap: '2px' }}>
                         {s.subServices.map((sub, si) => (
-                          <a key={si} href="#" onClick={closeAll} className="sub-nav-link">
+                          <a key={si} href={s.link || "#"} onClick={closeAll} className="sub-nav-link">
                             <span className="dot"></span>
                             {sub.title}
                           </a>
