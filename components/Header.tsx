@@ -41,10 +41,13 @@ const servicesList: ServiceItem[] = [
 ];
 
 const Header: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isServicesOpen, setIsServicesOpen] = useState(false);
-  const [activeSubMenu, setActiveSubMenu] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSubMenu, setActiveSubMenu] = useState<string | null>(null);
+
+  // Mobil Akordeon
+  const [mobileHizmetlerOpen, setMobileHizmetlerOpen] = useState(false);
+  const [mobileActiveServiceId, setMobileActiveServiceId] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -52,198 +55,133 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+  
+  const closeAll = () => {
+    setIsMobileMenuOpen(false);
+    setMobileHizmetlerOpen(false);
+    setMobileActiveServiceId(null);
+  };
+
   const activeService = servicesList.find(s => s.id === activeSubMenu);
 
   return (
-    <header 
-      id="cray-site-header"
-      className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-500 font-sans ${
-        scrolled 
-          ? 'bg-black/95 backdrop-blur-xl py-3 border-b border-cray-gold/20 shadow-[0_10px_50px_rgba(0,0,0,0.9)]' 
-          : 'bg-gradient-to-b from-black via-black/70 to-transparent py-7 border-b border-transparent'
-      }`}
-    >
-      <nav className="max-w-[1400px] mx-auto px-6 md:px-12 flex justify-between items-center relative">
-        {/* Logo Bölümü */}
-        <a href="#" className="flex items-center gap-3 no-underline group shrink-0 cursor-pointer select-none">
-          <div className="w-10 h-10 md:w-12 md:h-12 bg-cray-gold rounded-xl flex items-center justify-center font-bold text-xl text-black shadow-[0_0_20px_rgba(255,177,0,0.4)] transition-all group-hover:shadow-[0_0_35px_rgba(255,177,0,0.7)]">
-            CR
-          </div>
-          <div className="flex flex-col text-left">
-            <span className="text-white font-black text-lg md:text-xl tracking-tighter uppercase leading-none">CRAY</span>
-            <span className="text-cray-gold text-[0.65rem] font-bold tracking-[0.3em] uppercase mt-1">Digital</span>
+    <header className={`cray-header ${scrolled ? 'scrolled' : ''}`}>
+      <div className="nav-container">
+        {/* LOGO */}
+        <a href="#" className="logo-box">
+          <div className="logo-icon">CR</div>
+          <div className="logo-text">
+            <span className="logo-title">CRAY</span>
+            <span className="logo-sub">Digital</span>
           </div>
         </a>
 
-        {/* Masaüstü Menü */}
-        <div className="hidden lg:flex items-center gap-12">
-          <ul className="flex items-center gap-8 list-none m-0 p-0">
-            <li><a href="#" className="text-white hover:text-cray-gold text-[0.8rem] font-bold uppercase tracking-[0.15em] transition-all no-underline select-none">Ana Sayfa</a></li>
-            <li><a href="#" className="text-white hover:text-cray-gold text-[0.8rem] font-bold uppercase tracking-[0.15em] transition-all no-underline select-none">Hakkımızda</a></li>
+        {/* MASAÜSTÜ NAVIGASYON */}
+        <div className="main-nav">
+          <ul className="nav-links">
+            <li><a href="#" className="nav-link">Ana Sayfa</a></li>
+            <li><a href="#" className="nav-link">Hakkımızda</a></li>
             
-            {/* Hizmetler Dropdown */}
-            <li 
-              className="relative py-2"
-              onMouseEnter={() => setIsServicesOpen(true)}
-              onMouseLeave={() => {
-                setIsServicesOpen(false);
-                setActiveSubMenu(null);
-              }}
-            >
-              <button className={`flex items-center gap-2 text-[0.8rem] font-bold uppercase tracking-[0.15em] transition-all cursor-pointer bg-transparent border-none outline-none select-none ${
-                isServicesOpen ? 'text-cray-gold' : 'text-white'
-              }`}>
-                Hizmetler 
-                <svg className={`w-4 h-4 transition-transform duration-300 ${isServicesOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+            <li className="has-mega-menu" onMouseLeave={() => setActiveSubMenu(null)}>
+              <button className="nav-link mega-menu-trigger">
+                Hizmetler
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                  <path d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
-              
-              {/* Mega Menü Konteynırı - Görünmez köprü padding-top:24px */}
-              <div 
-                className={`absolute top-full left-1/2 -translate-x-1/2 pt-[24px] transition-all duration-300 ${
-                  isServicesOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-4 invisible pointer-events-none'
-                }`}
-              >
-                <div 
-                  className={`bg-[#0a0a0c] border border-white/10 rounded-[32px] shadow-[0_60px_120px_rgba(0,0,0,1)] flex transition-all duration-500 overflow-hidden ${
-                    activeSubMenu ? 'w-[980px]' : 'w-[440px]'
-                  }`}
-                >
-                  {/* Sol Sütun: Ana Kategoriler */}
-                  <div className="w-[440px] shrink-0 bg-black/40 py-8 no-scrollbar overflow-y-auto max-h-[75vh] border-r border-white/5">
-                    {servicesList.map((service) => (
+
+              <div className="mega-menu-wrapper">
+                <div className="mega-menu-content" style={{ width: activeSubMenu ? '980px' : '440px' }}>
+                  <div className="mega-menu-left no-scrollbar">
+                    {servicesList.map(item => (
                       <div 
-                        key={service.id}
-                        onMouseEnter={() => setActiveSubMenu(service.id)}
-                        className={`relative group/item transition-all duration-300 cursor-pointer ${
-                          activeSubMenu === service.id ? 'bg-cray-gold/15' : 'hover:bg-white/[0.04]'
-                        }`}
+                        key={item.id} 
+                        className={`menu-item-row ${activeSubMenu === item.id ? 'active' : ''}`}
+                        onMouseEnter={() => setActiveSubMenu(item.id)}
                       >
-                        <div className={`flex items-center justify-between px-10 py-5 transition-all ${
-                          activeSubMenu === service.id ? 'translate-x-1' : ''
-                        }`}>
-                          <div className="flex items-center gap-6">
-                            <span className={`text-2xl transition-all duration-500 ${
-                              activeSubMenu === service.id ? 'scale-125 brightness-125' : 'opacity-40 grayscale group-hover/item:opacity-100 group-hover/item:grayscale-0'
-                            }`}>
-                              {service.icon}
-                            </span>
-                            <span className={`text-[0.78rem] font-bold tracking-widest uppercase transition-all ${
-                              activeSubMenu === service.id ? 'text-white' : 'text-gray-400 group-hover/item:text-white/80'
-                            }`}>
-                              {service.title}
-                            </span>
-                          </div>
-                          {service.subServices && (
-                            <svg className={`w-4 h-4 transition-all duration-300 ${
-                              activeSubMenu === service.id ? 'text-cray-gold translate-x-1 opacity-100' : 'text-white/5 opacity-0'
-                            }`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" />
-                            </svg>
-                          )}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                          <span style={{ fontSize: '20px' }}>{item.icon}</span>
+                          <span style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '1px' }}>{item.title}</span>
                         </div>
-                        {activeSubMenu === service.id && (
-                          <div className="absolute left-0 top-0 bottom-0 w-[4px] bg-cray-gold shadow-[0_0_20px_rgba(255,177,0,0.8)]"></div>
+                        {item.subServices && (
+                           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                            <path d="M9 5l7 7-7 7" />
+                          </svg>
                         )}
                       </div>
                     ))}
                   </div>
 
-                  {/* Sağ Sütun: Alt Detaylar (Sadece seçim yapıldığında görünür) */}
-                  <div className={`flex-1 bg-gradient-to-br from-cray-gold/[0.03] to-transparent p-12 relative transition-all duration-500 ${
-                    activeSubMenu ? 'opacity-100' : 'opacity-0'
-                  }`}>
-                    {activeService && (
-                      <div className="animate-in fade-in slide-in-from-right-8 duration-500">
-                        <div className="flex items-center gap-6 mb-12">
-                          <div className="w-16 h-16 bg-cray-gold/10 rounded-[20px] flex items-center justify-center text-4xl border border-cray-gold/20 shadow-[inset_0_0_20px_rgba(255,177,0,0.1)]">
-                            {activeService.icon}
-                          </div>
-                          <div>
-                            <h4 className="text-white text-2xl font-bold uppercase tracking-tight leading-none mb-3">
-                              {activeService.title.replace(/^[A-Z]\)\s/, '')}
-                            </h4>
-                            <div className="flex items-center gap-3">
-                              <span className="h-[2px] w-8 bg-cray-gold/40"></span>
-                              <p className="text-cray-gold text-[0.65rem] font-black tracking-[0.5em] uppercase">Detaylı Çözümlerimiz</p>
-                            </div>
-                          </div>
+                  {activeSubMenu && (
+                    <div className="mega-menu-right animate-in fade-in duration-300">
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '30px' }}>
+                        <div style={{ padding: '15px', background: 'rgba(255,177,0,0.1)', borderRadius: '15px', fontSize: '32px' }}>
+                          {activeService?.icon}
                         </div>
-                        
-                        <div className="grid grid-cols-1 gap-2">
-                          {activeService.subServices?.map((sub, idx) => (
-                            <a 
-                              key={idx}
-                              href="#"
-                              className="group/sub flex items-center gap-5 px-6 py-4 rounded-2xl hover:bg-cray-gold/5 transition-all no-underline border border-transparent hover:border-cray-gold/10"
-                            >
-                              <div className="w-1.5 h-1.5 rounded-full bg-cray-gold/30 group-hover/sub:bg-cray-gold group-hover/sub:scale-150 transition-all duration-300"></div>
-                              <span className="text-[0.92rem] font-semibold text-gray-400 group-hover/sub:text-white transition-colors">
-                                {sub.title}
-                              </span>
-                            </a>
-                          ))}
-                        </div>
+                        <h4 style={{ margin: 0, fontSize: '20px', fontWeight: 800 }}>{activeService?.title.split(') ')[1]}</h4>
                       </div>
-                    )}
-                  </div>
+
+                      <div style={{ display: 'grid', gap: '4px' }}>
+                        {activeService?.subServices?.map((sub, i) => (
+                          <a key={i} href="#" className="sub-nav-link">
+                            <span className="dot"></span>
+                            {sub.title}
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </li>
 
-            <li><a href="#section1" className="text-white hover:text-cray-gold text-[0.8rem] font-bold uppercase tracking-[0.15em] transition-all no-underline select-none">Çözümler</a></li>
-            <li><a href="#" className="text-white hover:text-cray-gold text-[0.8rem] font-bold uppercase tracking-[0.15em] transition-all no-underline select-none">Referanslar</a></li>
+            <li><a href="#section1" className="nav-link">Çözümler</a></li>
+            <li><a href="#" className="nav-link">Referanslar</a></li>
           </ul>
 
-          <a href="#section1" className="bg-cray-gold text-black px-9 py-3.5 rounded-xl font-black text-[0.75rem] tracking-[0.15em] uppercase hover:scale-105 transition-all shadow-[0_10px_30px_rgba(255,177,0,0.3)] no-underline">
-            Teklif Al
-          </a>
+          <a href="#section1" className="cta-button">Teklif Al</a>
         </div>
 
-        {/* Mobil Menü Butonu */}
-        <button 
-          className="lg:hidden w-12 h-12 flex flex-col items-center justify-center gap-1.5 z-[10001] bg-white/5 rounded-xl border border-white/10 cursor-pointer"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          <div className={`w-6 h-0.5 bg-cray-gold rounded-full transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></div>
-          <div className={`w-6 h-0.5 bg-cray-gold rounded-full transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}></div>
-          <div className={`w-6 h-0.5 bg-cray-gold rounded-full transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></div>
+        {/* MOBIL HAMBURGER */}
+        <button className="mobile-hamburger" onClick={toggleMobileMenu}>
+          <span style={isMobileMenuOpen ? { transform: 'translateY(8px) rotate(45deg)' } : {}}></span>
+          <span style={isMobileMenuOpen ? { opacity: 0 } : {}}></span>
+          <span style={isMobileMenuOpen ? { transform: 'translateY(-8px) rotate(-45deg)' } : {}}></span>
         </button>
-      </nav>
+      </div>
 
-      {/* Mobil Menü Panel */}
-      <div className={`fixed inset-0 bg-black/98 backdrop-blur-3xl z-[10000] lg:hidden transition-all duration-600 ease-in-out ${
-        isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'
-      }`}>
-        <div className="flex flex-col h-full pt-32 pb-10 px-8 overflow-y-auto no-scrollbar">
-          <div className="flex flex-col gap-8">
-            <a href="#" onClick={() => setIsMenuOpen(false)} className="text-3xl font-black text-white no-underline uppercase tracking-tighter italic">Ana Sayfa</a>
-            <a href="#" onClick={() => setIsMenuOpen(false)} className="text-3xl font-black text-white no-underline uppercase tracking-tighter italic">Hakkımızda</a>
-            
-            <div className="space-y-6 pt-2">
-              <span className="text-cray-gold text-[0.65rem] font-black tracking-[0.5em] uppercase opacity-40">HİZMETLERİMİZ</span>
-              <div className="flex flex-col gap-5">
-                {servicesList.map((service) => (
-                  <div key={service.id} className="group">
-                    <div 
-                      className="flex items-center justify-between text-white py-1 cursor-pointer"
-                      onClick={() => service.subServices && setActiveSubMenu(activeSubMenu === service.id ? null : service.id)}
-                    >
-                      <div className="flex items-center gap-4">
-                        <span className="text-2xl">{service.icon}</span>
-                        <span className="text-[1.1rem] font-bold leading-none">{service.title}</span>
-                      </div>
-                      {service.subServices && (
-                        <svg className={`w-6 h-6 text-cray-gold transition-transform ${activeSubMenu === service.id ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 9l-7 7-7-7" />
+      {/* MOBIL OVERLAY */}
+      <div className={`mobile-overlay ${isMobileMenuOpen ? 'open' : ''}`}>
+        <ul className="mobile-nav-list">
+          <li className="mobile-nav-item"><a href="#" onClick={closeAll} className="mobile-nav-link">Ana Sayfa</a></li>
+          <li className="mobile-nav-item"><a href="#" onClick={closeAll} className="mobile-nav-link">Hakkımızda</a></li>
+          
+          <li className="mobile-nav-item">
+            <button onClick={() => setMobileHizmetlerOpen(!mobileHizmetlerOpen)} className="mobile-nav-link" style={{ background: 'none', border: 'none', width: '100%' }}>
+              Hizmetler
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{ transform: mobileHizmetlerOpen ? 'rotate(180deg)' : '' }}>
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            {mobileHizmetlerOpen && (
+              <div className="mobile-sub-menu">
+                {servicesList.map(s => (
+                  <div key={s.id} style={{ marginBottom: '15px' }}>
+                    <div onClick={() => setMobileActiveServiceId(mobileActiveServiceId === s.id ? null : s.id)} style={{ display: 'flex', justifyContent: 'space-between', color: mobileActiveServiceId === s.id ? 'var(--cray-gold)' : '#fff', fontWeight: 700, fontSize: '16px', cursor: 'pointer' }}>
+                      <span>{s.icon} {s.title}</span>
+                      {s.subServices && (
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" style={{ transform: mobileActiveServiceId === s.id ? 'rotate(180deg)' : '' }}>
+                          <path d="M19 9l-7 7-7-7" />
                         </svg>
                       )}
                     </div>
-                    {service.subServices && activeSubMenu === service.id && (
-                      <div className="flex flex-col gap-5 pl-12 border-l-2 border-cray-gold/20 mt-4 py-2">
-                        {service.subServices.map((sub, sIdx) => (
-                          <a key={sIdx} href="#" onClick={() => setIsMenuOpen(false)} className="text-[0.95rem] text-gray-400 font-bold no-underline hover:text-white transition-colors">
+                    {s.subServices && mobileActiveServiceId === s.id && (
+                      <div style={{ marginTop: '10px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                        {s.subServices.map((sub, si) => (
+                          <a key={si} href="#" onClick={closeAll} className="sub-nav-link">
+                            <span className="dot"></span>
                             {sub.title}
                           </a>
                         ))}
@@ -252,17 +190,15 @@ const Header: React.FC = () => {
                   </div>
                 ))}
               </div>
-            </div>
+            )}
+          </li>
 
-            <a href="#section1" onClick={() => setIsMenuOpen(false)} className="text-3xl font-black text-white no-underline uppercase tracking-tighter italic pt-2">Çözümler</a>
-            <a href="#" onClick={() => setIsMenuOpen(false)} className="text-3xl font-black text-white no-underline uppercase tracking-tighter italic">Referanslar</a>
-          </div>
+          <li className="mobile-nav-item"><a href="#section1" onClick={closeAll} className="mobile-nav-link">Çözümler</a></li>
+          <li className="mobile-nav-item"><a href="#" onClick={closeAll} className="mobile-nav-link">Referanslar</a></li>
+        </ul>
 
-          <div className="mt-auto pt-16">
-            <a href="#section1" onClick={() => setIsMenuOpen(false)} className="block w-full bg-cray-gold text-black text-center py-5 rounded-2xl font-black text-lg tracking-[0.1em] shadow-[0_15px_45px_rgba(255,177,0,0.4)] no-underline uppercase">
-              Ücretsiz Teklif Al
-            </a>
-          </div>
+        <div style={{ marginTop: 'auto' }}>
+          <a href="#section1" onClick={closeAll} className="cta-button" style={{ display: 'block', textAlign: 'center', fontSize: '16px', padding: '20px' }}>Ücretsiz Teklif Al</a>
         </div>
       </div>
     </header>

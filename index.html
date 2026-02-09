@@ -10,13 +10,327 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    /* Scrollbar Gizleme */
+    :root {
+      --cray-gold: #ffb100;
+      --cray-black: #000000;
+      --cray-dark: #09090b;
+      --header-height: 90px;
+    }
+
+    /* Temel Reset ve Scrollbar */
+    body { margin: 0; padding: 0; overflow-x: hidden; background: #000; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    
-    /* Metin seçme imlecini menüde engellemek için */
-    .nav-item-no-cursor { cursor: pointer; }
-    .nav-item-no-cursor * { cursor: pointer; }
+
+    /* --- ÖZGÜN HEADER CSS --- */
+    .cray-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 9999;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: 'Open Sans', sans-serif;
+      padding: 28px 0;
+    }
+
+    .cray-header.scrolled {
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 177, 0, 0.15);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+    }
+
+    .nav-container {
+      max-w: 1400px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Logo */
+    .logo-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--cray-gold);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      color: #000;
+      font-size: 20px;
+      box-shadow: 0 0 20px rgba(255, 177, 0, 0.3);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-title {
+      color: #fff;
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: -1px;
+      text-transform: uppercase;
+    }
+
+    .logo-sub {
+      color: var(--cray-gold);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    /* Masaüstü Ana Menü */
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 32px;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Ana Menü Font Kontrolü */
+    .nav-link {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 12px; /* Buradan tüm ana linklerin boyutu değişir */
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-link:hover {
+      color: var(--cray-gold);
+    }
+
+    /* Alt Menü (Dropdown/Mobile Sub) Font Kontrolü */
+    .sub-nav-link {
+      color: #9ca3af;
+      text-decoration: none;
+      font-size: 14px; /* TEK MERKEZDEN TÜM ALT MENÜ BOYUTU */
+      font-weight: 600;
+      text-transform: none; /* Alt menüler normal yazım olsun diye */
+      padding: 10px 14px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .sub-nav-link:hover {
+      color: #fff;
+      background: rgba(255, 177, 0, 0.05);
+    }
+
+    .sub-nav-link.active {
+      color: var(--cray-gold);
+    }
+
+    /* Alt Menüdeki Nokta (Indicator) */
+    .sub-nav-link .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--cray-gold);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* Dropdown - Mega Menu */
+    .has-mega-menu {
+      position: relative;
+    }
+
+    .mega-menu-trigger {
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .mega-menu-wrapper {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-67%);
+      padding-top: 15px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .has-mega-menu:hover .mega-menu-wrapper {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mega-menu-content {
+      background: #0a0a0c;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      display: flex;
+      overflow: hidden;
+      box-shadow: 0 50px 100px rgba(0,0,0,0.9);
+      transition: width 0.4s ease;
+    }
+
+    .mega-menu-left {
+      width: 440px;
+      background: rgba(20, 20, 22, 0.8);
+      border-right: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 20px 0;
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+
+    .mega-menu-right {
+      flex: 1;
+      padding: 40px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), transparent);
+    }
+
+    .menu-item-row {
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all 0.3s;
+      color: #9ca3af;
+    }
+
+    .menu-item-row:hover, .menu-item-row.active {
+      background: rgba(255, 177, 0, 0.1);
+      color: #fff;
+    }
+
+    .menu-item-row.active {
+      border-left: 4px solid var(--cray-gold);
+    }
+
+    /* CTA Button */
+    .cta-button {
+      background: var(--cray-gold);
+      color: #000;
+      padding: 14px 34px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      transition: all 0.3s;
+      box-shadow: 0 8px 25px rgba(255, 177, 0, 0.2);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(255, 177, 0, 0.4);
+    }
+
+    /* --- MOBIL MENU CSS --- */
+    .mobile-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.98);
+      backdrop-filter: blur(25px);
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      padding: 120px 40px 40px;
+      transition: transform 0.5s ease-in-out;
+      transform: translateX(100%);
+      overflow-y: auto;
+    }
+
+    .mobile-overlay.open {
+      transform: translateX(0);
+    }
+
+    .mobile-nav-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .mobile-nav-item {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 15px;
+    }
+
+    .mobile-nav-link {
+      font-size: 28px;
+      font-weight: 900;
+      color: #fff;
+      text-decoration: none;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mobile-sub-menu {
+      margin-top: 20px;
+      padding-left: 20px;
+      border-left: 2px solid rgba(255, 177, 0, 0.2);
+    }
+
+    .mobile-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      z-index: 10001;
+    }
+
+    .mobile-hamburger span {
+      width: 24px;
+      height: 2px;
+      background: var(--cray-gold);
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    @media (max-width: 1024px) {
+      .main-nav { display: none; }
+      .mobile-hamburger { display: flex; }
+    }
   </style>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -29,9 +343,6 @@
               dark: '#09090b',
               black: '#000000'
             }
-          },
-          fontFamily: {
-            sans: ['Open Sans', 'sans-serif'],
           }
         }
       }
