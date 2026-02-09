@@ -39,7 +39,7 @@ const WhyUsSection: React.FC = () => {
       <style>{`
         .why-us-section {
           position: relative;
-          padding: 80px 0;
+          padding: 60px 0;
           background-color: #000;
           color: #fff;
           min-height: 600px;
@@ -153,7 +153,7 @@ const WhyUsSection: React.FC = () => {
 
         .why-us-footer {
           text-align: center;
-          margin-top: 80px;
+          margin-top: 60px;
         }
 
         .btn-more {

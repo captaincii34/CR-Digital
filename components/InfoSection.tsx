@@ -12,7 +12,7 @@ const InfoSection: React.FC<{
     <section className={`info-section ${reverse ? 'reverse-gradient' : ''}`}>
       <style>{`
         .info-section {
-          padding: 80px 0;
+          padding: 60px 0;
           background-color: #000;
           color: #fff;
         }

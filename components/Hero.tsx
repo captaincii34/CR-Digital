@@ -23,7 +23,7 @@ const Hero: React.FC = () => {
         .hero-container {
           position: relative;
           padding-top: 160px;
-          padding-bottom: 120px;
+          padding-bottom: 25px;
           overflow: hidden;
           background-color: #000;
           color: #fff;
@@ -194,7 +194,7 @@ const Hero: React.FC = () => {
 
         .hero-scroll-indicator {
           position: absolute;
-          bottom: 40px;
+          bottom: 0px;
           left: 50%;
           transform: translateX(-50%);
           z-index: 100;

@@ -21,7 +21,7 @@ const ConsultancySection: React.FC = () => {
       <style>{`
         .consultancy-section {
           position: relative;
-          padding: 40px 0 20px;
+          padding: 60px 0 0px;
           overflow: hidden;
           background-color: #000;
           color: #fff;
@@ -253,7 +253,7 @@ const ConsultancySection: React.FC = () => {
         .ai-next-step { background: rgba(255, 177, 0, 0.1); border-left: 4px solid var(--cray-gold); padding: 16px; border-radius: 4px; font-size: 14px; font-weight: 700; margin-bottom: 30px; }
 
         .consultancy-scroll-indicator {
-          margin-top: 90px;
+          margin-top: 80px;
           margin-bottom: 0px;
           animation: consultancy-bounce 2s infinite;
           display: flex;

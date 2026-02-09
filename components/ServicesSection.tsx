@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const services = [
@@ -60,7 +59,7 @@ const ServicesSection: React.FC = () => {
       <style>{`
         .services-section {
           position: relative;
-          padding: 80px 0;
+          padding: 60px 0;
           overflow: hidden;
           background-color: #000;
           color: #fff;

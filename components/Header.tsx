@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 
 interface SubService {
@@ -16,7 +15,7 @@ interface ServiceItem {
 const servicesList: ServiceItem[] = [
   { 
     id: 'A', 
-    title: "A) A'DAN Z'YE KRİPTO PROJE DANIŞMANLIĞI", 
+    title: "A'DAN Z'YE KRİPTO PROJE DANIŞMANLIĞI", 
     icon: '💎',
     link: '#danismanlik',
     subServices: [
@@ -31,15 +30,15 @@ const servicesList: ServiceItem[] = [
       { title: "Lansman Sonrası Optimizasyon ve Danışmanlık" }
     ]
   },
-  { id: 'B', title: "B) TOKEN VE BLOKZİNCİR GELİŞTİRME", icon: '🔗' },
-  { id: 'C', title: "C) BLOKZİNCİR VE YAZILIM GELİŞTİRME", icon: '💻' },
-  { id: 'D', title: "D) TOKEN LANSMAN VE LİSTELEME HİZMETLERİ", icon: '📊' },
-  { id: 'E', title: "E) KRİPTO VE WEB3 PAZARLAMA HİZMETLERİ", icon: '📣' },
-  { id: 'F', title: "F) SOSYAL MEDYA VE TOPLULUK YÖNETİMİ", icon: '👥' },
-  { id: 'G', title: "G) İÇERİK ÜRETİMİ (VİDEO VE TASARIM)", icon: '🎬' },
-  { id: 'H', title: "H) PİYASA YAPICILIĞI VE LİKİDİTE ÇÖZÜMLERİ", icon: '🌊' },
-  { id: 'I', title: "I) YATIRIM DANIŞMANLIĞI VE FON TOPLAMA", icon: '💸' },
-  { id: 'J', title: "J) İŞ ORTAKLIKLARI VE İŞ GELİŞTİRME", icon: '🤝' },
+  { id: 'B', title: "TOKEN VE BLOKZİNCİR GELİŞTİRME", icon: '🔗' },
+  { id: 'C', title: "BLOKZİNCİR VE YAZILIM GELİŞTİRME", icon: '💻' },
+  { id: 'D', title: "TOKEN LANSMAN VE LİSTELEME HİZMETLERİ", icon: '📊' },
+  { id: 'E', title: "KRİPTO VE WEB3 PAZARLAMA HİZMETLERİ", icon: '📣' },
+  { id: 'F', title: "SOSYAL MEDYA VE TOPLULUK YÖNETİMİ", icon: '👥' },
+  { id: 'G', title: "İÇERİK ÜRETİMİ (VİDEO VE TASARIM)", icon: '🎬' },
+  { id: 'H', title: "PİYASA YAPICILIĞI VE LİKİDİTE ÇÖZÜMLERİ", icon: '🌊' },
+  { id: 'I', title: "YATIRIM DANIŞMANLIĞI VE FON TOPLAMA", icon: '💸' },
+  { id: 'J', title: "İŞ ORTAKLIKLARI VE İŞ GELİŞTİRME", icon: '🤝' },
 ];
 
 const Header: React.FC = () => {
@@ -139,7 +138,7 @@ const Header: React.FC = () => {
                         <div className="mega-menu-header-icon">
                           {activeService?.icon}
                         </div>
-                        <h4 className="mega-menu-header-title">{activeService?.title.split(') ')[1]}</h4>
+                        <h4 className="mega-menu-header-title">{activeService?.title}</h4>
                       </div>
 
                       <div style={{ display: 'grid', gap: '2px' }}>
