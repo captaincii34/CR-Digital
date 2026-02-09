@@ -77,7 +77,7 @@ const PartnershipBusinessDetailView: React.FC = () => {
         .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; color: #000; margin-bottom: 16px; }
         .form-button { width: 100%; background: var(--cray-gold); color: #000; padding: 18px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
         
-        .why-us-section { position: relative; padding: 120px 0; background-color: #000; overflow: hidden; }
+        .why-us-section { position: relative; background-color: #000; overflow: hidden; }
         .reasons-grid { display: grid; grid-template-columns: 1fr; gap: 32px; position: relative; z-index: 10; }
         @media (min-width: 768px) { .reasons-grid { grid-template-columns: repeat(3, 1fr); } }
         .reason-card { padding: 48px 32px; border-radius: 24px; text-align: center; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); transition: 0.4s; }
@@ -135,9 +135,9 @@ const PartnershipBusinessDetailView: React.FC = () => {
         </div>
       </section>
 
-      <section className="why-us-section">
-        <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=2070&auto=format&fit=crop" className="bg-img" alt="Partnerships Visual" />
-        <div className="overlay"></div><div className="grad"></div>
+      <section className="why-us-section section-padding">
+        <img src="https://images.unsplash.com/photo-1521791136064-7986c2959210?q=80&w=2070&auto=format&fit=crop" className="bg-img" alt="Partnerships Visual Background" />
+        <div className="overlay" style={{ background: 'rgba(0,0,0,0.85)' }}></div><div className="grad"></div>
         <div className="container-xl">
           <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Neden Bizimle Çalışmalısınız?</h2>
           <div className="reasons-grid">

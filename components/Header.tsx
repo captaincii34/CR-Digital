@@ -21,14 +21,14 @@ const servicesList: ServiceItem[] = [
     icon: '💎',
     link: '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi',
     subServices: [
-      { title: "Kripto Proje Danışmanlığı" },
-      { title: "Kripto Fikir ve Konsept Danışmanlığı" },
-      { title: "Kripto İş Modeli ve Strateji Danışmanlığı" },
-      { title: "Kripto Yol Haritası ve Tocenomics Danışmanlığı" },
-      { title: "Bütçe Odaklı Kripto Proje Danışmanlığı" },
-      { title: "Uçtan Uca Kripto Proje Yönetim Danışmanlığı" },
-      { title: "Lansman ve Büyüme Danışmanlığı" },
-      { title: "Dijital Pazarlama ve Tanıtım Danışmanlığı" }
+      { title: "Kripto Proje Danışmanlığı", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-proje-danismanligi" },
+      { title: "Kripto Fikir ve Konsept Danışmanlığı", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-fikir-ve-konsept-danismanligi" },
+      { title: "Kripto İş Modeli ve Strateji Danışmanlığı", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-is-modeli-ve-strateji-danismanligi" },
+      { title: "Kripto Yol Haritası ve Tocenomics Danışmanlığı", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-yol-haritasi-ve-tocenomics-danismanligi" },
+      { title: "Bütçe Odaklı Kripto Proje Danışmanlığı", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/butce-odakli-kripto-proje-danismanligi" },
+      { title: "Uçtan Uca Kripto Proje Yönetim Danışmanlığı", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/uctan-uca-kripto-proje-yonetim-danismanligi" },
+      { title: "Lansman ve Büyüme Danışmanlığı", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/lansman-ve-buyume-danismanligi" },
+      { title: "Dijital Pazarlama ve Tanıtım Danışmanlığı", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/dijital-pazarlama-ve-tanitim-danismanligi" }
     ]
   },
   { 
@@ -122,7 +122,7 @@ const servicesList: ServiceItem[] = [
   },
   { 
     id: 'G', 
-    title: "İÇERİK ÜRETİMİ (VİDEO VE TASARIM)", 
+    title: "İÇERİK ÜRETİMI (VİDEO VE TASARIM)", 
     icon: '🎬', 
     link: '#hizmetler/icerik-uretimi',
     subServices: [
@@ -202,6 +202,7 @@ const Header: React.FC = () => {
     setIsMobileMenuOpen(false);
     setMobileHizmetlerOpen(false);
     setMobileActiveServiceId(null);
+    setActiveSubMenu(null);
   };
 
   const handleHomeClick = (e: React.MouseEvent) => {
@@ -214,7 +215,12 @@ const Header: React.FC = () => {
   const handleServiceClick = (item: ServiceItem) => {
     window.location.hash = item.link;
     closeAll();
-    setActiveSubMenu(null);
+  };
+
+  const handleSubServiceClick = (e: React.MouseEvent, subLink: string) => {
+    e.preventDefault();
+    window.location.hash = subLink;
+    closeAll();
   };
 
   const activeService = servicesList.find(s => s.id === activeSubMenu);
@@ -244,7 +250,7 @@ const Header: React.FC = () => {
               </button>
 
               <div className="mega-menu-wrapper">
-                <div className="mega-menu-content" style={{ width: activeSubMenu ? '980px' : '440px' }}>
+                <div className="mega-menu-content" style={{ width: activeSubMenu ? '850px' : '440px' }}>
                   <div className="mega-menu-left no-scrollbar">
                     {servicesList.map(item => (
                       <div 
@@ -271,17 +277,18 @@ const Header: React.FC = () => {
                         <h4 className="mega-menu-header-title">{activeService?.title}</h4>
                       </div>
 
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '4px' }}>
+                      {/* Changed to 1 column layout as requested */}
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(1, 1fr)', gap: '2px' }}>
                         {(activeService?.subServices || [{ title: activeService?.title || '' }]).map((sub, i) => (
-                          <div key={i} style={{ gridColumn: sub.isHeader ? 'span 2' : 'span 1' }}>
+                          <div key={i}>
                             {sub.isHeader ? (
-                              <a href={sub.link || activeService?.link} onClick={closeAll} style={{ 
+                              <a href={sub.link || activeService?.link} onClick={(e) => handleSubServiceClick(e, sub.link || activeService?.link)} style={{ 
                                 color: 'var(--cray-gold)', 
-                                fontSize: '12px', 
-                                fontWeight: '800', 
+                                fontSize: '11px', 
+                                fontWeight: '700', 
                                 textTransform: 'uppercase', 
-                                margin: '20px 0 10px 12px',
-                                borderLeft: '3px solid var(--cray-gold)',
+                                margin: '15px 0 8px 16px',
+                                borderLeft: '2px solid var(--cray-gold)',
                                 paddingLeft: '8px',
                                 display: 'block',
                                 textDecoration: 'none'
@@ -289,7 +296,7 @@ const Header: React.FC = () => {
                                 🔹 {sub.title}
                               </a>
                             ) : (
-                              <a href={sub.link || activeService?.link} onClick={closeAll} className="sub-nav-link">
+                              <a href={sub.link || activeService?.link} onClick={(e) => handleSubServiceClick(e, sub.link || activeService?.link)} className="sub-nav-link">
                                 <span className="dot"></span>
                                 {sub.title}
                               </a>
@@ -352,14 +359,10 @@ const Header: React.FC = () => {
                       <div style={{ marginTop: '10px', display: 'flex', flexDirection: 'column', gap: '2px' }}>
                         {s.subServices.map((sub, si) => (
                           <div key={si}>
-                            {sub.isHeader ? (
-                              <a href={sub.link || s.link} onClick={closeAll} style={{ color: 'var(--cray-gold)', fontSize: '11px', fontWeight: '800', margin: '15px 0 5px 12px', display: 'block', textDecoration: 'none' }}>🔹 {sub.title}</a>
-                            ) : (
-                              <a href={sub.link || s.link} onClick={closeAll} className="sub-nav-link">
-                                <span className="dot"></span>
-                                {sub.title}
-                              </a>
-                            )}
+                            <a href={sub.link || s.link} onClick={(e) => handleSubServiceClick(e, sub.link || s.link)} className="sub-nav-link">
+                              <span className="dot"></span>
+                              {sub.title}
+                            </a>
                           </div>
                         ))}
                       </div>

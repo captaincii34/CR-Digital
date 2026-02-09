@@ -48,7 +48,7 @@
     .btn-gold, .btn-main, .btn-cta, .btn-more, .btn-submit, .btn-final-cta {
       font-size: 16px !important;
       font-weight: 600 !important;
-      padding: 12px 22px; /* !important kaldırıldı, yerel ezme için */
+      padding: 12px 22px;
       border-radius: 12px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -58,11 +58,6 @@
       cursor: pointer;
       border: none;
       text-decoration: none;
-    }
-
-    /* Kalın font gereken yerler için istisna */
-    .font-bold, b, strong {
-      font-weight: 800 !important;
     }
 
     .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -142,7 +137,6 @@
     }
     .nav-link:hover { color: var(--cray-gold); }
 
-    /* Header Özel Teklif Al Butonu */
     .cta-button {
       background: var(--cray-gold);
       color: #000;
@@ -157,10 +151,6 @@
       display: inline-block;
       box-shadow: 0 4px 15px rgba(255, 177, 0, 0.2);
     }
-    .cta-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(255, 177, 0, 0.4);
-    }
 
     /* MEGA MENU CSS */
     .has-mega-menu { position: relative; }
@@ -169,13 +159,13 @@
     .mega-menu-wrapper {
       position: absolute;
       top: calc(100% + 20px);
-      left: 50%;
-      transform: translateX(-50%);
+      left: 0;
+      transform: none;
       visibility: hidden;
       opacity: 0;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 1000;
-      padding-top: 20px;
+      padding-top: 28px;
     }
     
     .has-mega-menu:hover .mega-menu-wrapper {
@@ -191,13 +181,12 @@
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
       display: flex;
       overflow: hidden;
-      transition: width 0.3s ease;
     }
 
     .mega-menu-left {
-      width: 440px;
-      padding: 20px;
-      max-height: 600px;
+      width: max-content;
+      padding: 8px;
+      max-height: max-content;
       overflow-y: auto;
       background: rgba(255, 255, 255, 0.02);
     }
@@ -213,23 +202,44 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 18px;
+      padding: 6px 25px;
       border-radius: 12px;
       cursor: pointer;
       transition: 0.2s;
-      margin-bottom: 4px;
+      margin-bottom: 0px;
     }
     .menu-item-row:hover, .menu-item-row.active {
       background: rgba(255, 177, 0, 0.1);
       color: var(--cray-gold);
     }
-    .menu-item-content { display: flex; align-items: center; gap: 14px; }
+    .menu-item-content {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
     .menu-item-icon { font-size: 18px !important; }
-    .menu-item-title { font-weight: 700 !important; font-size: 12px !important; text-transform: uppercase; letter-spacing: 0.5px; }
+    .menu-item-title {
+      font-weight: 600 !important;
+      font-size: 11px !important;
+      text-transform: uppercase;
+      letter-spacing: 0px;
+    }
 
-    .mega-menu-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+    .mega-menu-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 0px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
     .mega-menu-header-icon { font-size: 24px !important; }
-    .mega-menu-header-title { color: var(--cray-gold); font-size: 18px !important; font-weight: 800 !important; text-transform: uppercase; }
+    .mega-menu-header-title {
+      color: var(--cray-gold);
+      font-size: 13px !important;
+      font-weight: 700 !important;
+      text-transform: uppercase;
+    }
 
     .sub-nav-link {
       display: flex;
@@ -237,10 +247,10 @@
       gap: 12px;
       color: #999 !important;
       text-decoration: none;
-      padding: 10px 12px;
+      padding: 7px 16px;
       border-radius: 8px;
       transition: 0.2s;
-      font-size: 13px !important;
+      font-size: 11px !important;
       font-weight: 600 !important;
     }
     .sub-nav-link:hover { color: #fff !important; background: rgba(255, 255, 255, 0.03); }

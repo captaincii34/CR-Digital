@@ -16,6 +16,14 @@ import ContentProductionDetailView from './components/ContentProductionDetailVie
 import MarketMakingDetailView from './components/MarketMakingDetailView';
 import InvestmentFundingDetailView from './components/InvestmentFundingDetailView';
 import PartnershipBusinessDetailView from './components/PartnershipBusinessDetailView';
+import CryptoProjectConsultancySubDetailView from './components/CryptoProjectConsultancySubDetailView';
+import CryptoIdeaConceptConsultancySubDetailView from './components/CryptoIdeaConceptConsultancySubDetailView';
+import CryptoBusinessModelStrategySubDetailView from './components/CryptoBusinessModelStrategySubDetailView';
+import CryptoRoadmapTokenomicsSubDetailView from './components/CryptoRoadmapTokenomicsSubDetailView';
+import BudgetOrientedConsultancySubDetailView from './components/BudgetOrientedConsultancySubDetailView';
+import EndToEndManagementSubDetailView from './components/EndToEndManagementSubDetailView';
+import LaunchGrowthSubDetailView from './components/LaunchGrowthSubDetailView';
+import DigitalMarketingPromotionSubDetailView from './components/DigitalMarketingPromotionSubDetailView';
 
 const AssetDebugger: React.FC = () => (
   <div className="min-h-screen bg-zinc-950 p-10 pt-32 text-white font-sans">
@@ -52,20 +60,47 @@ const App: React.FC = () => {
 
   const renderView = () => {
     switch(view) {
-      case '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi': return <ConsultancyDetailView />;
-      case '#hizmetler/token-ve-blokzincir-gelistirme': return <TokenBlockchainDetailView />;
+      case '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi': 
+        return <ConsultancyDetailView />;
+      case '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-proje-danismanligi': 
+        return <CryptoProjectConsultancySubDetailView />;
+      case '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-fikir-ve-konsept-danismanligi': 
+        return <CryptoIdeaConceptConsultancySubDetailView />;
+      case '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-is-modeli-ve-strateji-danismanligi': 
+        return <CryptoBusinessModelStrategySubDetailView />;
+      case '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-yol-haritasi-ve-tocenomics-danismanligi': 
+        return <CryptoRoadmapTokenomicsSubDetailView />;
+      case '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/butce-odakli-kripto-proje-danismanligi': 
+        return <BudgetOrientedConsultancySubDetailView />;
+      case '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/uctan-uca-kripto-proje-yonetim-danismanligi': 
+        return <EndToEndManagementSubDetailView />;
+      case '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/lansman-ve-buyume-danismanligi': 
+        return <LaunchGrowthSubDetailView />;
+      case '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/dijital-pazarlama-ve-tanitim-danismanligi': 
+        return <DigitalMarketingPromotionSubDetailView />;
+      case '#hizmetler/token-ve-blokzincir-gelistirme': 
+        return <TokenBlockchainDetailView />;
       case '#hizmetler/blokzincir-ve-yazilim-gelistirme':
       case '#hizmetler/blokzincir-gelistirme':
       case '#hizmetler/web3-ve-platform-yazilimlari':
-      case '#hizmetler/uygulama-ve-oyun-gelistirme': return <BlockchainSoftwareDetailView />;
-      case '#hizmetler/token-lansman-ve-listeleme': return <TokenListingDetailView />;
-      case '#hizmetler/kripto-ve-web3-pazarlama': return <KriptoMarketingDetailView />;
-      case '#hizmetler/sosyal-medya-ve-topluluk-yonetimi': return <SocialCommunityDetailView />;
-      case '#hizmetler/icerik-uretimi': return <ContentProductionDetailView />;
-      case '#hizmetler/piyasa-yapiciligi-ve-likidite': return <MarketMakingDetailView />;
-      case '#hizmetler/yatirim-danismanligi': return <InvestmentFundingDetailView />;
-      case '#hizmetler/is-ortakliklari-ve-is-gelistirme': return <PartnershipBusinessDetailView />;
-      case '#assets': return <AssetDebugger />;
+      case '#hizmetler/uygulama-ve-oyun-gelistirme': 
+        return <BlockchainSoftwareDetailView />;
+      case '#hizmetler/token-lansman-ve-listeleme': 
+        return <TokenListingDetailView />;
+      case '#hizmetler/kripto-ve-web3-pazarlama': 
+        return <KriptoMarketingDetailView />;
+      case '#hizmetler/sosyal-medya-ve-topluluk-yonetimi': 
+        return <SocialCommunityDetailView />;
+      case '#hizmetler/icerik-uretimi': 
+        return <ContentProductionDetailView />;
+      case '#hizmetler/piyasa-yapiciligi-ve-likidite': 
+        return <MarketMakingDetailView />;
+      case '#hizmetler/yatirim-danismanligi': 
+        return <InvestmentFundingDetailView />;
+      case '#hizmetler/is-ortakliklari-ve-is-gelistirme': 
+        return <PartnershipBusinessDetailView />;
+      case '#assets': 
+        return <AssetDebugger />;
       default:
         return (
           <main>

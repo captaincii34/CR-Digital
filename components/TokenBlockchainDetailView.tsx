@@ -100,8 +100,7 @@ const TokenBlockchainDetailView: React.FC = () => {
         .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; color: #000; }
         .form-button { width: 100%; background: var(--cray-gold); color: #000; padding: 18px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
 
-        /* Why Us Styles (Adapted from homepage WhyUsSection) */
-        .why-us-section { position: relative; padding: 80px 0; background-color: #000; color: #fff; overflow: hidden; }
+        .why-us-section { position: relative; padding: 120px 0; background-color: #000; color: #fff; overflow: hidden; }
         .reasons-grid { display: grid; grid-template-columns: 1fr; gap: 32px; position: relative; z-index: 10; }
         @media (min-width: 768px) { .reasons-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 1024px) { .reasons-grid { grid-template-columns: repeat(3, 1fr); } }
@@ -111,13 +110,13 @@ const TokenBlockchainDetailView: React.FC = () => {
             border-radius: 20px;
             text-align: center;
             transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
         }
         .reason-card:hover {
-            background: rgba(255, 177, 0, 0.06);
-            border-color: rgba(255, 177, 0, 0.3);
+            background: rgba(255, 177, 0, 0.08);
+            border-color: var(--cray-gold);
             transform: translateY(-8px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
@@ -137,7 +136,6 @@ const TokenBlockchainDetailView: React.FC = () => {
         .reason-title { margin-bottom: 16px; line-height: 1.3; font-weight: 700; }
         .reason-desc { color: #d1d5db; line-height: 1.6; font-size: 14px !important; }
 
-        /* Scope Grid Section */
         .scope-section { position: relative; padding: 100px 0; overflow: hidden; background-color: #000; color: #fff; }
         .scope-header { text-align: center; margin-bottom: 64px; position: relative; z-index: 10; }
         .scope-grid { 
@@ -161,8 +159,8 @@ const TokenBlockchainDetailView: React.FC = () => {
             align-items: center;
             gap: 16px;
             transition: 0.3s;
-            background: rgba(0,0,0,0.3);
-            backdrop-filter: blur(5px);
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(8px);
         }
         .scope-card:hover {
             background: rgba(255, 177, 0, 0.05);
@@ -257,10 +255,10 @@ const TokenBlockchainDetailView: React.FC = () => {
         </div>
       </section>
 
-      {/* Why Us Section (Replaced 'Hizmet Özetimiz') */}
+      {/* Why Us Section */}
       <section id="section-why" className="why-us-section section-padding">
-        <img src="/gorsel/fh.jpg" alt="Why Us Background" className="bg-img" />
-        <div className="overlay" style={{ background: 'rgba(0,0,0,0.75)' }}></div>
+        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop" alt="Blockchain Tech Background" className="bg-img" />
+        <div className="overlay" style={{ background: 'rgba(0,0,0,0.85)' }}></div>
         <div className="grad"></div>
         <div className="container-xl">
           <h2 className="h2-style" style={{ textAlign: 'center', marginBottom: '60px' }}>Neden Bizimle Çalışmalısınız?</h2>
@@ -280,7 +278,7 @@ const TokenBlockchainDetailView: React.FC = () => {
         </div>
       </section>
 
-      {/* Development Scope Section (Redesigned like Homepage Section 3) */}
+      {/* Development Scope Section */}
       <section className="scope-section">
         <img src="/gorsel/ag1.jpg" alt="Scope Background" className="bg-img" />
         <div className="overlay" style={{ background: 'rgba(0,0,0,0.7)' }}></div>
