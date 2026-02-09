@@ -92,20 +92,30 @@ const App: React.FC = () => {
             <ConsultancySection />
             <WhyUsSection />
             <InfoSection 
-              title="Mevcut Kripto Projenizi Bir Üst Seviyeye Taşıyalım"
-              desc="Birçok proje doğru strateji, pazarlama ve teknik optimizasyon eksikliği nedeniyle potansiyelini kullanamıyor."
-              points={["Projenizi analiz ederiz", "Eksikleri tespit ederiz", "Yeniden konumlandırır ve büyütürüz"]}
+              title="Kripto Projenizi Bir Üst Seviyeye Taşıyalım"
+              desc="Kripto projenizi; doğru strateji, pazarlama ve teknik optimizasyon ile buluşturarak ulaşmak istediği noktaya birlikte taşıyoruz."
+              points={[
+                "Projenizi analiz ederiz", 
+                "Eksikleri tespit ederiz", 
+                "Yeniden konumlandırır ve büyütürüz",
+                "Gizlilik ana kuralımız!"
+              ]}
               image="/gorsel/y.jpg"
               reverse
               cta="Projemi Değerlendirin"
             />
             <ServicesSection />
             <InfoSection 
-              title="Yatırım Gücünüz Var Ama Ne Yapacağınıza Karar Veremediniz mi?"
-              desc="Web3 ve kripto dünyasında doğru yatırım, sadece sermaye değil doğru strateji gerektirir."
-              points={["Yatırım fırsatlarını analiz eder", "Riskleri değerlendirir", "Size uygun Web3 modellerini belirleriz"]}
+              title="Yatırım Gücünüzü Doğru Strateji İle Kullanın, Büyüme Sağlayın!"
+              desc="Web3 ve kripto dünyasında doğru yatırım, sadece sermaye değil doğru strateji gerektirir. Doğru strateji ve dijital pazarlama süreçleri ile hızlı ve daha az maaliyetle işi neticelendir!"
+              points={[
+                "Yatırım ve strateji fırsatlarını analiz eder", 
+                "Riskleri değerlendirir", 
+                "Size uygun Web3 modellerini belirleriz",
+                "Size özel uçtan uca strateji danışmanlığı alın!"
+              ]}
               image="/gorsel/z.jpg"
-              cta="Yatırım Danışmanlığı Al"
+              cta="Strateji Danışmanlığı Al"
             />
             
             <section className="final-cta-section">
