@@ -118,8 +118,8 @@ const CryptoRoadmapTokenomicsSubDetailView: React.FC = () => {
               </div>
             </div>
             <div className="form-card">
-              <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px'}}>Economy Analysis</h3>
-              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
+              <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px', color: '#000'}}>Economy Analysis</h3>
+              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
                   <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
                     <option value="">Token Status</option><option value="idea">Idea Only</option><option value="draft">Draft Ready</option><option value="live">Live / Pivot</option>
@@ -185,7 +185,7 @@ const CryptoRoadmapTokenomicsSubDetailView: React.FC = () => {
       {/* CTA Box */}
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Let's Place Your Economy on Solid Foundations</h2>
+          <h2 className="h2-style" style={{color: '#000'}}>Let's Place Your Economy on Solid Foundations</h2>
           <p className="p-style" style={{color: '#555', maxWidth: '800px', margin: '20px auto 0'}}>Entrust the economy, which is the heart of your project, to expert hands. Contact us today to create your detailed analysis report.</p>
           <a href="#h-hero" className="cta-btn">Request Analysis</a>
         </div>
@@ -209,8 +209,8 @@ const CryptoRoadmapTokenomicsSubDetailView: React.FC = () => {
         </div>
       </section>
 
-      <div style={{ padding: '80px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
+      <div style={{ padding: '60px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
+        <button onClick={() => window.location.hash = 'services/end-to-end-crypto-project-consulting'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

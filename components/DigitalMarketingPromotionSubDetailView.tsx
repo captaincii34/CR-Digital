@@ -54,7 +54,7 @@ const DigitalMarketingPromotionSubDetailView: React.FC = () => {
         #h-hero { position: relative; padding: 220px 0 120px; min-height: 85vh; display: flex; align-items: center; }
         .hero-grid { display: grid; grid-template-columns: 1fr; gap: 60px; position: relative; z-index: 10; width: 100%; }
         @media (min-width: 1024px) { .hero-grid { grid-template-columns: 1.2fr 1fr; align-items: center; } }
-        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; color: #000; width: 100%; max-width: 480px; margin: 0 auto; }
+        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; color: #000; width: 100%; max-width: 480px; margin: 0 auto; box-shadow: 0 40px 80px rgba(0,0,0,0.7); }
         .form-button { width: 100%; background: var(--cray-gold); color: #000; padding: 18px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
 
         .reasons-grid { display: grid; grid-template-columns: 1fr; gap: 32px; position: relative; z-index: 10; }
@@ -94,7 +94,7 @@ const DigitalMarketingPromotionSubDetailView: React.FC = () => {
               <p className="hero-desc p-style">We don't just promote; we build a brand. We announce your voice to the whole world with advertising and promotion strategies suitable for the Web3 world.</p>
             </div>
             <div className="form-card">
-              <h3 className="h2-style" style={{textAlign: 'center', marginBottom: '20px', fontSize: '20px !important'}}>Promotion Request</h3>
+              <h3 className="h2-style" style={{textAlign: 'center', marginBottom: '20px', fontSize: '20px !important', color: '#000'}}>Promotion Request</h3>
               <form onSubmit={handleSubmit}>
                 <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Telegram / X Link" required />
                 <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="In which regions do you want to stand out?" required />
@@ -183,7 +183,7 @@ const DigitalMarketingPromotionSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '80px 0', textAlign: 'center', background: '#000' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
+        <button onClick={() => window.location.hash = 'services/end-to-end-crypto-project-consulting'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

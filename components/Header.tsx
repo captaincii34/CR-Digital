@@ -19,165 +19,165 @@ const servicesList: ServiceItem[] = [
     id: 'A', 
     title: "End-to-End Crypto Project Consulting", 
     icon: '💎',
-    link: '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi',
+    link: '#services/end-to-end-crypto-project-consulting',
     subServices: [
-      { title: "Crypto Project Consulting", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-proje-danismanligi" },
-      { title: "Crypto Idea & Concept Consulting", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-fikir-ve-konsept-danismanligi" },
-      { title: "Crypto Business Model & Strategy Consulting", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-is-modeli-ve-strateji-danismanligi" },
-      { title: "Crypto Roadmap & Tokenomics Consulting", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-yol-haritasi-ve-tocenomics-danismanligi" },
-      { title: "Budget-Focused Crypto Project Consulting", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/butce-odakli-kripto-proje-danismanligi" },
-      { title: "End-to-End Crypto Project Management Consulting", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/uctan-uca-kripto-proje-yonetim-danismanligi" },
-      { title: "Launch & Growth Consulting", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/lansman-ve-buyume-danismanligi" },
-      { title: "Digital Marketing & Promotion Consulting", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/dijital-pazarlama-ve-tanitim-danismanligi" }
+      { title: "Crypto Project Consulting", link: "#services/end-to-end-crypto-project-consulting/crypto-project-consulting" },
+      { title: "Crypto Idea & Concept Consulting", link: "#services/end-to-end-crypto-project-consulting/idea-and-concept" },
+      { title: "Crypto Business Model & Strategy Consulting", link: "#services/end-to-end-crypto-project-consulting/business-model-and-strategy" },
+      { title: "Crypto Roadmap & Tokenomics Consulting", link: "#services/end-to-end-crypto-project-consulting/roadmap-and-tokenomics" },
+      { title: "Budget-Focused Crypto Project Consulting", link: "#services/end-to-end-crypto-project-consulting/budget-oriented" },
+      { title: "End-to-End Crypto Project Management Consulting", link: "#services/end-to-end-crypto-project-consulting/management-consulting" },
+      { title: "Launch & Growth Consulting", link: "#services/end-to-end-crypto-project-consulting/launch-and-growth" },
+      { title: "Digital Marketing & Promotion Consulting", link: "#services/end-to-end-crypto-project-consulting/digital-marketing" }
     ]
   },
   { 
     id: 'B', 
     title: "Token & Blockchain Development", 
     icon: '🔗', 
-    link: '#hizmetler/token-ve-blokzincir-gelistirme',
+    link: '#services/token-and-blockchain-development',
     subServices: [
-      { title: "Token Project Consulting", link: "#hizmetler/token-ve-blokzincir-gelistirme/token-proje-danismanligi" },
-      { title: "Blockchain & Network Selection", link: "#hizmetler/token-ve-blokzincir-gelistirme/blokzincir-ve-ag-secimi" },
-      { title: "Smart Contract Development", link: "#hizmetler/token-ve-blokzincir-gelistirme/akilli-kontrat-gelistirme" },
-      { title: "Tokenomics Design", link: "#hizmetler/token-ve-blokzincir-gelistirme/tokenomics-tasarimi" },
-      { title: "Whitepaper & Litepaper Preparation", link: "#hizmetler/token-ve-blokzincir-gelistirme/whitepaper-hazirligi" },
-      { title: "Pitch Deck & Investor Presentations", link: "#hizmetler/token-ve-blokzincir-gelistirme/pitch-deck-ve-sunum-hazirligi" },
-      { title: "Roadmap & Go-To-Market (GTM) Planning", link: "#hizmetler/token-ve-blokzincir-gelistirme/roadmap-ve-gtm-planlamasi" },
-      { title: "Audit Preparation Processes (Partner-Based)", link: "#hizmetler/token-ve-blokzincir-gelistirme/audit-hazirlik-surecleri" }
+      { title: "Token Project Consulting", link: "#services/token-and-blockchain-development/token-consulting" },
+      { title: "Blockchain & Network Selection", link: "#services/token-and-blockchain-development/network-selection" },
+      { title: "Smart Contract Development", link: "#services/token-and-blockchain-development/smart-contract" },
+      { title: "Tokenomics Design", link: "#services/token-and-blockchain-development/tokenomics-design" },
+      { title: "Whitepaper & Litepaper Preparation", link: "#services/token-and-blockchain-development/whitepaper" },
+      { title: "Pitch Deck & Investor Presentations", link: "#services/token-and-blockchain-development/pitch-deck" },
+      { title: "Roadmap & Go-To-Market (GTM) Planning", link: "#services/token-and-blockchain-development/gtm-planning" },
+      { title: "Audit Preparation Processes (Partner-Based)", link: "#services/token-and-blockchain-development/audit-preparation" }
     ]
   },
   { 
     id: 'C', 
     title: "Blockchain & Software Development", 
     icon: '💻', 
-    link: '#hizmetler/blokzincir-ve-yazilim-gelistirme',
+    link: '#services/blockchain-and-software-development',
     subServices: [
-      { title: "Blockchain Development", isHeader: true, link: "#hizmetler/blokzincir-gelistirme" },
-      { title: "Smart Contract Development", link: "#hizmetler/blokzincir-ve-yazilim-gelistirme/akilli-kontrat-gelistirme" },
-      { title: "Token & NFT Contracts", link: "#hizmetler/blokzincir-ve-yazilim-gelistirme/token-nft-kontratlari" },
-      { title: "Decentralized Application (DApp) Development", link: "#hizmetler/blokzincir-ve-yazilim-gelistirme/dapp-gelistirme" },
-      { title: "DAO Infrastructure Setup", link: "#hizmetler/blokzincir-ve-yazilim-gelistirme/dao-altyapi" },
-      { title: "Wallet Integrations", link: "#hizmetler/blokzincir-ve-yazilim-gelistirme/cuzdan-entegrasyonu" },
-      { title: "Web3 & Platform Software", isHeader: true, link: "#hizmetler/web3-ve-platform-yazilimlari" },
-      { title: "Web3-Compatible Website Development", link: "#hizmetler/web3-ve-platform-yazilimlari/website-gelistirme" },
-      { title: "Custom Admin Dashboards", link: "#hizmetler/web3-ve-platform-yazilimlari/ozel-paneller" },
-      { title: "Analytics & Reporting Dashboards", link: "#hizmetler/web3-ve-platform-yazilimlari/analitik-raporlama" },
-      { title: "Backend & API Development", link: "#hizmetler/web3-ve-platform-yazilimlari/backend-api" },
-      { title: "Application & Game Development", isHeader: true, link: "#hizmetler/uygulama-ve-oyun-gelistirme" },
-      { title: "Web3 Mobile Application Development", link: "#hizmetler/uygulama-ve-oyun-gelistirme/mobil-uygulama" },
-      { title: "Telegram Bot & Mini App Development", link: "#hizmetler/uygulama-ve-oyun-gelistirme/telegram-bot" },
-      { title: "Blockchain-Based Game Development", link: "#hizmetler/uygulama-ve-oyun-gelistirme/oyun-gelistirme" },
-      { title: "GameFi / Play-to-Earn Systems", link: "#hizmetler/uygulama-ve-oyun-gelistirme/gamefi-p2e" },
-      { title: "Server & Infrastructure Setup", link: "#hizmetler/uygulama-ve-oyun-gelistirme/sunucu-altyapi" }
+      { title: "Blockchain Development", isHeader: true, link: "#services/blockchain-development" },
+      { title: "Smart Contract Development", link: "#services/blockchain-and-software-development/smart-contract-dev" },
+      { title: "Token & NFT Contracts", link: "#services/blockchain-and-software-development/token-nft-contracts" },
+      { title: "Decentralized Application (DApp) Development", link: "#services/blockchain-and-software-development/dapp-development" },
+      { title: "DAO Infrastructure Setup", link: "#services/blockchain-and-software-development/dao-infrastructure" },
+      { title: "Wallet Integrations", link: "#services/blockchain-and-software-development/wallet-integration" },
+      { title: "Web3 & Platform Software", isHeader: true, link: "#services/web3-platform-software" },
+      { title: "Web3-Compatible Website Development", link: "#services/web3-platform-software/website-development" },
+      { title: "Custom Admin Dashboards", link: "#services/web3-platform-software/custom-dashboards" },
+      { title: "Analytics & Reporting Dashboards", link: "#services/web3-platform-software/analytics-reporting" },
+      { title: "Backend & API Development", link: "#services/web3-platform-software/backend-api" },
+      { title: "Application & Game Development", isHeader: true, link: "#services/app-game-development" },
+      { title: "Web3 Mobile Application Development", link: "#services/app-game-development/mobile-app" },
+      { title: "Telegram Bot & Mini App Development", link: "#services/app-game-development/telegram-mini-app" },
+      { title: "Blockchain-Based Game Development", link: "#services/app-game-development/game-development" },
+      { title: "GameFi / Play-to-Earn Systems", link: "#services/app-game-development/gamefi-p2e" },
+      { title: "Server & Infrastructure Setup", link: "#services/app-game-development/server-infrastructure" }
     ]
   },
   { 
     id: 'D', 
     title: "Token Launch & Listing Services", 
     icon: '📊', 
-    link: '#hizmetler/token-lansman-ve-listeleme',
+    link: '#services/token-launch-and-listing',
     subServices: [
-      { title: "Token Launch Strategy", link: "#hizmetler/token-lansman-ve-listeleme/strateji" },
-      { title: "DEX Launch Management", link: "#hizmetler/token-lansman-ve-listeleme/dex" },
-      { title: "CEX Listing Consulting", link: "#hizmetler/token-lansman-ve-listeleme/cex" },
-      { title: "Launchpad Preparation Processes", link: "#hizmetler/token-lansman-ve-listeleme/launchpad" },
-      { title: "Pre-Listing Marketing Strategy", link: "#hizmetler/token-lansman-ve-listeleme/pre-list-marketing" },
-      { title: "Post-Listing Growth Strategy", link: "#hizmetler/token-lansman-ve-listeleme/post-list-growth" },
-      { title: "Exchange Communication & Process Management", link: "#hizmetler/token-lansman-ve-listeleme/exchange-comm" },
-      { title: "Listing Documentation & Checklists", link: "#hizmetler/token-lansman-ve-listeleme/docs" }
+      { title: "Token Launch Strategy", link: "#services/token-launch-and-listing/strategy" },
+      { title: "DEX Launch Management", link: "#services/token-launch-and-listing/dex" },
+      { title: "CEX Listing Consulting", link: "#services/token-launch-and-listing/cex" },
+      { title: "Launchpad Preparation Processes", link: "#services/token-launch-and-listing/launchpad" },
+      { title: "Pre-Listing Marketing Strategy", link: "#services/token-launch-and-listing/pre-list-marketing" },
+      { title: "Post-Listing Growth Strategy", link: "#services/token-launch-and-listing/post-list-growth" },
+      { title: "Exchange Communication & Process Management", link: "#services/token-launch-and-listing/exchange-comm" },
+      { title: "Listing Documentation & Checklists", link: "#services/token-launch-and-listing/docs" }
     ]
   },
   { 
     id: 'E', 
     title: "Crypto & Web3 Marketing Services", 
     icon: '📣', 
-    link: '#hizmetler/kripto-ve-web3-pazarlama',
+    link: '#services/crypto-marketing',
     subServices: [
-      { title: "Web3 Growth Strategy", link: "#hizmetler/kripto-ve-web3-pazarlama/growth" },
-      { title: "Crypto Performance Marketing", link: "#hizmetler/kripto-ve-web3-pazarlama/performance" },
-      { title: "Influencer & KOL Marketing", link: "#hizmetler/kripto-ve-web3-pazarlama/influencer" },
-      { title: "PR & Media Publications", link: "#hizmetler/kripto-ve-web3-pazarlama/pr" },
-      { title: "Campaign & Hype Management", link: "#hizmetler/kripto-ve-web3-pazarlama/hype" },
-      { title: "Landing Page & Funnel Optimization", link: "#hizmetler/kripto-ve-web3-pazarlama/funnel" },
-      { title: "Analytics, Tracking & KPI Reporting", link: "#hizmetler/kripto-ve-web3-pazarlama/analytics" },
-      { title: "Web3-Compliant Marketing Automation", link: "#hizmetler/kripto-ve-web3-pazarlama/automation" }
+      { title: "Web3 Growth Strategy", link: "#services/crypto-marketing/growth" },
+      { title: "Crypto Performance Marketing", link: "#services/crypto-marketing/performance" },
+      { title: "Influencer & KOL Marketing", link: "#services/crypto-marketing/influencer" },
+      { title: "PR & Media Publications", link: "#services/crypto-marketing/pr" },
+      { title: "Campaign & Hype Management", link: "#services/crypto-marketing/hype" },
+      { title: "Landing Page & Funnel Optimization", link: "#services/crypto-marketing/funnel" },
+      { title: "Analytics, Tracking & KPI Reporting", link: "#services/crypto-marketing/analytics" },
+      { title: "Web3-Compliant Marketing Automation", link: "#services/crypto-marketing/automation" }
     ]
   },
   { 
     id: 'F', 
     title: "Social Media & Community Management", 
     icon: '👥', 
-    link: '#hizmetler/sosyal-medya-ve-topluluk-yonetimi',
+    link: '#services/community-management',
     subServices: [
-      { title: "X (Twitter) Content & Growth Management", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/twitter" },
-      { title: "Telegram Community Management", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/telegram" },
-      { title: "Discord Community Management", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/discord" },
-      { title: "24/7 Community Moderation", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/mod" },
-      { title: "Ambassador Program Setup", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/ambassador" },
-      { title: "Engagement Campaigns", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/engagement" },
-      { title: "FUD & Crisis Management", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/crisis" },
-      { title: "Community Analytics & Reporting", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/analytics" }
+      { title: "X (Twitter) Content & Growth Management", link: "#services/community-management/twitter" },
+      { title: "Telegram Community Management", link: "#services/community-management/telegram" },
+      { title: "Discord Community Management", link: "#services/community-management/discord" },
+      { title: "24/7 Community Moderation", link: "#services/community-management/mod" },
+      { title: "Ambassador Program Setup", link: "#services/community-management/ambassador" },
+      { title: "Engagement Campaigns", link: "#services/community-management/engagement" },
+      { title: "FUD & Crisis Management", link: "#services/community-management/crisis" },
+      { title: "Community Analytics & Reporting", link: "#services/community-management/analytics" }
     ]
   },
   { 
     id: 'G', 
     title: "Content Production (Video & Design)", 
     icon: '🎬', 
-    link: '#hizmetler/icerik-uretimi',
+    link: '#services/content-production',
     subServices: [
-      { title: "Brand Identity Design", link: "#hizmetler/icerik-uretimi/brand" },
-      { title: "Web3 UI / UX Design", link: "#hizmetler/icerik-uretimi/ui-ux" },
-      { title: "Motion Graphics & Explainer Videos", link: "#hizmetler/icerik-uretimi/motion" },
-      { title: "Short-Form Video Content (Reels / Shorts)", link: "#hizmetler/icerik-uretimi/shorts" },
-      { title: "Meme & Trend Content Production", link: "#hizmetler/icerik-uretimi/meme" },
-      { title: "Announcement & Listing Content Kits", link: "#hizmetler/icerik-uretimi/announcement" },
-      { title: "Social Media Visual Asset Packages", link: "#hizmetler/icerik-uretimi/social-kits" }
+      { title: "Brand Identity Design", link: "#services/content-production/brand" },
+      { title: "Web3 UI / UX Design", link: "#services/content-production/ui-ux" },
+      { title: "Motion Graphics & Explainer Videos", link: "#services/content-production/motion" },
+      { title: "Short-Form Video Content (Reels / Shorts)", link: "#services/content-production/shorts" },
+      { title: "Meme & Trend Content Production", link: "#services/content-production/meme" },
+      { title: "Announcement & Listing Content Kits", link: "#services/content-production/announcement" },
+      { title: "Social Media Visual Asset Packages", link: "#services/content-production/social-kits" }
     ]
   },
   { 
     id: 'H', 
     title: "Market Making & Liquidity Solutions", 
     icon: '🌊', 
-    link: '#hizmetler/piyasa-yapiciligi-ve-likidite',
+    link: '#services/market-making',
     subServices: [
-      { title: "Market Making Strategy", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/strategy" },
-      { title: "Liquidity Planning", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/planning" },
-      { title: "Market Maker Selection & Coordination", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/mm-selection" },
-      { title: "Market Making System Consulting", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/consultancy" },
-      { title: "Bot Infrastructure Consulting", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/bot" },
-      { title: "Spread & Volatility Optimization", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/optim" },
-      { title: "DEX & CEX Liquidity Management", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/liquidity" },
-      { title: "Performance Monitoring & Reporting", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/perf" }
+      { title: "Market Making Strategy", link: "#services/market-making/strategy" },
+      { title: "Liquidity Planning", link: "#services/market-making/planning" },
+      { title: "Market Maker Selection & Coordination", link: "#services/market-making/mm-selection" },
+      { title: "Market Making System Consulting", link: "#services/market-making/consultancy" },
+      { title: "Bot Infrastructure Consulting", link: "#services/market-making/bot" },
+      { title: "Spread & Volatility Optimization", link: "#services/market-making/optim" },
+      { title: "DEX & CEX Liquidity Management", link: "#services/market-making/liquidity" },
+      { title: "Performance Monitoring & Reporting", link: "#services/market-making/perf" }
     ]
   },
   { 
     id: 'I', 
     title: "Investment Consulting & Fundraising", 
     icon: '💸', 
-    link: '#hizmetler/yatirim-danismanligi',
+    link: '#services/investment-consulting',
     subServices: [
-      { title: "Investment Readiness Analysis", link: "#hizmetler/yatirim-danismanligi/audit" },
-      { title: "Fundraising Strategy & Planning", link: "#hizmetler/yatirim-danismanligi/funding-strategy" },
-      { title: "Seed / Private / Strategic Investment Rounds", link: "#hizmetler/yatirim-danismanligi/tours" },
-      { title: "Investor Research & Targeting", link: "#hizmetler/yatirim-danismanligi/research" },
-      { title: "Pitch Deck & Data Room Preparation", link: "#hizmetler/yatirim-danismanligi/deck" },
-      { title: "Valuation & Token Allocation Consulting", link: "#hizmetler/yatirim-danismanligi/valuation" },
-      { title: "Strategic Investor Connections", link: "#hizmetler/yatirim-danismanligi/network" },
-      { title: "Co-Investment & Syndicate Structuring", link: "#hizmetler/yatirim-danismanligi/syndicate" },
-      { title: "Investor Relations Management", link: "#hizmetler/yatirim-danismanligi/relations" }
+      { title: "Investment Readiness Analysis", link: "#services/investment-consulting/audit" },
+      { title: "Fundraising Strategy & Planning", link: "#services/investment-consulting/funding-strategy" },
+      { title: "Seed / Private / Strategic Investment Rounds", link: "#services/investment-consulting/tours" },
+      { title: "Investor Research & Targeting", link: "#services/investment-consulting/research" },
+      { title: "Pitch Deck & Data Room Preparation", link: "#services/investment-consulting/deck" },
+      { title: "Valuation & Token Allocation Consulting", link: "#services/investment-consulting/valuation" },
+      { title: "Strategic Investor Connections", link: "#services/investment-consulting/network" },
+      { title: "Co-Investment & Syndicate Structuring", link: "#services/investment-consulting/syndicate" },
+      { title: "Investor Relations Management", link: "#services/investment-consulting/relations" }
     ]
   },
   { 
     id: 'J', 
     title: "Partnerships & Business Development", 
     icon: '🤝', 
-    link: '#hizmetler/is-ortakliklari-ve-is-gelistirme',
+    link: '#services/partnerships',
     subServices: [
-      { title: "Strategic Partnerships", link: "#hizmetler/is-ortakliklari-ve-is-gelistirme/partners" },
-      { title: "Ecosystem Collaborations", link: "#hizmetler/is-ortakliklari-ve-is-gelistirme/ecosystem" },
-      { title: "Cross-Marketing Planning", link: "#hizmetler/is-ortakliklari-ve-is-gelistirme/cross" },
-      { title: "Corporate Business Development", link: "#hizmetler/is-ortakliklari-ve-is-gelistirme/corporate" }
+      { title: "Strategic Partnerships", link: "#services/partnerships/partners" },
+      { title: "Ecosystem Collaborations", link: "#services/partnerships/ecosystem" },
+      { title: "Cross-Marketing Planning", link: "#services/partnerships/cross" },
+      { title: "Corporate Business Development", link: "#services/partnerships/corporate" }
     ]
   },
 ];
@@ -222,7 +222,7 @@ const Header: React.FC = () => {
 
   const handleAboutClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    window.location.hash = 'hakkimizda';
+    window.location.hash = 'about-us';
     closeAll();
   };
 
@@ -280,7 +280,7 @@ const Header: React.FC = () => {
         <div className="main-nav">
           <ul className="nav-links">
             <li><a href="#" onClick={handleHomeClick} className="nav-link">HOMEPAGE</a></li>
-            <li><a href="#hakkimizda" onClick={handleAboutClick} className="nav-link">ABOUT US</a></li>
+            <li><a href="#about-us" onClick={handleAboutClick} className="nav-link">ABOUT US</a></li>
             
             <li className="has-mega-menu" onMouseLeave={() => setActiveSubMenu(null)}>
               <button className="nav-link mega-menu-trigger">
@@ -382,7 +382,7 @@ const Header: React.FC = () => {
             </a>
           </li>
           <li className="mobile-nav-item">
-            <a href="#hakkimizda" onClick={handleAboutClick} className="mobile-nav-link">
+            <a href="#about-us" onClick={handleAboutClick} className="mobile-nav-link">
               ABOUT US
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 18l6-6-6-6"/></svg>
             </a>

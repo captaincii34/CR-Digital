@@ -91,10 +91,10 @@ const EndToEndManagementSubDetailView: React.FC = () => {
           <div className="hero-grid">
             <div>
               <h1 className="h1-style">End-to-End Crypto Project Management Consulting</h1>
-              <p className="hero-desc p-style">You focus on the vision, we manage the operation. We orchestrate all processes with our professional teams.</p>
+              <p className="p-style">You focus on the vision, we manage the operation. We orchestrate all processes with our professional teams.</p>
             </div>
             <div className="form-card">
-              <h3 className="h2-style" style={{textAlign: 'center', marginBottom: '20px', fontSize: '20px !important'}}>Management Request</h3>
+              <h3 className="h2-style" style={{textAlign: 'center', marginBottom: '20px', fontSize: '20px !important', color: '#000'}}>Management Request</h3>
               <form onSubmit={handleSubmit}>
                 <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Project Name" required />
                 <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="What are your current gaps?" required />
@@ -158,7 +158,7 @@ const EndToEndManagementSubDetailView: React.FC = () => {
       {/* CTA Box */}
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Let Us Manage the Operation, You Focus on the Vision</h2>
+          <h2 className="h2-style" style={{color: '#000'}}>Let Us Manage the Operation, You Focus on the Vision</h2>
           <p className="p-style" style={{color: '#555', maxWidth: '800px', margin: '20px auto 0'}}>Delegate the daily chaos of your startup to a professional team and focus on your growth. Contact us for 24/7 uninterrupted operation support.</p>
           <a href="#h-hero" className="cta-btn">Request Management Package</a>
         </div>
@@ -183,7 +183,7 @@ const EndToEndManagementSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '80px 0', textAlign: 'center', background: '#000' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
+        <button onClick={() => window.location.hash = 'services/end-to-end-crypto-project-consulting'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

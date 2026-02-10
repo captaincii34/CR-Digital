@@ -22,14 +22,14 @@ const ConsultancyDetailView: React.FC = () => {
   };
 
   const roadmapSteps = [
-    { title: "Crypto Project Consulting", desc: "We define the general framework of your project, analyzing goals and potential.", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-proje-danismanligi" },
-    { title: "Idea & Concept Consulting", desc: "Technical feasibility and market demand for your idea are evaluated.", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-fikir-ve-konsept-danismanligi" },
-    { title: "Business Model & Strategy Consulting", desc: "We design a sustainable ecosystem structure and revenue model.", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-is-modeli-ve-strateji-danismanligi" },
-    { title: "Roadmap & Tokenomics Consulting", desc: "We plan the token economy and technical milestones.", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-yol-haritasi-ve-tocenomics-danismanligi" },
-    { title: "Budget-Oriented Crypto Project Consulting", desc: "We determine the most efficient path based on your current budget.", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/butce-odakli-kripto-proje-danismanligi" },
-    { title: "End-to-End Project Management Consulting", desc: "We ensure all processes are coordinated by professional teams.", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/uctan-uca-kripto-proje-yonetim-danismanligi" },
-    { title: "Launch & Growth Consulting", desc: "Market entry strategies and scalable growth plans.", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/lansman-ve-buyume-danismanligi" },
-    { title: "Digital Marketing & Promotion Consulting", desc: "Visibility, brand awareness, and user acquisition efforts.", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/dijital-pazarlama-ve-tanitim-danismanligi" }
+    { title: "Crypto Project Consulting", desc: "We define the general framework of your project, analyzing goals and potential.", link: "#services/end-to-end-crypto-project-consulting/crypto-project-consulting" },
+    { title: "Idea & Concept Consulting", desc: "Technical feasibility and market demand for your idea are evaluated.", link: "#services/end-to-end-crypto-project-consulting/idea-and-concept" },
+    { title: "Business Model & Strategy Consulting", desc: "We design a sustainable ecosystem structure and revenue model.", link: "#services/end-to-end-crypto-project-consulting/business-model-and-strategy" },
+    { title: "Roadmap & Tokenomics Consulting", desc: "We plan the token economy and technical milestones.", link: "#services/end-to-end-crypto-project-consulting/roadmap-and-tokenomics" },
+    { title: "Budget-Focused Crypto Project Consulting", desc: "We determine the most efficient path based on your current budget.", link: "#services/end-to-end-crypto-project-consulting/budget-oriented" },
+    { title: "End-to-End Project Management Consulting", desc: "We ensure all processes are coordinated by professional teams.", link: "#services/end-to-end-crypto-project-consulting/management-consulting" },
+    { title: "Launch & Growth Consulting", desc: "Market entry strategies and scalable growth plans.", link: "#services/end-to-end-crypto-project-consulting/launch-and-growth" },
+    { title: "Digital Marketing & Promotion Consulting", desc: "Visibility, brand awareness, and user acquisition efforts.", link: "#services/end-to-end-crypto-project-consulting/digital-marketing" }
   ];
 
   const faqs = [
@@ -93,7 +93,7 @@ const ConsultancyDetailView: React.FC = () => {
             </div>
             <div className="form-card">
               <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '24px', color: '#000'}}>Free Pre-Evaluation</h3>
-              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
+              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
                   <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
                     <option value="">Project Status</option>

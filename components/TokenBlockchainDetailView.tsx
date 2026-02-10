@@ -77,7 +77,7 @@ const TokenBlockchainDetailView: React.FC = () => {
         .grad { position: absolute; inset: 0; background: linear-gradient(to bottom, #000, transparent 40%, transparent 60%, #000); z-index: 2; }
 
         .h1-style { font-size: 40px !important; font-weight: 700 !important; }
-        .h2-style { font-size: 30px !important; font-weight: 700 !important; }
+        .h2-style { font-size: 32px !important; font-weight: 700 !important; }
         .h3-style { font-size: 22px !important; font-weight: 600 !important; }
         .h4-style { font-size: 18px !important; font-weight: 600 !important; }
         .p-style { font-size: 16px !important; font-weight: 300 !important; }
@@ -212,10 +212,10 @@ const TokenBlockchainDetailView: React.FC = () => {
 
             <div className="form-card-container">
               <div className="form-card">
-                <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '24px'}}>Technical Pre-Evaluation</h3>
+                <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '24px', color: '#000'}}>Technical Pre-Evaluation</h3>
                 {aiResult ? (
                   <div className="ai-result">
-                    <p className="p-style" style={{ fontStyle: 'italic', marginBottom: '24px' }}>"{aiResult.summary}"</p>
+                    <p className="p-style" style={{ color: '#000', fontStyle: 'italic', marginBottom: '24px' }}>"{aiResult.summary}"</p>
                     <button onClick={() => setAiResult(null)} className="form-button">Analyze Again</button>
                   </div>
                 ) : (

@@ -37,7 +37,7 @@ const BlockchainSoftwareDetailView: React.FC = () => {
       title: "Web3 & Platform Software",
       items: [
         { name: "Web3 Compliant Website", desc: "Modern and connection-oriented interfaces.", icon: "💻" },
-        { name: "Custom Management Dashboards", desc: "Blockchain data-driven admin tools.", icon: "📊" },
+        { name: "Custom Admin Dashboards", desc: "Blockchain data-driven admin tools.", icon: "📊" },
         { name: "Analytics & Reporting", desc: "On-chain data monitoring and visualization.", icon: "📈" },
         { name: "Backend & API", desc: "Scalable Web3 API services.", icon: "⚙️" }
       ]
@@ -114,7 +114,7 @@ const BlockchainSoftwareDetailView: React.FC = () => {
         .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; color: #000; }
         .form-button { width: 100%; background: var(--cray-gold); color: #000; padding: 18px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
 
-        .why-us-section { position: relative; padding: 80px 0; background-color: #000; color: #fff; overflow: hidden; }
+        .why-us-section { position: relative; padding: 80px 0; background-color: #000; color: #fff; overflow-x: hidden; }
         .reasons-grid { display: grid; grid-template-columns: 1fr; gap: 32px; position: relative; z-index: 10; }
         @media (min-width: 768px) { .reasons-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 1024px) { .reasons-grid { grid-template-columns: repeat(3, 1fr); } }
@@ -155,11 +155,11 @@ const BlockchainSoftwareDetailView: React.FC = () => {
             <div className="hero-text-content">
               <h1 className="hero-title h1-style">Blockchain & Software Development Solutions</h1>
               <p className="hero-desc p-style">
-                We don't just write code; we build the decentralized future. From smart contracts to mobile applications, we stand by you with our expert engineering staff for all your Web3-based software needs.
+                Build the decentralized economy of the future today. We provide end-to-end software engineering from smart contracts to high-performance dApp architectures.
               </p>
               
               <div className="hero-feature-list">
-                {["End-to-End Web3 Engineering", "Telegram Mini App Expertise", "Security-Oriented Coding", "Scalable Infrastructure"].map((item, i) => (
+                {["Full-Stack Web3 Engineering", "Audit-Ready Code Standards", "Scalable Infrastructure", "TON & Telegram Ecosystem Experts"].map((item, i) => (
                   <div key={i} className="hero-feature-item">
                     <div className="feature-icon-circle">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="4"><polyline points="20 6 9 17 4 12"/></svg>
@@ -172,33 +172,40 @@ const BlockchainSoftwareDetailView: React.FC = () => {
 
             <div className="form-card-container">
               <div className="form-card">
-                <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '24px'}}>Request Project Analysis</h3>
+                <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '24px', color: '#000'}}>Technical Evaluation</h3>
                 {aiResult ? (
                   <div className="ai-result">
-                    <p className="p-style" style={{ fontStyle: 'italic', marginBottom: '24px' }}>"{aiResult.summary}"</p>
+                    <p className="p-style" style={{ color: '#000', fontStyle: 'italic', marginBottom: '24px' }}>"{aiResult.summary}"</p>
                     <button onClick={() => setAiResult(null)} className="form-button">Analyze Again</button>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit}>
                     <div className="form-group">
                       <select className="form-control p-style" value={status} onChange={(e) => setStatus(e.target.value)} required>
-                        <option value="">Select Need Type</option>
-                        <option value="new">Development from Scratch</option>
-                        <option value="ekleme">Web3 Integration to Existing Infrastructure</option>
-                        <option value="audit">Code Improvement / Audit Prep</option>
+                        <option value="">Select Project Stage</option>
+                        <option value="concept">Concept Only</option>
+                        <option value="development">Under Development</option>
+                        <option value="refactor">Refactoring Existing System</option>
                       </select>
                     </div>
                     <div className="form-group">
-                      <input type="text" className="form-control p-style" placeholder="Preferred Tech (Solidity, TON, etc.)" value={techStack} onChange={(e) => setTechStack(e.target.value)} />
+                      <input 
+                        type="text" 
+                        className="form-control p-style" 
+                        placeholder="Required Tech Stack (e.g. Solidity, React)" 
+                        value={techStack}
+                        onChange={(e) => setTechStack(e.target.value)}
+                        required
+                      />
                     </div>
                     <div className="form-group">
-                      <textarea className="form-control p-style" rows={3} placeholder="What product do you want to develop?" value={goal} onChange={(e) => setGoal(e.target.value)} required style={{resize: 'none'}} />
+                      <textarea className="form-control p-style" rows={3} placeholder="What is your technical goal?" value={goal} onChange={(e) => setGoal(e.target.value)} required style={{resize: 'none'}} />
                     </div>
                     <div className="form-group">
                       <input type="text" className="form-control p-style" placeholder="Email / Telegram" value={contact} onChange={(e) => setContact(e.target.value)} required />
                     </div>
                     <button type="submit" disabled={loading} className="form-button">
-                      {loading ? 'ANALYZING...' : 'GET DEVELOPMENT ANALYSIS'}
+                      {loading ? 'ANALYZING...' : 'GET TECHNICAL PLAN'}
                     </button>
                   </form>
                 )}
@@ -209,12 +216,9 @@ const BlockchainSoftwareDetailView: React.FC = () => {
       </section>
 
       {/* Why Us Section */}
-      <section id="section-why" className="why-us-section section-padding">
-        <img src="/gorsel/fh.jpg" alt="Why Us Background" className="bg-img" />
-        <div className="overlay"></div>
-        <div className="grad"></div>
+      <section className="why-us-section">
         <div className="container-xl">
-          <h2 className="h2-style" style={{ textAlign: 'center', marginBottom: '60px' }}>Why CRAY Digital for Software?</h2>
+          <h2 className="h2-style" style={{ textAlign: 'center', marginBottom: '60px' }}>Why Should You Work With Us?</h2>
           <div className="reasons-grid">
             {reasons.map((reason, idx) => (
               <div key={idx} className="reason-card">
@@ -232,22 +236,17 @@ const BlockchainSoftwareDetailView: React.FC = () => {
       </section>
 
       {/* Development Scope Section */}
-      <section className="scope-section section-padding">
+      <section className="scope-section">
         <div className="container-xl">
-          <div style={{ textAlign: 'center', marginBottom: '64px' }}>
-            <h2 className="h2-style">Our Development Scope</h2>
-            <p className="p-style" style={{ color: '#d1d5db', maxWidth: '800px', margin: '16px auto 0' }}>
-              Our wide spectrum engineering services meeting all your technical needs in the blockchain world.
-            </p>
-          </div>
-
-          {scopeCategories.map((cat, idx) => (
-            <div key={idx}>
-              <h3 className="scope-cat-title h3-style">🔹 {cat.title}</h3>
+          <h2 className="h2-style" style={{ textAlign: 'center' }}>Our Full Development Scope</h2>
+          
+          {scopeCategories.map((cat, ci) => (
+            <div key={ci}>
+              <h3 className="scope-cat-title">{cat.title}</h3>
               <div className="scope-grid">
-                {cat.items.map((item, i) => (
-                  <div key={i} className="scope-card">
-                    <span className="scope-card-icon">{item.icon}</span>
+                {cat.items.map((item, ii) => (
+                  <div key={ii} className="scope-card">
+                    <div className="scope-card-icon">{item.icon}</div>
                     <div>
                       <h4 className="scope-card-name h4-style">{item.name}</h4>
                       <p className="scope-card-desc p-style">{item.desc}</p>
@@ -260,14 +259,38 @@ const BlockchainSoftwareDetailView: React.FC = () => {
         </div>
       </section>
 
+      {/* Split Info Section */}
+      <section className="section-padding" style={{borderTop: '1px solid rgba(255,177,0,0.1)'}}>
+        <div className="container-xl">
+          <div className="flex flex-col lg:flex-row items-center gap-16">
+            <div className="flex-1">
+              <h2 className="h2-style" style={{marginBottom: '24px'}}>Reliable Engineering for a Decentralized World</h2>
+              <p className="p-style" style={{marginBottom: '20px', color: '#d1d5db'}}>
+                Software in Web3 is not just about functionality; it's about trust. We follow rigorous testing protocols and industry best practices to ensure your platform is secure, fast, and scalable from day one.
+              </p>
+              <ul style={{listStyle: 'none', padding: 0, margin: 0}}>
+                {["Audit-ready smart contracts", "High-performance indexing", "Military-grade encryption", "Seamless cross-chain bridges"].map((adv, i) => (
+                  <li key={i} className="p-style" style={{display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '10px'}}>
+                    <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {adv}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="flex-1" style={{position: 'relative', borderRadius: '24px', overflow: 'hidden', border: '1px solid rgba(255,177,0,0.2)', height: '440px'}}>
+              <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop" className="bg-img" alt="Technical Visual" />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Band */}
       <section className="bant-section">
         <div className="container-xl">
-          <h2 className="h2-style" style={{color: '#000', marginBottom: '16px'}}>Let's Build the Future Together</h2>
-          <p className="p-style" style={{color: '#333', marginBottom: '32px'}}>
-            Construct your technical infrastructure with the latest technologies of the Web3 world.
+          <h2 className="h2-style" style={{color: '#000', marginBottom: '16px'}}>Ready to Build the Future of Web3?</h2>
+          <p className="p-style" style={{color: '#333', marginBottom: '32px', maxWidth: '700px', margin: '0 auto 32px'}}>
+            Whether you need a custom smart contract, a full dApp, or a high-performance backend, our engineering team is ready to deliver.
           </p>
-          <a href="#h-hero" className="bant-btn">Plan Technical Meeting</a>
+          <a href="#h-hero" className="bant-btn">Start Technical Consultation</a>
         </div>
       </section>
 
@@ -275,7 +298,7 @@ const BlockchainSoftwareDetailView: React.FC = () => {
       <section className="section-padding">
         <div className="container-xl">
           <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '40px'}}>Frequently Asked Questions</h2>
-          <div style={{maxWidth: '800px', margin: '0 auto'}}>
+          <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((faq, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
                 <div className="faq-accordion-header h4-style">
@@ -302,4 +325,5 @@ const BlockchainSoftwareDetailView: React.FC = () => {
   );
 };
 
+/* Added missing default export */
 export default BlockchainSoftwareDetailView;

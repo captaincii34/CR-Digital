@@ -143,7 +143,7 @@ const App: React.FC = () => {
   const renderView = () => {
     const normalizedView = decodeURIComponent(view.toLowerCase().replace(/\/$/, ''));
 
-    if (normalizedView === '#hakkimizda' || normalizedView === '#hakkımızda') {
+    if (normalizedView === '#about-us') {
       return <AboutUsView />;
     }
 
@@ -164,120 +164,120 @@ const App: React.FC = () => {
     }
 
     switch(normalizedView) {
-      // Grup A
-      case '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi': return <ConsultancyDetailView />;
-      case '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-proje-danismanligi': return <CryptoProjectConsultancySubDetailView />;
-      case '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-fikir-ve-konsept-danismanligi': return <CryptoIdeaConceptConsultancySubDetailView />;
-      case '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-is-modeli-ve-strateji-danismanligi': return <CryptoBusinessModelStrategySubDetailView />;
-      case '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-yol-haritasi-ve-tocenomics-danismanligi': return <CryptoRoadmapTokenomicsSubDetailView />;
-      case '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/butce-odakli-kripto-proje-danismanligi': return <BudgetOrientedConsultancySubDetailView />;
-      case '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/uctan-uca-kripto-proje-yonetim-danismanligi': return <EndToEndManagementSubDetailView />;
-      case '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/lansman-ve-buyume-danismanligi': return <LaunchGrowthSubDetailView />;
-      case '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/dijital-pazarlama-ve-tanitim-danismanligi': return <DigitalMarketingPromotionSubDetailView />;
+      // Group A
+      case '#services/end-to-end-crypto-project-consulting': return <ConsultancyDetailView />;
+      case '#services/end-to-end-crypto-project-consulting/crypto-project-consulting': return <CryptoProjectConsultancySubDetailView />;
+      case '#services/end-to-end-crypto-project-consulting/idea-and-concept': return <CryptoIdeaConceptConsultancySubDetailView />;
+      case '#services/end-to-end-crypto-project-consulting/business-model-and-strategy': return <CryptoBusinessModelStrategySubDetailView />;
+      case '#services/end-to-end-crypto-project-consulting/roadmap-and-tokenomics': return <CryptoRoadmapTokenomicsSubDetailView />;
+      case '#services/end-to-end-crypto-project-consulting/budget-oriented': return <BudgetOrientedConsultancySubDetailView />;
+      case '#services/end-to-end-crypto-project-consulting/management-consulting': return <EndToEndManagementSubDetailView />;
+      case '#services/end-to-end-crypto-project-consulting/launch-and-growth': return <LaunchGrowthSubDetailView />;
+      case '#services/end-to-end-crypto-project-consulting/digital-marketing': return <DigitalMarketingPromotionSubDetailView />;
 
-      // Grup B
-      case '#hizmetler/token-ve-blokzincir-gelistirme': return <TokenBlockchainDetailView />;
-      case '#hizmetler/token-ve-blokzincir-gelistirme/token-proje-danismanligi': return <TokenProjectConsultancySubDetailView />;
-      case '#hizmetler/token-ve-blokzincir-gelistirme/blokzincir-ve-ag-secimi': return <BlockchainNetworkSelectionSubDetailView />;
-      case '#hizmetler/token-ve-blokzincir-gelistirme/akilli-kontrat-gelistirme': return <SmartContractDevelopmentSubDetailView />;
-      case '#hizmetler/token-ve-blokzincir-gelistirme/tokenomics-tasarimi': return <TokenomicsDesignSubDetailView />;
-      case '#hizmetler/token-ve-blokzincir-gelistirme/whitepaper-hazirligi': return <WhitepaperPreparationSubDetailView />;
-      case '#hizmetler/token-ve-blokzincir-gelistirme/pitch-deck-ve-sunum-hazirligi': return <PitchDeckPreparationSubDetailView />;
-      case '#hizmetler/token-ve-blokzincir-gelistirme/roadmap-ve-gtm-planlamasi': return <GtmRoadmapSubDetailView />;
-      case '#hizmetler/token-ve-blokzincir-gelistirme/audit-hazirlik-surecleri': return <AuditPreparationSubDetailView />;
+      // Group B
+      case '#services/token-and-blockchain-development': return <TokenBlockchainDetailView />;
+      case '#services/token-and-blockchain-development/token-consulting': return <TokenProjectConsultancySubDetailView />;
+      case '#services/token-and-blockchain-development/network-selection': return <BlockchainNetworkSelectionSubDetailView />;
+      case '#services/token-and-blockchain-development/smart-contract': return <SmartContractDevelopmentSubDetailView />;
+      case '#services/token-and-blockchain-development/tokenomics-design': return <TokenomicsDesignSubDetailView />;
+      case '#services/token-and-blockchain-development/whitepaper': return <WhitepaperPreparationSubDetailView />;
+      case '#services/token-and-blockchain-development/pitch-deck': return <PitchDeckPreparationSubDetailView />;
+      case '#services/token-and-blockchain-development/gtm-planning': return <GtmRoadmapSubDetailView />;
+      case '#services/token-and-blockchain-development/audit-preparation': return <AuditPreparationSubDetailView />;
 
-      // Grup C
-      case '#hizmetler/blokzincir-ve-yazilim-gelistirme': return <BlockchainSoftwareDetailView />;
-      case '#hizmetler/blokzincir-gelistirme': return <BlockchainDevHeaderDetailView />;
-      case '#hizmetler/blokzincir-ve-yazilim-gelistirme/akilli-kontrat-gelistirme': return <SmartContractDevV2SubDetailView />;
-      case '#hizmetler/blokzincir-ve-yazilim-gelistirme/token-nft-kontratlari': return <TokenNFTContractsSubDetailView />;
-      case '#hizmetler/blokzincir-ve-yazilim-gelistirme/dapp-gelistirme': return <DAppDevelopmentSubDetailView />;
-      case '#hizmetler/blokzincir-ve-yazilim-gelistirme/dao-altyapi': return <DAOInfrastructureSubDetailView />;
-      case '#hizmetler/blokzincir-ve-yazilim-gelistirme/cuzdan-entegrasyonu': return <WalletIntegrationSubDetailView />;
-      case '#hizmetler/web3-ve-platform-yazilimlari': return <Web3PlatformHeaderDetailView />;
-      case '#hizmetler/web3-ve-platform-yazilimlari/website-gelistirme': return <Web3WebsiteDevSubDetailView />;
-      case '#hizmetler/web3-ve-platform-yazilimlari/ozel-paneller': return <CustomDashboardSubDetailView />;
-      case '#hizmetler/web3-ve-platform-yazilimlari/analitik-raporlama': return <AnalyticsReportingSubDetailView />;
-      case '#hizmetler/web3-ve-platform-yazilimlari/backend-api': return <BackendApiDevSubDetailView />;
-      case '#hizmetler/uygulama-ve-oyun-gelistirme': return <AppGameHeaderDetailView />;
-      case '#hizmetler/uygulama-ve-oyun-gelistirme/mobil-uygulama': return <Web3MobileAppSubDetailView />;
-      case '#hizmetler/uygulama-ve-oyun-gelistirme/telegram-bot': return <TelegramBotMiniAppSubDetailView />;
-      case '#hizmetler/uygulama-ve-oyun-gelistirme/oyun-gelistirme': return <BlockchainGameDevSubDetailView />;
-      case '#hizmetler/uygulama-ve-oyun-gelistirme/gamefi-p2e': return <GameFiP2ESystemsSubDetailView />;
-      case '#hizmetler/uygulama-ve-oyun-gelistirme/sunucu-altyapi': return <ServerInfrastructureSubDetailView />;
+      // Group C
+      case '#services/blockchain-and-software-development': return <BlockchainSoftwareDetailView />;
+      case '#services/blockchain-development': return <BlockchainDevHeaderDetailView />;
+      case '#services/blockchain-and-software-development/smart-contract-dev': return <SmartContractDevV2SubDetailView />;
+      case '#services/blockchain-and-software-development/token-nft-contracts': return <TokenNFTContractsSubDetailView />;
+      case '#services/blockchain-and-software-development/dapp-development': return <DAppDevelopmentSubDetailView />;
+      case '#services/blockchain-and-software-development/dao-infrastructure': return <DAOInfrastructureSubDetailView />;
+      case '#services/blockchain-and-software-development/wallet-integration': return <WalletIntegrationSubDetailView />;
+      case '#services/web3-platform-software': return <Web3PlatformHeaderDetailView />;
+      case '#services/web3-platform-software/website-development': return <Web3WebsiteDevSubDetailView />;
+      case '#services/web3-platform-software/custom-dashboards': return <CustomDashboardSubDetailView />;
+      case '#services/web3-platform-software/analytics-reporting': return <AnalyticsReportingSubDetailView />;
+      case '#services/web3-platform-software/backend-api': return <BackendApiDevSubDetailView />;
+      case '#services/app-game-development': return <AppGameHeaderDetailView />;
+      case '#services/app-game-development/mobile-app': return <Web3MobileAppSubDetailView />;
+      case '#services/app-game-development/telegram-mini-app': return <TelegramBotMiniAppSubDetailView />;
+      case '#services/app-game-development/game-development': return <BlockchainGameDevSubDetailView />;
+      case '#services/app-game-development/gamefi-p2e': return <GameFiP2ESystemsSubDetailView />;
+      case '#services/app-game-development/server-infrastructure': return <ServerInfrastructureSubDetailView />;
 
-      // Grup D
-      case '#hizmetler/token-lansman-ve-listeleme': return <TokenListingDetailView />;
-      case '#hizmetler/token-lansman-ve-listeleme/strateji': return <TokenLaunchStrategySubDetailView />;
-      case '#hizmetler/token-lansman-ve-listeleme/dex': return <DexLaunchManagementSubDetailView />;
-      case '#hizmetler/token-lansman-ve-listeleme/cex': return <CexListingConsultancySubDetailView />;
-      case '#hizmetler/token-lansman-ve-listeleme/launchpad': return <LaunchpadPreparationSubDetailView />;
-      case '#hizmetler/token-lansman-ve-listeleme/pre-list-marketing': return <PreListingMarketingSubDetailView />;
-      case '#hizmetler/token-lansman-ve-listeleme/post-list-growth': return <PostListingGrowthSubDetailView />;
-      case '#hizmetler/token-lansman-ve-listeleme/exchange-comm': return <ExchangeCommunicationSubDetailView />;
-      case '#hizmetler/token-lansman-ve-listeleme/docs': return <ListingDocumentationSubDetailView />;
+      // Group D
+      case '#services/token-launch-and-listing': return <TokenListingDetailView />;
+      case '#services/token-launch-and-listing/strategy': return <TokenLaunchStrategySubDetailView />;
+      case '#services/token-launch-and-listing/dex': return <DexLaunchManagementSubDetailView />;
+      case '#services/token-launch-and-listing/cex': return <CexListingConsultancySubDetailView />;
+      case '#services/token-launch-and-listing/launchpad': return <LaunchpadPreparationSubDetailView />;
+      case '#services/token-launch-and-listing/pre-list-marketing': return <PreListingMarketingSubDetailView />;
+      case '#services/token-launch-and-listing/post-list-growth': return <PostListingGrowthSubDetailView />;
+      case '#services/token-launch-and-listing/exchange-comm': return <ExchangeCommunicationSubDetailView />;
+      case '#services/token-launch-and-listing/docs': return <ListingDocumentationSubDetailView />;
 
-      // Grup E
-      case '#hizmetler/kripto-ve-web3-pazarlama': return <KriptoMarketingDetailView />;
-      case '#hizmetler/kripto-ve-web3-pazarlama/growth': return <Web3GrowthStrategySubDetailView />;
-      case '#hizmetler/kripto-ve-web3-pazarlama/performance': return <CryptoPerformanceMarketingSubDetailView />;
-      case '#hizmetler/kripto-ve-web3-pazarlama/influencer': return <InfluencerKolMarketingSubDetailView />;
-      case '#hizmetler/kripto-ve-web3-pazarlama/pr': return <PrMediaPublicationsSubDetailView />;
-      case '#hizmetler/kripto-ve-web3-pazarlama/hype': return <CampaignHypeManagementSubDetailView />;
-      case '#hizmetler/kripto-ve-web3-pazarlama/funnel': return <LandingPageFunnelSubDetailView />;
-      case '#hizmetler/kripto-ve-web3-pazarlama/analytics': return <AnalyticsKpiReportingSubDetailView />;
-      case '#hizmetler/kripto-ve-web3-pazarlama/automation': return <Web3MarketingAutomationSubDetailView />;
+      // Group E
+      case '#services/crypto-marketing': return <KriptoMarketingDetailView />;
+      case '#services/crypto-marketing/growth': return <Web3GrowthStrategySubDetailView />;
+      case '#services/crypto-marketing/performance': return <CryptoPerformanceMarketingSubDetailView />;
+      case '#services/crypto-marketing/influencer': return <InfluencerKolMarketingSubDetailView />;
+      case '#services/crypto-marketing/pr': return <PrMediaPublicationsSubDetailView />;
+      case '#services/crypto-marketing/hype': return <CampaignHypeManagementSubDetailView />;
+      case '#services/crypto-marketing/funnel': return <LandingPageFunnelSubDetailView />;
+      case '#services/crypto-marketing/analytics': return <AnalyticsKpiReportingSubDetailView />;
+      case '#services/crypto-marketing/automation': return <Web3MarketingAutomationSubDetailView />;
 
-      // Grup F
-      case '#hizmetler/sosyal-medya-ve-topluluk-yonetimi': return <SocialCommunityDetailView />;
-      case '#hizmetler/sosyal-medya-ve-topluluk-yonetimi/twitter': return <XTwitterGrowthSubDetailView />;
-      case '#hizmetler/sosyal-medya-ve-topluluk-yonetimi/telegram': return <TelegramCommunitySubDetailView />;
-      case '#hizmetler/sosyal-medya-ve-topluluk-yonetimi/discord': return <DiscordCommunitySubDetailView />;
-      case '#hizmetler/sosyal-medya-ve-topluluk-yonetimi/mod': return <ModerationSubDetailView />;
-      case '#hizmetler/sosyal-medya-ve-topluluk-yonetimi/ambassador': return <AmbassadorProgramSubDetailView />;
-      case '#hizmetler/sosyal-medya-ve-topluluk-yonetimi/engagement': return <EngagementCampaignsSubDetailView />;
-      case '#hizmetler/sosyal-medya-ve-topluluk-yonetimi/crisis': return <FudCrisisManagementSubDetailView />;
-      case '#hizmetler/sosyal-medya-ve-topluluk-yonetimi/analytics': return <CommunityAnalyticsSubDetailView />;
+      // Group F
+      case '#services/community-management': return <SocialCommunityDetailView />;
+      case '#services/community-management/twitter': return <XTwitterGrowthSubDetailView />;
+      case '#services/community-management/telegram': return <TelegramCommunitySubDetailView />;
+      case '#services/community-management/discord': return <DiscordCommunitySubDetailView />;
+      case '#services/community-management/mod': return <ModerationSubDetailView />;
+      case '#services/community-management/ambassador': return <AmbassadorProgramSubDetailView />;
+      case '#services/community-management/engagement': return <EngagementCampaignsSubDetailView />;
+      case '#services/community-management/crisis': return <FudCrisisManagementSubDetailView />;
+      case '#services/community-management/analytics': return <CommunityAnalyticsSubDetailView />;
 
-      // Grup G
-      case '#hizmetler/icerik-uretimi': return <ContentProductionDetailView />;
-      case '#hizmetler/icerik-uretimi/brand': return <BrandIdentityDesignSubDetailView />;
-      case '#hizmetler/icerik-uretimi/ui-ux': return <Web3UiUxDesignSubDetailView />;
-      case '#hizmetler/icerik-uretimi/motion': return <MotionExplainerVideoSubDetailView />;
-      case '#hizmetler/icerik-uretimi/shorts': return <ShortFormatVideoSubDetailView />;
-      case '#hizmetler/icerik-uretimi/meme': return <MemeTrendContentSubDetailView />;
-      case '#hizmetler/icerik-uretimi/announcement': return <AnnouncementListingKitsSubDetailView />;
-      case '#hizmetler/icerik-uretimi/social-kits': return <SocialMediaVisualPackagesSubDetailView />;
+      // Group G
+      case '#services/content-production': return <ContentProductionDetailView />;
+      case '#services/content-production/brand': return <BrandIdentityDesignSubDetailView />;
+      case '#services/content-production/ui-ux': return <Web3UiUxDesignSubDetailView />;
+      case '#services/content-production/motion': return <MotionExplainerVideoSubDetailView />;
+      case '#services/content-production/shorts': return <ShortFormatVideoSubDetailView />;
+      case '#services/content-production/meme': return <MemeTrendContentSubDetailView />;
+      case '#services/content-production/announcement': return <AnnouncementListingKitsSubDetailView />;
+      case '#services/content-production/social-kits': return <SocialMediaVisualPackagesSubDetailView />;
 
-      // Grup H
-      case '#hizmetler/piyasa-yapiciligi-ve-likidite': return <MarketMakingDetailView />;
-      case '#hizmetler/piyasa-yapiciligi-ve-likidite/strategy': return <MarketMakingStrategySubDetailView />;
-      case '#hizmetler/piyasa-yapiciligi-ve-likidite/planning': return <LiquidityPlanningSubDetailView />;
-      case '#hizmetler/piyasa-yapiciligi-ve-likidite/mm-selection': return <MmSelectionSubDetailView />;
-      case '#hizmetler/piyasa-yapiciligi-ve-likidite/consultancy': return <MmSystemConsultancySubDetailView />;
-      case '#hizmetler/piyasa-yapiciligi-ve-likidite/bot': return <BotInfrastructureSubDetailView />;
-      case '#hizmetler/piyasa-yapiciligi-ve-likidite/optim': return <SpreadVolatilitySubDetailView />;
-      case '#hizmetler/piyasa-yapiciligi-ve-likidite/liquidity': return <CrossPlatformLiquiditySubDetailView />;
-      case '#hizmetler/piyasa-yapiciligi-ve-likidite/perf': return <MmPerformanceReportingSubDetailView />;
+      // Group H
+      case '#services/market-making': return <MarketMakingDetailView />;
+      case '#services/market-making/strategy': return <MarketMakingStrategySubDetailView />;
+      case '#services/market-making/planning': return <LiquidityPlanningSubDetailView />;
+      case '#services/market-making/mm-selection': return <MmSelectionSubDetailView />;
+      case '#services/market-making/consultancy': return <MmSystemConsultancySubDetailView />;
+      case '#services/market-making/bot': return <BotInfrastructureSubDetailView />;
+      case '#services/market-making/optim': return <SpreadVolatilitySubDetailView />;
+      case '#services/market-making/liquidity': return <CrossPlatformLiquiditySubDetailView />;
+      case '#services/market-making/perf': return <MmPerformanceReportingSubDetailView />;
 
-      // Grup I
-      case '#hizmetler/yatirim-danismanligi': return <InvestmentFundingDetailView />;
-      case '#hizmetler/yatirim-danismanligi/audit': return <InvestmentReadinessSubDetailView />;
-      case '#hizmetler/yatirim-danismanligi/funding-strategy': return <FundingStrategySubDetailView />;
-      case '#hizmetler/yatirim-danismanligi/tours': return <InvestmentRoundsSubDetailView />;
-      case '#hizmetler/yatirim-danismanligi/research': return <InvestorResearchSubDetailView />;
-      case '#hizmetler/yatirim-danismanligi/deck': return <DataRoomPreparationSubDetailView />;
-      case '#hizmetler/yatirim-danismanligi/valuation': return <ValuationAllocationSubDetailView />;
-      case '#hizmetler/yatirim-danismanligi/network': return <InvestorNetworkSubDetailView />;
-      case '#hizmetler/yatirim-danismanligi/syndicate': return <SyndicateStructuringSubDetailView />;
-      case '#hizmetler/yatirim-danismanligi/relations': return <InvestorRelationsSubDetailView />;
+      // Group I
+      case '#services/investment-consulting': return <InvestmentFundingDetailView />;
+      case '#services/investment-consulting/audit': return <InvestmentReadinessSubDetailView />;
+      case '#services/investment-consulting/funding-strategy': return <FundingStrategySubDetailView />;
+      case '#services/investment-consulting/tours': return <InvestmentRoundsSubDetailView />;
+      case '#services/investment-consulting/research': return <InvestorResearchSubDetailView />;
+      case '#services/investment-consulting/deck': return <DataRoomPreparationSubDetailView />;
+      case '#services/investment-consulting/valuation': return <ValuationAllocationSubDetailView />;
+      case '#services/investment-consulting/network': return <InvestorNetworkSubDetailView />;
+      case '#services/investment-consulting/syndicate': return <SyndicateStructuringSubDetailView />;
+      case '#services/investment-consulting/relations': return <InvestorRelationsSubDetailView />;
 
-      // Grup J
-      case '#hizmetler/is-ortakliklari-ve-is-gelistirme': return <PartnershipBusinessDetailView />;
-      case '#hizmetler/is-ortakliklari-ve-is-gelistirme/partners': return <StrategicPartnershipsSubDetailView />;
-      case '#hizmetler/is-ortakliklari-ve-is-gelistirme/ecosystem': return <EcosystemCollaborationsSubDetailView />;
-      case '#hizmetler/is-ortakliklari-ve-is-gelistirme/cross': return <CrossMarketingPlanningSubDetailView />;
-      case '#hizmetler/is-ortakliklari-ve-is-gelistirme/corporate': return <CorporateBusinessDevSubDetailView />;
+      // Group J
+      case '#services/partnerships': return <PartnershipBusinessDetailView />;
+      case '#services/partnerships/partners': return <StrategicPartnershipsSubDetailView />;
+      case '#services/partnerships/ecosystem': return <EcosystemCollaborationsSubDetailView />;
+      case '#services/partnerships/cross': return <CrossMarketingPlanningSubDetailView />;
+      case '#services/partnerships/corporate': return <CorporateBusinessDevSubDetailView />;
 
       default:
         return (

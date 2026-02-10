@@ -58,7 +58,7 @@ const BudgetOrientedConsultancySubDetailView: React.FC = () => {
         #h-hero { position: relative; padding: 220px 0 120px; min-height: 85vh; display: flex; align-items: center; }
         .hero-grid { display: grid; grid-template-columns: 1fr; gap: 60px; position: relative; z-index: 10; width: 100%; }
         @media (min-width: 1024px) { .hero-grid { grid-template-columns: 1.2fr 1fr; align-items: center; } }
-        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; color: #000; width: 100%; max-width: 480px; margin: 0 auto; }
+        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: 0 auto; }
         .form-button { width: 100%; background: var(--cray-gold); color: #000; padding: 18px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
 
         .reasons-grid { display: grid; grid-template-columns: 1fr; gap: 32px; position: relative; z-index: 10; }
@@ -95,11 +95,11 @@ const BudgetOrientedConsultancySubDetailView: React.FC = () => {
           <div className="hero-grid">
             <div>
               <h1 className="h1-style">Budget-Focused Crypto Project Consulting</h1>
-              <p className="hero-desc p-style">Create unlimited impact with limited resources. We develop strategies that maximize ROI by using your budget in the most efficient way.</p>
+              <p className="p-style">Create unlimited impact with limited resources. We develop strategies that maximize ROI by using your budget in the most efficient way.</p>
             </div>
             <div className="form-card">
-              <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px'}}>Efficiency Analysis</h3>
-              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
+              <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px', color: '#000'}}>Efficiency Analysis</h3>
+              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
                   <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Estimated Budget Range" required />
                   <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="What is your primary goal?" required />
@@ -162,7 +162,7 @@ const BudgetOrientedConsultancySubDetailView: React.FC = () => {
       {/* CTA Box */}
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Turn Your Budget Into Power</h2>
+          <h2 className="h2-style" style={{color: '#000'}}>Turn Your Budget Into Power</h2>
           <p className="p-style" style={{color: '#555', maxWidth: '800px', margin: '20px auto 0'}}>Let's plan together for the best results you can reach with your current budget. Start now for your efficiency-oriented roadmap.</p>
           <a href="#h-hero" className="cta-btn">Get Started Now</a>
         </div>
@@ -187,7 +187,7 @@ const BudgetOrientedConsultancySubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '80px 0', textAlign: 'center', background: '#000' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
+        <button onClick={() => window.location.hash = 'services/end-to-end-crypto-project-consulting'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

@@ -216,7 +216,7 @@ const Footer: React.FC = () => {
         <div className="footer-grid">
           {/* Logo & Desc Column */}
           <div className="footer-brand-col">
-            <a href="#" className="footer-logo-box">
+            <a href="#" onClick={(e) => { e.preventDefault(); window.location.hash = ''; }} className="footer-logo-box">
               <div className="footer-logo-icon">CR</div>
               <div className="footer-logo-text">
                 <span className="footer-logo-main">CRAY</span>
@@ -224,7 +224,7 @@ const Footer: React.FC = () => {
               </div>
             </a>
             <p className="footer-brand-desc">
-              Kripto sektöründe dijital pazarlama ve danışmanlık hizmetleri sunan lider ajans. Token projeleriniz için 360 derece çözümler.
+              Leading agency providing digital marketing and consultancy services in the crypto industry. 360-degree solutions for your token projects.
             </p>
             <div className="footer-social-list">
               <a href="#" className="footer-social-link">𝕏</a>
@@ -235,31 +235,31 @@ const Footer: React.FC = () => {
 
           {/* Services Column */}
           <div>
-            <h4 className="footer-title">Hizmetlerimiz</h4>
+            <h4 className="footer-title">Our Services</h4>
             <ul className="footer-links-list">
-              <li><a href="#" className="footer-link">A'dan Z'ye Danışmanlık</a></li>
-              <li><a href="#" className="footer-link">Token & Blockchain Development</a></li>
-              <li><a href="#" className="footer-link">Crypto & Web3 Marketing</a></li>
-              <li><a href="#" className="footer-link">Market Making & Likidite</a></li>
-              <li><a href="#" className="footer-link">Yatırım Danışmanlığı</a></li>
+              <li><a href="#services/end-to-end-crypto-project-consulting" className="footer-link">360° Consultancy</a></li>
+              <li><a href="#services/token-and-blockchain-development" className="footer-link">Token & Blockchain Dev</a></li>
+              <li><a href="#services/crypto-marketing" className="footer-link">Web3 Marketing</a></li>
+              <li><a href="#services/market-making" className="footer-link">Market Making</a></li>
+              <li><a href="#services/investment-consulting" className="footer-link">Investment Advisory</a></li>
             </ul>
           </div>
 
           {/* Corporate Column */}
           <div>
-            <h4 className="footer-title">Kurumsal</h4>
+            <h4 className="footer-title">Corporate</h4>
             <ul className="footer-links-list">
-              <li><a href="#" className="footer-link">Hakkımızda</a></li>
-              <li><a href="#" className="footer-link">İletişim</a></li>
-              <li><a href="#" className="footer-link">Works</a></li>
-              <li><a href="#" className="footer-link">Kaynaklar</a></li>
-              <li><a href="#" className="footer-link">Çözümler</a></li>
+              <li><a href="#about-us" className="footer-link">About Us</a></li>
+              <li><a href="#contact" className="footer-link">Contact</a></li>
+              <li><a href="#works" className="footer-link">Works</a></li>
+              <li><a href="#" className="footer-link">Resources</a></li>
+              <li><a href="#" className="footer-link">Solutions</a></li>
             </ul>
           </div>
 
           {/* Contact Column */}
           <div>
-            <h4 className="footer-title">İletişim</h4>
+            <h4 className="footer-title">Contact</h4>
             <div className="footer-contact-item">
               <span className="footer-contact-icon">✉</span>
               <a href="mailto:info@craydigital.com" className="footer-contact-text">info@craydigital.com</a>
@@ -276,11 +276,11 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="footer-bottom">
-          <p className="footer-copyright">© 2024 CRAY Digital. Tüm hakları saklıdır.</p>
+          <p className="footer-copyright">© 2024 CRAY Digital. All rights reserved.</p>
           <div className="footer-legal-links">
-            <a href="#" className="footer-legal-link">Gizlilik Politikası</a>
-            <a href="#" className="footer-legal-link">Kullanım Koşulları</a>
-            <a href="#" className="footer-legal-link">KVKK</a>
+            <a href="#" className="footer-legal-link">Privacy Policy</a>
+            <a href="#" className="footer-legal-link">Terms of Service</a>
+            <a href="#" className="footer-legal-link">GDPR</a>
           </div>
         </div>
       </div>
