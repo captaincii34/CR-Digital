@@ -20,7 +20,7 @@ const WorksView: React.FC = () => {
       slug: 'aixovia',
       title: 'AIXOVIA', 
       categories: ['AI', 'Token'], 
-      image: '/gorsel/1.jpg', 
+      image: '/gorsel/works/AIXOVIA.jpg', 
       desc: 'Dünyanın ilk tam otonom AI agent mining altyapısı ve token ekosistemi.' 
     },
     { 
@@ -28,7 +28,7 @@ const WorksView: React.FC = () => {
       slug: 'aixovia-play',
       title: 'AIXOVIA Play', 
       categories: ['AI', 'Gaming'], 
-      image: '/gorsel/2.jpg', 
+      image: '/gorsel/works/AIXOVIA Play.jpg', 
       desc: 'AI destekli oyun deneyimi ve on-chain oyun mekanikleri.' 
     },
     { 
@@ -36,7 +36,7 @@ const WorksView: React.FC = () => {
       slug: 'bccoin',
       title: 'BCCOIN', 
       categories: ['AI', 'Crypto'], 
-      image: 'https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=2000', 
+      image: '/gorsel/works/BCCOIN.jpg', 
       desc: 'Yüksek performanslı kripto ekosistemi için stratejik marka yükseltmesi.' 
     },
     { 
@@ -44,7 +44,7 @@ const WorksView: React.FC = () => {
       slug: 'curva-nft',
       title: 'Curva NFT', 
       categories: ['NFT'], 
-      image: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=2000', 
+      image: '/gorsel/works/Curva NFT.jpg', 
       desc: 'Küresel spor taraftarları için özel dijital koleksiyon serisi.' 
     },
     { 
@@ -52,7 +52,7 @@ const WorksView: React.FC = () => {
       slug: 'ecom',
       title: 'eCOM', 
       categories: ['Gaming'], 
-      image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2000', 
+      image: '/gorsel/works/eCOM.jpg', 
       desc: 'Birleşik oyun merkezi ve topluluk büyüme stratejisi.' 
     },
     { 
@@ -60,7 +60,7 @@ const WorksView: React.FC = () => {
       slug: 'ftn',
       title: 'FTN', 
       categories: ['Token'], 
-      image: 'https://images.unsplash.com/photo-1621416848440-276911c47f35?q=80&w=2000', 
+      image: '/gorsel/works/FTN.jpg', 
       desc: 'Fast Token ekosistemi lansmanı ve küresel pazarlama erişimi.' 
     },
     { 
@@ -68,7 +68,7 @@ const WorksView: React.FC = () => {
       slug: 'helpsteps',
       title: 'HelpSteps', 
       categories: ['Token'], 
-      image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=2000', 
+      image: '/gorsel/works/HelpSteps.jpg', 
       desc: 'Sosyal etkinin ve hareket odaklı ödüllerin tokenizasyonu.' 
     },
     { 
@@ -76,7 +76,7 @@ const WorksView: React.FC = () => {
       slug: 'nexum',
       title: 'Nexum', 
       categories: ['Token'], 
-      image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000', 
+      image: '/gorsel/works/Nexum.jpg', 
       desc: 'Yeni nesil denizcilik ve lojistik finansmanı token stratejisi.' 
     },
     { 
@@ -84,7 +84,7 @@ const WorksView: React.FC = () => {
       slug: 'nova',
       title: 'Nova', 
       categories: ['Blockchain'], 
-      image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2000', 
+      image: '/gorsel/works/Nova.jpg', 
       desc: 'Çekirdek blokzincir altyapısı ve teknik veri yönetimi.' 
     },
     { 
@@ -92,7 +92,7 @@ const WorksView: React.FC = () => {
       slug: 'snapmuse',
       title: 'Snapmuse', 
       categories: ['Token'], 
-      image: 'https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=2000', 
+      image: '/gorsel/works/Snapmuse.jpg', 
       desc: 'Platform tokenomics ve içerik üreticisi ekonomisi entegrasyonu.' 
     },
     { 
@@ -100,7 +100,7 @@ const WorksView: React.FC = () => {
       slug: 'refplus',
       title: 'RefPlus', 
       categories: ['Blockchain'], 
-      image: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=2000', 
+      image: '/gorsel/works/RefPlus.jpg', 
       desc: 'Referans tabanlı blokzincir ölçeklendirme ve node büyüme protokolleri.' 
     },
     { 
@@ -108,7 +108,7 @@ const WorksView: React.FC = () => {
       slug: 'the-crypt',
       title: 'The Crypt', 
       categories: ['News'], 
-      image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=2000', 
+      image: '/gorsel/works/The Crypt.jpg', 
       desc: 'Premium kripto haber merkezi ve piyasa duyarlılık analizi.' 
     }
   ];
