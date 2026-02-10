@@ -1,16 +1,15 @@
 import React from 'react';
 
 const AixoviaWorkDetailView: React.FC = () => {
-  // /gorsel klasöründeki 8 görselin stratejik haritası
+  // /gorsel klasöründeki .jpg uzantılı görsellerin stratejik haritası
   const galleryImages = [
-    { src: '/gorsel/7.png', title: 'Source Intelligence', desc: 'Price is just a shadow, we see the source.' },
-    { src: '/gorsel/1.png', title: 'The Momentum Engine', desc: 'Teknik altyapı ölçeklendirme ve strateji.' },
-    { src: '/gorsel/3.png', title: 'Neural Re-Engineering', desc: 'Otonom AI agent geliştirme ve optimizasyon.' },
-    { src: '/gorsel/0.png', title: 'Autonomous Mining', desc: 'AI destekli mining süreçleri görsel hikaye anlatımı.' },
-    { src: '/gorsel/5.png', title: 'Financial Machine', desc: 'Kapalı döngü finansal mühendislik görselleştirmesi.' },
-    { src: '/gorsel/4.png', title: 'The Superxovia', desc: 'Marka karakter tasarımı ve ekosistem utilitisi.' },
-    { src: '/gorsel/6.png', title: 'Hybrid Intelligence', desc: 'Piyasanın önünde koşan hibrit zeka modeli.' },
-    { src: '/gorsel/2.png', title: 'Seasonal Campaigns', desc: 'Topluluk etkileşimi için yaratıcı kampanya yönetimi.' }
+    { src: '/gorsel/7.jpg', title: 'Source Intelligence', desc: 'Price is just a shadow, we see the source.' },
+    { src: '/gorsel/1.jpg', title: 'The Momentum Engine', desc: 'Teknik altyapı ölçeklendirme ve strateji.' },
+    { src: '/gorsel/3.jpg', title: 'Neural Re-Engineering', desc: 'Otonom AI agent geliştirme ve optimizasyon.' },
+    { src: '/gorsel/2.jpg', title: 'Seasonal Campaigns', desc: 'Topluluk etkileşimi için yaratıcı kampanya yönetimi.' },
+    { src: '/gorsel/5.jpg', title: 'Financial Machine', desc: 'Kapalı döngü finansal mühendislik görselleştirmesi.' },
+    { src: '/gorsel/4.jpg', title: 'The Superxovia', desc: 'Marka karakter tasarımı ve ekosistem utilitisi.' },
+    { src: '/gorsel/6.jpg', title: 'Hybrid Intelligence', desc: 'Piyasanın önünde koşan hibrit zeka modeli.' }
   ];
 
   const services = [
@@ -136,8 +135,8 @@ const AixoviaWorkDetailView: React.FC = () => {
       </div>
 
       <section className="hero-section">
-        {/* Ana Hero Görseli: 0.png */}
-        <img src="/gorsel/0.png" className="hero-bg" alt="Aixovia Hero" />
+        {/* Ana Hero Görseli: 1.jpg */}
+        <img src="/gorsel/1.jpg" className="hero-bg" alt="Aixovia Hero" />
         <div className="hero-overlay"></div>
         <div className="container-xl">
           <div style={{maxWidth: '1000px'}}>
@@ -182,15 +181,15 @@ const AixoviaWorkDetailView: React.FC = () => {
                 </p>
               </div>
               <div style={{position: 'relative', borderRadius: '48px', overflow: 'hidden', border: '1px solid rgba(255,177,0,0.35)', boxShadow: '0 40px 80px rgba(0,0,0,0.8)'}}>
-                {/* Vurgu Görseli: 5.png */}
-                <img src="/gorsel/5.png" alt="Aixovia Analytics" style={{width: '100%', height: 'auto', display: 'block'}} />
+                {/* Vurgu Görseli: 5.jpg */}
+                <img src="/gorsel/5.jpg" alt="Aixovia Analytics" style={{width: '100%', height: 'auto', display: 'block'}} />
               </div>
             </div>
           </div>
 
           <div className="section-header">
             <h2 className="h1-style">Görsel Kimlik & Kreatif Evren</h2>
-            <p className="p-style text-zinc-500 max-w-2xl text-lg">Aixovia ekosistemi için yarattığımız, teknoloji ve sanatı harmanlayan görsel dünyayı keşfedin. Tüm görseller /gorsel klasöründen otonom olarak çekilmektedir.</p>
+            <p className="p-style text-zinc-500 max-w-2xl text-lg">Aixovia ekosistemi için yarattığımız, teknoloji ve sanatı harmanlayan görsel dünyayı keşfedin. Tüm görseller /gorsel klasöründen çekilmektedir.</p>
           </div>
           
           <div className="gallery-grid">

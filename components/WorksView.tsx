@@ -20,7 +20,7 @@ const WorksView: React.FC = () => {
       slug: 'aixovia',
       title: 'AIXOVIA', 
       categories: ['AI', 'Token'], 
-      image: '/gorsel/0.png', 
+      image: '/gorsel/1.jpg', 
       desc: 'Dünyanın ilk tam otonom AI agent mining altyapısı ve token ekosistemi.' 
     },
     { 
@@ -28,7 +28,7 @@ const WorksView: React.FC = () => {
       slug: 'aixovia-play',
       title: 'AIXOVIA Play', 
       categories: ['AI', 'Gaming'], 
-      image: '/gorsel/1.png', 
+      image: '/gorsel/2.jpg', 
       desc: 'AI destekli oyun deneyimi ve on-chain oyun mekanikleri.' 
     },
     { 
