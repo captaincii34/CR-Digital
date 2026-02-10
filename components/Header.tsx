@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 
 interface SubService {
@@ -37,14 +38,14 @@ const servicesList: ServiceItem[] = [
     icon: '🔗', 
     link: '#hizmetler/token-ve-blokzincir-gelistirme',
     subServices: [
-      { title: "Token Proje Danışmanlığı" },
-      { title: "Blokzincir & Ağ Seçimi" },
-      { title: "Akıllı Kontrat (Smart Contract) Geliştirme" },
-      { title: "Tokenomics Tasarımı" },
-      { title: "Whitepaper & Litepaper Hazırlığı" },
-      { title: "Pitch Deck & Yatırımcı Sunumları" },
-      { title: "Roadmap & Go-To-Market (GTM) Planlaması" },
-      { title: "Audit Hazırlık Süreçleri (Partner Tabanlı)" }
+      { title: "Token Proje Danışmanlığı", link: "#hizmetler/token-ve-blokzincir-gelistirme/token-proje-danismanligi" },
+      { title: "Blokzincir & Ağ Seçimi", link: "#hizmetler/token-ve-blokzincir-gelistirme/blokzincir-ve-ag-secimi" },
+      { title: "Akıllı Kontrat (Smart Contract) Geliştirme", link: "#hizmetler/token-ve-blokzincir-gelistirme/akilli-kontrat-gelistirme" },
+      { title: "Tokenomics Tasarımı", link: "#hizmetler/token-ve-blokzincir-gelistirme/tokenomics-tasarimi" },
+      { title: "Whitepaper & Litepaper Hazırlığı", link: "#hizmetler/token-ve-blokzincir-gelistirme/whitepaper-hazirligi" },
+      { title: "Pitch Deck & Yatırımcı Sunumları", link: "#hizmetler/token-ve-blokzincir-gelistirme/pitch-deck-ve-sunum-hazirligi" },
+      { title: "Roadmap & Go-To-Market (GTM) Planlaması", link: "#hizmetler/token-ve-blokzincir-gelistirme/roadmap-ve-gtm-planlamasi" },
+      { title: "Audit Hazırlık Süreçleri (Partner Tabanlı)", link: "#hizmetler/token-ve-blokzincir-gelistirme/audit-hazirlik-surecleri" }
     ]
   },
   { 
@@ -54,22 +55,22 @@ const servicesList: ServiceItem[] = [
     link: '#hizmetler/blokzincir-ve-yazilim-gelistirme',
     subServices: [
       { title: "Blokzincir Geliştirme", isHeader: true, link: "#hizmetler/blokzincir-gelistirme" },
-      { title: "Akıllı Kontrat Geliştirme" },
-      { title: "Token & NFT Kontratları" },
-      { title: "Merkeziyetsiz Uygulama (DApp) Geliştirme" },
-      { title: "DAO Altyapı Kurulumu" },
-      { title: "Cüzdan Entegrasyonları" },
+      { title: "Akıllı Kontrat Geliştirme", link: "#hizmetler/blokzincir-ve-yazilim-gelistirme/akilli-kontrat-gelistirme" },
+      { title: "Token & NFT Kontratları", link: "#hizmetler/blokzincir-ve-yazilim-gelistirme/token-nft-kontratlari" },
+      { title: "Merkeziyetsiz Uygulama (DApp) Geliştirme", link: "#hizmetler/blokzincir-ve-yazilim-gelistirme/dapp-gelistirme" },
+      { title: "DAO Altyapı Kurulumu", link: "#hizmetler/blokzincir-ve-yazilim-gelistirme/dao-altyapi" },
+      { title: "Cüzdan Entegrasyonları", link: "#hizmetler/blokzincir-ve-yazilim-gelistirme/cuzdan-entegrasyonu" },
       { title: "Web3 & Platform Yazılımları", isHeader: true, link: "#hizmetler/web3-ve-platform-yazilimlari" },
-      { title: "Web3 Uyumlu Website Geliştirme" },
-      { title: "Özel Yönetim Panelleri (Dashboard)" },
-      { title: "Analitik ve Raporlama Panelleri" },
-      { title: "Backend & API Geliştirme" },
+      { title: "Web3 Uyumlu Website Geliştirme", link: "#hizmetler/web3-ve-platform-yazilimlari/website-gelistirme" },
+      { title: "Özel Yönetim Panelleri (Dashboard)", link: "#hizmetler/web3-ve-platform-yazilimlari/ozel-paneller" },
+      { title: "Analitik ve Raporlama Panelleri", link: "#hizmetler/web3-ve-platform-yazilimlari/analitik-raporlama" },
+      { title: "Backend & API Geliştirme", link: "#hizmetler/web3-ve-platform-yazilimlari/backend-api" },
       { title: "Uygulama & Oyun Geliştirme", isHeader: true, link: "#hizmetler/uygulama-ve-oyun-gelistirme" },
-      { title: "Web3 Mobil Uygulama Geliştirme" },
-      { title: "Telegram Bot & Mini App Geliştirme" },
-      { title: "Blokzincir Tabanlı Oyun Geliştirme" },
-      { title: "GameFi / Play-to-Earn Sistemleri" },
-      { title: "Sunucu & Altyapı Kurulumu" }
+      { title: "Web3 Mobil Uygulama Geliştirme", link: "#hizmetler/uygulama-ve-oyun-gelistirme/mobil-uygulama" },
+      { title: "Telegram Bot & Mini App Geliştirme", link: "#hizmetler/uygulama-ve-oyun-gelistirme/telegram-bot" },
+      { title: "Blokzincir Tabanlı Oyun Geliştirme", link: "#hizmetler/uygulama-ve-oyun-gelistirme/oyun-gelistirme" },
+      { title: "GameFi / Play-to-Earn Sistemleri", link: "#hizmetler/uygulama-ve-oyun-gelistirme/gamefi-p2e" },
+      { title: "Sunucu & Altyapı Kurulumu", link: "#hizmetler/uygulama-ve-oyun-gelistirme/sunucu-altyapi" }
     ]
   },
   { 
@@ -78,14 +79,14 @@ const servicesList: ServiceItem[] = [
     icon: '📊', 
     link: '#hizmetler/token-lansman-ve-listeleme',
     subServices: [
-      { title: "Token Lansman Stratejisi" },
-      { title: "DEX Lansman Yönetimi" },
-      { title: "CEX Listeleme Danışmanlığı" },
-      { title: "Launchpad Hazırlık Süreçleri" },
-      { title: "Listeleme Öncesi Pazarlama Stratejisi" },
-      { title: "Listeleme Sonrası Büyüme Stratejisi" },
-      { title: "Borsa İletişim ve Süreç Yönetimi" },
-      { title: "Listeleme Dokümantasyonu & Kontrol Listeleri" }
+      { title: "Token Lansman Stratejisi", link: "#hizmetler/token-lansman-ve-listeleme/strateji" },
+      { title: "DEX Lansman Yönetimi", link: "#hizmetler/token-lansman-ve-listeleme/dex" },
+      { title: "CEX Listeleme Danışmanlığı", link: "#hizmetler/token-lansman-ve-listeleme/cex" },
+      { title: "Launchpad Hazırlık Süreçleri", link: "#hizmetler/token-lansman-ve-listeleme/launchpad" },
+      { title: "Listeleme Öncesi Pazarlama Stratejisi", link: "#hizmetler/token-lansman-ve-listeleme/pre-list-marketing" },
+      { title: "Listeleme Sonrası Büyüme Stratejisi", link: "#hizmetler/token-lansman-ve-listeleme/post-list-growth" },
+      { title: "Borsa İletişim ve Süreç Yönetimi", link: "#hizmetler/token-lansman-ve-listeleme/exchange-comm" },
+      { title: "Listeleme Dokümantasyonu & Kontrol Listeleri", link: "#hizmetler/token-lansman-ve-listeleme/docs" }
     ]
   },
   { 
@@ -94,14 +95,14 @@ const servicesList: ServiceItem[] = [
     icon: '📣', 
     link: '#hizmetler/kripto-ve-web3-pazarlama',
     subServices: [
-      { title: "Web3 Büyüme Stratejisi" },
-      { title: "Kripto Performans Pazarlaması" },
-      { title: "Influencer & KOL Pazarlaması" },
-      { title: "PR & Medya Yayınları" },
-      { title: "Kampanya & Hype Yönetimi" },
-      { title: "Landing Page & Funnel Optimizasyonu" },
-      { title: "Analitik, Takip & KPI Raporlaması" },
-      { title: "Web3 Uyumlu Pazarlama Otomasyonu" }
+      { title: "Web3 Büyüme Stratejisi", link: "#hizmetler/kripto-ve-web3-pazarlama/growth" },
+      { title: "Kripto Performans Pazarlaması", link: "#hizmetler/kripto-ve-web3-pazarlama/performance" },
+      { title: "Influencer & KOL Pazarlaması", link: "#hizmetler/kripto-ve-web3-pazarlama/influencer" },
+      { title: "PR & Medya Yayınları", link: "#hizmetler/kripto-ve-web3-pazarlama/pr" },
+      { title: "Kampanya & Hype Yönetimi", link: "#hizmetler/kripto-ve-web3-pazarlama/hype" },
+      { title: "Landing Page & Funnel Optimizasyonu", link: "#hizmetler/kripto-ve-web3-pazarlama/funnel" },
+      { title: "Analitik, Takip & KPI Raporlaması", link: "#hizmetler/kripto-ve-web3-pazarlama/analytics" },
+      { title: "Web3 Uyumlu Pazarlama Otomasyonu", link: "#hizmetler/kripto-ve-web3-pazarlama/automation" }
     ]
   },
   { 
@@ -110,14 +111,14 @@ const servicesList: ServiceItem[] = [
     icon: '👥', 
     link: '#hizmetler/sosyal-medya-ve-topluluk-yonetimi',
     subServices: [
-      { title: "X (Twitter) İçerik ve Büyüme Yönetimi" },
-      { title: "Telegram Topluluk Yönetimi" },
-      { title: "Discord Topluluk Yönetimi" },
-      { title: "7/24 Topluluk Moderasyonu" },
-      { title: "Ambassador Programı Kurulumu" },
-      { title: "Etkileşim Kampanyaları" },
-      { title: "FUD & Kriz Yönetimi" },
-      { title: "Topluluk Analitiği & Raporlama" }
+      { title: "X (Twitter) İçerik ve Büyüme Yönetimi", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/twitter" },
+      { title: "Telegram Topluluk Yönetimi", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/telegram" },
+      { title: "Discord Topluluk Yönetimi", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/discord" },
+      { title: "7/24 Topluluk Moderasyonu", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/mod" },
+      { title: "Ambassador Programı Kurulumu", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/ambassador" },
+      { title: "Etkileşim Kampanyaları", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/engagement" },
+      { title: "FUD & Kriz Yönetimi", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/crisis" },
+      { title: "Topluluk Analitiği & Raporlama", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/analytics" }
     ]
   },
   { 
@@ -126,13 +127,13 @@ const servicesList: ServiceItem[] = [
     icon: '🎬', 
     link: '#hizmetler/icerik-uretimi',
     subServices: [
-      { title: "Marka Kimliği Tasarımı" },
-      { title: "Web3 UI / UX Tasarımı" },
-      { title: "Motion Grafik & Explainer Video" },
-      { title: "Kısa Format Video İçerikleri (Reels / Shorts)" },
-      { title: "Meme & Trend İçerik Üretimi" },
-      { title: "Duyuru & Listeleme İçerik Kitleri" },
-      { title: "Sosyal Medya Görsel Paketleri" }
+      { title: "Marka Kimliği Tasarımı", link: "#hizmetler/icerik-uretimi/brand" },
+      { title: "Web3 UI / UX Tasarımı", link: "#hizmetler/icerik-uretimi/ui-ux" },
+      { title: "Motion Grafik & Explainer Video", link: "#hizmetler/icerik-uretimi/motion" },
+      { title: "Kısa Format Video İçerikleri (Reels / Shorts)", link: "#hizmetler/icerik-uretimi/shorts" },
+      { title: "Meme & Trend İçerik Üretimi", link: "#hizmetler/icerik-uretimi/meme" },
+      { title: "Duyuru & Listeleme İçerik Kitleri", link: "#hizmetler/icerik-uretimi/announcement" },
+      { title: "Sosyal Medya Görsel Paketleri", link: "#hizmetler/icerik-uretimi/social-kits" }
     ]
   },
   { 
@@ -141,14 +142,14 @@ const servicesList: ServiceItem[] = [
     icon: '🌊', 
     link: '#hizmetler/piyasa-yapiciligi-ve-likidite',
     subServices: [
-      { title: "Piyasa Yapıcılığı Stratejisi" },
-      { title: "Likidite Planlaması" },
-      { title: "Market Maker Seçimi & Koordinasyonu" },
-      { title: "Piyasa Yapıcılığı Sistem Danışmanlığı" },
-      { title: "Bot Altyapısı Danışmanlığı" },
-      { title: "Spread & Volatilite Optimizasyonu" },
-      { title: "DEX & CEX Likidite Yönetimi" },
-      { title: "Performans Takibi & Raporlama" }
+      { title: "Piyasa Yapıcılığı Stratejisi", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/strategy" },
+      { title: "Likidite Planlaması", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/planning" },
+      { title: "Market Maker Seçimi & Koordinasyonu", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/mm-selection" },
+      { title: "Piyasa Yapıcılığı Sistem Danışmanlığı", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/consultancy" },
+      { title: "Bot Altyapısı Danışmanlığı", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/bot" },
+      { title: "Spread & Volatilite Optimizasyonu", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/optim" },
+      { title: "DEX & CEX Likidite Yönetimi", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/liquidity" },
+      { title: "Performans Takibi & Raporlama", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/perf" }
     ]
   },
   { 
@@ -157,15 +158,15 @@ const servicesList: ServiceItem[] = [
     icon: '💸', 
     link: '#hizmetler/yatirim-danismanligi',
     subServices: [
-      { title: "Yatırıma Hazırlık Analizi" },
-      { title: "Fon Toplama Stratejisi & Planlaması" },
-      { title: "Seed / Private / Strategic Yatırım Turları" },
-      { title: "Yatırımcı Araştırması & Hedefleme" },
-      { title: "Pitch Deck & Data Room Hazırlığı" },
-      { title: "Değerleme & Token Dağılım Danışmanlığı" },
-      { title: "Stratejik Yatırımcı Bağlantıları" },
-      { title: "Ortak Yatırım & Syndicate Yapılanması" },
-      { title: "Yatırımcı İlişkileri Yönetimi" }
+      { title: "Yatırıma Hazırlık Analizi", link: "#hizmetler/yatirim-danismanligi/audit" },
+      { title: "Fon Toplama Stratejisi & Planlaması", link: "#hizmetler/yatirim-danismanligi/funding-strategy" },
+      { title: "Seed / Private / Strategic Yatırım Turları", link: "#hizmetler/yatirim-danismanligi/tours" },
+      { title: "Yatırımcı Araştırması & Hedefleme", link: "#hizmetler/yatirim-danismanligi/research" },
+      { title: "Pitch Deck & Data Room Hazırlığı", link: "#hizmetler/yatirim-danismanligi/deck" },
+      { title: "Değerleme & Token Dağılım Danışmanlığı", link: "#hizmetler/yatirim-danismanligi/valuation" },
+      { title: "Stratejik Yatırımcı Bağlantıları", link: "#hizmetler/yatirim-danismanligi/network" },
+      { title: "Ortak Yatırım & Syndicate Yapılanması", link: "#hizmetler/yatirim-danismanligi/syndicate" },
+      { title: "Yatırımcı İlişkileri Yönetimi", link: "#hizmetler/yatirim-danismanligi/relations" }
     ]
   },
   { 
@@ -174,18 +175,57 @@ const servicesList: ServiceItem[] = [
     icon: '🤝', 
     link: '#hizmetler/is-ortakliklari-ve-is-gelistirme',
     subServices: [
-      { title: "Stratejik Partnerlikler" },
-      { title: "Ekosistem İş Birlikleri" },
-      { title: "Cross-Marketing Planlaması" },
-      { title: "Kurumsal İş Geliştirme" }
+      { title: "Stratejik Partnerlikler", link: "#hizmetler/is-ortakliklari-ve-is-gelistirme/partners" },
+      { title: "Ekosistem İş Birlikleri", link: "#hizmetler/is-ortakliklari-ve-is-gelistirme/ecosystem" },
+      { title: "Cross-Marketing Planlaması", link: "#hizmetler/is-ortakliklari-ve-is-gelistirme/cross" },
+      { title: "Kurumsal İş Geliştirme", link: "#hizmetler/is-ortakliklari-ve-is-gelistirme/corporate" }
     ]
   },
+];
+
+// SVG Bayrak Komponentleri
+const FlagTR = () => (
+  <svg width="24" height="18" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#E30A17"/>
+    <circle cx="425" cy="400" r="200" fill="#FFF"/>
+    <circle cx="475" cy="400" r="160" fill="#E30A17"/>
+    <polygon points="580,400 706.5,441.1 658.2,308.9 753.5,400 658.2,491.1 706.5,358.9" fill="#FFF" transform="translate(40,0)"/>
+  </svg>
+);
+
+const FlagGB = () => (
+  <svg width="24" height="18" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+    <clipPath id="s">
+      <path d="M0,0 v30 h60 v-30 z"/>
+    </clipPath>
+    <path d="M0,0 v30 h60 v-30 z" fill="#012169"/>
+    <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" strokeWidth="6" clipPath="url(#s)"/>
+    <path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" strokeWidth="4" clipPath="url(#s)"/>
+    <path d="M30,0 v30 M0,15 h60" stroke="#fff" strokeWidth="10"/>
+    <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" strokeWidth="6"/>
+  </svg>
+);
+
+const FlagES = () => (
+  <svg width="24" height="18" viewBox="0 0 750 500" xmlns="http://www.w3.org/2000/svg">
+    <rect width="750" height="500" fill="#c60b1e"/>
+    <rect y="125" width="750" height="250" fill="#ffc400"/>
+    <path d="M125,150 a50,50 0 0,1 100,0 v50 a50,50 0 0,1 -100,0 z" fill="#ffc400" stroke="#c60b1e" strokeWidth="5"/>
+  </svg>
+);
+
+const languages = [
+  { code: 'tr', name: 'Türkçe', flag: <FlagTR /> },
+  { code: 'en', name: 'İngilizce', flag: <FlagGB /> },
+  { code: 'es', name: 'İspanyolca', flag: <FlagES /> }
 ];
 
 const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSubMenu, setActiveSubMenu] = useState<string | null>(null);
+  const [isLangOpen, setIsLangOpen] = useState(false);
+  const [currentLang, setCurrentLang] = useState(languages[0]);
 
   const [mobileHizmetlerOpen, setMobileHizmetlerOpen] = useState(false);
   const [mobileActiveServiceId, setMobileActiveServiceId] = useState<string | null>(null);
@@ -196,6 +236,14 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isMobileMenuOpen]);
+
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
   
   const closeAll = () => {
@@ -203,12 +251,23 @@ const Header: React.FC = () => {
     setMobileHizmetlerOpen(false);
     setMobileActiveServiceId(null);
     setActiveSubMenu(null);
+    setIsLangOpen(false);
   };
 
   const handleHomeClick = (e: React.MouseEvent) => {
     e.preventDefault();
     window.location.hash = '';
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    closeAll();
+  };
+
+  const handleAboutClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.location.hash = 'hakkimizda';
+    closeAll();
+  };
+
+  const handleLinkClick = () => {
     closeAll();
   };
 
@@ -227,6 +286,102 @@ const Header: React.FC = () => {
 
   return (
     <header id="cray-header" className={`cray-header ${scrolled ? 'scrolled' : ''}`}>
+      <style>{`
+        .lang-selector-container {
+          position: relative;
+          display: flex;
+          align-items: center;
+        }
+        .lang-box {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 8px 12px;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 10px;
+          cursor: pointer;
+          transition: 0.3s;
+          position: relative;
+          z-index: 1001;
+        }
+        .lang-box:hover {
+          border-color: var(--cray-gold);
+          background: rgba(255, 255, 255, 0.08);
+        }
+        .current-flag {
+          display: flex;
+          align-items: center;
+          width: 22px;
+          height: 15px;
+          overflow: hidden;
+          border-radius: 2px;
+          box-shadow: 0 0 5px rgba(0,0,0,0.5);
+          pointer-events: none;
+        }
+        .current-flag svg {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+        .lang-dropdown-wrapper {
+          position: absolute;
+          top: 100%;
+          right: 0;
+          padding-top: 12px; /* Köprü alanı */
+          z-index: 1000;
+        }
+        .lang-dropdown-inner {
+          background: #0d0d0d;
+          border: 1px solid rgba(255, 177, 0, 0.2);
+          border-radius: 12px;
+          width: 170px;
+          box-shadow: 0 20px 40px rgba(0,0,0,0.9);
+          overflow: hidden;
+        }
+        .lang-item {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 12px 16px;
+          font-size: 13px !important;
+          font-weight: 600 !important;
+          color: #ccc;
+          transition: 0.2s;
+          cursor: pointer;
+        }
+        .lang-item:hover {
+          background: rgba(255, 177, 0, 0.1);
+          color: var(--cray-gold);
+        }
+        .lang-item.active {
+          color: var(--cray-gold);
+          background: rgba(255, 177, 0, 0.05);
+        }
+        .lang-item .current-flag {
+          flex-shrink: 0;
+        }
+
+        /* Visibility Controls */
+        .desktop-lang {
+          display: flex;
+        }
+        .mobile-action-group {
+          display: none;
+        }
+
+        @media (max-width: 1024px) {
+          .desktop-lang { 
+            display: none !important; 
+          }
+          .mobile-action-group { 
+            display: flex !important; 
+            align-items: center; 
+            gap: 12px; 
+          }
+        }
+      `}</style>
+
       <div className="nav-container">
         <a href="#" onClick={handleHomeClick} className="logo-box">
           <div className="logo-icon">CR</div>
@@ -239,7 +394,7 @@ const Header: React.FC = () => {
         <div className="main-nav">
           <ul className="nav-links">
             <li><a href="#" onClick={handleHomeClick} className="nav-link">Ana Sayfa</a></li>
-            <li><a href="#" className="nav-link">Hakkımızda</a></li>
+            <li><a href="#hakkimizda" onClick={handleAboutClick} className="nav-link">Hakkımızda</a></li>
             
             <li className="has-mega-menu" onMouseLeave={() => setActiveSubMenu(null)}>
               <button className="nav-link mega-menu-trigger">
@@ -250,7 +405,7 @@ const Header: React.FC = () => {
               </button>
 
               <div className="mega-menu-wrapper">
-                <div className="mega-menu-content" style={{ width: activeSubMenu ? '850px' : '440px' }}>
+                <div className="mega-menu-content" style={{ width: 'max-content' }}>
                   <div className="mega-menu-left no-scrollbar">
                     {servicesList.map(item => (
                       <div 
@@ -271,22 +426,25 @@ const Header: React.FC = () => {
                   </div>
 
                   {activeSubMenu && (
-                    <div className="mega-menu-right animate-in fade-in duration-300 no-scrollbar" style={{ overflowY: 'auto', maxHeight: '600px' }}>
-                      <div className="mega-menu-header">
+                    <div className="mega-menu-right animate-in fade-in duration-300 no-scrollbar" style={{ overflowY: 'auto', maxHeight: '600px', minWidth: '450px' }}>
+                      <a 
+                        href={activeService?.link} 
+                        onClick={(e) => handleSubServiceClick(e, activeService?.link || '')} 
+                        className="mega-menu-header"
+                      >
                         <div className="mega-menu-header-icon">{activeService?.icon}</div>
                         <h4 className="mega-menu-header-title">{activeService?.title}</h4>
-                      </div>
+                      </a>
 
-                      {/* Changed to 1 column layout as requested */}
                       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(1, 1fr)', gap: '2px' }}>
                         {(activeService?.subServices || [{ title: activeService?.title || '' }]).map((sub, i) => (
                           <div key={i}>
                             {sub.isHeader ? (
                               <a href={sub.link || activeService?.link} onClick={(e) => handleSubServiceClick(e, sub.link || activeService?.link)} style={{ 
                                 color: 'var(--cray-gold)', 
-                                fontSize: '11px', 
+                                fontSize: '8.5px', 
                                 fontWeight: '700', 
-                                textTransform: 'uppercase', 
+                                textTransform: 'capitalize', 
                                 margin: '15px 0 8px 16px',
                                 borderLeft: '2px solid var(--cray-gold)',
                                 paddingLeft: '8px',
@@ -310,29 +468,103 @@ const Header: React.FC = () => {
               </div>
             </li>
 
-            <li><a href="#section1" className="nav-link">Çözümler</a></li>
             <li><a href="#" className="nav-link">Referanslar</a></li>
+            <li><a href="#booking-section" onClick={handleLinkClick} className="nav-link">İletişim</a></li>
           </ul>
 
-          <a href="#section1" className="cta-button">Teklif Al</a>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+            <a href="#booking-section" onClick={closeAll} className="cta-button">TAKVİM OLUŞTUR</a>
+            
+            {/* Masaüstü Dil Seçeneği */}
+            <div className="lang-selector-container desktop-lang" onMouseLeave={() => setIsLangOpen(false)}>
+              <div className="lang-box" onClick={() => setIsLangOpen(!isLangOpen)}>
+                <div className="current-flag">{currentLang.flag}</div>
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="4" style={{ transform: isLangOpen ? 'rotate(180deg)' : '', transition: '0.3s' }}>
+                  <path d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+              {isLangOpen && (
+                <div className="lang-dropdown-wrapper animate-in fade-in slide-in-from-top-2 duration-200">
+                  <div className="lang-dropdown-inner">
+                    {languages.map(lang => (
+                      <div 
+                        key={lang.code} 
+                        className={`lang-item ${currentLang.code === lang.code ? 'active' : ''}`}
+                        onClick={(e) => { 
+                          e.stopPropagation();
+                          setCurrentLang(lang); 
+                          setIsLangOpen(false); 
+                        }}
+                      >
+                        <div className="current-flag">{lang.flag}</div>
+                        <span>{lang.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
 
-        <button className="mobile-hamburger" onClick={toggleMobileMenu}>
-          <span style={isMobileMenuOpen ? { transform: 'translateY(8px) rotate(45deg)' } : {}}></span>
-          <span style={isMobileMenuOpen ? { opacity: 0 } : {}}></span>
-          <span style={isMobileMenuOpen ? { transform: 'translateY(-8px) rotate(-45deg)' } : {}}></span>
-        </button>
+        {/* Mobil Aksiyon Grubu */}
+        <div className="mobile-action-group">
+          <div className="lang-selector-container">
+            <div className="lang-box" onClick={() => setIsLangOpen(!isLangOpen)}>
+              <div className="current-flag">{currentLang.flag}</div>
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="4" style={{ transform: isLangOpen ? 'rotate(180deg)' : '', transition: '0.3s' }}>
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+            {isLangOpen && (
+              <div className="lang-dropdown-wrapper animate-in fade-in slide-in-from-top-2 duration-200" style={{ right: 0 }}>
+                <div className="lang-dropdown-inner">
+                  {languages.map(lang => (
+                    <div 
+                      key={lang.code} 
+                      className={`lang-item ${currentLang.code === lang.code ? 'active' : ''}`}
+                      onClick={(e) => { 
+                        e.stopPropagation();
+                        setCurrentLang(lang); 
+                        setIsLangOpen(false); 
+                      }}
+                    >
+                      <div className="current-flag">{lang.flag}</div>
+                      <span>{lang.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          <button className="mobile-hamburger" onClick={toggleMobileMenu}>
+            <span style={isMobileMenuOpen ? { transform: 'translateY(8px) rotate(45deg)' } : {}}></span>
+            <span style={isMobileMenuOpen ? { opacity: 0 } : {}}></span>
+            <span style={isMobileMenuOpen ? { transform: 'translateY(-8px) rotate(-45deg)' } : {}}></span>
+          </button>
+        </div>
       </div>
 
-      <div className={`mobile-overlay ${isMobileMenuOpen ? 'open' : ''} no-scrollbar`} style={{ overflowY: 'auto' }}>
+      <div className={`mobile-overlay ${isMobileMenuOpen ? 'open' : ''} no-scrollbar`}>
         <ul className="mobile-nav-list">
-          <li className="mobile-nav-item"><a href="#" onClick={handleHomeClick} className="mobile-nav-link">Ana Sayfa</a></li>
-          <li className="mobile-nav-item"><a href="#" onClick={closeAll} className="mobile-nav-link">Hakkımızda</a></li>
+          <li className="mobile-nav-item">
+            <a href="#" onClick={handleHomeClick} className="mobile-nav-link">
+              Ana Sayfa
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 18l6-6-6-6"/></svg>
+            </a>
+          </li>
+          <li className="mobile-nav-item">
+            <a href="#hakkimizda" onClick={handleAboutClick} className="mobile-nav-link">
+              Hakkımızda
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 18l6-6-6-6"/></svg>
+            </a>
+          </li>
           
           <li className="mobile-nav-item">
-            <button onClick={() => setMobileHizmetlerOpen(!mobileHizmetlerOpen)} className="mobile-nav-link" style={{ background: 'none', border: 'none', width: '100%' }}>
+            <button onClick={() => setMobileHizmetlerOpen(!mobileHizmetlerOpen)} className="mobile-nav-link" style={{ background: 'none', border: 'none', width: '100%', padding: '18px 0' }}>
               Hizmetler
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{ transform: mobileHizmetlerOpen ? 'rotate(180deg)' : '' }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{ transform: mobileHizmetlerOpen ? 'rotate(180deg)' : '' }}>
                 <path d="M19 9l-7 7-7-7" />
               </svg>
             </button>
@@ -340,28 +572,43 @@ const Header: React.FC = () => {
             {mobileHizmetlerOpen && (
               <div className="mobile-sub-menu">
                 {servicesList.map(s => (
-                  <div key={s.id} style={{ marginBottom: '15px' }}>
+                  <div key={s.id} style={{ marginBottom: '8px' }}>
                     <div onClick={() => {
                       if (!s.subServices) {
                         handleServiceClick(s);
                       } else {
                         setMobileActiveServiceId(mobileActiveServiceId === s.id ? null : s.id);
                       }
-                    }} style={{ display: 'flex', justifyContent: 'space-between', color: mobileActiveServiceId === s.id ? 'var(--cray-gold)' : '#fff', fontWeight: 700, fontSize: '16px', cursor: 'pointer' }}>
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>{s.icon} {s.title}</span>
+                    }} className="mobile-sub-item-link">
+                      <span className="mobile-service-title" style={{ color: mobileActiveServiceId === s.id ? 'var(--cray-gold)' : '#fff' }}>
+                        {s.title.toLowerCase()}
+                      </span>
                       {s.subServices && (
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" style={{ transform: mobileActiveServiceId === s.id ? 'rotate(180deg)' : '' }}>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" style={{ transform: mobileActiveServiceId === s.id ? 'rotate(180deg)' : '' }}>
                           <path d="M19 9l-7 7-7-7" />
                         </svg>
                       )}
                     </div>
                     {s.subServices && mobileActiveServiceId === s.id && (
-                      <div style={{ marginTop: '10px', display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                      <div style={{ paddingLeft: '15px', borderLeft: '1px solid rgba(255, 177, 0, 0.2)', display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                        <div>
+                          <a href={s.link} onClick={(e) => handleSubServiceClick(e, s.link)} className="mobile-sub-item-link">
+                            <span className="mobile-service-title" style={{ color: 'var(--cray-gold)' }}>
+                              {s.title.toLowerCase()}
+                            </span>
+                          </a>
+                        </div>
                         {s.subServices.map((sub, si) => (
                           <div key={si}>
-                            <a href={sub.link || s.link} onClick={(e) => handleSubServiceClick(e, sub.link || s.link)} className="sub-nav-link">
-                              <span className="dot"></span>
-                              {sub.title}
+                            <a 
+                              href={sub.link || s.link} 
+                              onClick={(e) => handleSubServiceClick(e, sub.link || s.link)} 
+                              className="mobile-sub-item-link"
+                              style={!sub.isHeader ? { paddingLeft: '20px' } : {}}
+                            >
+                              <span className={sub.isHeader ? "mobile-sub-header-title" : "mobile-service-title"} style={!sub.isHeader ? { opacity: 0.7 } : {}}>
+                                {sub.isHeader ? "🔹 " : "• "}{sub.title.toLowerCase()}
+                              </span>
                             </a>
                           </div>
                         ))}
@@ -373,12 +620,22 @@ const Header: React.FC = () => {
             )}
           </li>
 
-          <li className="mobile-nav-item"><a href="#section1" onClick={closeAll} className="mobile-nav-link">Çözümler</a></li>
-          <li className="mobile-nav-item"><a href="#" onClick={closeAll} className="mobile-nav-link">Referanslar</a></li>
+          <li className="mobile-nav-item">
+            <a href="#" onClick={closeAll} className="mobile-nav-link">
+              Referanslar
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 18l6-6-6-6"/></svg>
+            </a>
+          </li>
+          <li className="mobile-nav-item">
+            <a href="#booking-section" onClick={closeAll} className="mobile-nav-link">
+              İletişim
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 18l6-6-6-6"/></svg>
+            </a>
+          </li>
         </ul>
 
-        <div style={{ marginTop: 'auto', paddingBottom: '40px' }}>
-          <a href="#section1" onClick={closeAll} className="cta-button" style={{ display: 'block', textAlign: 'center', fontSize: '16px', padding: '20px' }}>Ücretsiz Teklif Al</a>
+        <div style={{ marginTop: '40px', paddingBottom: '20px' }}>
+          <a href="#booking-section" onClick={closeAll} className="cta-button" style={{ display: 'block', textAlign: 'center', fontSize: '13px', padding: '16px' }}>TAKVİM OLUŞTUR</a>
         </div>
       </div>
     </header>
