@@ -1,7 +1,7 @@
 import React from 'react';
 
 const AixoviaWorkDetailView: React.FC = () => {
-  // Kullanıcının paylaştığı 8 görseli stratejik olarak haritalıyoruz
+  // /gorsel klasöründeki 8 görselin stratejik haritası
   const galleryImages = [
     { src: '/gorsel/7.png', title: 'Source Intelligence', desc: 'Price is just a shadow, we see the source.' },
     { src: '/gorsel/1.png', title: 'The Momentum Engine', desc: 'Teknik altyapı ölçeklendirme ve strateji.' },
@@ -26,8 +26,9 @@ const AixoviaWorkDetailView: React.FC = () => {
       <style>{`
         .work-detail-page { background: #000; color: #fff; min-height: 100vh; padding-top: 100px; }
         .hero-section { position: relative; height: 90vh; display: flex; align-items: center; overflow: hidden; border-bottom: 1px solid rgba(255,177,0,0.15); }
-        .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.55; filter: brightness(0.8) contrast(1.1); }
-        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #000 0%, transparent 60%, rgba(0,0,0,0.4) 100%); }
+        .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.6; filter: brightness(0.7) contrast(1.1); transition: transform 10s linear; }
+        .hero-section:hover .hero-bg { transform: scale(1.1); }
+        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #000 0%, transparent 60%, rgba(0,0,0,0.5) 100%); }
         
         .container-xl { max-width: 1400px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 10; }
         
@@ -45,7 +46,7 @@ const AixoviaWorkDetailView: React.FC = () => {
           box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
         .service-card:hover { border-color: var(--cray-gold); transform: translateY(-12px); box-shadow: 0 30px 60px rgba(255,177,0,0.15); }
-        .service-icon { font-size: 36px; margin-bottom: 25px; display: block; filter: drop-shadow(0 0 10px rgba(255,177,0,0.3)); }
+        .service-icon { font-size: 36px; margin-bottom: 25px; display: block; }
         .service-title { font-weight: 800 !important; font-size: 13px !important; color: var(--cray-gold); text-transform: uppercase; margin-bottom: 12px; letter-spacing: 1.5px; }
         .service-desc { font-size: 12px !important; color: #bbb; line-height: 1.7; }
 
@@ -67,7 +68,7 @@ const AixoviaWorkDetailView: React.FC = () => {
           cursor: pointer;
           box-shadow: 0 15px 30px rgba(0,0,0,0.5);
         }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 1s cubic-bezier(0.4, 0, 0.2, 1); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
         .gallery-item:hover img { transform: scale(1.15); filter: brightness(1.2); }
         .gallery-info { 
           position: absolute; 
@@ -135,7 +136,7 @@ const AixoviaWorkDetailView: React.FC = () => {
       </div>
 
       <section className="hero-section">
-        {/* Ana Hero Görseli: input_file_0.png */}
+        {/* Ana Hero Görseli: 0.png */}
         <img src="/gorsel/0.png" className="hero-bg" alt="Aixovia Hero" />
         <div className="hero-overlay"></div>
         <div className="container-xl">
@@ -181,7 +182,7 @@ const AixoviaWorkDetailView: React.FC = () => {
                 </p>
               </div>
               <div style={{position: 'relative', borderRadius: '48px', overflow: 'hidden', border: '1px solid rgba(255,177,0,0.35)', boxShadow: '0 40px 80px rgba(0,0,0,0.8)'}}>
-                {/* Vurgu Görseli: input_file_5.png */}
+                {/* Vurgu Görseli: 5.png */}
                 <img src="/gorsel/5.png" alt="Aixovia Analytics" style={{width: '100%', height: 'auto', display: 'block'}} />
               </div>
             </div>
