@@ -20,16 +20,16 @@ const WorksView: React.FC = () => {
       slug: 'aixovia',
       title: 'AIXOVIA', 
       categories: ['AI', 'Token'], 
-      image: '/images/a/8.png', 
-      desc: 'Autonomous AI agent mining infrastructure and token utility model.' 
+      image: 'input_file_0.png', 
+      desc: 'Dünyanın ilk tam otonom AI agent mining altyapısı ve token ekosistemi.' 
     },
     { 
       id: 2, 
       slug: 'aixovia-play',
       title: 'AIXOVIA Play', 
       categories: ['AI', 'Gaming'], 
-      image: '/images/a/1.png', 
-      desc: 'AI-powered gaming experience with immersive on-chain mechanics.' 
+      image: 'input_file_1.png', 
+      desc: 'AI destekli oyun deneyimi ve on-chain oyun mekanikleri.' 
     },
     { 
       id: 3, 
@@ -37,7 +37,7 @@ const WorksView: React.FC = () => {
       title: 'BCCOIN', 
       categories: ['AI', 'Crypto'], 
       image: 'https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=2000', 
-      desc: 'Strategic brand elevation for a high-performance crypto ecosystem.' 
+      desc: 'Yüksek performanslı kripto ekosistemi için stratejik marka yükseltmesi.' 
     },
     { 
       id: 4, 
@@ -45,7 +45,7 @@ const WorksView: React.FC = () => {
       title: 'Curva NFT', 
       categories: ['NFT'], 
       image: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=2000', 
-      desc: 'Exclusive digital collectible collection for global sports ultras.' 
+      desc: 'Küresel spor taraftarları için özel dijital koleksiyon serisi.' 
     },
     { 
       id: 5, 
@@ -53,7 +53,7 @@ const WorksView: React.FC = () => {
       title: 'eCOM', 
       categories: ['Gaming'], 
       image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2000', 
-      desc: 'Unified gaming hub and community growth strategy.' 
+      desc: 'Birleşik oyun merkezi ve topluluk büyüme stratejisi.' 
     },
     { 
       id: 6, 
@@ -61,7 +61,7 @@ const WorksView: React.FC = () => {
       title: 'FTN', 
       categories: ['Token'], 
       image: 'https://images.unsplash.com/photo-1621416848440-276911c47f35?q=80&w=2000', 
-      desc: 'Fast Token ecosystem launch and global marketing reach.' 
+      desc: 'Fast Token ekosistemi lansmanı ve küresel pazarlama erişimi.' 
     },
     { 
       id: 7, 
@@ -69,7 +69,7 @@ const WorksView: React.FC = () => {
       title: 'HelpSteps', 
       categories: ['Token'], 
       image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=2000', 
-      desc: 'Tokenization of social impact and movement-based rewards.' 
+      desc: 'Sosyal etkinin ve hareket odaklı ödüllerin tokenizasyonu.' 
     },
     { 
       id: 8, 
@@ -77,7 +77,7 @@ const WorksView: React.FC = () => {
       title: 'Nexum', 
       categories: ['Token'], 
       image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000', 
-      desc: 'Next-generation maritime and logistics finance token strategy.' 
+      desc: 'Yeni nesil denizcilik ve lojistik finansmanı token stratejisi.' 
     },
     { 
       id: 9, 
@@ -85,7 +85,7 @@ const WorksView: React.FC = () => {
       title: 'Nova', 
       categories: ['Blockchain'], 
       image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2000', 
-      desc: 'Core blockchain infrastructure and technical data management.' 
+      desc: 'Çekirdek blokzincir altyapısı ve teknik veri yönetimi.' 
     },
     { 
       id: 10, 
@@ -93,7 +93,7 @@ const WorksView: React.FC = () => {
       title: 'Snapmuse', 
       categories: ['Token'], 
       image: 'https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=2000', 
-      desc: 'Platform tokenomics and creator economy integration.' 
+      desc: 'Platform tokenomics ve içerik üreticisi ekonomisi entegrasyonu.' 
     },
     { 
       id: 11, 
@@ -101,7 +101,7 @@ const WorksView: React.FC = () => {
       title: 'RefPlus', 
       categories: ['Blockchain'], 
       image: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=2000', 
-      desc: 'Referral-based blockchain scaling and node growth protocols.' 
+      desc: 'Referans tabanlı blokzincir ölçeklendirme ve node büyüme protokolleri.' 
     },
     { 
       id: 12, 
@@ -109,7 +109,7 @@ const WorksView: React.FC = () => {
       title: 'The Crypt', 
       categories: ['News'], 
       image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=2000', 
-      desc: 'Premium crypto news hub and market sentiment analysis.' 
+      desc: 'Premium kripto haber merkezi ve piyasa duyarlılık analizi.' 
     }
   ];
 
@@ -219,7 +219,7 @@ const WorksView: React.FC = () => {
         <div className="section-header">
           <h5 style={{color: 'var(--cray-gold)', letterSpacing: '6px', textTransform: 'uppercase', marginBottom: '20px', fontWeight: 800, fontSize: '12px !important'}}>Portfolio</h5>
           <h1 className="h1-style">Case Studies</h1>
-          <p className="p-style">A collection of industry-shifting Web3 projects engineered and marketed by CRAY Digital.</p>
+          <p className="p-style">CRAY Digital tarafından geliştirilen ve pazarlanan sektörel değişim yaratan Web3 projeleri.</p>
         </div>
 
         <div className="filter-bar">
@@ -247,7 +247,7 @@ const WorksView: React.FC = () => {
                 <h3 className="work-title">{work.title}</h3>
                 <p className="work-desc">{work.desc}</p>
                 <div className="view-case-btn">
-                  View Success Story
+                  Success Story'i Görüntüle
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M5 12h14M12 5l7 7-7-7"/></svg>
                 </div>
               </div>
@@ -258,9 +258,9 @@ const WorksView: React.FC = () => {
         {/* CTA Section */}
         <section className="section-padding" style={{marginTop: '120px', borderTop: '1px solid rgba(255,255,255,0.05)'}}>
           <div style={{textAlign: 'center', background: 'linear-gradient(rgba(255,177,0,0.05), transparent)', padding: '80px 40px', borderRadius: '40px', border: '1px solid rgba(255,177,0,0.1)'}}>
-            <h2 className="h2-style mb-6">Want Your Project Featured?</h2>
-            <p className="p-style text-zinc-500 mb-10 max-w-2xl mx-auto">Join the portfolio of the world's most successful Web3 brands. Let's build your success architecture together.</p>
-            <a href="#booking-section" className="cta-button" style={{padding: '22px 60px', borderRadius: '15px', fontSize: '13px !important'}}>Book a Discovery Call</a>
+            <h2 className="h2-style mb-6">Projenizi Burada Görmek İster Misiniz?</h2>
+            <p className="p-style text-zinc-500 mb-10 max-w-2xl mx-auto">Dünyanın en başarılı Web3 markalarının portföyüne katılın. Başarı mimarinizi birlikte inşa edelim.</p>
+            <a href="#booking-section" className="cta-button" style={{padding: '22px 60px', borderRadius: '15px', fontSize: '13px !important'}}>Keşif Görüşmesi Ayarla</a>
           </div>
         </section>
       </div>
