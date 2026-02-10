@@ -14,15 +14,15 @@ const AnalyticsReportingSubDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject(status, `Analitik: ${goal}`);
+    const result = await evaluateProject(status, `Analytics: ${goal}`);
     setAiResult(result);
     setLoading(false);
   };
 
   const reasons = [
-    { title: 'Big Data Mining', desc: 'Blokzincirdeki devasa veri yığınlarını işleyerek anlamlı raporlar üretiyoruz.', icon: <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/> },
-    { title: 'Whale Tracker', desc: 'Büyük yatırımcıların hareketlerini anlık takip eden alarm sistemleri.', icon: <path d="M22 12h-4l-3 9L9 3l-3 9H2"/> },
-    { title: 'Security Auditing', desc: 'On-chain verilerle projenin siber güvenlik durumunu sürekli denetliyoruz.', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> }
+    { title: 'Big Data Mining', desc: 'We process massive blockchain data sets to generate meaningful reports.', icon: <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/> },
+    { title: 'Whale Tracker', desc: 'Instant alarm systems that track the movements of large investors.', icon: <path d="M22 12h-4l-3 9L9 3l-3 9H2"/> },
+    { title: 'Security Auditing', desc: 'We continuously audit the project\'s cybersecurity status with on-chain data.', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> }
   ];
 
   return (
@@ -40,7 +40,7 @@ const AnalyticsReportingSubDetailView: React.FC = () => {
         #h-hero { position: relative; padding: 220px 0 120px; min-height: 85vh; display: flex; align-items: center; }
         .hero-grid { display: flex; flex-direction: column; gap: 60px; position: relative; z-index: 10; width: 100%; }
         @media (min-width: 1024px) { .hero-grid { flex-direction: row; align-items: center; justify-content: space-between; } }
-        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: 0 auto; }
+        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: auto; }
         .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; color: #000; margin-bottom: 16px; }
         .form-button { width: 100%; background: var(--cray-gold); color: #000; padding: 18px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
         .reasons-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
@@ -72,19 +72,19 @@ const AnalyticsReportingSubDetailView: React.FC = () => {
           <div className="hero-grid">
             <div style={{flex: 1.2}}>
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Data Intelligence</h5>
-              <h1 className="h1-style">Analitik ve Raporlama Panelleri</h1>
-              <p className="p-style">On-chain verileri stratejik bilgiye dönüştürün. Balina hareketlerini ve piyasa duyarlılığını analiz eden gelişmiş sistemler sunuyoruz.</p>
+              <h1 className="h1-style">Analytics and Reporting Dashboards</h1>
+              <p className="p-style">Transform on-chain data into strategic information. We offer advanced systems that analyze whale movements and market sentiment.</p>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Veri Analizi Al</h3>
-              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Data Analysis</h3>
+              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Again</button></div> : (
                 <form onSubmit={handleSubmit}>
                   <select className="form-control" required>
-                    <option value="">Odak</option><option value="whale">Balina Analizi</option><option value="market">Market Trends</option>
+                    <option value="">Focus</option><option value="whale">Whale Analysis</option><option value="market">Market Trends</option>
                   </select>
-                  <textarea className="form-control" rows={3} placeholder="Analiz istediğiniz ağları belirtin..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="E-posta veya Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'HESAPLANIYOR...' : 'VERİ PLANI AL'}</button>
+                  <textarea className="form-control" rows={3} placeholder="Specify the networks you want analyzed..." value={goal} onChange={e=>setGoal(e.target.value)} required />
+                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'CALCULATING...' : 'GET DATA PLAN'}</button>
                 </form>
               )}
             </div>
@@ -116,8 +116,8 @@ const AnalyticsReportingSubDetailView: React.FC = () => {
                 <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2000" alt="Chart" />
               </div>
               <div className="detail-text">
-                <h2 className="h2-style">Görsel Veri Hikayeleri</h2>
-                <p className="p-style">Karmaşık on-chain verileri herkesin anlayabileceği şık grafiklere dönüştürüyoruz. Yatırımcılarınıza ve topluluğunuza projenizin başarısını veriyle kanıtlayın.</p>
+                <h2 className="h2-style">Visual Data Stories</h2>
+                <p className="p-style">We transform complex on-chain data into stylish charts that everyone can understand. Prove your project's success to your investors and community with data.</p>
               </div>
             </div>
             <div className="detail-item reverse">
@@ -125,8 +125,8 @@ const AnalyticsReportingSubDetailView: React.FC = () => {
                 <img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=2000" alt="Risk" />
               </div>
               <div className="detail-text">
-                <h2 className="h2-style">Anomali ve Risk Tespiti</h2>
-                <p className="p-style">Piyasada oluşabilecek manipülasyonları, büyük holder satışlarını veya şüpheli kontrat etkileşimlerini anlık olarak tespit eden erken uyarı sistemleri kuruyoruz. Varlıklarınızı veriyle koruyun.</p>
+                <h2 className="h2-style">Anomaly and Risk Detection</h2>
+                <p className="p-style">We establish early warning systems that instantly detect potential manipulations in the market, large holder sales, or suspicious contract interactions. Protect your assets with data.</p>
               </div>
             </div>
           </div>
@@ -135,19 +135,19 @@ const AnalyticsReportingSubDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Veriye Dayalı Kararlar Almaya Başlayın</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Karanlıkta ilerlemeyin. On-chain verinin gücünü kullanarak projenizin geleceğini garanti altına alın. Profesyonel analitik raporlarımızla tanışın.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Hemen Analiz İsteyin</a>
+          <h2 className="h2-style">Start Making Data-Driven Decisions</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Don't proceed in the dark. Guarantee your project's future by using the power of on-chain data. Meet our professional analytical reports.</p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Request Analysis Now</a>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {[
-              { q: "Rakip analizi yapıyor musunuz?", a: "Evet, rakip projelerin on-chain cüzdanlarını ve marketing harcamalarını analiz edebiliyoruz." },
-              { q: "Raporlama sıklığı nedir?", a: "İhtiyaca göre günlük anlık dashboard veya haftalık PDF raporlar sunuyoruz." }
+              { q: "Do you perform competitor analysis?", a: "Yes, we can analyze the on-chain wallets and marketing expenditures of competitor projects." },
+              { q: "What is the reporting frequency?", a: "We offer instant dashboards according to need, or weekly PDF reports." }
             ].map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
                 <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
@@ -162,7 +162,7 @@ const AnalyticsReportingSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

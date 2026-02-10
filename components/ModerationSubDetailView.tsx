@@ -11,23 +11,15 @@ const ModerationSubDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject('Moderasyon', 'Topluluk güvenliği ve 7/24 yanıt hızı analizi.');
+    const result = await evaluateProject('Moderation', '7/24 safety and interaction strategy.');
     setAiResult(result);
     setLoading(false);
   };
 
   const reasons = [
-    { title: 'Global Zaman Dilimi', desc: 'Farklı coğrafyalardan moderatörlerle topluluğunuzun siz uyurken bile sahipsiz kalmamasını sağlıyoruz.', icon: <path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/> },
-    { title: 'Anlık FUD Kontrolü', desc: 'Olumsuz haber veya saldırı (raid) durumlarında saniyeler içinde müdahale ederek dezenformasyonu durduruyoruz.', icon: <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/> },
-    { title: 'Teknik Bilgi Birikimi', desc: 'Moderatörlerimiz sadece "hello" demez. Projenizin teknik detaylarına hakim olup yatırımcı sorularına doyurucu yanıtlar verirler.', icon: <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/> }
-  ];
-
-  const faqs = [
-    { q: "Hangi platformlarda moderasyon sağlıyorsunuz?", a: "Öncelikle Telegram ve Discord olmak üzere, talep doğrultusunda X ve Reddit platformlarında da aktif destek veriyoruz." },
-    { q: "Moderatörleriniz projemize nasıl hazırlanıyor?", a: "Hizmet başlamadan önce projenizin Whitepaper ve teknik dökümanlarını ezberleyen, size özel bir onboarding sürecinden geçiyorlar." },
-    { q: "Diller arasında geçiş yapabiliyor musunuz?", a: "Evet, global pazarlar için İngilizce ana dil olmak üzere; Çince, Rusça, Korece ve Türkçe moderasyon ekiplerimiz mevcuttur." },
-    { q: "Dolandırıcılık girişimlerini nasıl önlüyorsunuz?", a: "Sahte admin hesaplarını, taklit botları ve DM üzerinden yapılan saldırıları sürekli takip edip topluluğu uyarıyoruz." },
-    { q: "Haftalık performans raporunda ne var?", a: "Yanıt süreleri, gruptaki en aktif konular, engellenen spam sayısı ve kullanıcı duyarlılık (sentiment) analizi." }
+    { title: 'Global Timezone Coverage', desc: 'Our team spans every major timezone to ensure your community is active and safe 24/7.', icon: <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/> },
+    { title: 'Instant FUD Control', desc: 'We monitor sentiment and neutralize disinformation in seconds to protect your project reputation.', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> },
+    { title: 'Technical Expertise', desc: 'Our moderators are trained in blockchain jargon, providing accurate answers to complex investor queries.', icon: <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/> }
   ];
 
   return (
@@ -37,7 +29,7 @@ const ModerationSubDetailView: React.FC = () => {
         .section-padding { padding: 100px 0; position: relative; }
         .container-xl { max-width: 1280px; margin: 0 auto; padding: 0 32px; width: 100%; position: relative; z-index: 10; }
         .bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
-        .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.8); z-index: 1; }
+        .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.85); z-index: 1; }
         .grad { position: absolute; inset: 0; background: linear-gradient(to bottom, #000, transparent 40%, transparent 60%, #000); z-index: 2; }
         .h1-style { font-size: 40px !important; font-weight: 700 !important; line-height: 1.2; }
         .h2-style { font-size: 32px !important; font-weight: 700 !important; }
@@ -52,53 +44,25 @@ const ModerationSubDetailView: React.FC = () => {
         .reason-card { padding: 48px 32px; border-radius: 24px; text-align: center; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); transition: 0.4s; }
         .reason-card:hover { transform: translateY(-10px); border-color: var(--cray-gold); background: rgba(255, 177, 0, 0.1); }
         .reason-icon-box { width: 60px; height: 60px; background-color: var(--cray-gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.3); }
-        .detail-row { display: flex; flex-direction: column; gap: 100px; }
-        .detail-item { display: flex; flex-direction: column; gap: 60px; align-items: center; width: 100%; }
-        @media (min-width: 1024px) { .detail-item { flex-direction: row; } .detail-item.reverse { flex-direction: row-reverse; } }
-        .detail-visual { border-radius: 32px; overflow: hidden; height: 500px; border: 1px solid rgba(255,177,0,0.2); position: relative; width: 100%; }
-        .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
-        .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
-        .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
-        .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; width: 100%; text-align: left; }
-        .faq-accordion-body { padding: 0 32px 28px; color: #9ca3af; display: none; }
-        .faq-accordion-item.active .faq-accordion-body { display: block; }
-        .faq-accordion-item.active .faq-accordion-header { color: var(--cray-gold); }
-        .bullet-point { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-        .bullet-icon { width: 20px; height: 20px; background: var(--cray-gold); border-radius: 50%; display: flex; align-items: center; justifyContent: center; flex-shrink: 0; }
-        .bullet-text { font-size: 11px !important; font-weight: 700 !important; text-transform: uppercase; letter-spacing: 1px; color: #fff; }
       `}</style>
 
       <section id="h-hero">
-        <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2832" className="bg-img" alt="Moderation Hero" />
+        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=2832" className="bg-img" alt="Moderation Hero" />
         <div className="overlay"></div><div className="grad"></div>
         <div className="container-xl">
           <div className="hero-grid">
             <div>
-              <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Always Active Presence</h5>
-              <h1 className="h1-style">7/24 Topluluk Moderasyonu</h1>
-              <p className="p-style">Kripto asla uyumaz. Biz de uyumuyoruz. Projenizi 24 saat boyunca her dilde ve her zaman diliminde profesyonelce koruyor ve yönetiyoruz.</p>
-              <div style={{marginTop: '30px'}}>
-                <div className="bullet-point">
-                  <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">GLOBAL EKİP İLE KESİNTİSİZ DESTEK</span>
-                </div>
-                <div className="bullet-point">
-                  <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">KRİZ VE SALDIRI DURUMUNDA ANLIK MÜDAHALE</span>
-                </div>
-                <div className="bullet-point">
-                  <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">TEKNİK YETKİNLİĞİ YÜKSEK MODERATÖR KADROSU</span>
-                </div>
-              </div>
+              <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Always Active Safety</h5>
+              <h1 className="h1-style">24/7 Community Moderation</h1>
+              <p className="p-style">Crypto never sleeps, and neither do we. Protect your community from scams and FUD with our expert multi-lingual moderation squads around the clock.</p>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Moderasyon Teklifi Al</h3>
-              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Squad Quote</h3>
+              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Topluluk Büyüklüğü" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="İhtiyaç duyulan dilleri belirtin..." required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'HESAPLANIYOR...' : 'EKİP PLANI AL'}</button>
+                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Community Platform & Link" required />
+                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Which languages do you require support for?" required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'ANALYZING...' : 'GET MODERATION PLAN'}</button>
                 </form>
               )}
             </div>
@@ -122,58 +86,8 @@ const ModerationSubDetailView: React.FC = () => {
         </div>
       </section>
 
-      <section className="section-padding" style={{background: '#050505'}}>
-        <div className="container-xl">
-          <div className="detail-row">
-            <div className="detail-item">
-              <div className="detail-text">
-                <h2 className="h2-style">Huzurlu Bir Ekosistem</h2>
-                <p className="p-style">Grup içerisindeki toksik davranışları, reklamları ve dolandırıcılık girişimlerini biz eliyoruz. Kullanıcılarınızın sadece projenizin geleceğine odaklandığı, güvenli ve yapıcı bir tartışma ortamı sağlıyoruz.</p>
-              </div>
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2000" alt="Safe Group" />
-              </div>
-            </div>
-            <div className="detail-item reverse">
-              <div className="detail-text">
-                <h2 className="h2-style">Doğru Bilgi, Hızlı Yanıt</h2>
-                <p className="p-style">Yatırımcılar geç gelen yanıtlardan hoşlanmaz. Gelişmiş "FAQ Base" sistemimizle her soruyu projenizin resmi duruşuna uygun, tutarlı ve profesyonel bir dille saniyeler içinde cevaplıyoruz.</p>
-              </div>
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=2000" alt="Fast Support" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="cta-box-section">
-        <div className="container-xl">
-          <h2 className="h2-style">Topluluğunuzu Uzman Ellere Emanet Edin</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>7/24 kesintisiz moderasyon desteği ile projenizin itibarını global seviyeye taşıyın. Profesyonel moderasyon planımız için hemen tanışalım.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Moderasyon Ekibi Kur</a>
-        </div>
-      </section>
-
-      <section className="section-padding">
-        <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
-          <div style={{maxWidth: '850px', margin: '0 auto'}}>
-            {faqs.map((f, i) => (
-              <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
-                <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
-                  <span>{f.q}</span>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
-                </div>
-                <div className="faq-accordion-body p-style"><p>{f.a}</p></div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/sosyal-medya-ve-topluluk-yonetimi'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/sosyal-medya-ve-topluluk-yonetimi'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

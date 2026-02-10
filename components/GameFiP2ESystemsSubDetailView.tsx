@@ -20,9 +20,9 @@ const GameFiP2ESystemsSubDetailView: React.FC = () => {
   };
 
   const reasons = [
-    { title: 'Anti-Inflation Tech', desc: 'Token emisyonunu ve ekonomisini dengeleyen gelişmiş algoritmalar.', icon: <path d="M22 12h-4l-3 9L9 3l-3 9H2"/> },
-    { title: 'Reward Distribution', desc: 'Otomatik, şeffaf ve düşük maliyetli ödül dağıtım sistemleri.', icon: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/> },
-    { title: 'Seamless Wallet', desc: 'Oyun içi cüzdan ve account abstraction ile kusursuz UX.', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> }
+    { title: 'Anti-Inflation Tech', desc: 'Advanced algorithms that balance token emission and economy.', icon: <path d="M22 12h-4l-3 9L9 3l-3 9H2"/> },
+    { title: 'Reward Distribution', desc: 'Automated, transparent, and low-cost reward distribution systems.', icon: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/> },
+    { title: 'Seamless Wallet', desc: 'Flawless UX with in-game wallet and account abstraction.', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> }
   ];
 
   return (
@@ -39,8 +39,12 @@ const GameFiP2ESystemsSubDetailView: React.FC = () => {
         .p-style { font-size: 16px !important; font-weight: 300 !important; color: #d1d5db; line-height: 1.8; }
         #h-hero { position: relative; padding: 220px 0 120px; min-height: 85vh; display: flex; align-items: center; }
         .hero-grid { display: flex; flex-direction: column; gap: 60px; position: relative; z-index: 10; width: 100%; }
-        @media (min-width: 1024px) { .hero-grid { flex-direction: row; align-items: center; justify-content: space-between; } }
+        @media (min-width: 1024px) { 
+          .hero-grid { flex-direction: row; align-items: center; justify-content: space-between; } 
+        }
+        .hero-text { flex: 1.2; }
         .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: 0 auto; }
+        @media (min-width: 1024px) { .form-card { margin: 0; flex: 0.8; } }
         .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; color: #000; margin-bottom: 16px; }
         .form-button { width: 100%; background: var(--cray-gold); color: #000; padding: 18px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
         .reasons-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
@@ -70,21 +74,21 @@ const GameFiP2ESystemsSubDetailView: React.FC = () => {
         <div className="overlay"></div><div className="grad"></div>
         <div className="container-xl">
           <div className="hero-grid">
-            <div style={{flex: 1.2}}>
+            <div className="hero-text">
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Economy & Play</h5>
-              <h1 className="h1-style">GameFi / Play-to-Earn Sistemleri</h1>
-              <p className="p-style">Oynarken kazanma mantığını sürdürülebilir bir ekonomiyle buluşturuyoruz. Enflasyon kontrolü yapılmış, dengeli GameFi modelleri kurguluyoruz.</p>
+              <h1 className="h1-style">GameFi / Play-to-Earn Systems</h1>
+              <p className="p-style">We bring the Play-to-Earn logic together with a sustainable economy. We build balanced GameFi models with inflation control.</p>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Ekonomi Analizi Al</h3>
-              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Economy Analysis</h3>
+              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
                   <select className="form-control" required>
                     <option value="">Model</option><option value="p2e">Play-to-Earn</option><option value="m2e">Move-to-Earn</option>
                   </select>
-                  <textarea className="form-control" rows={3} placeholder="Ödül mekanizmasını özetleyin..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="E-posta veya Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'HESAPLANIYOR...' : 'EKONOMİ PLANI AL'}</button>
+                  <textarea className="form-control" rows={3} placeholder="Summarize the reward mechanism..." value={goal} onChange={e=>setGoal(e.target.value)} required />
+                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'CALCULATING...' : 'GET ECONOMY PLAN'}</button>
                 </form>
               )}
             </div>
@@ -116,8 +120,8 @@ const GameFiP2ESystemsSubDetailView: React.FC = () => {
                 <img src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d?q=80&w=2000" alt="Assets" />
               </div>
               <div className="detail-text">
-                <h2 className="h2-style">Sürdürülebilir Reward Sistemi</h2>
-                <p className="p-style">Token havuzunun dengesini korumak için dinamik ödül katsayıları ve stake mekanizmaları kuruyoruz. Oyuncuların kazandığı ödülleri ekosistem içinde tekrar harcamasını teşvik eden oyun döngüleri (game loops) tasarlıyoruz.</p>
+                <h2 className="h2-style">Sustainable Reward System</h2>
+                <p className="p-style">We build dynamic reward coefficients and stake mechanisms to maintain token pool balance. We design game loops that encourage players to re-spend their rewards within the ecosystem.</p>
               </div>
             </div>
             <div className="detail-item reverse">
@@ -125,8 +129,8 @@ const GameFiP2ESystemsSubDetailView: React.FC = () => {
                 <img src="https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?q=80&w=2000" alt="NFT Marketplace" />
               </div>
               <div className="detail-text">
-                <h2 className="h2-style">Oyun İçi NFT Ekonomisi</h2>
-                <p className="p-style">Karakterler, itemler ve topraklar... Oyun içi tüm varlıkların ikincil piyasada (marketplace) değer kazanması için kıtlık algısı ve fayda dengesini kuruyoruz. Oyuncularınız sadece oynamaz, aynı zamanda birer yatırımcıya dönüşür.</p>
+                <h2 className="h2-style">In-Game NFT Economy</h2>
+                <p className="p-style">Characters, items, and lands... We establish the balance between scarcity perception and utility for all in-game assets to gain value in the secondary market. Your players don't just play; they become investors.</p>
               </div>
             </div>
           </div>
@@ -135,19 +139,19 @@ const GameFiP2ESystemsSubDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Oyun Ekonominizi Uzmanlarla Kurgulayın</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>P2E dünyasının en büyük sorunu olan kontrolsüz enflasyonu, matematiksel simülasyonlar ve yakım mekanizmalarıyla çözüyoruz. Projenizin ömrünü profesyonel ekonomi modeliyle uzatın.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Hemen Ekonomi Analizi İste</a>
+          <h2 className="h2-style">Build Your Game Economy with Experts</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>We solve uncontrolled inflation, the biggest problem of the P2E world, with mathematical simulations and burn mechanisms. Extend the life of your project with a professional economy model.</p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Request Economy Analysis Now</a>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {[
-              { q: "Enflasyonu nasıl engelliyorsunuz?", a: "Matematiksel simülasyonlarla token giriş-çıkış dengesini kuruyor ve yakım mekanizmaları entegre ediyoruz." },
-              { q: "Hibrit (Web2+Web3) modeller kuruyor musunuz?", a: "Evet, geleneksel oyuncuları ürkütmeyen 'Web2.5' modelleriyle kitleyi Web3'e alıştırıyoruz." }
+              { q: "How do you prevent inflation?", a: "We establish the token entry-exit balance with mathematical simulations and integrate burn mechanisms." },
+              { q: "Do you build hybrid (Web2+Web3) models?", a: "Yes, we acclimate the audience to Web3 with 'Web2.5' models that don't scare away traditional players." }
             ].map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
                 <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
@@ -162,7 +166,7 @@ const GameFiP2ESystemsSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back</button>
       </div>
     </div>
   );

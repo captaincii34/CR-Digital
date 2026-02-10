@@ -20,9 +20,9 @@ const Web3WebsiteDevSubDetailView: React.FC = () => {
   };
 
   const reasons = [
-    { title: 'Conversion Focused', desc: 'Kullanıcıyı projenize bağlayan stratejik tasarım yapısı.', icon: <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/> },
-    { title: 'Interactive UX', desc: 'Dinamik animasyonlar ve Web3 kütüphaneleriyle modern deneyim.', icon: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/> },
-    { title: 'SEO & Performance', desc: 'Kripto kelimelerinde üst sıraları hedefleyen hızlı altyapı.', icon: <path d="M22 12h-4l-3 9L9 3l-3 9H2"/> }
+    { title: 'Conversion Focused', desc: 'Strategic design structure that connects the user to your project.', icon: <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/> },
+    { title: 'Interactive UX', desc: 'Modern experience with dynamic animations and Web3 libraries.', icon: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/> },
+    { title: 'SEO & Performance', desc: 'Fast infrastructure targeting top rankings in crypto keywords.', icon: <path d="M22 12h-4l-3 9L9 3l-3 9H2"/> }
   ];
 
   return (
@@ -39,30 +39,19 @@ const Web3WebsiteDevSubDetailView: React.FC = () => {
         .p-style { font-size: 16px !important; font-weight: 300 !important; color: #d1d5db; line-height: 1.8; }
         #h-hero { position: relative; padding: 220px 0 120px; min-height: 85vh; display: flex; align-items: center; }
         .hero-grid { display: flex; flex-direction: column; gap: 60px; position: relative; z-index: 10; width: 100%; }
-        @media (min-width: 1024px) { .hero-grid { flex-direction: row; align-items: center; justify-content: space-between; } }
-        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: 0 auto; }
+        @media (min-width: 1024px) { 
+            .hero-grid { flex-direction: row; align-items: center; justify-content: space-between; } 
+        }
+        .hero-text { flex: 1.2; }
+        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; color: #000; width: 100%; max-width: 480px; margin: 0 auto; box-shadow: 0 40px 80px rgba(0,0,0,0.7); }
+        @media (min-width: 1024px) { .form-card { margin: 0; flex: 0.8; } }
         .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; color: #000; margin-bottom: 16px; }
         .form-button { width: 100%; background: var(--cray-gold); color: #000; padding: 18px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
         .reasons-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
         @media (min-width: 768px) { .reasons-grid { grid-template-columns: repeat(3, 1fr); } }
-        .reason-card { padding: 48px 32px; border-radius: 24px; text-align: center; background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); transition: 0.4s; }
+        .reason-card { padding: 48px 32px; border-radius: 24px; text-align: center; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); transition: 0.4s; }
         .reason-card:hover { transform: translateY(-10px); border-color: var(--cray-gold); background: rgba(255, 177, 0, 0.15); }
         .reason-icon-box { width: 60px; height: 60px; background-color: var(--cray-gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.3); }
-        .detail-row { display: flex; flex-direction: column; gap: 100px; }
-        .detail-item { display: flex; flex-direction: column; gap: 60px; align-items: center; width: 100%; }
-        @media (min-width: 1024px) { 
-            .detail-item { flex-direction: row; } 
-            .detail-item.reverse { flex-direction: row-reverse; } 
-            .detail-text, .detail-visual { width: 50%; flex: 1; }
-        }
-        .detail-visual { border-radius: 32px; overflow: hidden; height: 500px; border: 1px solid rgba(255,177,0,0.2); position: relative; width: 100%; }
-        .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
-        .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
-        .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
-        .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        .faq-accordion-body { padding: 0 32px 28px; color: #9ca3af; display: none; }
-        .faq-accordion-item.active .faq-accordion-body { display: block; }
-        .faq-accordion-item.active .faq-accordion-header { color: var(--cray-gold); }
       `}</style>
 
       <section id="h-hero">
@@ -70,21 +59,21 @@ const Web3WebsiteDevSubDetailView: React.FC = () => {
         <div className="overlay"></div><div className="grad"></div>
         <div className="container-xl">
           <div className="hero-grid">
-            <div style={{flex: 1.2}}>
+            <div className="hero-text">
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Modern Web Showcase</h5>
-              <h1 className="h1-style">Web3 Uyumlu Website Geliştirme</h1>
-              <p className="p-style">Statik sitelerin ötesine geçin. Cüzdan bağlantılı, etkileşimli ve projenizin gücünü yansıtan Web3 vitrininizi tasarlıyoruz.</p>
+              <h1 className="h1-style">Web3-Compatible Website Development</h1>
+              <p className="p-style">Go beyond static sites. We design your Web3 showcase that is wallet-connected, interactive, and reflects the power of your project.</p>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Site Tasarımı İsteyin</h3>
-              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Request Site Design</h3>
+              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Try Again</button></div> : (
                 <form onSubmit={handleSubmit}>
                   <select className="form-control" required>
-                    <option value="">İhtiyaç</option><option value="new">Yeni Site</option><option value="rev">Revizyon</option>
+                    <option value="">Need</option><option value="new">New Site</option><option value="rev">Revision</option>
                   </select>
-                  <textarea className="form-control" rows={3} placeholder="Web sitenizde hangi özellikler olmalı?" value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="E-posta veya Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'TASARLANIYOR...' : 'TASLAK PLANI AL'}</button>
+                  <textarea className="form-control" rows={3} placeholder="What features should your website have?" value={goal} onChange={e=>setGoal(e.target.value)} required />
+                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'DESIGNING...' : 'GET DRAFT PLAN'}</button>
                 </form>
               )}
             </div>
@@ -108,61 +97,8 @@ const Web3WebsiteDevSubDetailView: React.FC = () => {
         </div>
       </section>
 
-      <section className="section-padding" style={{background: '#050505'}}>
-        <div className="container-xl">
-          <div className="detail-row">
-            <div className="detail-item">
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=2000" alt="Gates" />
-              </div>
-              <div className="detail-text">
-                <h2 className="h2-style">Token Gated Deneyimler</h2>
-                <p className="p-style">Sadece belirli bir token veya NFT'ye sahip olanlara özel içerikler sunan kapalı devre web deneyimleri kurguluyoruz. Topluluk aidiyetini dijital dünyada güçlendirin.</p>
-              </div>
-            </div>
-            <div className="detail-item reverse">
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2000" alt="Responsive" />
-              </div>
-              <div className="detail-text">
-                <h2 className="h2-style">Mobil Öncelikli Responsive Tasarım</h2>
-                <p className="p-style">Kripto kullanıcılarının %70'inden fazlası mobil cihazlar üzerinden işlem yapar. Biz web sitenizi tüm ekran boyutlarında, cüzdan tarayıcılarıyla (DApp Browsers) %100 uyumlu şekilde optimize ediyoruz.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="cta-box-section">
-        <div className="container-xl">
-          <h2 className="h2-style">Dijital Vitrininizi Birlikte İnşa Edelim</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Etkileyici bir web sitesi, projenizin güvenilirliğini artırır ve dönüşüm oranlarını maksimize eder. Profesyonel ekibimizle Web3 standartlarında bir vitrin oluşturun.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Hemen Başlayalım</a>
-        </div>
-      </section>
-
-      <section className="section-padding">
-        <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
-          <div style={{maxWidth: '850px', margin: '0 auto'}}>
-            {[
-              { q: "Cüzdan bağlantısı ne kadar güvenli?", a: "Tamamen client-side kütüphaneler (Wagmi, RainbowKit) kullanarak güvenli imzalama süreçleri sağlıyoruz." },
-              { q: "Dinamik Roadmap desteği veriyor musunuz?", a: "Evet, teknik ve ticari ilerlemelerinizi anlık olarak topluluğunuza yansıtan interaktif sayfalar hazırlıyoruz." }
-            ].map((f, i) => (
-              <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
-                <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
-                  <span>{f.q}</span>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
-                </div>
-                <div className="faq-accordion-body p-style"><p>{f.a}</p></div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

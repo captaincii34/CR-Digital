@@ -20,9 +20,9 @@ const CustomDashboardSubDetailView: React.FC = () => {
   };
 
   const reasons = [
-    { title: 'Real-time Monitoring', desc: 'On-chain ve off-chain verileri anlık olarak takip eden sistemler.', icon: <path d="M22 12h-4l-3 9L9 3l-3 9H2"/> },
-    { title: 'Admin Controls', desc: 'Kontrat fonksiyonlarını kolayca yönetebileceğiniz özel yönetim katmanları.', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> },
-    { title: 'User Portal', desc: 'Kullanıcılarınızın kendi varlıklarını ve istatistiklerini görebileceği profil alanları.', icon: <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/> }
+    { title: 'Real-time Monitoring', desc: 'Systems that monitor on-chain and off-chain data instantly.', icon: <path d="M22 12h-4l-3 9L9 3l-3 9H2"/> },
+    { title: 'Admin Controls', desc: 'Special management layers where you can easily manage contract functions.', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> },
+    { title: 'User Portal', desc: 'Profile areas where your users can see their own assets and statistics.', icon: <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/> }
   ];
 
   return (
@@ -40,7 +40,7 @@ const CustomDashboardSubDetailView: React.FC = () => {
         #h-hero { position: relative; padding: 220px 0 120px; min-height: 85vh; display: flex; align-items: center; }
         .hero-grid { display: flex; flex-direction: column; gap: 60px; position: relative; z-index: 10; width: 100%; }
         @media (min-width: 1024px) { .hero-grid { flex-direction: row; align-items: center; justify-content: space-between; } }
-        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: 0 auto; }
+        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: auto; }
         .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; color: #000; margin-bottom: 16px; }
         .form-button { width: 100%; background: var(--cray-gold); color: #000; padding: 18px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
         .reasons-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
@@ -72,19 +72,19 @@ const CustomDashboardSubDetailView: React.FC = () => {
           <div className="hero-grid">
             <div style={{flex: 1.2}}>
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Internal Tools</h5>
-              <h1 className="h1-style">Özel Yönetim Panelleri (Dashboard)</h1>
-              <p className="p-style">Varlıklarınızı ve verilerinizi tek noktadan izleyin. Projenizin büyümesini gerçek zamanlı dashboard'lar ile kontrol altında tutun.</p>
+              <h1 className="h1-style">Custom Admin Dashboards</h1>
+              <p className="p-style">Monitor your assets and data from a single point. Keep your project's growth under control with real-time dashboards.</p>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Dashboard Analizi Al</h3>
-              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Request Dashboard Analysis</h3>
+              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Try Again</button></div> : (
                 <form onSubmit={handleSubmit}>
                   <select className="form-control" required>
-                    <option value="">Panel Türü</option><option value="admin">Admin Panel</option><option value="user">User Dashboard</option>
+                    <option value="">Panel Type</option><option value="admin">Admin Panel</option><option value="user">User Dashboard</option>
                   </select>
-                  <textarea className="form-control" rows={3} placeholder="İzlemek istediğiniz ana metrikler neler?" value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="E-posta veya Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'HESAPLANIYOR...' : 'RAPOR AL'}</button>
+                  <textarea className="form-control" rows={3} placeholder="What are the main metrics you want to monitor?" value={goal} onChange={e=>setGoal(e.target.value)} required />
+                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'CALCULATING...' : 'GET REPORT'}</button>
                 </form>
               )}
             </div>
@@ -116,8 +116,8 @@ const CustomDashboardSubDetailView: React.FC = () => {
                 <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2000" alt="Data" />
               </div>
               <div className="detail-text">
-                <h2 className="h2-style">Gerçek Zamanlı Veri Akışı</h2>
-                <p className="p-style">Blokzincir üzerinden akan tüm verileri süzüyor ve anlaşılır grafiklere dönüştürüyoruz. Hacim, holder sayısı ve likidite durumunu anlık takip ederek stratejik kararlar alın.</p>
+                <h2 className="h2-style">Real-time Data Flow</h2>
+                <p className="p-style">We filter all data flowing through the blockchain and transform it into understandable charts. Make strategic decisions by monitoring volume, holder count, and liquidity status in real-time.</p>
               </div>
             </div>
             <div className="detail-item reverse">
@@ -125,8 +125,8 @@ const CustomDashboardSubDetailView: React.FC = () => {
                 <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000" alt="Governance" />
               </div>
               <div className="detail-text">
-                <h2 className="h2-style">Tam Kontrol & Yetkilendirme</h2>
-                <p className="p-style">Proje sahipleri için özel olarak tasarlanan admin panelleri sayesinde, kontrat üzerindeki yetkileri (mint, burn, pause vb.) hiçbir kod bilgisine ihtiyaç duymadan, güvenli bir arayüz üzerinden yönetin.</p>
+                <h2 className="h2-style">Full Control & Authorization</h2>
+                <p className="p-style">Through admin panels specially designed for project owners, manage authorizations on the contract (mint, burn, pause, etc.) over a secure interface without any coding knowledge.</p>
               </div>
             </div>
           </div>
@@ -135,19 +135,19 @@ const CustomDashboardSubDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Projenizin Kontrol Paneline Sahip Olun</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Veriye dayalı yönetim, Web3 dünyasında hata payınızı sıfıra indirir. Profesyonel dashboard çözümlerimizle projenizi her an, her yerden izleyin.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Hemen Panel Projesi Başlat</a>
+          <h2 className="h2-style">Own Your Project's Control Panel</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Data-driven management reduces your margin of error to zero in the Web3 world. Monitor your project anytime, anywhere with our professional dashboard solutions.</p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Start Dashboard Project Now</a>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {[
-              { q: "Hangi ağ verilerini çekebiliyorsunuz?", a: "Ethereum, BSC, Polygon ve Solana başta olmak üzere tüm EVM uyumlu ağlardan veri çekiyoruz." },
-              { q: "Mobil uyumlu mu?", a: "Tüm panellerimiz %100 mobil uyumlu (responsive) olarak tasarlanmaktadır." }
+              { q: "Which network data can you extract?", a: "We extract data from all EVM-compatible networks, primarily Ethereum, BSC, Polygon, and Solana." },
+              { q: "Is it mobile friendly?", a: "All our panels are designed to be 100% mobile friendly (responsive)." }
             ].map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
                 <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
@@ -162,7 +162,7 @@ const CustomDashboardSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

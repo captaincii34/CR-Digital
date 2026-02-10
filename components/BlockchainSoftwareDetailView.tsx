@@ -17,39 +17,39 @@ const BlockchainSoftwareDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject(status, `Teknoloji İhtiyacı: ${techStack}. Hedef: ${goal}`);
+    const result = await evaluateProject(status, `Tech Need: ${techStack}. Goal: ${goal}`);
     setAiResult(result);
     setLoading(false);
   };
 
   const scopeCategories = [
     {
-      title: "Blokzincir Geliştirme",
+      title: "Blockchain Development",
       items: [
-        { name: "Akıllı Kontrat Geliştirme", desc: "Solidity ve Rust ile güvenli mimari.", icon: "📜" },
-        { name: "Token & NFT Kontratları", desc: "ERC-20, ERC-721 ve özel standartlar.", icon: "🎨" },
-        { name: "Merkeziyetsiz Uygulama (DApp)", desc: "Web3 tabanlı uçtan uca çözümler.", icon: "🌐" },
-        { name: "DAO Altyapı Kurulumu", desc: "Yönetişim ve oylama sistemleri.", icon: "🏛️" },
-        { name: "Cüzdan Entegrasyonları", desc: "MetaMask, WalletConnect ve dahası.", icon: "👛" }
+        { name: "Smart Contract Development", desc: "Secure architecture with Solidity and Rust.", icon: "📜" },
+        { name: "Token & NFT Contracts", desc: "ERC-20, ERC-721 and custom standards.", icon: "🎨" },
+        { name: "Decentralized Application (DApp)", desc: "End-to-end Web3 based solutions.", icon: "🌐" },
+        { name: "DAO Infrastructure Setup", desc: "Governance and voting systems.", icon: "🏛️" },
+        { name: "Wallet Integrations", desc: "MetaMask, WalletConnect and more.", icon: "👛" }
       ]
     },
     {
-      title: "Web3 & Platform Yazılımları",
+      title: "Web3 & Platform Software",
       items: [
-        { name: "Web3 Uyumlu Website", desc: "Modern ve bağlantı odaklı arayüzler.", icon: "💻" },
-        { name: "Özel Yönetim Panelleri", desc: "Blockchain veri odaklı admin araçları.", icon: "📊" },
-        { name: "Analitik & Raporlama", desc: "On-chain veri izleme ve görselleştirme.", icon: "📈" },
-        { name: "Backend & API", desc: "Ölçeklenebilir Web3 API servisleri.", icon: "⚙️" }
+        { name: "Web3 Compliant Website", desc: "Modern and connection-oriented interfaces.", icon: "💻" },
+        { name: "Custom Management Dashboards", desc: "Blockchain data-driven admin tools.", icon: "📊" },
+        { name: "Analytics & Reporting", desc: "On-chain data monitoring and visualization.", icon: "📈" },
+        { name: "Backend & API", desc: "Scalable Web3 API services.", icon: "⚙️" }
       ]
     },
     {
-      title: "Uygulama & Oyun Geliştirme",
+      title: "App & Game Development",
       items: [
-        { name: "Web3 Mobil Uygulama", desc: "iOS ve Android için Web3 deneyimi.", icon: "📱" },
-        { name: "Telegram Bot & Mini App", desc: "TON ekosisteminde viral çözümler.", icon: "✈️" },
-        { name: "Blokzincir Tabanlı Oyun", desc: "On-chain oyun mekanikleri.", icon: "🎮" },
-        { name: "GameFi Sistemleri", desc: "Play-to-Earn ve ekonomi kurguları.", icon: "🪙" },
-        { name: "Sunucu & Altyapı", desc: "Yüksek performanslı node ve sunucu yönetimi.", icon: "🖥️" }
+        { name: "Web3 Mobile App", desc: "Web3 experience for iOS and Android.", icon: "📱" },
+        { name: "Telegram Bot & Mini App", desc: "Viral solutions on the TON ecosystem.", icon: "✈️" },
+        { name: "Blockchain Based Gaming", desc: "On-chain game mechanics.", icon: "🎮" },
+        { name: "GameFi Systems", desc: "Play-to-Earn and economy designs.", icon: "🪙" },
+        { name: "Server & Infrastructure", desc: "High-performance node and server management.", icon: "🖥️" }
       ]
     }
   ];
@@ -57,26 +57,26 @@ const BlockchainSoftwareDetailView: React.FC = () => {
   const reasons = [
     {
       icon: <><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></>,
-      title: 'NDA & Gizlilik Önceliği',
-      desc: 'Projelerinizin güvenliği bizim için en önemli konu'
+      title: 'NDA & Confidentiality Priority',
+      desc: 'The security of your projects is our most important concern'
     },
     {
       icon: <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>,
-      title: "A'dan Z'ye Proje Yaklaşımı",
-      desc: 'Fikir aşamasından lansmanına kadar her adımda yanınızdayız'
+      title: "End-to-End Project Approach",
+      desc: 'We are with you at every step from ideation to launch'
     },
     {
       icon: <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>,
-      title: 'Web3 & Crypto Odaklı Uzmanlık',
-      desc: 'Sadece kripto ve Web3 projelerine odaklanmış deneyimli ekip'
+      title: 'Web3 & Crypto Focused Expertise',
+      desc: 'Experienced team focused exclusively on crypto and Web3 projects'
     }
   ];
 
   const faqs = [
-    { q: "Hangi dilleri kullanıyorsunuz?", a: "Smart contract tarafında Solidity ve Rust; frontend tarafında React/Next.js; backend tarafında ise Node.js ve Go dillerini tercih ediyoruz." },
-    { q: "Telegram Mini App geliştiriyor musunuz?", a: "Evet, TON (The Open Network) ekosisteminde çalışan yüksek etkileşimli Mini App'ler ve botlar geliştiriyoruz." },
-    { q: "Mevcut web sitemi Web3'e taşıyabilir misiniz?", a: "Evet, mevcut altyapınıza cüzdan bağlantısı ve akıllı kontrat entegrasyonu ekleyerek Web3 dönüşümünü sağlıyoruz." },
-    { q: "Uygulama güvenliğini nasıl sağlıyorsunuz?", a: "Tüm kodlarımızı audit standartlarında geliştiriyor ve teslim öncesi derinlemesine penetrasyon testlerinden geçiriyoruz." }
+    { q: "Which languages do you use?", a: "We prefer Solidity and Rust for smart contracts; React/Next.js for the frontend; and Node.js and Go for the backend." },
+    { q: "Do you develop Telegram Mini Apps?", a: "Yes, we develop high-interaction Mini Apps and bots running on the TON (The Open Network) ecosystem." },
+    { q: "Can you migrate my existing website to Web3?", a: "Yes, we provide Web3 transformation by adding wallet connections and smart contract integrations to your existing infrastructure." },
+    { q: "How do you ensure application security?", a: "We develop all our code to audit standards and perform deep penetration testing before delivery." }
   ];
 
   return (
@@ -91,7 +91,7 @@ const BlockchainSoftwareDetailView: React.FC = () => {
         .grad { position: absolute; inset: 0; background: linear-gradient(to bottom, #000, transparent 40%, transparent 60%, #000); z-index: 2; }
 
         .h1-style { font-size: 40px !important; font-weight: 700 !important; }
-        .h2-style { font-size: 30px !important; font-weight: 700 !important; }
+        .h2-style { font-size: 32px !important; font-weight: 700 !important; }
         .h3-style { font-size: 22px !important; font-weight: 600 !important; }
         .h4-style { font-size: 18px !important; font-weight: 600 !important; }
         .p-style { font-size: 16px !important; font-weight: 300 !important; }
@@ -153,13 +153,13 @@ const BlockchainSoftwareDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="hero-grid">
             <div className="hero-text-content">
-              <h1 className="hero-title h1-style">Blokzincir ve Yazılım Geliştirme Çözümleri</h1>
+              <h1 className="hero-title h1-style">Blockchain & Software Development Solutions</h1>
               <p className="hero-desc p-style">
-                Sadece kod yazmıyoruz; geleceğin merkeziyetsiz dünyasını inşa ediyoruz. Akıllı kontratlardan mobil uygulamalara, Web3 tabanlı her türlü yazılım ihtiyacınızda uzman mühendis kadromuzla yanınızdayız.
+                We don't just write code; we build the decentralized future. From smart contracts to mobile applications, we stand by you with our expert engineering staff for all your Web3-based software needs.
               </p>
               
               <div className="hero-feature-list">
-                {["Uçtan Uca Web3 Mühendisliği", "Telegram Mini App Uzmanlığı", "Güvenlik Odaklı Kodlama", "Ölçeklenebilir Altyapı"].map((item, i) => (
+                {["End-to-End Web3 Engineering", "Telegram Mini App Expertise", "Security-Oriented Coding", "Scalable Infrastructure"].map((item, i) => (
                   <div key={i} className="hero-feature-item">
                     <div className="feature-icon-circle">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="4"><polyline points="20 6 9 17 4 12"/></svg>
@@ -172,33 +172,33 @@ const BlockchainSoftwareDetailView: React.FC = () => {
 
             <div className="form-card-container">
               <div className="form-card">
-                <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '24px'}}>Proje Analizi İsteyin</h3>
+                <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '24px'}}>Request Project Analysis</h3>
                 {aiResult ? (
                   <div className="ai-result">
                     <p className="p-style" style={{ fontStyle: 'italic', marginBottom: '24px' }}>"{aiResult.summary}"</p>
-                    <button onClick={() => setAiResult(null)} className="form-button">Yeniden Analiz Et</button>
+                    <button onClick={() => setAiResult(null)} className="form-button">Analyze Again</button>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit}>
                     <div className="form-group">
                       <select className="form-control p-style" value={status} onChange={(e) => setStatus(e.target.value)} required>
-                        <option value="">İhtiyaç Türü Seçiniz</option>
-                        <option value="yeni">Sıfırdan Geliştirme</option>
-                        <option value="ekleme">Mevcut Altyapıya Web3 Entegrasyonu</option>
-                        <option value="audit">Kod İyileştirme / Audit Hazırlık</option>
+                        <option value="">Select Need Type</option>
+                        <option value="new">Development from Scratch</option>
+                        <option value="ekleme">Web3 Integration to Existing Infrastructure</option>
+                        <option value="audit">Code Improvement / Audit Prep</option>
                       </select>
                     </div>
                     <div className="form-group">
-                      <input type="text" className="form-control p-style" placeholder="Tercih Edilen Teknoloji (Solidity, TON vb.)" value={techStack} onChange={(e) => setTechStack(e.target.value)} />
+                      <input type="text" className="form-control p-style" placeholder="Preferred Tech (Solidity, TON, etc.)" value={techStack} onChange={(e) => setTechStack(e.target.value)} />
                     </div>
                     <div className="form-group">
-                      <textarea className="form-control p-style" rows={3} placeholder="Geliştirmek istediğiniz ürün nedir?" value={goal} onChange={(e) => setGoal(e.target.value)} required style={{resize: 'none'}} />
+                      <textarea className="form-control p-style" rows={3} placeholder="What product do you want to develop?" value={goal} onChange={(e) => setGoal(e.target.value)} required style={{resize: 'none'}} />
                     </div>
                     <div className="form-group">
-                      <input type="text" className="form-control p-style" placeholder="E-posta / Telegram" value={contact} onChange={(e) => setContact(e.target.value)} required />
+                      <input type="text" className="form-control p-style" placeholder="Email / Telegram" value={contact} onChange={(e) => setContact(e.target.value)} required />
                     </div>
                     <button type="submit" disabled={loading} className="form-button">
-                      {loading ? 'ANALİZ EDİLİYOR...' : 'GELİŞTİRME ANALİZİ AL'}
+                      {loading ? 'ANALYZING...' : 'GET DEVELOPMENT ANALYSIS'}
                     </button>
                   </form>
                 )}
@@ -214,7 +214,7 @@ const BlockchainSoftwareDetailView: React.FC = () => {
         <div className="overlay"></div>
         <div className="grad"></div>
         <div className="container-xl">
-          <h2 className="h2-style" style={{ textAlign: 'center', marginBottom: '60px' }}>Yazılımda Neden Cray Digital?</h2>
+          <h2 className="h2-style" style={{ textAlign: 'center', marginBottom: '60px' }}>Why CRAY Digital for Software?</h2>
           <div className="reasons-grid">
             {reasons.map((reason, idx) => (
               <div key={idx} className="reason-card">
@@ -235,9 +235,9 @@ const BlockchainSoftwareDetailView: React.FC = () => {
       <section className="scope-section section-padding">
         <div className="container-xl">
           <div style={{ textAlign: 'center', marginBottom: '64px' }}>
-            <h2 className="h2-style">Geliştirme Kapsamımız</h2>
+            <h2 className="h2-style">Our Development Scope</h2>
             <p className="p-style" style={{ color: '#d1d5db', maxWidth: '800px', margin: '16px auto 0' }}>
-              Blokzincir dünyasındaki tüm teknik ihtiyaçlarınızı karşılayan geniş spektrumlu mühendislik hizmetlerimiz.
+              Our wide spectrum engineering services meeting all your technical needs in the blockchain world.
             </p>
           </div>
 
@@ -263,18 +263,18 @@ const BlockchainSoftwareDetailView: React.FC = () => {
       {/* CTA Band */}
       <section className="bant-section">
         <div className="container-xl">
-          <h2 className="h2-style" style={{color: '#000', marginBottom: '16px'}}>Geleceği Birlikte İnşa Edelim</h2>
+          <h2 className="h2-style" style={{color: '#000', marginBottom: '16px'}}>Let's Build the Future Together</h2>
           <p className="p-style" style={{color: '#333', marginBottom: '32px'}}>
-            Projenizin teknik altyapısını Web3 dünyasının en güncel teknolojileriyle kurgulayın.
+            Construct your technical infrastructure with the latest technologies of the Web3 world.
           </p>
-          <a href="#h-hero" className="bant-btn">Teknik Görüşme Planla</a>
+          <a href="#h-hero" className="bant-btn">Plan Technical Meeting</a>
         </div>
       </section>
 
       {/* FAQ Section */}
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '40px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '40px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '800px', margin: '0 auto'}}>
             {faqs.map((faq, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -295,7 +295,7 @@ const BlockchainSoftwareDetailView: React.FC = () => {
 
       <div style={{ padding: '60px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
         <button onClick={() => window.location.hash = ''} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase', fontSize: '14px !important' }}>
-          Ana Sayfaya Dön
+          Back to Homepage
         </button>
       </div>
     </div>

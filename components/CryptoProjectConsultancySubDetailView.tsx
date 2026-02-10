@@ -22,26 +22,26 @@ const CryptoProjectConsultancySubDetailView: React.FC = () => {
   const reasons = [
     {
       icon: <><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></>,
-      title: 'NDA & Gizlilik Önceliği',
-      desc: 'Projelerinizin güvenliği ve fikirlerinizin korunması bizim için en kutsal kuraldır.'
+      title: 'NDA & Confidentiality Priority',
+      desc: 'The security of your projects and the protection of your ideas is our most sacred rule.'
     },
     {
       icon: <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>,
-      title: "A'dan Z'ye Proje Yaklaşımı",
-      desc: 'Sadece tavsiye vermiyoruz, fikir aşamasından lansman sonrasına kadar her adımda sizinle birlikte çalışıyoruz.'
+      title: "End-to-End Project Approach",
+      desc: 'We don’t just give advice; we work with you every step of the way from idea to post-launch.'
     },
     {
       icon: <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>,
-      title: 'Web3 & Crypto Odaklı Uzmanlık',
-      desc: 'Ekibimiz yalnızca blokzincir ekosistemine odaklanmış, global projelerde deneyimli uzmanlardan oluşur.'
+      title: 'Web3 & Crypto Focused Expertise',
+      desc: 'Our team consists of experts exclusively focused on the blockchain ecosystem with global experience.'
     }
   ];
 
   const faqs = [
-    { q: "Danışmanlık süreci nasıl başlar?", a: "Süreç, ücretsiz bir ön değerlendirme ve gizlilik sözleşmesi (NDA) imzalanmasıyla resmiyet kazanır. Ardından projenizin mevcut durumunu analiz ederek yol haritasını çizeriz." },
-    { q: "Hangi bütçe seviyeleri için uygunsunuz?", a: "Hem butik butçeli başlangıç seviyesi projelere hem de büyük ölçekli kurumsal Web3 girişimlerine uygun esnek hizmet modellerimiz mevcuttur." },
-    { q: "Teknik ekip desteği sağlıyor musunuz?", a: "Evet, danışmanlık kapsamında projenizin yazılım ihtiyaçlarını kendi bünyemizdeki geliştirici ekibimizle karşılıyoruz." },
-    { q: "Raporlama süreci nasıl işliyor?", a: "Haftalık periyotlarda ilerleme raporları sunuyor ve tüm verileri şeffaf bir şekilde paylaşıyoruz." }
+    { q: "How does the consulting process start?", a: "The process becomes official with a free pre-evaluation and the signing of a Non-Disclosure Agreement (NDA). Then, we analyze your project's current status and draw a roadmap." },
+    { q: "What budget levels do you work with?", a: "We have flexible service models suitable for both boutique budget startups and large-scale corporate Web3 ventures." },
+    { q: "Do you provide technical team support?", a: "Yes, within the scope of consultancy, we meet your project's software needs with our own in-house developer team." },
+    { q: "How does the reporting process work?", a: "We provide progress reports in weekly periods and share all data transparently." }
   ];
 
   return (
@@ -109,11 +109,11 @@ const CryptoProjectConsultancySubDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="hero-grid">
             <div className="hero-text-content">
-              <h1 className="h1-style">Kripto Proje Danışmanlığı</h1>
-              <p className="hero-desc p-style">Sektörün karmaşıklığını basitleştiriyoruz. Token projenizin başarılı olması için gereken tüm stratejik kararları uzmanlıkla alıyoruz.</p>
+              <h1 className="h1-style">Crypto Project Consulting</h1>
+              <p className="hero-desc p-style">We simplify the complexity of the industry. We expertly make all strategic decisions required for your token project to be successful.</p>
               
               <div className="hero-feature-list">
-                {["Uçtan Uca Stratejik Mimari", "Borsalara Uyumlu Yapılandırma", "Global Network Erişimi"].map((item, i) => (
+                {["End-to-End Strategic Architecture", "Exchange-Compliant Structuring", "Global Network Access"].map((item, i) => (
                   <div key={i} className="hero-feature-item">
                     <div className="feature-icon-circle">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="4"><polyline points="20 6 9 17 4 12"/></svg>
@@ -124,18 +124,18 @@ const CryptoProjectConsultancySubDetailView: React.FC = () => {
               </div>
             </div>
             <div className="form-card">
-              <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px'}}>Proje Analizi</h3>
-              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px'}}>Project Analysis</h3>
+              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
                   <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
-                    <option value="">İhtiyaç Aşaması</option>
-                    <option value="yeni">Yeni Fikir / Konsept</option>
-                    <option value="geliştirme">Geliştirme Aşamasında</option>
-                    <option value="hazir">Lansmana Hazır</option>
+                    <option value="">Need Stage</option>
+                    <option value="new">New Idea / Concept</option>
+                    <option value="development">Under Development</option>
+                    <option value="ready">Ready for Launch</option>
                   </select>
-                  <textarea className="form-control" rows={3} placeholder="Projenizin temel amacını kısaca anlatın..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="E-posta veya Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'ANALİZ EDİLİYOR...' : 'STRATEJİK ANALİZ AL'}</button>
+                  <textarea className="form-control" rows={3} placeholder="Briefly describe the main goal of your project..." value={goal} onChange={e=>setGoal(e.target.value)} required />
+                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'ANALYZING...' : 'GET STRATEGIC ANALYSIS'}</button>
                 </form>
               )}
             </div>
@@ -148,7 +148,7 @@ const CryptoProjectConsultancySubDetailView: React.FC = () => {
         <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop" className="bg-img" alt="Expertise" />
         <div className="overlay" style={{ background: 'rgba(0,0,0,0.88)' }}></div><div className="grad"></div>
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Neden Bizimle Çalışmalısınız?</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Why Work With Us?</h2>
           <div className="reasons-grid">
             {reasons.map((r, i) => (
               <div key={i} className="reason-card">
@@ -170,12 +170,12 @@ const CryptoProjectConsultancySubDetailView: React.FC = () => {
           <div className="detail-row">
             <div className="detail-item">
               <div className="detail-text">
-                <h2 className="h2-style" style={{marginBottom: '20px'}}>Kapsamlı Proje Analizi</h2>
+                <h2 className="h2-style" style={{marginBottom: '20px'}}>Comprehensive Project Analysis</h2>
                 <p className="p-style" style={{color: '#d1d5db', lineHeight: '1.8'}}>
-                  Her başarılı projenin arkasında derinlemesine yapılmış bir pazar ve rakip analizi vardır. Biz sadece teknik değil, aynı zamanda projenizin piyasa koşullarındaki hayatta kalma ve büyüme potansiyelini analiz ediyoruz. Trendleri takip etmek yerine, trend yaratan bir proje olmanız için gereken verileri sunuyoruz.
+                  Behind every successful project lies deep market and competitor analysis. We analyze not only the technical but also the survival and growth potential of your project in market conditions. Instead of following trends, we provide the data you need to be a project that creates trends.
                 </p>
                 <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
-                  {["Pazar Boşluğu Analizi", "Kullanıcı Deneyimi (UX) Stratejisi", "Likidite ve Finansal Planlama"].map((li, i) => (
+                  {["Market Gap Analysis", "User Experience (UX) Strategy", "Liquidity and Financial Planning"].map((li, i) => (
                     <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
                       <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
                     </li>
@@ -189,12 +189,12 @@ const CryptoProjectConsultancySubDetailView: React.FC = () => {
 
             <div className="detail-item reverse">
               <div className="detail-text">
-                <h2 className="h2-style" style={{marginBottom: '20px'}}>Teknik ve Ekonomik Mimari</h2>
+                <h2 className="h2-style" style={{marginBottom: '20px'}}>Technical and Economic Architecture</h2>
                 <p className="p-style" style={{color: '#d1d5db', lineHeight: '1.8'}}>
-                  Tokenomics, bir projenin kalbidir. Yanlış tasarlanmış bir ekonomi modeli, en iyi teknolojiye sahip olsa bile projenin çökmesine neden olabilir. Danışmanlarımız, yatırımcıları cezbeden ve token fiyatını sürdürülebilir kılan arz-talep mekanizmalarını tasarlar.
+                  Tokenomics is the heart of a project. A poorly designed economic model can cause a project to collapse, even if it has the best technology. Our consultants design supply-demand mechanisms that attract investors and make the token price sustainable.
                 </p>
                 <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
-                  {["Sürdürülebilir Tokenomics Tasarımı", "Audit'e Hazır Akıllı Kontrat Mimarisi", "Ekosistem Teşvik Modelleri"].map((li, i) => (
+                  {["Sustainable Tokenomics Design", "Audit-Ready Smart Contract Architecture", "Ecosystem Incentive Models"].map((li, i) => (
                     <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
                       <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
                     </li>
@@ -212,18 +212,18 @@ const CryptoProjectConsultancySubDetailView: React.FC = () => {
       {/* CTA Box */}
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style" style={{color: '#000'}}>Hayallerinizi On-Chain Dünyasına Taşıyalım</h2>
+          <h2 className="h2-style" style={{color: '#000'}}>Let's Carry Your Dreams to the On-Chain World</h2>
           <p className="p-style" style={{color: '#555', maxWidth: '800px', margin: '20px auto 0'}}>
-            Projenizin ihtiyacı olan uzman görüşü ve profesyonel yönetim desteği için bugün ilk adımı atın. Fikrinizi global bir başarı hikayesine dönüştürelim.
+            Take the first step today for the expert opinion and professional management support your project needs. Let's turn your idea into a global success story.
           </p>
-          <a href="#h-hero" className="cta-btn">Ücretsiz Danışmanlık Al</a>
+          <a href="#h-hero" className="cta-btn">Get Free Consultancy</a>
         </div>
       </section>
 
       {/* FAQ Section */}
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((faq, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -238,8 +238,8 @@ const CryptoProjectConsultancySubDetailView: React.FC = () => {
         </div>
       </section>
 
-      <div style={{ padding: '80px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Hizmetler Sayfasına Dön</button>
+      <div style={{ padding: '60px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
+        <button onClick={() => window.location.hash = '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

@@ -11,23 +11,23 @@ const PostListingGrowthSubDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject('Listeleme Sonrası Büyüme', 'Fiyat istikrarı ve sürekli kullanıcı edinimi analizi.');
+    const result = await evaluateProject('Post-Listing Growth', 'Price stability and continuous user acquisition analysis.');
     setAiResult(result);
     setLoading(false);
   };
 
   const reasons = [
-    { title: 'Sürdürülebilir Hacim', desc: 'Sadece lansman günü değil, projenizin her günü aktif işlem görmesi için stratejik destek sağlıyoruz.', icon: <path d="M7 12l3-3 3 3 4-4M8 21h12a2 2 0 002-2v-6a2 2 0 00-2-2H8a2 2 0 00-2 2v6a2 2 0 002 2z"/> },
-    { title: 'Holder Sadakati', desc: 'Token holderların satış yapmasını önleyen, uzun vadeli tutmayı teşvik eden modeller kurguluyoruz.', icon: <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/> },
-    { title: 'Yeni Borsa Hedefleri', desc: 'Mevcut verileri kullanarak projenizi her geçen gün daha büyük borsalara taşıyoruz.', icon: <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/> }
+    { title: 'Sustainable Volume', desc: 'We provide strategic support so that your project trades actively every day, not just on launch day.', icon: <path d="M7 12l3-3 3 3 4-4M8 21h12a2 2 0 002-2v-6a2 2 0 00-2-2H8a2 2 0 00-2 2v6a2 2 0 002 2z"/> },
+    { title: 'Holder Loyalty', desc: 'We construct models that prevent token holders from selling and encourage long-term holding.', icon: <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/> },
+    { title: 'New Exchange Targets', desc: 'Using existing data, we carry your project to larger exchanges every day.', icon: <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/> }
   ];
 
   const faqs = [
-    { q: "Lansman sonrası düşüş (dump) nasıl engellenir?", a: "Doğru tasarlanmış bir vesting takvimi, lansman sonrası anlık marketing dalgası ve aktif MM desteği ile." },
-    { q: "Holder sayısını nasıl artırıyorsunuz?", a: "Belirli periyotlarla yapılan staking ödülleri, topluluk etkinlikleri ve global influencer desteğinin devamlılığı ile." },
-    { q: "Yeni borsalara ne zaman başvurmalıyız?", a: "Mevcut borsadaki hacim ve holder verileriniz istikrar kazandığında bir üst segment borsa için süreci başlatıyoruz." },
-    { q: "Staking modelleri kuruyor musunuz?", a: "Evet, token ekonominizi güçlendirecek on-chain staking ve ödül platformları geliştiriyoruz." },
-    { q: "CMC ve CoinGecko verilerini nasıl yönetiyorsunuz?", a: "Verilerinizin doğru yansıması ve sıralamanızın artması için borsalarla koordineli bir API yönetimi sağlıyoruz." }
+    { q: "How is the post-launch dump prevented?", a: "With a correctly designed vesting schedule, instantaneous marketing wave after launch, and active MM support." },
+    { q: "How do you increase the number of holders?", a: "Through the continuity of staking rewards, community events, and global influencer support at certain periods." },
+    { q: "When should we apply to new exchanges?", a: "When your volume and holder data on the current exchange stabilize, we start the process for a higher segment exchange." },
+    { q: "Do you build staking models?", a: "Yes, we develop on-chain staking and reward platforms that will strengthen your token economy." },
+    { q: "How do you manage CMC and CoinGecko data?", a: "We provide coordinated API management with exchanges so that your data is correctly reflected and your rankings increase." }
   ];
 
   return (
@@ -79,30 +79,30 @@ const PostListingGrowthSubDetailView: React.FC = () => {
           <div className="hero-grid">
             <div>
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Sustainable Growth</h5>
-              <h1 className="h1-style">Listeleme Sonrası Büyüme Stratejisi</h1>
-              <p className="p-style">Lansman bir bitiş değil, gerçek mücadelenin başlangıcıdır. Projenizin her geçen gün daha fazla holder'a ve daha yüksek hacme ulaşması için veriye dayalı büyüme modelleri sunuyoruz.</p>
+              <h1 className="h1-style">Post-Listing Growth Strategy</h1>
+              <p className="p-style">Launch is not an end, it is the beginning of the real struggle. We provide data-driven growth models so that your project reaches more holders and higher volume every day.</p>
               <div style={{marginTop: '30px'}}>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">SÜREKLİ LİKİDİTE VE HACİM TAKİBİ</span>
+                  <span className="bullet-text">CONTINUOUS LIQUIDITY AND VOLUME TRACKING</span>
                 </div>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">HOLDER SADAKAT PROGRAMLARI</span>
+                  <span className="bullet-text">HOLDER LOYALTY PROGRAMS</span>
                 </div>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">YENİ BORSA GENİŞLEME PLANI</span>
+                  <span className="bullet-text">NEW EXCHANGE EXPANSION PLAN</span>
                 </div>
               </div>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Büyüme Analizi Al</h3>
-              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Growth Analysis</h3>
+              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Mevcut Holder Sayısı" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Gelecek 6 aylık hedefiniz nedir?" required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'İŞLENİYOR...' : 'BÜYÜME PLANI AL'}</button>
+                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Current Holder Count" required />
+                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="What is your goal for the next 6 months?" required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'PROCESSING...' : 'GET GROWTH PLAN'}</button>
                 </form>
               )}
             </div>
@@ -134,17 +134,17 @@ const PostListingGrowthSubDetailView: React.FC = () => {
                 <img src="https://images.unsplash.com/photo-1611974714851-eb6053e623e4?q=80&w=2000" alt="Market Stability" />
               </div>
               <div className="detail-text">
-                <h2 className="h2-style">Fiyat İstikrarı ve Tahta Yönetimi</h2>
-                <p className="p-style">Listeleme sonrası oluşan panik satışlarını veya kontrolsüz hareketleri profesyonel market making desteğiyle dengeliyoruz. Projenizin güven veren, sağlıklı bir grafik sergilemesi için likidite derinliğini sürekli kontrol ediyoruz.</p>
+                <h2 className="h2-style">Price Stability and Board Management</h2>
+                <p className="p-style">We balance panic sales or uncontrolled movements occurring after listing with professional market making support. We constantly check liquidity depth so that your project exhibits a reliable, healthy chart.</p>
               </div>
             </div>
             <div className="detail-item reverse">
+              <div className="detail-text">
+                <h2 className="h2-style">Continuous User and Holder Acquisition</h2>
+                <p className="p-style">We do not cut off marketing efforts after launch. With new region-oriented campaigns, global influencer collaborations, and joint competitions with exchanges, we regularly increase your number of token holders.</p>
+              </div>
               <div className="detail-visual">
                 <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=2000" alt="Holder Growth" />
-              </div>
-              <div className="detail-text">
-                <h2 className="h2-style">Sürekli Kullanıcı ve Holder Edinimi</h2>
-                <p className="p-style">Pazarlama çalışmalarını lansman sonrası kesmiyoruz. Yeni bölge odaklı kampanyalar, global influencer iş birlikleri ve borsalarla ortak düzenlenen yarışmalarla token holder sayınızı düzenli olarak artırıyoruz.</p>
               </div>
             </div>
           </div>
@@ -153,15 +153,15 @@ const PostListingGrowthSubDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Projenizi Uzun Vadeli Bir Başarı Hikayesine Dönüştürün</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Lansmandan sonra sönen projelerden olmayın. Sürdürülebilir büyüme ve güçlü bir holder tabanı için uzman ekibimizle yol haritanızı güncelleyin.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Büyüme Danışmanlığı Al</a>
+          <h2 className="h2-style">Transform Your Project into a Long-Term Success Story</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Don't be among the projects that fade after launch. Update your roadmap with our expert team for sustainable growth and a strong holder base.</p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Get Growth Consulting</a>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -177,7 +177,7 @@ const PostListingGrowthSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/token-lansman-ve-listeleme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/token-lansman-ve-listeleme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back</button>
       </div>
     </div>
   );

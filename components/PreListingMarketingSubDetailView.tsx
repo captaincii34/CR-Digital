@@ -11,23 +11,23 @@ const PreListingMarketingSubDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject('Listeleme Öncesi Pazarlama', 'Lansman öncesi hype ve topluluk inşası analizi.');
+    const result = await evaluateProject('Pre-Listing Marketing', 'Pre-launch hype and community building analysis.');
     setAiResult(result);
     setLoading(false);
   };
 
   const reasons = [
-    { title: 'Hype Yönetimi', desc: 'Lansman gününe kadar topluluktaki heyecanı pik seviyeye çıkaracak kurgular hazırlıyoruz.', icon: <path d="M13 10V3L4 14h7v7l9-11h-7z"/> },
-    { title: 'KOL & Influencer', desc: 'Listeleme haberinizi global Web3 kanaat önderleriyle tüm dünyaya duyuruyoruz.', icon: <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/> },
-    { title: 'Topluluk Isındırma', desc: 'Telegram ve X üzerinden yapılan interaktif görevlerle kitleyi listelemeye hazırlıyoruz.', icon: <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/> }
+    { title: 'Hype Management', desc: 'We prepare setups to peak excitement in the community until launch day.', icon: <path d="M13 10V3L4 14h7v7l9-11h-7z"/> },
+    { title: 'KOL & Influencer', desc: 'We announce your listing news to the whole world with global Web3 thought leaders.', icon: <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/> },
+    { title: 'Community Warming', desc: 'We prepare the audience for listing with interactive tasks via Telegram and X.', icon: <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/> }
   ];
 
   const faqs = [
-    { q: "Tanıtım çalışmaları ne zaman başlamalı?", a: "İdeal olarak listeleme tarihinden en az 4 hafta önce topluluğu ısındırmaya başlamalıyız." },
-    { q: "Hangi platformlar daha etkili?", a: "Kripto dünyasının kalbi olan X (Twitter), Telegram ve YouTube ana mecralarımızdır." },
-    { q: "Viral kampanyalar yapıyor musunuz?", a: "Evet, topluluğun birbirini davet ettiği ödüllü airdrop ve whitelist kurgularıyla organik büyüme sağlıyoruz." },
-    { q: "Influencer bütçesi ne kadar olmalı?", a: "Bütçeniz ne olursa olsun, projenize en uygun dönüşüm oranına sahip (high conversion) hesapları seçiyoruz." },
-    { q: "PR desteği veriyor musunuz?", a: "CoinTelegraph, CoinDesk ve diğer büyük mecralarda haber yayınları ile güvenilirliğinizi artırıyoruz." }
+    { q: "When should promotional activities start?", a: "Ideally, we should start warming up the community at least 4 weeks before the listing date." },
+    { q: "Which platforms are more effective?", a: "X (Twitter), Telegram, and YouTube, which are the hearts of the crypto world, are our primary channels." },
+    { q: "Do you run viral campaigns?", a: "Yes, we provide organic growth with rewarded airdrop and whitelist setups where the community invites each other." },
+    { q: "How much should the influencer budget be?", a: "Whatever your budget, we choose accounts with high conversion rates for your project." },
+    { q: "Do you provide PR support?", a: "We increase your credibility with news publications in CoinTelegraph, CoinDesk, and other major outlets." }
   ];
 
   return (
@@ -79,30 +79,30 @@ const PreListingMarketingSubDetailView: React.FC = () => {
           <div className="hero-grid">
             <div>
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Pre-Launch Momentum</h5>
-              <h1 className="h1-style">Listeleme Öncesi Pazarlama Stratejisi</h1>
-              <p className="p-style">Büyük gün gelmeden önce tüm dünyayı projenizi konuşur hale getiriyoruz. Lansman anında ihtiyacınız olan 'Sold Out' etkisini profesyonel pazarlama kurgularımızla yaratıyoruz.</p>
+              <h1 className="h1-style">Pre-Listing Marketing Strategy</h1>
+              <p className="p-style">We make the whole world talk about your project before the big day arrives. We create the 'Sold Out' effect you need at launch with our professional marketing setups.</p>
               <div style={{marginTop: '30px'}}>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">HYPE VE TOPLULUK İNŞASI</span>
+                  <span className="bullet-text">HYPE AND COMMUNITY BUILDING</span>
                 </div>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">KOL VE INFLUENCER NETWORKÜ</span>
+                  <span className="bullet-text">KOL AND INFLUENCER NETWORK</span>
                 </div>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">STRATEJİK PR VE MEDYA YAYILIMI</span>
+                  <span className="bullet-text">STRATEGIC PR AND MEDIA SPREAD</span>
                 </div>
               </div>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Marketing Analizi Al</h3>
-              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Marketing Analysis</h3>
+              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Mevcut Topluluk Büyüklüğü" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Pazarlama hedeflerinizi özetleyin..." required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'HESAPLANIYOR...' : 'PAZARLAMA PLANI AL'}</button>
+                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Current Community Size" required />
+                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Summarize your marketing goals..." required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'CALCULATING...' : 'GET MARKETING PLAN'}</button>
                 </form>
               )}
             </div>
@@ -131,8 +131,8 @@ const PreListingMarketingSubDetailView: React.FC = () => {
           <div className="detail-row">
             <div className="detail-item">
               <div className="detail-text">
-                <h2 className="h2-style">Stratejik PR ve Medya Yayılımı</h2>
-                <p className="p-style">Projenizin sadece sosyal medyada değil, CoinTelegraph, Forbes ve büyük borsa portalları gibi güvenilir mecralarda yer almasını sağlıyoruz. Yatırımcıların projenizi her arattığında profesyonel bir duruşla karşılaşması için çalışıyoruz.</p>
+                <h2 className="h2-style">Strategic PR and Media Spread</h2>
+                <p className="p-style">We ensure your project is featured not just on social media, but also in reliable outlets such as CoinTelegraph, Forbes, and major exchange portals. We work to ensure that investors encounter a professional stance every time they search for your project.</p>
               </div>
               <div className="detail-visual">
                 <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=2000" alt="PR Strategy" />
@@ -140,8 +140,8 @@ const PreListingMarketingSubDetailView: React.FC = () => {
             </div>
             <div className="detail-item reverse">
               <div className="detail-text">
-                <h2 className="h2-style">Viral Etkileşim ve FOMO Kurgusu</h2>
-                <p className="p-style">Kripto yatırımcısının dilini biliyoruz. Onları harekete geçirecek 'Call to Action' kurguları, gizemli duyurular ve ödüllü görevler ile projenizin çevresinde devasa bir ilgi halkası oluşturuyoruz.</p>
+                <h2 className="h2-style">Viral Engagement and FOMO Setup</h2>
+                <p className="p-style">We know the language of the crypto investor. We create a huge ring of interest around your project with 'Call to Action' setups, mysterious announcements, and rewarded tasks that will prompt them to take action.</p>
               </div>
               <div className="detail-visual">
                 <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2000" alt="Viral Hype" />
@@ -153,15 +153,15 @@ const PreListingMarketingSubDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Lansmanınızı Unutulmaz Bir Marka Hikayesine Dönüştürün</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Gürültünün arasından sıyrılmak için sadece reklam değil, stratejik bir anlatı gerekir. Projenizin sesini tüm dünyaya uzman pazarlama ekibimizle duyurun.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Kampanya Planla</a>
+          <h2 className="h2-style">Turn Your Launch Into an Unforgettable Brand Story</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>To stand out from the noise, not just advertising but a strategic narrative is required. Make your project's voice heard all over the world with our expert marketing team.</p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Plan Campaign</a>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -177,7 +177,7 @@ const PreListingMarketingSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/token-lansman-ve-listeleme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/token-lansman-ve-listeleme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back</button>
       </div>
     </div>
   );

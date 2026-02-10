@@ -14,15 +14,15 @@ const Web3MobileAppSubDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject(status, `Web3 Mobil: ${goal}`);
+    const result = await evaluateProject(status, `Web3 Mobile: ${goal}`);
     setAiResult(result);
     setLoading(false);
   };
 
   const reasons = [
-    { title: 'Native Performance', desc: 'React Native ve Flutter ile yüksek hızlı mobil deneyimler.', icon: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/> },
-    { title: 'Biometric Security', desc: 'FaceID ve TouchID ile entegre cüzdan yetkilendirme.', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> },
-    { title: 'Push Notifications', desc: 'On-chain hareketleri anlık bildirimlerle kullanıcıya iletme.', icon: <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/> }
+    { title: 'Native Performance', desc: 'High-speed mobile experiences with React Native and Flutter.', icon: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/> },
+    { title: 'Biometric Security', desc: 'Wallet authorization integrated with FaceID and TouchID.', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> },
+    { title: 'Push Notifications', desc: 'Communicating on-chain movements to the user via instant notifications.', icon: <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/> }
   ];
 
   return (
@@ -40,7 +40,7 @@ const Web3MobileAppSubDetailView: React.FC = () => {
         #h-hero { position: relative; padding: 220px 0 120px; min-height: 85vh; display: flex; align-items: center; }
         .hero-grid { display: flex; flex-direction: column; gap: 60px; position: relative; z-index: 10; width: 100%; }
         @media (min-width: 1024px) { .hero-grid { flex-direction: row; align-items: center; justify-content: space-between; } }
-        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: 0 auto; }
+        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: auto; }
         .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; color: #000; margin-bottom: 16px; }
         .form-button { width: 100%; background: var(--cray-gold); color: #000; padding: 18px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
         .reasons-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
@@ -72,19 +72,19 @@ const Web3MobileAppSubDetailView: React.FC = () => {
           <div className="hero-grid">
             <div style={{flex: 1.2}}>
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>App Store & Play Store</h5>
-              <h1 className="h1-style">Web3 Mobil Uygulama Geliştirme</h1>
-              <p className="p-style">Kullanıcılarınıza her an ulaşın. iOS ve Android için hibrit veya native Web3 uygulamaları geliştiriyoruz.</p>
+              <h1 className="h1-style">Web3 Mobile Application Development</h1>
+              <p className="p-style">Reach your users at any time. We develop hybrid or native Web3 applications for iOS and Android.</p>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Mobil Analiz Al</h3>
-              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Mobile Analysis</h3>
+              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Try Again</button></div> : (
                 <form onSubmit={handleSubmit}>
                   <select className="form-control" required>
-                    <option value="">İhtiyaç</option><option value="new">Yeni Uygulama</option><option value="dapp">Mevcut DApp'i Taşı</option>
+                    <option value="">Need</option><option value="new">New Application</option><option value="dapp">Port Existing DApp</option>
                   </select>
-                  <textarea className="form-control" rows={3} placeholder="Mobil hedefiniz nedir?" value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="E-posta veya Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'İŞLENİYOR...' : 'MOBİL PLAN AL'}</button>
+                  <textarea className="form-control" rows={3} placeholder="What is your mobile goal?" value={goal} onChange={e=>setGoal(e.target.value)} required />
+                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'PROCESSING...' : 'GET MOBILE PLAN'}</button>
                 </form>
               )}
             </div>
@@ -116,8 +116,8 @@ const Web3MobileAppSubDetailView: React.FC = () => {
                 <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2000" alt="App UI" />
               </div>
               <div className="detail-text">
-                <h2 className="h2-style">Cüzdan Entegrasyonlu Mobilite</h2>
-                <p className="p-style">Kullanıcılarınızın MetaMask veya Phantom mobil uygulamalarına geçiş yapmadan, doğrudan uygulama içinde işlem yapabileceği güvenli SDK'lar kullanıyoruz. Sorunsuz bir Web3 deneyimi yaşatın.</p>
+                <h2 className="h2-style">Mobility with Wallet Integration</h2>
+                <p className="p-style">We use secure SDKs that allow your users to transact directly within the app, without having to switch to MetaMask or Phantom mobile apps. Provide a seamless Web3 experience.</p>
               </div>
             </div>
             <div className="detail-item reverse">
@@ -125,8 +125,8 @@ const Web3MobileAppSubDetailView: React.FC = () => {
                 <img src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?q=80&w=2000" alt="Notification" />
               </div>
               <div className="detail-text">
-                <h2 className="h2-style">Anlık On-Chain Bildirimler</h2>
-                <p className="p-style">Fiyat hareketleri, başarılı swap işlemleri veya NFT teklifleri... Kullanıcılarınızın tüm on-chain hareketlerini mobil bildirimlerle (Push Notifications) takip etmesini sağlayarak etkileşimi artırıyoruz.</p>
+                <h2 className="h2-style">Instant On-Chain Notifications</h2>
+                <p className="p-style">Price movements, successful swap transactions, or NFT offers... We increase engagement by allowing your users to follow all on-chain movements with mobile notifications (Push Notifications).</p>
               </div>
             </div>
           </div>
@@ -135,19 +135,19 @@ const Web3MobileAppSubDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Mobil Dünyada Yerinizi Alın</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Kripto kullanıcıları artık her şeyi cebinden halletmek istiyor. Onlara bekledikleri hızı ve güvenliği profesyonel Web3 mobil çözümlerimizle sunun.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Hemen Uygulama Başlat</a>
+          <h2 className="h2-style">Take Your Place in the Mobile World</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Crypto users now want to handle everything from their pockets. Offer them the speed and security they expect with our professional Web3 mobile solutions.</p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Start Application Now</a>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {[
-              { q: "Apple Store onay sürecini yönetiyor musunuz?", a: "Evet, kripto uygulamaları için Apple'ın katı kurallarına uygun geliştirme ve onay süreci danışmanlığı veriyoruz." },
-              { q: "Social Login desteği var mı?", a: "Evet, e-posta veya Apple ID ile otomatik cüzdan oluşturulmasını sağlayan sistemler kuruyoruz." }
+              { q: "Do you manage the Apple Store approval process?", a: "Yes, we provide technical consultancy and manage the approval process in accordance with Apple's strict rules for crypto applications." },
+              { q: "Is there Social Login support?", a: "Yes, we establish systems that allow for automatic wallet creation with email or Apple ID." }
             ].map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
                 <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
@@ -162,7 +162,7 @@ const Web3MobileAppSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

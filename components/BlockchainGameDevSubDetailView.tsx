@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
 
@@ -20,9 +21,9 @@ const BlockchainGameDevSubDetailView: React.FC = () => {
   };
 
   const reasons = [
-    { title: 'True Ownership', desc: 'Oyuncuların itemlerine NFT olarak gerçekten sahip olduğu ekosistemler.', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> },
-    { title: 'Unity & Unreal', desc: 'Global standartlarda oyun motorlarıyla Web3 entegrasyonu.', icon: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/> },
-    { title: 'P2E Economy', desc: 'Sürdürülebilir, enflasyon kontrolü yapılmış oyun ekonomisi tasarımı.', icon: <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/> }
+    { title: 'True Ownership', desc: 'Ecosystems where players truly own their items as NFTs.', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> },
+    { title: 'Unity & Unreal', desc: 'Web3 integration with global standard game engines.', icon: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/> },
+    { title: 'P2E Economy', desc: 'Sustainable game economy design with inflation control.', icon: <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/> }
   ];
 
   return (
@@ -40,7 +41,7 @@ const BlockchainGameDevSubDetailView: React.FC = () => {
         #h-hero { position: relative; padding: 220px 0 120px; min-height: 85vh; display: flex; align-items: center; }
         .hero-grid { display: flex; flex-direction: column; gap: 60px; position: relative; z-index: 10; width: 100%; }
         @media (min-width: 1024px) { .hero-grid { flex-direction: row; align-items: center; justify-content: space-between; } }
-        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: 0 auto; }
+        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: auto; }
         .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; color: #000; margin-bottom: 16px; }
         .form-button { width: 100%; background: var(--cray-gold); color: #000; padding: 18px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
         .reasons-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
@@ -65,26 +66,30 @@ const BlockchainGameDevSubDetailView: React.FC = () => {
         .faq-accordion-item.active .faq-accordion-header { color: var(--cray-gold); }
       `}</style>
 
+      {/* Hero Section */}
       <section id="h-hero">
         <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2832" className="bg-img" alt="Game Development" />
         <div className="overlay"></div><div className="grad"></div>
         <div className="container-xl">
           <div className="hero-grid">
             <div style={{flex: 1.2}}>
-              <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Gaming 3.0</h5>
-              <h1 className="h1-style">Blokzincir Tabanlı Oyun Geliştirme</h1>
-              <p className="p-style">Eğlenceyi on-chain ekonomiyle birleştiriyoruz. Varlıkların gerçek mülkiyetinin oyuncuda olduğu sürdürülebilir oyun dünyaları inşa ediyoruz.</p>
+              <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Immersive Web3 Gaming</h5>
+              <h1 className="h1-style">Blockchain Based Game Development</h1>
+              <p className="p-style">We build games where players truly own their achievements. From on-chain assets to decentralized economies, we bring the future of gaming to life.</p>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Oyun Analizi Al</h3>
-              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Game Analysis</h3>
+              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <select className="form-control" required>
-                    <option value="">Motor</option><option value="unity">Unity</option><option value="unreal">Unreal Engine</option>
+                  <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
+                    <option value="">Status</option>
+                    <option value="concept">Concept Only</option>
+                    <option value="dev">In Development</option>
+                    <option value="live">Live / Refactoring</option>
                   </select>
-                  <textarea className="form-control" rows={3} placeholder="Oyun kurgunuzu ve NFT kullanımını özetleyin..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="E-posta veya Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'HAYAL EDİLİYOR...' : 'OYUN PLANI AL'}</button>
+                  <textarea className="form-control" rows={3} placeholder="Describe your game's core loop and Web3 features..." value={goal} onChange={e=>setGoal(e.target.value)} required />
+                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'ANALYZING...' : 'GET GAME PLAN'}</button>
                 </form>
               )}
             </div>
@@ -92,6 +97,7 @@ const BlockchainGameDevSubDetailView: React.FC = () => {
         </div>
       </section>
 
+      {/* Reasons Section */}
       <section className="section-padding">
         <div className="container-xl">
           <div className="reasons-grid">
@@ -108,61 +114,51 @@ const BlockchainGameDevSubDetailView: React.FC = () => {
         </div>
       </section>
 
-      <section className="section-padding" style={{background: '#050505'}}>
+      {/* Detailed Info Section */}
+      <section className="info-detail-section section-padding" style={{background: '#050505'}}>
         <div className="container-xl">
           <div className="detail-row">
             <div className="detail-item">
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2000" alt="Economy" />
-              </div>
               <div className="detail-text">
-                <h2 className="h2-style">Sürdürülebilir Oyun Ekonomisi</h2>
-                <p className="p-style">P2E projelerinin en büyük sorunu olan kontrolsüz enflasyonu, matematiksel modeller ve yakım mekanizmalarıyla çözüyoruz. Oyuncuların kazandığı itemlerin değerini koruyan sistemler kuruyoruz.</p>
+                <h2 className="h2-style" style={{marginBottom: '20px'}}>True Asset Ownership</h2>
+                <p className="p-style" style={{color: '#d1d5db', lineHeight: '1.8'}}>
+                  In blockchain gaming, items aren't just pixels; they are assets. We integrate NFT standards that allow players to trade, sell, or even use their game items across different platforms, creating real economic value.
+                </p>
+              </div>
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2000" alt="Game Asset" />
               </div>
             </div>
+
             <div className="detail-item reverse">
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=2000" alt="Unity" />
-              </div>
               <div className="detail-text">
-                <h2 className="h2-style">Premium Grafik & Akıcı Mekanikler</h2>
-                <p className="p-style">Web3 oyunu olması, kalitesiz grafik anlamına gelmez. Unity ve Unreal Engine ile yüksek kaliteli görsel deneyim sunarken, blokzincir işlemlerini arka planda, oyuncuyu rahatsız etmeden yürütüyoruz.</p>
+                <h2 className="h2-style" style={{marginBottom: '20px'}}>Advanced Game Economies</h2>
+                <p className="p-style" style={{color: '#d1d5db', lineHeight: '1.8'}}>
+                  We design Play-to-Earn (P2E) models that prioritize sustainability. By balancing token emissions with utility and burn mechanisms, we ensure your game's economy thrives over the long term.
+                </p>
+              </div>
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?q=80&w=2000" alt="Game Economy" />
               </div>
             </div>
           </div>
         </div>
       </section>
 
+      {/* CTA Section */}
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Yeni Nesil Oyununuzu Birlikte Başlatalım</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Oyun dünyası merkeziyetsiz bir geleceğe evriliyor. Kendi metaverse evreninizi veya rekabetçi Web3 oyununuzu uzman ekibimizle inşa edin.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Hemen Oyun Projesi Başlat</a>
+          <h2 className="h2-style" style={{color: '#000'}}>Build the Next Generation of Gaming</h2>
+          <p className="p-style" style={{color: '#555', maxWidth: '800px', margin: '20px auto 0'}}>
+            Whether you're building a hyper-casual mobile game or a AAA metaverse, our team has the expertise to integrate Web3 features seamlessly.
+          </p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Request Game Consultation</a>
         </div>
       </section>
 
-      <section className="section-padding">
-        <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
-          <div style={{maxWidth: '850px', margin: '0 auto'}}>
-            {[
-              { q: "NFT itemleri oyun içinde nasıl çalışır?", a: "Kontrat seviyesinde entegre edilen itemler, oyun motorundaki karakter özelliklerini anlık güncelleyebilir." },
-              { q: "Mobil platformlarda Web3 oyunları oynanabilir mi?", a: "Evet, mobil cüzdan (MetaMask, Phantom) entegrasyonuyla kusursuz mobil deneyim sunuyoruz." }
-            ].map((f, i) => (
-              <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
-                <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
-                  <span>{f.q}</span>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
-                </div>
-                <div className="faq-accordion-body p-style"><p>{f.a}</p></div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+      {/* Back Button */}
+      <div style={{ padding: '60px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
+        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

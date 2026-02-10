@@ -14,15 +14,15 @@ const AppGameHeaderDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject(status, `Uygulama Oyun: ${goal}`);
+    const result = await evaluateProject(status, `Application Game: ${goal}`);
     setAiResult(result);
     setLoading(false);
   };
 
   const reasons = [
-    { title: 'Unity & Unreal', desc: 'En güçlü oyun motorlarıyla Web3 entegreli premium deneyimler.', icon: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/> },
-    { title: 'Mobile First', desc: 'iOS ve Android için optimize edilmiş Web3 uygulamaları.', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> },
-    { title: 'Social Integration', desc: 'Telegram ve Discord gibi topluluk platformlarına gömülü mini uygulamalar.', icon: <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/> }
+    { title: 'Unity & Unreal', desc: 'Premium Web3 integrated experiences with the most powerful game engines.', icon: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/> },
+    { title: 'Mobile First', desc: 'Web3 applications optimized for iOS and Android.', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> },
+    { title: 'Social Integration', desc: 'Embedded mini-apps on community platforms like Telegram and Discord.', icon: <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/> }
   ];
 
   return (
@@ -40,7 +40,7 @@ const AppGameHeaderDetailView: React.FC = () => {
         #h-hero { position: relative; padding: 220px 0 120px; min-height: 85vh; display: flex; align-items: center; }
         .hero-grid { display: flex; flex-direction: column; gap: 60px; position: relative; z-index: 10; width: 100%; }
         @media (min-width: 1024px) { .hero-grid { flex-direction: row; align-items: center; justify-content: space-between; } }
-        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: 0 auto; }
+        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: auto; }
         .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; color: #000; margin-bottom: 16px; }
         .form-button { width: 100%; background: var(--cray-gold); color: #000; padding: 18px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
         .reasons-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
@@ -72,19 +72,19 @@ const AppGameHeaderDetailView: React.FC = () => {
           <div className="hero-grid">
             <div style={{flex: 1.2}}>
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Entertainment & Utility</h5>
-              <h1 className="h1-style">Uygulama & Oyun Geliştirme</h1>
-              <p className="p-style">Mobil uygulamalardan on-chain oyunlara kadar eğlence ve teknolojiyi Web3 ile birleştiriyoruz.</p>
+              <h1 className="h1-style">Application & Game Development</h1>
+              <p className="p-style">We combine entertainment and technology with Web3 from mobile applications to on-chain games.</p>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Proje Analizi Al</h3>
-              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Project Analysis</h3>
+              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Try Again</button></div> : (
                 <form onSubmit={handleSubmit}>
                   <select className="form-control" required>
-                    <option value="">Kategori</option><option value="app">Mobile App</option><option value="game">P2E Game</option>
+                    <option value="">Category</option><option value="app">Mobile App</option><option value="game">P2E Game</option>
                   </select>
-                  <textarea className="form-control" rows={3} placeholder="Projenizi anlatın..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="E-posta veya Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'HAYAL EDİLİYOR...' : 'PLANI OLUŞTUR'}</button>
+                  <textarea className="form-control" rows={3} placeholder="Tell us about your project..." value={goal} onChange={e=>setGoal(e.target.value)} required />
+                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'IMAGINING...' : 'CREATE PLAN'}</button>
                 </form>
               )}
             </div>
@@ -116,8 +116,8 @@ const AppGameHeaderDetailView: React.FC = () => {
                 <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2000" alt="Mobile" />
               </div>
               <div className="detail-text">
-                <h2 className="h2-style">Hibrit Mobil Deneyimi</h2>
-                <p className="p-style">Web3'ü cebinize taşıyoruz. Cüzdan bağlantılı, yüksek güvenlikli ve hızlı mobil uygulamalarla ekosisteminizi her an ulaşılabilir kılıyoruz.</p>
+                <h2 className="h2-style">Hybrid Mobile Experience</h2>
+                <p className="p-style">We bring Web3 to your pocket. We make your ecosystem accessible at any time with wallet-connected, high-security, and fast mobile applications.</p>
               </div>
             </div>
             <div className="detail-item reverse">
@@ -125,8 +125,8 @@ const AppGameHeaderDetailView: React.FC = () => {
                 <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2000" alt="Games" />
               </div>
               <div className="detail-text">
-                <h2 className="h2-style">Oynarken Kazan (Play-to-Earn) Altyapıları</h2>
-                <p className="p-style">Oyun içi ekonomileri, tokenomics uzmanlarımızla birlikte kurguluyoruz. Sadece eğlenceli değil, aynı zamanda oyuncular için sürdürülebilir bir gelir modeli sunan oyunlar inşa ediyoruz.</p>
+                <h2 className="h2-style">Play-to-Earn (P2E) Infrastructures</h2>
+                <p className="p-style">We construct in-game economies together with our tokenomics experts. We build games that are not just fun but also offer a sustainable income model for players.</p>
               </div>
             </div>
           </div>
@@ -135,19 +135,19 @@ const AppGameHeaderDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Yaratıcı Projenizi Hayata Geçirelim</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Fikirden lansmana, oyun mekaniklerinden cüzdan entegrasyonuna kadar tüm süreci Web3 vizyonuyla yönetiyoruz. Hayalinizdeki uygulamayı gerçeğe dönüştürmek için hemen bizimle iletişime geçin.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Hemen Başla</a>
+          <h2 className="h2-style">Let's Bring Your Creative Project to Life</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>We manage the entire process with Web3 vision from idea to launch, from game mechanics to wallet integration. Contact us now to turn your dream application into reality.</p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Start Now</a>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {[
-              { q: "Oyun içi ekonomi nasıl kuruluyor?", a: "Tokenomics ekibimizle koordineli şekilde, enflasyonist baskısı olmayan P2E modelleri kurguluyoruz." },
-              { q: "Uygulama marketi onay süreçlerini yönetiyor musunuz?", a: "Evet, iOS ve Android mağaza onay kurallarına uygun teknik danışmanlık veriyoruz." }
+              { q: "How is the in-game economy established?", a: "We construct P2E models without inflationary pressure, coordinated with our tokenomics team." },
+              { q: "Do you manage app market approval processes?", a: "Yes, we provide technical consultancy in accordance with iOS and Android store approval rules." }
             ].map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
                 <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
@@ -162,7 +162,7 @@ const AppGameHeaderDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

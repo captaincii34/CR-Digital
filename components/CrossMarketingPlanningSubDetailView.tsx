@@ -11,23 +11,23 @@ const CrossMarketingPlanningSubDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject('Cross Marketing', 'Ortak kitle paylaşımı ve ortak kampanya analizi.');
+    const result = await evaluateProject('Cross Marketing', 'Shared audience sharing and joint campaign analysis.');
     setAiResult(result);
     setLoading(false);
   };
 
   const reasons = [
-    { title: 'Düşük Edinme Maliyeti', desc: 'Yeni kullanıcı çekmek yerine, partner projelerin hazır topluluklarına ulaşarak CAC (Maliyet) oranınızı %50 düşürüyoruz.', icon: <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/> },
-    { title: 'Paylaşılan Güven', desc: 'Sektörde güvenilirliği kanıtlanmış bir proje ile ortak kampanya yapmak, topluluğunuza anlık "verified" hissi verir.', icon: <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/> },
-    { title: 'Viral Genişleme', desc: 'Ortak airdrop, whitelist veya staking görevleriyle topluluğun birbirini davet ettiği kartopu etkisi yaratıyoruz.', icon: <path d="M13 10V3L4 14h7v7l9-11h-7z"/> }
+    { title: 'Lower Acquisition Cost', desc: 'Instead of attracting new users from scratch, we reach existing communities of partner projects, lowering your CAC (Cost) by up to 50%.', icon: <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/> },
+    { title: 'Shared Trust', desc: 'A joint campaign with a project that has proven credibility in the sector gives your community an instant "verified" feeling.', icon: <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/> },
+    { title: 'Viral Expansion', desc: 'We create a snowball effect where communities invite each other through joint airdrop, whitelist, or staking tasks.', icon: <path d="M13 10V3L4 14h7v7l9-11h-7z"/> }
   ];
 
   const faqs = [
-    { q: "Cross-marketing tam olarak nedir?", a: "Benzer hedef kitleye sahip iki projenin, birbirlerinin kanallarında tanıtım yapması ve ortak kampanyalar düzenlemesidir." },
-    { q: "Hangi tür kampanyalar daha etkili?", a: "Ortak Twitter Space etkinlikleri, ortak görev listeleri (Galxe/Zealy) ve partner projelerin token holderlarına özel airdroplar en yüksek dönüşümü sağlar." },
-    { q: "Partner projeyi neye göre seçiyorsunuz?", a: "Holder örtüşmesi, topluluk kültürü ve projenin güven skoruna göre bir 'Matching' matrisi kullanıyoruz." },
-    { q: "Küçük bir proje olarak büyük bir projeyle cross-marketing yapabilir miyim?", a: "Büyük projeye sunacağımız yaratıcı bir teknik entegrasyon veya topluluk enerjisi ile bu kapıları aralayabiliriz." },
-    { q: "Kampanya başarısını nasıl ölçüyoruz?", a: "Cüzdan eşleşmeleri, gelen trafik verileri ve holder artış oranlarıyla şeffaf bir ROI raporu sunuyoruz." }
+    { q: "What exactly is cross-marketing?", a: "It is two projects with similar target audiences promoting each other across their channels and organizing joint campaigns." },
+    { q: "What types of campaigns are most effective?", a: "Joint Twitter Space events, shared task lists (Galxe/Zealy), and special airdrops for partner project token holders provide the highest conversion." },
+    { q: "How do you choose a partner project?", a: "We use a 'Matching' matrix based on holder overlap, community culture, and the project's trust score." },
+    { q: "Can I do cross-marketing with a large project as a smaller one?", a: "We can open these doors by offering a creative technical integration or unique community energy to the larger project." },
+    { q: "How do we measure campaign success?", a: "We provide a transparent ROI report with wallet matches, incoming traffic data, and holder growth rates." }
   ];
 
   return (
@@ -37,7 +37,7 @@ const CrossMarketingPlanningSubDetailView: React.FC = () => {
         .section-padding { padding: 100px 0; position: relative; }
         .container-xl { max-width: 1280px; margin: 0 auto; padding: 0 32px; width: 100%; position: relative; z-index: 10; }
         .bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
-        .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.8); z-index: 1; }
+        .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.85); z-index: 1; }
         .grad { position: absolute; inset: 0; background: linear-gradient(to bottom, #000, transparent 40%, transparent 60%, #000); z-index: 2; }
         .h1-style { font-size: 40px !important; font-weight: 700 !important; line-height: 1.2; }
         .h2-style { font-size: 32px !important; font-weight: 700 !important; }
@@ -79,30 +79,30 @@ const CrossMarketingPlanningSubDetailView: React.FC = () => {
           <div className="hero-grid">
             <div>
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Community Bridge</h5>
-              <h1 className="h1-style">Cross-Marketing Planlaması</h1>
-              <p className="p-style">Pazarlama bütçenizi devasa reklamlara harcamadan, doğru topluluklarla el sıkışarak büyüyün. Güvenilir projelerin hazır kitlelerine stratejik kampanyalarla sızıyoruz.</p>
+              <h1 className="h1-style">Cross-Marketing Planning</h1>
+              <p className="p-style">Grow by shaking hands with the right communities instead of spending your marketing budget on massive ads. We penetrate the ready audiences of reliable projects with strategic campaigns.</p>
               <div style={{marginTop: '30px'}}>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">ORTAK KİTLE VE HOLDER ANALİZİ</span>
+                  <span className="bullet-text">SHARED AUDIENCE AND HOLDER ANALYSIS</span>
                 </div>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">VİRAL GÖREV VE ÖDÜL KURGULARI</span>
+                  <span className="bullet-text">VIRAL TASK AND REWARD ARCHITECTURES</span>
                 </div>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">ROI ODAKLI KAMPANYA YÖNETİMİ</span>
+                  <span className="bullet-text">ROI-FOCUSED CAMPAIGN MANAGEMENT</span>
                 </div>
               </div>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Kampanya Analizi Al</h3>
-              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Campaign Analysis</h3>
+              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Ana Sosyal Medya Kanalınız" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Nasıl bir proje ile ortaklık yapmak istersiniz?" required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'EŞLEŞTİRİLİYOR...' : 'ORTAK KAMPANYA PLANI AL'}</button>
+                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Your Primary Social Channel" required />
+                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="What type of project would you like to partner with?" required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'MATCHING...' : 'GET JOINT CAMPAIGN PLAN'}</button>
                 </form>
               )}
             </div>
@@ -131,8 +131,8 @@ const CrossMarketingPlanningSubDetailView: React.FC = () => {
           <div className="detail-row">
             <div className="detail-item">
               <div className="detail-text">
-                <h2 className="h2-style">Topluluklar Arası Güven Köprüsü</h2>
-                <p className="p-style">Kripto yatırımcısı, bir projenin reklamını görmektense, zaten güvendiği bir projenin o yeni projeyle partnerlik duyurusuna çok daha fazla inanır. Biz bu "sosyal kanıt" (social proof) mekanizmasını markanız için en verimli şekilde kurguluyoruz.</p>
+                <h2 className="h2-style">Build a Trust Bridge Between Communities</h2>
+                <p className="p-style">A crypto investor is far more likely to believe a partnership announcement from a project they already trust than to respond to an ad. We kurgu this "social proof" mechanism for your brand in the most efficient way.</p>
               </div>
               <div className="detail-visual">
                 <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2000" alt="Audience Growth" />
@@ -140,8 +140,8 @@ const CrossMarketingPlanningSubDetailView: React.FC = () => {
             </div>
             <div className="detail-item reverse">
               <div className="detail-text">
-                <h2 className="h2-style">Etkileşimi Oyunlaştırıyoruz</h2>
-                <p className="p-style">Sıradan "takip et - RT yap" görevlerinin ötesine geçiyoruz. İki projenin ekosistemine de değer katan, her iki tarafın tokenlarını tutanlara özel avantajlar sağlayan ve topluluğu heyecanlandıran oyunlaştırılmış kurgularla ses getiriyoruz.</p>
+                <h2 className="h2-style">Gamifying Engagement</h2>
+                <p className="p-style">We go beyond ordinary "follow - RT" tasks. We make waves with gamified kurgular that add value to the ecosystems of both projects, providing special advantages to holders of both tokens and exciting the community.</p>
               </div>
               <div className="detail-visual">
                 <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2000" alt="Gamified Marketing" />
@@ -153,15 +153,15 @@ const CrossMarketingPlanningSubDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Birlikte Daha Güçlü Büyüyün</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Doğru "Cross-Marketing" hamlesiyle reklam bütçenizden tasarruf ederken sadık kullanıcı sayınızı artırın. Sinerji yaratacak projelerle sizi biz buluşturalım.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Kampanya Paketi İste</a>
+          <h2 className="h2-style">Grow Stronger Together</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Increase your loyal user base while saving on ad spend with the right "Cross-Marketing" move. Let us introduce you to projects that will create synergy.</p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Request Campaign Package</a>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -177,7 +177,7 @@ const CrossMarketingPlanningSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/is-ortakliklari-ve-is-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/is-ortakliklari-ve-is-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

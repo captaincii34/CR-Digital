@@ -11,23 +11,23 @@ const CexListingConsultancySubDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject('CEX Listeleme', 'Borsa başvuru ve iletişim süreçleri analizi.');
+    const result = await evaluateProject('CEX Listing', 'Borsa application and communication processes analysis.');
     setAiResult(result);
     setLoading(false);
   };
 
   const reasons = [
-    { title: 'Tier-1 Network', desc: 'Binance, OKX, Bybit ve Gate.io gibi borsalarla doğrudan iletişim hattına sahibiz.', icon: <path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/> },
-    { title: 'Başvuru Optimizasyonu', desc: 'Borsaların istediği teknik ve hukuki dosyaları hata payı bırakmadan hazırlıyoruz.', icon: <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/> },
-    { title: 'Hızlı Onay Süreci', desc: 'Partner ağımız sayesinde başvurularınızın bekleme sürelerini minimize ediyoruz.', icon: <path d="M13 10V3L4 14h7v7l9-11h-7z"/> }
+    { title: 'Tier-1 Network', desc: 'We have a direct communication line with exchanges like Binance, OKX, Bybit, and Gate.io.', icon: <path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/> },
+    { title: 'Application Optimization', desc: 'We prepare the technical and legal files requested by exchanges without any margin for error.', icon: <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/> },
+    { title: 'Fast Approval Process', desc: 'Thanks to our partner network, we minimize the waiting times of your applications.', icon: <path d="M13 10V3L4 14h7v7l9-11h-7z"/> }
   ];
 
   const faqs = [
-    { q: "Hangi borsalarda listeleme yapabilirsiniz?", a: "Piyasa hacmi ve projenizin kalitesine göre Binance'ten MEXC'ye kadar geniş bir yelpazede partnerliğimiz mevcuttur." },
-    { q: "Listeleme ücretleri (Listing Fees) ne kadar?", a: "Her borsanın politikası farklıdır. Biz partner ağımızı kullanarak size en uygun fiyat ve 'free listing' fırsatlarını kovalıyoruz." },
-    { q: "Borsa listelemesi ne kadar sürer?", a: "Hazırlık aşamasından sonra borsanın onay vermesi genellikle 2 ila 6 hafta arasındadır." },
-    { q: "Hukuki görüş mektubu (Legal Opinion) gerekli mi?", a: "Evet, çoğu kurumsal borsa bunu ister. Hukuk partnerlerimiz aracılığıyla bu belgeyi sağlıyoruz." },
-    { q: "Market making desteği zorunlu mu?", a: "Borsaların çoğu hacim ve likidite garantisi için profesyonel bir MM (Market Maker) ile çalışmanızı şart koşar." }
+    { q: "On which exchanges can you list?", a: "We have partnerships in a wide range from Binance to MEXC, according to the market volume and quality of your project." },
+    { q: "How much are listing fees?", a: "Each exchange's policy is different. We use our partner network to find the most suitable price and 'free listing' opportunities for you." },
+    { q: "How long does exchange listing take?", a: "After the preparation phase, exchange approval is usually between 2 to 6 weeks." },
+    { q: "Is a Legal Opinion letter required?", a: "Yes, most corporate exchanges request this. We provide this document through our legal partners." },
+    { q: "Is market making support mandatory?", a: "Most exchanges require you to work with a professional MM (Market Maker) for volume and liquidity guarantees." }
   ];
 
   return (
@@ -79,30 +79,30 @@ const CexListingConsultancySubDetailView: React.FC = () => {
           <div className="hero-grid">
             <div>
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Global Exchange Access</h5>
-              <h1 className="h1-style">CEX Listeleme Danışmanlığı</h1>
-              <p className="p-style">Projenizi dünyanın en büyük merkezi borsalarına taşıyoruz. Teknik, ticari ve hukuki tüm başvuru süreçlerini partner networkümüzle hızlandırıyoruz.</p>
+              <h1 className="h1-style">CEX Listing Consulting</h1>
+              <p className="p-style">We carry your project to the world's largest centralized exchanges. We speed up all technical, commercial, and legal application processes with our partner network.</p>
               <div style={{marginTop: '30px'}}>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">TIER-1 BORSA NETWORKÜ</span>
+                  <span className="bullet-text">TIER-1 EXCHANGE NETWORK</span>
                 </div>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">HIZLI ONAY VE BAŞVURU YÖNETİMİ</span>
+                  <span className="bullet-text">FAST APPROVAL AND APPLICATION MANAGEMENT</span>
                 </div>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">MARKET MAKING KOORDİNASYONU</span>
+                  <span className="bullet-text">MARKET MAKING COORDINATION</span>
                 </div>
               </div>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Borsa Analizi Al</h3>
-              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Exchange Analysis</h3>
+              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Hedef Borsa (Tier 1/2)" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Mevcut holder ve hacim verilerinizi paylaşın..." required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'ANALİZ EDİLİYOR...' : 'LİSTELEME PLANI AL'}</button>
+                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Target Exchange (Tier 1/2)" required />
+                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Share your current holder and volume data..." required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'ANALYZING...' : 'GET LISTING PLAN'}</button>
                 </form>
               )}
             </div>
@@ -131,8 +131,8 @@ const CexListingConsultancySubDetailView: React.FC = () => {
           <div className="detail-row">
             <div className="detail-item">
               <div className="detail-text">
-                <h2 className="h2-style">Borsalarla Stratejik İletişim</h2>
-                <p className="p-style">Borsalara sadece bir form göndermiyoruz. Onlarla projenizin değerini, topluluk gücünü ve teknik sağlamlığını anlatan profesyonel bir dille müzakere ediyoruz. Listeleme komitelerindeki partnerlerimizle süreci içeriden takip ediyoruz.</p>
+                <h2 className="h2-style">Strategic Communication with Exchanges</h2>
+                <p className="p-style">We don't just send a form to exchanges. We negotiate with them in a professional language that explains the value of your project, community strength, and technical soundness. We follow the process from within with our partners in the listing committees.</p>
               </div>
               <div className="detail-visual">
                 <img src="https://images.unsplash.com/photo-1521791136064-7986c2959210?q=80&w=2000" alt="Communication" />
@@ -140,8 +140,8 @@ const CexListingConsultancySubDetailView: React.FC = () => {
             </div>
             <div className="detail-item reverse">
               <div className="detail-text">
-                <h2 className="h2-style">Hukuki ve Teknik Tam Uyum</h2>
-                <p className="p-style">Borsaların en çok dikkat ettiği konu güvenlik ve yasal uyumluluktur. Akıllı kontratınızın audit raporlarından, token dağılımının (vesting) adilliğine kadar her detayı borsaların 'listing criteria' listesine göre revize ediyoruz.</p>
+                <h2 className="h2-style">Full Legal and Technical Compliance</h2>
+                <p className="p-style">Security and legal compliance are the topics exchanges pay the most attention to. From audit reports of your smart contract to the fairness of token distribution (vesting), we revise every detail according to the exchanges' 'listing criteria' list.</p>
               </div>
               <div className="detail-visual">
                 <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2000" alt="Legal Compliance" />
@@ -153,15 +153,15 @@ const CexListingConsultancySubDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Projenizi Global Borsalara Hazırlayalım</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Listeleme süreci sadece para değil, prestij ve güven meselesidir. Doğru kapıları doğru anahtarlarla açmak için profesyonel destek alın.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Borsa Randevusu Al</a>
+          <h2 className="h2-style">Let's Prepare Your Project for Global Exchanges</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>The listing process is not just a matter of money, but prestige and trust. Take professional support to open the right doors with the right keys.</p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Book Exchange Appointment</a>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -177,7 +177,7 @@ const CexListingConsultancySubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/token-lansman-ve-listeleme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/token-lansman-ve-listeleme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back</button>
       </div>
     </div>
   );

@@ -11,23 +11,23 @@ const ExchangeCommunicationSubDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject('Borsa İletişim', 'Borsalarla teknik ve ticari müzakere yönetimi analizi.');
+    const result = await evaluateProject('Exchange Communication', 'Technical and commercial negotiation management analysis with exchanges.');
     setAiResult(result);
     setLoading(false);
   };
 
   const reasons = [
-    { title: 'Doğrudan İletişim', desc: 'Borsaların "listing" departmanları ile doğrudan ve resmi iletişim kanallarına sahibiz.', icon: <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/> },
-    { title: 'Müzakere Gücü', desc: 'Listeleme ücretleri (fees) ve market making şartlarında projeniz lehine en iyi şartları alıyoruz.', icon: <path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/> },
-    { title: 'Teknik Koordinasyon', desc: 'Borsaların cüzdan ve ağ entegrasyonu aşamalarını teknik ekibimizle koordine ediyoruz.', icon: <path d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 011-1h1a2 2 0 100-4H7a1 1 0 01-1-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/> }
+    { title: 'Direct Communication', desc: 'We have direct and official communication channels with the "listing" departments of exchanges.', icon: <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/> },
+    { title: 'Negotiation Power', desc: 'We optimize the best conditions in your project\'s favor regarding listing fees and market making terms.', icon: <path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/> },
+    { title: 'Technical Coordination', desc: 'We coordinate the wallet and network integration phases of exchanges with our technical team.', icon: <path d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 011-1h1a2 2 0 100-4H7a1 1 0 01-1-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/> }
   ];
 
   const faqs = [
-    { q: "Borsalarla iletişim nasıl kuruluyor?", a: "Sektördeki 5+ yıllık networkümüz ve borsa yöneticileriyle olan doğrudan iletişim kanallarımız aracılığıyla." },
-    { q: "Listeleme ücretlerini düşürebiliyor musunuz?", a: "Evet, projenizin kalitesini ve topluluk gücünü vurgulayarak borsalardan özel indirimler ve teşvikler talep ediyoruz." },
-    { q: "Borsaların reddetme sebepleri nelerdir?", a: "Genellikle zayıf teknik altyapı, düşük topluluk etkileşimi veya eksik hukuki dökümantasyon. Biz bu eksikleri önceden gideriyoruz." },
-    { q: "Entegrasyon süreci ne kadar sürer?", a: "Borsanın teknik ekibine göre değişmekle birlikte genellikle 1 ila 2 hafta sürer. Biz tüm bu süreci hızlandırıyoruz." },
-    { q: "Partner borsalarınız hangileri?", a: "Global ölçekteki en büyük 20 borsanın tamamı ile çalışma geçmişimiz ve aktif iletişimimiz mevcuttur." }
+    { q: "How is communication with exchanges established?", a: "Through our 5+ years of network in the industry and our direct communication channels with exchange managers." },
+    { q: "Can you lower listing fees?", a: "Yes, we request special discounts and incentives from exchanges by emphasizing the quality of your project and community strength." },
+    { q: "What are the reasons for exchanges rejecting?", a: "Generally weak technical infrastructure, low community interaction, or missing legal documentation. We eliminate these deficiencies beforehand." },
+    { q: "How long does the integration process take?", a: "It usually takes 1 to 2 weeks, depending on the technical team of the exchange. We speed up this whole process." },
+    { q: "Which are your partner exchanges?", a: "We have a history of working and active communication with all of the largest 20 exchanges on a global scale." }
   ];
 
   return (
@@ -79,30 +79,30 @@ const ExchangeCommunicationSubDetailView: React.FC = () => {
           <div className="hero-grid">
             <div>
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Direct BD Access</h5>
-              <h1 className="h1-style">Borsa İletişim ve Süreç Yönetimi</h1>
-              <p className="p-style">Borsalarla olan karmaşık yazışmaları, teknik entegrasyonu ve ticari müzakereleri sizin adınıza yönetiyoruz. Doğru kapıları, profesyonel networkümüzle açıyoruz.</p>
+              <h1 className="h1-style">Exchange Communication & Process Management</h1>
+              <p className="p-style">We manage complex correspondence, technical integration, and commercial negotiations with exchanges on your behalf. We open the right doors with our professional network.</p>
               <div style={{marginTop: '30px'}}>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">DOĞRU LİSTELEME DEPARTMANI BAĞLANTILARI</span>
+                  <span className="bullet-text">ACCURATE LISTING DEPARTMENT CONNECTIONS</span>
                 </div>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">TİCARİ VE TEKNİK MÜZAKERE GÜCÜ</span>
+                  <span className="bullet-text">COMMERCIAL AND TECHNICAL NEGOTIATION POWER</span>
                 </div>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">ENTEGRE OPERASYON YÖNETİMİ</span>
+                  <span className="bullet-text">INTEGRATED OPERATION MANAGEMENT</span>
                 </div>
               </div>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Borsa İletişim Talebi</h3>
-              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Exchange Communication Request</h3>
+              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Hedeflediğiniz Borsalar" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Müzakere etmek istediğiniz ana konuları belirtin..." required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'BAĞLANILIYOR...' : 'SÜREÇ ANALİZİ AL'}</button>
+                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Targeted Exchanges" required />
+                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="State the main topics you want to negotiate..." required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'CONNECTING...' : 'GET PROCESS ANALYSIS'}</button>
                 </form>
               )}
             </div>
@@ -134,17 +134,17 @@ const ExchangeCommunicationSubDetailView: React.FC = () => {
                 <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2000" alt="Negotiation" />
               </div>
               <div className="detail-text">
-                <h2 className="h2-style">Profesyonel Müzakere ve Koordine</h2>
-                <p className="p-style">Borsa listeleme süreci sadece evrak doldurmak değildir. Borsaların 'Business Development' yöneticileriyle projenin uzun vadeli vizyonunu paylaşıyor, 'Marketing Support' (borsa duyuruları, AMA etkinlikleri) tarafında en yüksek verimi alıyoruz.</p>
+                <h2 className="h2-style">Professional Negotiation and Coordination</h2>
+                <p className="p-style">The exchange listing process is not just about filling out a form. We share the long-term vision of the project with the 'Business Development' managers of the exchanges and get the highest efficiency in 'Marketing Support' (exchange announcements, AMA events).</p>
               </div>
             </div>
             <div className="detail-item reverse">
+              <div className="detail-text">
+                <h2 className="h2-style">Technical Integration Management</h2>
+                <p className="p-style">We personally follow the stages of compliance with the wallet structure of the exchanges, on-chain tests, and API integration. We ensure that your project does not deviate from the listing calendar by solving technical bottlenecks instantly.</p>
+              </div>
               <div className="detail-visual">
                 <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc51?q=80&w=2000" alt="Tech Sync" />
-              </div>
-              <div className="detail-text">
-                <h2 className="h2-style">Teknik Entegrasyon Yönetimi</h2>
-                <p className="p-style">Borsaların cüzdan yapısına uyumluluk, on-chain testler ve API entegrasyonu aşamalarını bizzat takip ediyoruz. Teknik tıkanıklıkları anında çözerek projenizin listelenme takviminden sapmamasını sağlıyoruz.</p>
               </div>
             </div>
           </div>
@@ -153,15 +153,15 @@ const ExchangeCommunicationSubDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Borsalarla İlişkilerinizi Profesyonel Seviyeye Taşıyın</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Kendi başınıza haftalar sürecek bürokratik engelleri, uzman iletişim ekibimizle saniyeler içinde aşın. Borsalarla olan köprünüzü biz kuralım.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>İletişim Hattını Başlat</a>
+          <h2 className="h2-style">Take Your Relations with Exchanges to a Professional Level</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Overcome bureaucratic obstacles that would take weeks on your own in seconds with our expert communication team. Let us build your bridge with exchanges.</p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Start Communication Line</a>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -177,7 +177,7 @@ const ExchangeCommunicationSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/token-lansman-ve-listeleme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/token-lansman-ve-listeleme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back</button>
       </div>
     </div>
   );

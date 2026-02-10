@@ -15,44 +15,44 @@ const MarketMakingDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject(status, `Borsalar: ${exchanges}. Hedef: ${goal}`);
+    const result = await evaluateProject(status, `Exchanges: ${exchanges}. Goal: ${goal}`);
     setAiResult(result);
     setLoading(false);
   };
 
   const scope = [
-    { title: "Piyasa Yapıcılığı Stratejisi", desc: "Tahta sağlığı ve fiyat istikrarı için profesyonel algoritmik kurgular.", icon: "🏦" },
-    { title: "Likidite Planlaması", desc: "Token arzına ve işlem hacmi hedeflerine göre likidite havuzu yönetimi.", icon: "🌊" },
-    { title: "Market Maker Seçimi", desc: "Projeniz için en uygun profesyonel MM partnerleri ile eşleşme.", icon: "🤖" },
-    { title: "Piyasa Yapıcılığı Danışmanlığı", desc: "Mevcut MM süreçlerinin verimlilik analizi ve iyileştirilmesi.", icon: "📏" },
-    { title: "Bot Altyapısı Danışmanlığı", desc: "Otomatik işlem ve hacim botları için teknik altyapı desteği.", icon: "⚙️" },
-    { title: "Spread & Volatilite", desc: "Düşük spread ve sağlıklı fiyat hareketleri için optimizasyon.", icon: "📊" },
-    { title: "DEX & CEX Yönetimi", desc: "Merkezi ve merkeziyetsiz borsalarda eş zamanlı likidite takibi.", icon: "🔄" },
-    { title: "Performans Raporlama", desc: "Hacim, derinlik ve tahta sağlığına dair şeffaf günlük raporlar.", icon: "📅" }
+    { title: "Market Making Strategy", desc: "Professional algorithmic setups for order book health and price stability.", icon: "🏦" },
+    { title: "Liquidity Planning", desc: "Liquidity pool management based on token supply and volume targets.", icon: "🌊" },
+    { title: "Market Maker Selection", desc: "Matching your project with the most suitable professional MM partners.", icon: "🤖" },
+    { title: "Market Making Consulting", desc: "Efficiency analysis and improvement of existing MM processes.", icon: "📏" },
+    { title: "Bot Infrastructure Consulting", desc: "Technical infrastructure support for automated trading and volume bots.", icon: "⚙️" },
+    { title: "Spread & Volatility", desc: "Optimization for low spread and healthy price movements.", icon: "📊" },
+    { title: "DEX & CEX Management", desc: "Simultaneous liquidity monitoring on centralized and decentralized exchanges.", icon: "🔄" },
+    { title: "Performance Reporting", desc: "Transparent daily reports on volume, depth, and order book health.", icon: "📅" }
   ];
 
   const reasons = [
     {
       icon: <><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></>,
-      title: 'NDA & Gizlilik Önceliği',
-      desc: 'Projelerinizin güvenliği bizim için en önemli konu'
+      title: 'NDA & Confidentiality Priority',
+      desc: 'The security of your projects is our most important concern'
     },
     {
       icon: <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>,
-      title: "A'dan Z'ye Proje Yaklaşımı",
-      desc: 'Fikir aşamasından lansmanına kadar her adımda yanınızdayız'
+      title: "End-to-End Project Approach",
+      desc: 'We are with you at every step from ideation to launch'
     },
     {
       icon: <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>,
-      title: 'Web3 & Crypto Odaklı Uzmanlık',
-      desc: 'Sadece kripto ve Web3 projelerine odaklanmış deneyimli ekip'
+      title: 'Web3 & Crypto Focused Expertise',
+      desc: 'Experienced team focused exclusively on crypto and Web3 projects'
     }
   ];
 
   const faqs = [
-    { q: "Hangi borsalarda market making yapıyorsunuz?", a: "Binance, OKX, Bybit, MEXC, Gate.io ve Uniswap gibi majör DEX/CEX platformlarında destek veriyoruz." },
-    { q: "Bot kullanımı borsa tarafından banlanır mı?", a: "Hayır, borsaların kendi API standartlarına uygun profesyonel ve 'non-toxic' MM botları kullanıyoruz." },
-    { q: "Raporlama sıklığı nedir?", a: "Günlük özet ve haftalık detaylı performans raporları sunuyoruz." }
+    { q: "On which exchanges do you provide market making?", a: "We provide support on major DEX/CEX platforms such as Binance, OKX, Bybit, MEXC, Gate.io, and Uniswap." },
+    { q: "Will using a bot lead to an exchange ban?", a: "No, our bots are 100% compliant with the official API standards and ethical trading rules of the exchanges." },
+    { q: "What is the reporting frequency?", a: "We provide daily summaries and detailed weekly performance reports." }
   ];
 
   return (
@@ -65,7 +65,7 @@ const MarketMakingDetailView: React.FC = () => {
         .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.85); z-index: 1; }
         .grad { position: absolute; inset: 0; background: linear-gradient(to bottom, #000, transparent 40%, transparent 60%, #000); z-index: 2; }
         .h1-style { font-size: 40px !important; font-weight: 700 !important; }
-        .h2-style { font-size: 30px !important; font-weight: 700 !important; }
+        .h2-style { font-size: 32px !important; font-weight: 700 !important; }
         .h3-style { font-size: 22px !important; font-weight: 600 !important; }
         .h4-style { font-size: 18px !important; font-weight: 600 !important; }
         .p-style { font-size: 16px !important; font-weight: 300 !important; }
@@ -88,7 +88,7 @@ const MarketMakingDetailView: React.FC = () => {
         .reason-card:hover { transform: translateY(-10px); border-color: var(--cray-gold); background: rgba(255, 177, 0, 0.08); }
         .reason-icon-box { width: 60px; height: 60px; background-color: var(--cray-gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.3); }
         
-        .scope-section { position: relative; padding: 120px 0; overflow: hidden; background-color: #000; }
+        .scope-section { position: relative; padding: 120px 0; overflow: hidden; background-color: #000; color: #fff; }
         .scope-grid { display: grid; grid-template-columns: 1fr; gap: 24px; position: relative; z-index: 10; }
         @media (min-width: 768px) { .scope-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 1024px) { .scope-grid { grid-template-columns: repeat(4, 1fr); } }
@@ -110,11 +110,11 @@ const MarketMakingDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="hero-grid">
             <div className="hero-text-content">
-              <h1 className="h1-style">Piyasa Yapıcılığı ve Likidite Çözümleri</h1>
-              <p className="hero-desc p-style">Tahtanızda derinlik, fiyatınızda istikrar. Global borsalarda sağlıklı bir işlem ortamı için profesyonel likidite yönetimi sunuyoruz.</p>
+              <h1 className="h1-style">Market Making & Liquidity Solutions</h1>
+              <p className="hero-desc p-style">Depth in your order book, stability in your price. We provide professional liquidity management for a healthy trading environment on global exchanges.</p>
               
               <div className="hero-feature-list">
-                {["Algoritmik Likidite Yönetimi", "Düşük Spread Garantisi", "Organik Hacim İnşası", "7/24 Tahta Sağlığı İzleme"].map((item, i) => (
+                {["Algorithmic Liquidity Management", "Low Spread Guarantee", "Organic Volume Building", "7/24 Order Book Monitoring"].map((item, i) => (
                   <div key={i} className="hero-feature-item">
                     <div className="feature-icon-circle">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="4"><polyline points="20 6 9 17 4 12"/></svg>
@@ -125,15 +125,15 @@ const MarketMakingDetailView: React.FC = () => {
               </div>
             </div>
             <div className="form-card">
-              <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px'}}>Likidite Analizi</h3>
+              <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px'}}>Liquidity Analysis</h3>
               <form onSubmit={handleSubmit}>
                 <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
-                  <option value="">İşlem Durumu</option><option value="yeni">Lansman Öncesi</option><option value="aktif">Aktif İşlem Görüyor</option>
+                  <option value="">Trading Status</option><option value="yeni">Pre-Launch</option><option value="aktif">Currently Trading</option>
                 </select>
-                <input type="text" className="form-control" placeholder="Aktif Borsalar" value={exchanges} onChange={e=>setExchanges(e.target.value)} />
-                <textarea className="form-control" rows={3} placeholder="Hacim Hedefiniz Nedir?" value={goal} onChange={e=>setGoal(e.target.value)} required />
-                <input type="text" className="form-control" placeholder="Telegram/E-posta" value={contact} onChange={e=>setContact(e.target.value)} required />
-                <button type="submit" className="form-button">{loading ? 'İŞLENİYOR...' : 'LİKİDİTE PLANI AL'}</button>
+                <input type="text" className="form-control" placeholder="Active Exchanges" value={exchanges} onChange={e=>setExchanges(e.target.value)} />
+                <textarea className="form-control" rows={3} placeholder="What is your volume target?" value={goal} onChange={e=>setGoal(e.target.value)} required />
+                <input type="text" className="form-control" placeholder="Telegram / Email" value={contact} onChange={e=>setContact(e.target.value)} required />
+                <button type="submit" className="form-button">{loading ? 'PROCESSING...' : 'GET LIQUIDITY PLAN'}</button>
               </form>
             </div>
           </div>
@@ -144,7 +144,7 @@ const MarketMakingDetailView: React.FC = () => {
         <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=2070&auto=format&fit=crop" className="bg-img" alt="Trading Analysis Background" />
         <div className="overlay" style={{ background: 'rgba(0,0,0,0.85)' }}></div><div className="grad"></div>
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Neden Bizimle Çalışmalısınız?</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Why Should You Work With Us?</h2>
           <div className="reasons-grid">
             {reasons.map((r, i) => (
               <div key={i} className="reason-card">
@@ -164,7 +164,7 @@ const MarketMakingDetailView: React.FC = () => {
         <img src="/gorsel/ag1.jpg" alt="Liquidity Scope" className="bg-img" />
         <div className="overlay"></div><div className="grad"></div>
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Hizmet Kapsamımız</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Our Service Scope</h2>
           <div className="scope-grid">
             {scope.map((s, i) => (
               <div key={i} className="scope-card">
@@ -180,12 +180,12 @@ const MarketMakingDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="flex flex-col lg:flex-row items-center gap-20">
             <div className="flex-1">
-              <h2 className="h2-style" style={{marginBottom: '28px'}}>Fiyat İstikrarı ve Derinlik</h2>
+              <h2 className="h2-style" style={{marginBottom: '28px'}}>Price Stability and Depth</h2>
               <p className="p-style" style={{marginBottom: '24px', color: '#d1d5db'}}>
-                Bir tokenın piyasadaki başarısı sadece fiyata değil, tahtadaki derinliğe bağlıdır. Biz projenizin 'slippage' (fiyat kayması) sorunlarını minimize ediyor ve sağlıklı bir grafik sergilemesini sağlıyoruz.
+                The success of a token in the market depends not just on the price, but on the depth in the order book. We minimize 'slippage' issues for your project and ensure it displays a healthy chart.
               </p>
-              <ul style={{listStyle: 'none', padding: 0}}>
-                {["Düşük Spread Garantisi", "Yapay Hacim Değil, Organik Likidite", "7/24 Aktif Algoritmik Yönetim"].map((item, i) => (
+              <ul style={{listStyle: 'none', padding: 0, margin: 0}}>
+                {["Low Spread Guarantee", "Organic Liquidity, Not Fake Volume", "7/24 Active Algorithmic Management"].map((item, i) => (
                   <li key={i} className="p-style" style={{display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '12px'}}>
                     <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {item}
                   </li>
@@ -201,14 +201,14 @@ const MarketMakingDetailView: React.FC = () => {
 
       <section className="bant-section">
         <div className="container-xl">
-          <h2 className="h2-style" style={{color: '#000', marginBottom: '20px'}}>Tahta Sağlığınızı Güvence Altına Alın</h2>
-          <a href="#h-hero" className="bant-btn">Likidite Teklifi Al</a>
+          <h2 className="h2-style" style={{color: '#000', marginBottom: '20px'}}>Secure Your Order Book Health</h2>
+          <a href="#h-hero" className="bant-btn">Request Liquidity Quote</a>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((faq, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -224,7 +224,7 @@ const MarketMakingDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '80px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
-        <button onClick={() => window.location.hash = ''} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Ana Sayfaya Dön</button>
+        <button onClick={() => window.location.hash = ''} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Homepage</button>
       </div>
     </div>
   );

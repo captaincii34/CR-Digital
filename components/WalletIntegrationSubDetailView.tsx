@@ -14,15 +14,15 @@ const WalletIntegrationSubDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject(status, `Cüzdan Entegrasyonu: ${goal}`);
+    const result = await evaluateProject(status, `Wallet Integration: ${goal}`);
     setAiResult(result);
     setLoading(false);
   };
 
   const reasons = [
-    { title: 'Any Wallet, Any Chain', desc: 'MetaMask, Phantom, Ledger ve WalletConnect v2 ile tam uyum.', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> },
-    { title: 'Social Login Entegrasyonu', desc: 'Email veya Google ile cüzdan oluşturma (Account Abstraction).', icon: <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/> },
-    { title: 'Secure Signing', desc: 'Kullanıcıyı koruyan, şeffaf işlem imzalama ve yetkilendirme süreçleri.', icon: <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/> }
+    { title: 'Any Wallet, Any Chain', desc: 'Full compatibility with MetaMask, Phantom, Ledger, and WalletConnect v2.', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> },
+    { title: 'Social Login Integration', desc: 'Wallet creation with Email or Google (Account Abstraction).', icon: <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/> },
+    { title: 'Secure Signing', desc: 'Transparent transaction signing and authorization processes that protect the user.', icon: <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/> }
   ];
 
   return (
@@ -40,7 +40,7 @@ const WalletIntegrationSubDetailView: React.FC = () => {
         #h-hero { position: relative; padding: 220px 0 120px; min-height: 85vh; display: flex; align-items: center; }
         .hero-grid { display: flex; flex-direction: column; gap: 60px; position: relative; z-index: 10; width: 100%; }
         @media (min-width: 1024px) { .hero-grid { flex-direction: row; align-items: center; justify-content: space-between; } }
-        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: 0 auto; }
+        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: auto; }
         .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; color: #000; margin-bottom: 16px; }
         .form-button { width: 100%; background: var(--cray-gold); color: #000; padding: 18px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
         .reasons-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
@@ -72,19 +72,19 @@ const WalletIntegrationSubDetailView: React.FC = () => {
           <div className="hero-grid">
             <div style={{flex: 1.2}}>
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Seamless Connection</h5>
-              <h1 className="h1-style">Cüzdan Entegrasyon Hizmetleri</h1>
-              <p className="p-style">Kullanıcılarınızın platformunuza saniyeler içinde, en güvenli yolla bağlanmasını sağlıyoruz. Karmaşık Web3 girişlerini basitleştiriyoruz.</p>
+              <h1 className="h1-style">Wallet Integration Services</h1>
+              <p className="p-style">We ensure your users connect to your platform in seconds, in the most secure way. We simplify complex Web3 logins.</p>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Bağlantı Analizi Al</h3>
-              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Connection Analysis</h3>
+              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Try Again</button></div> : (
                 <form onSubmit={handleSubmit}>
                   <select className="form-control" required>
                     <option value="">Platform</option><option value="web">Web Browser</option><option value="mobile">Mobile App</option>
                   </select>
-                  <textarea className="form-control" rows={3} placeholder="Hangi ağları ve cüzdanları hedefliyorsunuz?" value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="E-posta veya Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'TEST EDİLİYOR...' : 'PLANI OLUŞTUR'}</button>
+                  <textarea className="form-control" rows={3} placeholder="Which networks and wallets are you targeting?" value={goal} onChange={e=>setGoal(e.target.value)} required />
+                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'TESTING...' : 'CREATE PLAN'}</button>
                 </form>
               )}
             </div>
@@ -119,7 +119,7 @@ const WalletIntegrationSubDetailView: React.FC = () => {
               </div>
               <div className="detail-text">
                 <h2 className="h2-style">Account Abstraction (AA)</h2>
-                <p className="p-style">Kripto cüzdanı olmayan kullanıcılarınızı kaybetmeyin. E-posta veya sosyal medya hesaplarıyla otomatik cüzdan oluşturulmasını sağlayan AA altyapılarını platformunuza entegre ediyoruz.</p>
+                <p className="p-style">Don't lose users who don't have a crypto wallet. We integrate AA infrastructures into your platform that allow for automatic wallet creation using email or social media accounts.</p>
               </div>
             </div>
             <div className="detail-item reverse">
@@ -128,7 +128,7 @@ const WalletIntegrationSubDetailView: React.FC = () => {
               </div>
               <div className="detail-text">
                 <h2 className="h2-style">Multi-Chain Connectivity</h2>
-                <p className="p-style">Ethereum, Solana, BNB ve L2 ağlarını aynı arayüzde birleştiriyoruz. Kullanıcınız hangi ağda olursa olsun, platformunuza kesintisiz bağlanmasını sağlıyoruz.</p>
+                <p className="p-style">We combine Ethereum, Solana, BNB, and L2 networks in the same interface. We ensure your users can connect to your platform seamlessly, regardless of which network they are on.</p>
               </div>
             </div>
           </div>
@@ -137,18 +137,18 @@ const WalletIntegrationSubDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Kullanıcı Deneyimini Web3 Standartlarına Taşıyalım</h2>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Entegrasyon İste</a>
+          <h2 className="h2-style">Let's Carry Your User Experience to Web3 Standards</h2>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Request Integration</a>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {[
-              { q: "MetaMask dışında hangi cüzdanlar destekleniyor?", a: "WalletConnect protokolü üzerinden 100'den fazla mobil cüzdanı destekliyoruz." },
-              { q: "Donanım cüzdanları (Ledger/Trezor) uyumlu mu?", a: "Evet, kurumsal seviyede güvenlik için donanım cüzdanı desteğini standart olarak sunuyoruz." }
+              { q: "Which wallets are supported besides MetaMask?", a: "We support more than 100 mobile wallets via the WalletConnect protocol." },
+              { q: "Are hardware wallets (Ledger/Trezor) compatible?", a: "Yes, we offer hardware wallet support as a standard for enterprise-level security." }
             ].map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
                 <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
@@ -163,7 +163,7 @@ const WalletIntegrationSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

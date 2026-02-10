@@ -14,7 +14,7 @@ const CryptoIdeaConceptConsultancySubDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject(status, `Fikir/Konsept Hedefi: ${goal}`);
+    const result = await evaluateProject(status, `Idea/Concept Goal: ${goal}`);
     setAiResult(result);
     setLoading(false);
   };
@@ -22,25 +22,25 @@ const CryptoIdeaConceptConsultancySubDetailView: React.FC = () => {
   const reasons = [
     {
       icon: <><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></>,
-      title: 'NDA & Fikri Mülkiyet',
-      desc: 'Fikriniz en büyük varlığınızdır. Süreç başlamadan önce imzalanan NDA ile fikrinizi %100 koruma altına alıyoruz.'
+      title: 'NDA & Intellectual Property',
+      desc: 'Your idea is your greatest asset. We protect your idea 100% with the NDA signed before the process begins.'
     },
     {
       icon: <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>,
-      title: "Pazar Doğrulaması",
-      desc: 'Sadece "iyi bir fikir" yetmez. Fikrinizin pazar karşılığını ve gerçek dünya problemini çözme potansiyelini analiz ediyoruz.'
+      title: "Market Validation",
+      desc: 'A "good idea" is not enough. We analyze your idea’s market response and its potential to solve real-world problems.'
     },
     {
       icon: <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>,
-      title: 'Blockchain Uyumluluğu',
-      desc: 'Fikrinizin neden bir blockchain çözümüne ihtiyaç duyduğunu ve en doğru ağın hangisi olduğunu teknik olarak temellendiriyoruz.'
+      title: 'Blockchain Compatibility',
+      desc: 'We technically ground why your idea needs a blockchain solution and which network is the right one.'
     }
   ];
 
   const faqs = [
-    { q: "Henüz sadece bir fikrim var, erken mi?", a: "Hayır, tam zamanı. Bir projenin temeli fikir aşamasında atılır. Yanlış bir temel üzerine inşa edilen projeler ileride büyük maliyetlere yol açar." },
-    { q: "Fikrim için teknik bilgiye ihtiyacım var mı?", a: "Hayır, biz fikrinizi teknik bir spesifikasyona ve 'Proof of Concept' aşamasına taşımak için buradayız." },
-    { q: "Pazar analizi yapıyor musunuz?", a: "Evet, fikrinizin benzer projeler arasındaki konumunu ve benzersiz değer önermesini (UVP) detaylıca analiz ediyoruz." }
+    { q: "I only have an idea for now, is it too early?", a: "No, it's the perfect time. The foundation of a project is laid at the idea stage. Projects built on a wrong foundation lead to high costs later on." },
+    { q: "Do I need technical knowledge for my idea?", a: "No, we are here to carry your idea to a technical specification and 'Proof of Concept' stage." },
+    { q: "Do you perform market analysis?", a: "Yes, we analyze your idea’s position among similar projects and its unique value proposition (UVP) in detail." }
   ];
 
   return (
@@ -108,11 +108,11 @@ const CryptoIdeaConceptConsultancySubDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="hero-grid">
             <div className="hero-text-content">
-              <h1 className="h1-style">Kripto Fikir ve Konsept Danışmanlığı</h1>
-              <p className="hero-desc p-style">Büyük projeler sadece kodla değil, devrimsel fikirlerle başlar. Fikrinizi ham halinden alıp, Web3 ekosisteminin en iddialı konseptine dönüştürüyoruz.</p>
+              <h1 className="h1-style">Crypto Idea & Concept Consulting</h1>
+              <p className="hero-desc p-style">Great projects don’t just start with code, but with revolutionary ideas. We take your idea from its raw state and transform it into the most ambitious concept in the Web3 ecosystem.</p>
               
               <div className="hero-feature-list">
-                {["Benzersiz Değer Önermesi (UVP)", "Pazar-Ürün Uyumu (Product-Market Fit)", "Teknik Proof of Concept", "Yenilikçi Web3 Modelleri"].map((item, i) => (
+                {["Unique Value Proposition (UVP)", "Product-Market Fit", "Technical Proof of Concept", "Innovative Web3 Models"].map((item, i) => (
                   <div key={i} className="hero-feature-item">
                     <div className="feature-icon-circle">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="4"><polyline points="20 6 9 17 4 12"/></svg>
@@ -123,18 +123,18 @@ const CryptoIdeaConceptConsultancySubDetailView: React.FC = () => {
               </div>
             </div>
             <div className="form-card">
-              <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px'}}>Fikir Analizi</h3>
-              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px'}}>Idea Analysis</h3>
+              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
                   <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
-                    <option value="">Fikir Aşaması</option>
-                    <option value="ham">Ham Fikir / Taslak</option>
-                    <option value="gelismis">Gelişmiş Konsept</option>
-                    <option value="pivot">Mevcut Projeyi Pivot Etme</option>
+                    <option value="">Idea Stage</option>
+                    <option value="raw">Raw Idea / Draft</option>
+                    <option value="advanced">Advanced Concept</option>
+                    <option value="pivot">Pivoting Existing Project</option>
                   </select>
-                  <textarea className="form-control" rows={3} placeholder="Aklınızdaki vizyonu kısaca özetleyin..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="E-posta veya Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'VİZYON ANALİZ EDİLİYOR...' : 'KONSEPT ANALİZİ AL'}</button>
+                  <textarea className="form-control" rows={3} placeholder="Briefly summarize your vision..." value={goal} onChange={e=>setGoal(e.target.value)} required />
+                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'ANALYZING...' : 'GET CONCEPT ANALYSIS'}</button>
                 </form>
               )}
             </div>
@@ -147,7 +147,7 @@ const CryptoIdeaConceptConsultancySubDetailView: React.FC = () => {
         <img src="https://images.unsplash.com/photo-1454165833767-027ffea9e77b?q=80&w=2070&auto=format&fit=crop" className="bg-img" alt="Brainstorming" />
         <div className="overlay" style={{ background: 'rgba(0,0,0,0.9)' }}></div><div className="grad"></div>
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Neden Bizimle Çalışmalısınız?</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Why Work With Us?</h2>
           <div className="reasons-grid">
             {reasons.map((r, i) => (
               <div key={i} className="reason-card">
@@ -169,12 +169,12 @@ const CryptoIdeaConceptConsultancySubDetailView: React.FC = () => {
           <div className="detail-row">
             <div className="detail-item">
               <div className="detail-text">
-                <h2 className="h2-style" style={{marginBottom: '20px'}}>Fikirden Konsepte Yolculuk</h2>
+                <h2 className="h2-style" style={{marginBottom: '20px'}}>Journey from Idea to Concept</h2>
                 <p className="p-style" style={{color: '#d1d5db', lineHeight: '1.8'}}>
-                  Herkesin bir fikri vardır ama sadece doğru "konsept" haline getirilenler başarılı olur. Biz fikrinizi Web3 dünyasının teknik ve psikolojik dinamikleriyle birleştiriyoruz. Bir Whitepaper'ın ilk cümlesinden, projenin topluluğa dokunan ruhuna kadar her detayı birlikte örüyoruz.
+                  Everyone has an idea, but only those developed into the right "concept" succeed. We combine your idea with the technical and psychological dynamics of the Web3 world. From the first sentence of a Whitepaper to the spirit of the project that touches the community, we weave every detail together.
                 </p>
                 <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
-                  {["Sektörel İhtiyaç Analizi", "Hikaye Anlatıcılığı (Storytelling)", "Kullanıcı Yolculuğu Tasarımı"].map((li, i) => (
+                  {["Sectoral Needs Analysis", "Storytelling", "User Journey Design"].map((li, i) => (
                     <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
                       <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
                     </li>
@@ -188,12 +188,12 @@ const CryptoIdeaConceptConsultancySubDetailView: React.FC = () => {
 
             <div className="detail-item reverse">
               <div className="detail-text">
-                <h2 className="h2-style" style={{marginBottom: '20px'}}>Sektörel Farklılaşma</h2>
+                <h2 className="h2-style" style={{marginBottom: '20px'}}>Sectoral Differentiation</h2>
                 <p className="p-style" style={{color: '#d1d5db', lineHeight: '1.8'}}>
-                  Binlerce projenin olduğu bir ekosistemde "kopya" olmak başarısızlığın garantisidir. Biz projenizi rakiplerinden ayıran o "X faktörünü" bulmanızı sağlıyoruz. Teknik altyapınızın ve iş modelinizin neden benzersiz olması gerektiğini yatırımcı ve kullanıcı gözüyle kurguluyoruz.
+                  In an ecosystem with thousands of projects, being a "copy" is a guarantee of failure. We ensure you find the "X factor" that sets your project apart from competitors. We construct why your technical infrastructure and business model should be unique from the eyes of investors and users.
                 </p>
                 <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
-                  {["Rakip Farklılaşma Matrisi", "Trend Analizi ve Gelecek Projeksiyonu", "Hukuki ve Etik Konsept Çerçevesi"].map((li, i) => (
+                  {["Competitor Differentiation Matrix", "Trend Analysis and Future Projection", "Legal and Ethical Concept Framework"].map((li, i) => (
                     <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
                       <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
                     </li>
@@ -211,18 +211,18 @@ const CryptoIdeaConceptConsultancySubDetailView: React.FC = () => {
       {/* CTA Box */}
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style" style={{color: '#000'}}>Fikrinizi Bir Sonraki Büyük Web3 Projesine Dönüştürelim</h2>
+          <h2 className="h2-style" style={{color: '#000'}}>Let's Turn Your Idea Into the Next Big Web3 Project</h2>
           <p className="p-style" style={{color: '#555', maxWidth: '800px', margin: '20px auto 0'}}>
-            Zihninizdeki vizyonun teknik ve pazar gerçekleriyle buluşma vakti geldi. Profesyonel danışmanlığımızla temellerinizi en baştan sağlam atın.
+            It's time for the vision in your mind to meet technical and market realities. Build your foundations solid from the start with our professional consultancy.
           </p>
-          <a href="#h-hero" className="cta-btn">Vizyonumu Paylaşmak İstiyorum</a>
+          <a href="#h-hero" className="cta-btn">I Want to Share My Vision</a>
         </div>
       </section>
 
       {/* FAQ Section */}
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((faq, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -238,7 +238,7 @@ const CryptoIdeaConceptConsultancySubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '80px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Hizmetler Sayfasına Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

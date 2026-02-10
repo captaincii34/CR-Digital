@@ -11,23 +11,23 @@ const LaunchpadPreparationSubDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject('Launchpad Hazırlık', 'IDO/IEO platformları için proje uygunluk analizi.');
+    const result = await evaluateProject('Launchpad Prep', 'Project eligibility analysis for IDO/IEO platforms.');
     setAiResult(result);
     setLoading(false);
   };
 
   const reasons = [
-    { title: 'Platform Network', desc: 'DAO Maker, Seedify ve Polkastarter gibi devlerle stratejik hazırlık süreçleri.', icon: <path d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/> },
-    { title: 'IDO Stratejisi', desc: 'Satış turları, bilet sistemleri ve whitelisting süreçlerini optimize ediyoruz.', icon: <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.407 2.67 1L12 5V3m0 18v-2m-2-1l4-1m-4-1h4m-9-3h18M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/> },
-    { title: 'Yatırımcı İknası', desc: 'Launchpad komitelerini etkileyecek profesyonel Pitch Deck ve doküman hazırlığı.', icon: <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/> }
+    { title: 'Platform Network', desc: 'Strategic preparation processes with giants like DAO Maker, Seedify, and Polkastarter.', icon: <path d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/> },
+    { title: 'IDO Strategy', desc: 'We optimize sales rounds, ticket systems, and whitelisting processes.', icon: <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.407 2.67 1L12 5V3m0 18v-2m-2-1l4-1m-4-1h4m-9-3h18M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/> },
+    { title: 'Investor Conviction', desc: 'Professional Pitch Deck and document preparation that will impress Launchpad committees.', icon: <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/> }
   ];
 
   const faqs = [
-    { q: "Neden bir Launchpad ile çalışmalıyım?", a: "Launchpad'ler hem güven tazeleyen birer 'onay mührü'dür hem de binlerce aktif yatırımcıya anında ulaşmanızı sağlar." },
-    { q: "Launchpad seçerken nelere dikkat etmelisiniz?", a: "Platformun geçmiş başarı oranları (ATH ROI), topluluk büyüklüğü ve projenizin kategorisine olan ilgisi en kritik kriterlerdir." },
-    { q: "Hazırlık süreci neleri kapsıyor?", a: "Teknik denetim, marketing materyallerinin güncellenmesi, topluluk büyüme hedefleri ve borsa listeleme garantisi gibi adımları kapsar." },
-    { q: "IGO vs IDO farkı nedir?", a: "IGO (Initial Game Offering) sadece oyun projeleri içindir. IDO (Initial DEX Offering) ise genel kripto projeleri için her platformda yapılabilir." },
-    { q: "Ücretler nasıl işliyor?", a: "Platformlar genellikle toplanan fonun bir yüzdesini ve projenin tokenlarından bir pay alır. Biz bu pazarlıkları sizin adınıza yapıyoruz." }
+    { q: "Why should I work with a Launchpad?", a: "Launchpads are both an 'approval seal' that renews trust and allows you to instantly reach thousands of active investors." },
+    { q: "What should you pay attention to when choosing a Launchpad?", a: "The platform's past success rates (ATH ROI), community size, and interest in your project's category are the most critical criteria." },
+    { q: "What does the preparation process cover?", a: "It covers steps such as technical audit, updating marketing materials, community growth targets, and exchange listing guarantees." },
+    { q: "What is the difference between IGO and IDO?", a: "IGO (Initial Game Offering) is only for gaming projects. IDO (Initial DEX Offering) can be done on any platform for general crypto projects." },
+    { q: "How do fees work?", a: "Platforms usually take a percentage of the funds collected and a share of the project's tokens. We do these negotiations on your behalf." }
   ];
 
   return (
@@ -79,30 +79,30 @@ const LaunchpadPreparationSubDetailView: React.FC = () => {
           <div className="hero-grid">
             <div>
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>IDO & IEO Management</h5>
-              <h1 className="h1-style">Launchpad Hazırlık Süreçleri</h1>
-              <p className="p-style">Projenizi global yatırımcı kitleleriyle buluşturan Launchpad platformlarına hazırlıyoruz. IDO/IEO turlarında maksimum başarı için tüm süreci biz yönetiyoruz.</p>
+              <h1 className="h1-style">Launchpad Preparation Processes</h1>
+              <p className="p-style">We prepare your project for Launchpad platforms that bring you together with global investor masses. We manage the entire process for maximum success in IDO/IEO rounds.</p>
               <div style={{marginTop: '30px'}}>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">STRATEJİK PITCH DECK VE DOKÜMANTASYON</span>
+                  <span className="bullet-text">STRATEGIC PITCH DECK AND DOCUMENTATION</span>
                 </div>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">IDO/IEO PLATFORM BAŞVURU YÖNETİMİ</span>
+                  <span className="bullet-text">IDO/IEO PLATFORM APPLICATION MANAGEMENT</span>
                 </div>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">TOPLULUK VE WHITELIST KURGUSU</span>
+                  <span className="bullet-text">COMMUNITY AND WHITELIST SETUP</span>
                 </div>
               </div>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Hazırlık Analizi Al</h3>
-              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Preparation Analysis</h3>
+              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Toplanması Hedeflenen Fon ($)" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Hangi platformları hedefliyorsunuz?" required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'İŞLENİYOR...' : 'HAZIRLIK PLANI AL'}</button>
+                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Target Fund to be Collected ($)" required />
+                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Which platforms are you targeting?" required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'PROCESSING...' : 'GET PREP PLAN'}</button>
                 </form>
               )}
             </div>
@@ -131,8 +131,8 @@ const LaunchpadPreparationSubDetailView: React.FC = () => {
           <div className="detail-row">
             <div className="detail-item">
               <div className="detail-text">
-                <h2 className="h2-style">Platform-Özel Strateji</h2>
-                <p className="p-style">Her Launchpad'in farklı bir yatırımcı kitlesi ve farklı bir kabul kriteri vardır. Biz projenizi IDO yapacağınız platformun beklentilerine göre optimize ediyor, topluluk oylamalarında öne çıkmanızı sağlıyoruz.</p>
+                <h2 className="h2-style">Platform-Specific Strategy</h2>
+                <p className="p-style">Every Launchpad has a different investor audience and a different acceptance criteria. We optimize your project according to the expectations of the platform you will IDO on and ensure you stand out in community votes.</p>
               </div>
               <div className="detail-visual">
                 <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2000" alt="Special Strategy" />
@@ -140,8 +140,8 @@ const LaunchpadPreparationSubDetailView: React.FC = () => {
             </div>
             <div className="detail-item reverse">
               <div className="detail-text">
-                <h2 className="h2-style">Topluluk ve Whitelist Yönetimi</h2>
-                <p className="p-style">Satış turuna katılımın yüksek olması projenin lansman sonrası fiyatını doğrudan etkiler. Whitelist kampanyaları, topluluk görevleri ve etkileşim modelleriyle satışın saniyeler içinde tükenmesini (Sold Out) sağlıyoruz.</p>
+                <h2 className="h2-style">Community and Whitelist Management</h2>
+                <p className="p-style">High participation in the sales round directly affects the project's post-launch price. We ensure the sales are Sold Out in seconds with whitelist campaigns, community tasks, and interaction models.</p>
               </div>
               <div className="detail-visual">
                 <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2000" alt="Whitelist" />
@@ -153,15 +153,15 @@ const LaunchpadPreparationSubDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Launchpad Dünyasında Yerinizi Alın</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Doğru platformda yapılan bir IDO, projenizin global tanınırlığını bir gecede değiştirebilir. Profesyonel hazırlık desteğimizle riske yer bırakmayın.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Hemen Hazırlığa Başla</a>
+          <h2 className="h2-style">Take Your Place in the Launchpad World</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>An IDO on the right platform can change your project's global recognition overnight. Do not leave any room for risk with our professional preparation support.</p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Start Preparation Now</a>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -177,7 +177,7 @@ const LaunchpadPreparationSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/token-lansman-ve-listeleme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/token-lansman-ve-listeleme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back</button>
       </div>
     </div>
   );

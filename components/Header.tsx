@@ -17,167 +17,167 @@ interface ServiceItem {
 const servicesList: ServiceItem[] = [
   { 
     id: 'A', 
-    title: "A'DAN Z'YE KRİPTO PROJE DANIŞMANLIĞI", 
+    title: "End-to-End Crypto Project Consulting", 
     icon: '💎',
     link: '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi',
     subServices: [
-      { title: "Kripto Proje Danışmanlığı", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-proje-danismanligi" },
-      { title: "Kripto Fikir ve Konsept Danışmanlığı", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-fikir-ve-konsept-danismanligi" },
-      { title: "Kripto İş Modeli ve Strateji Danışmanlığı", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-is-modeli-ve-strateji-danismanligi" },
-      { title: "Kripto Yol Haritası ve Tocenomics Danışmanlığı", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-yol-haritasi-ve-tocenomics-danismanligi" },
-      { title: "Bütçe Odaklı Kripto Proje Danışmanlığı", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/butce-odakli-kripto-proje-danismanligi" },
-      { title: "Uçtan Uca Kripto Proje Yönetim Danışmanlığı", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/uctan-uca-kripto-proje-yonetim-danismanligi" },
-      { title: "Lansman ve Büyüme Danışmanlığı", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/lansman-ve-buyume-danismanligi" },
-      { title: "Dijital Pazarlama ve Tanıtım Danışmanlığı", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/dijital-pazarlama-ve-tanitim-danismanligi" }
+      { title: "Crypto Project Consulting", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-proje-danismanligi" },
+      { title: "Crypto Idea & Concept Consulting", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-fikir-ve-konsept-danismanligi" },
+      { title: "Crypto Business Model & Strategy Consulting", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-is-modeli-ve-strateji-danismanligi" },
+      { title: "Crypto Roadmap & Tokenomics Consulting", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-yol-haritasi-ve-tocenomics-danismanligi" },
+      { title: "Budget-Focused Crypto Project Consulting", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/butce-odakli-kripto-proje-danismanligi" },
+      { title: "End-to-End Crypto Project Management Consulting", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/uctan-uca-kripto-proje-yonetim-danismanligi" },
+      { title: "Launch & Growth Consulting", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/lansman-ve-buyume-danismanligi" },
+      { title: "Digital Marketing & Promotion Consulting", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/dijital-pazarlama-ve-tanitim-danismanligi" }
     ]
   },
   { 
     id: 'B', 
-    title: "TOKEN VE BLOKZİNCİR GELİŞTİRME", 
+    title: "Token & Blockchain Development", 
     icon: '🔗', 
     link: '#hizmetler/token-ve-blokzincir-gelistirme',
     subServices: [
-      { title: "Token Proje Danışmanlığı", link: "#hizmetler/token-ve-blokzincir-gelistirme/token-proje-danismanligi" },
-      { title: "Blokzincir & Ağ Seçimi", link: "#hizmetler/token-ve-blokzincir-gelistirme/blokzincir-ve-ag-secimi" },
-      { title: "Akıllı Kontrat (Smart Contract) Geliştirme", link: "#hizmetler/token-ve-blokzincir-gelistirme/akilli-kontrat-gelistirme" },
-      { title: "Tokenomics Tasarımı", link: "#hizmetler/token-ve-blokzincir-gelistirme/tokenomics-tasarimi" },
-      { title: "Whitepaper & Litepaper Hazırlığı", link: "#hizmetler/token-ve-blokzincir-gelistirme/whitepaper-hazirligi" },
-      { title: "Pitch Deck & Yatırımcı Sunumları", link: "#hizmetler/token-ve-blokzincir-gelistirme/pitch-deck-ve-sunum-hazirligi" },
-      { title: "Roadmap & Go-To-Market (GTM) Planlaması", link: "#hizmetler/token-ve-blokzincir-gelistirme/roadmap-ve-gtm-planlamasi" },
-      { title: "Audit Hazırlık Süreçleri (Partner Tabanlı)", link: "#hizmetler/token-ve-blokzincir-gelistirme/audit-hazirlik-surecleri" }
+      { title: "Token Project Consulting", link: "#hizmetler/token-ve-blokzincir-gelistirme/token-proje-danismanligi" },
+      { title: "Blockchain & Network Selection", link: "#hizmetler/token-ve-blokzincir-gelistirme/blokzincir-ve-ag-secimi" },
+      { title: "Smart Contract Development", link: "#hizmetler/token-ve-blokzincir-gelistirme/akilli-kontrat-gelistirme" },
+      { title: "Tokenomics Design", link: "#hizmetler/token-ve-blokzincir-gelistirme/tokenomics-tasarimi" },
+      { title: "Whitepaper & Litepaper Preparation", link: "#hizmetler/token-ve-blokzincir-gelistirme/whitepaper-hazirligi" },
+      { title: "Pitch Deck & Investor Presentations", link: "#hizmetler/token-ve-blokzincir-gelistirme/pitch-deck-ve-sunum-hazirligi" },
+      { title: "Roadmap & Go-To-Market (GTM) Planning", link: "#hizmetler/token-ve-blokzincir-gelistirme/roadmap-ve-gtm-planlamasi" },
+      { title: "Audit Preparation Processes (Partner-Based)", link: "#hizmetler/token-ve-blokzincir-gelistirme/audit-hazirlik-surecleri" }
     ]
   },
   { 
     id: 'C', 
-    title: "BLOKZİNCİR VE YAZILIM GELİŞTİRME", 
+    title: "Blockchain & Software Development", 
     icon: '💻', 
     link: '#hizmetler/blokzincir-ve-yazilim-gelistirme',
     subServices: [
-      { title: "Blokzincir Geliştirme", isHeader: true, link: "#hizmetler/blokzincir-gelistirme" },
-      { title: "Akıllı Kontrat Geliştirme", link: "#hizmetler/blokzincir-ve-yazilim-gelistirme/akilli-kontrat-gelistirme" },
-      { title: "Token & NFT Kontratları", link: "#hizmetler/blokzincir-ve-yazilim-gelistirme/token-nft-kontratlari" },
-      { title: "Merkeziyetsiz Uygulama (DApp) Geliştirme", link: "#hizmetler/blokzincir-ve-yazilim-gelistirme/dapp-gelistirme" },
-      { title: "DAO Altyapı Kurulumu", link: "#hizmetler/blokzincir-ve-yazilim-gelistirme/dao-altyapi" },
-      { title: "Cüzdan Entegrasyonları", link: "#hizmetler/blokzincir-ve-yazilim-gelistirme/cuzdan-entegrasyonu" },
-      { title: "Web3 & Platform Yazılımları", isHeader: true, link: "#hizmetler/web3-ve-platform-yazilimlari" },
-      { title: "Web3 Uyumlu Website Geliştirme", link: "#hizmetler/web3-ve-platform-yazilimlari/website-gelistirme" },
-      { title: "Özel Yönetim Panelleri (Dashboard)", link: "#hizmetler/web3-ve-platform-yazilimlari/ozel-paneller" },
-      { title: "Analitik ve Raporlama Panelleri", link: "#hizmetler/web3-ve-platform-yazilimlari/analitik-raporlama" },
-      { title: "Backend & API Geliştirme", link: "#hizmetler/web3-ve-platform-yazilimlari/backend-api" },
-      { title: "Uygulama & Oyun Geliştirme", isHeader: true, link: "#hizmetler/uygulama-ve-oyun-gelistirme" },
-      { title: "Web3 Mobil Uygulama Geliştirme", link: "#hizmetler/uygulama-ve-oyun-gelistirme/mobil-uygulama" },
-      { title: "Telegram Bot & Mini App Geliştirme", link: "#hizmetler/uygulama-ve-oyun-gelistirme/telegram-bot" },
-      { title: "Blokzincir Tabanlı Oyun Geliştirme", link: "#hizmetler/uygulama-ve-oyun-gelistirme/oyun-gelistirme" },
-      { title: "GameFi / Play-to-Earn Sistemleri", link: "#hizmetler/uygulama-ve-oyun-gelistirme/gamefi-p2e" },
-      { title: "Sunucu & Altyapı Kurulumu", link: "#hizmetler/uygulama-ve-oyun-gelistirme/sunucu-altyapi" }
+      { title: "Blockchain Development", isHeader: true, link: "#hizmetler/blokzincir-gelistirme" },
+      { title: "Smart Contract Development", link: "#hizmetler/blokzincir-ve-yazilim-gelistirme/akilli-kontrat-gelistirme" },
+      { title: "Token & NFT Contracts", link: "#hizmetler/blokzincir-ve-yazilim-gelistirme/token-nft-kontratlari" },
+      { title: "Decentralized Application (DApp) Development", link: "#hizmetler/blokzincir-ve-yazilim-gelistirme/dapp-gelistirme" },
+      { title: "DAO Infrastructure Setup", link: "#hizmetler/blokzincir-ve-yazilim-gelistirme/dao-altyapi" },
+      { title: "Wallet Integrations", link: "#hizmetler/blokzincir-ve-yazilim-gelistirme/cuzdan-entegrasyonu" },
+      { title: "Web3 & Platform Software", isHeader: true, link: "#hizmetler/web3-ve-platform-yazilimlari" },
+      { title: "Web3-Compatible Website Development", link: "#hizmetler/web3-ve-platform-yazilimlari/website-gelistirme" },
+      { title: "Custom Admin Dashboards", link: "#hizmetler/web3-ve-platform-yazilimlari/ozel-paneller" },
+      { title: "Analytics & Reporting Dashboards", link: "#hizmetler/web3-ve-platform-yazilimlari/analitik-raporlama" },
+      { title: "Backend & API Development", link: "#hizmetler/web3-ve-platform-yazilimlari/backend-api" },
+      { title: "Application & Game Development", isHeader: true, link: "#hizmetler/uygulama-ve-oyun-gelistirme" },
+      { title: "Web3 Mobile Application Development", link: "#hizmetler/uygulama-ve-oyun-gelistirme/mobil-uygulama" },
+      { title: "Telegram Bot & Mini App Development", link: "#hizmetler/uygulama-ve-oyun-gelistirme/telegram-bot" },
+      { title: "Blockchain-Based Game Development", link: "#hizmetler/uygulama-ve-oyun-gelistirme/oyun-gelistirme" },
+      { title: "GameFi / Play-to-Earn Systems", link: "#hizmetler/uygulama-ve-oyun-gelistirme/gamefi-p2e" },
+      { title: "Server & Infrastructure Setup", link: "#hizmetler/uygulama-ve-oyun-gelistirme/sunucu-altyapi" }
     ]
   },
   { 
     id: 'D', 
-    title: "TOKEN LANSMAN VE LİSTELEME HİZMETLERİ", 
+    title: "Token Launch & Listing Services", 
     icon: '📊', 
     link: '#hizmetler/token-lansman-ve-listeleme',
     subServices: [
-      { title: "Token Lansman Stratejisi", link: "#hizmetler/token-lansman-ve-listeleme/strateji" },
-      { title: "DEX Lansman Yönetimi", link: "#hizmetler/token-lansman-ve-listeleme/dex" },
-      { title: "CEX Listeleme Danışmanlığı", link: "#hizmetler/token-lansman-ve-listeleme/cex" },
-      { title: "Launchpad Hazırlık Süreçleri", link: "#hizmetler/token-lansman-ve-listeleme/launchpad" },
-      { title: "Listeleme Öncesi Pazarlama Stratejisi", link: "#hizmetler/token-lansman-ve-listeleme/pre-list-marketing" },
-      { title: "Listeleme Sonrası Büyüme Stratejisi", link: "#hizmetler/token-lansman-ve-listeleme/post-list-growth" },
-      { title: "Borsa İletişim ve Süreç Yönetimi", link: "#hizmetler/token-lansman-ve-listeleme/exchange-comm" },
-      { title: "Listeleme Dokümantasyonu & Kontrol Listeleri", link: "#hizmetler/token-lansman-ve-listeleme/docs" }
+      { title: "Token Launch Strategy", link: "#hizmetler/token-lansman-ve-listeleme/strateji" },
+      { title: "DEX Launch Management", link: "#hizmetler/token-lansman-ve-listeleme/dex" },
+      { title: "CEX Listing Consulting", link: "#hizmetler/token-lansman-ve-listeleme/cex" },
+      { title: "Launchpad Preparation Processes", link: "#hizmetler/token-lansman-ve-listeleme/launchpad" },
+      { title: "Pre-Listing Marketing Strategy", link: "#hizmetler/token-lansman-ve-listeleme/pre-list-marketing" },
+      { title: "Post-Listing Growth Strategy", link: "#hizmetler/token-lansman-ve-listeleme/post-list-growth" },
+      { title: "Exchange Communication & Process Management", link: "#hizmetler/token-lansman-ve-listeleme/exchange-comm" },
+      { title: "Listing Documentation & Checklists", link: "#hizmetler/token-lansman-ve-listeleme/docs" }
     ]
   },
   { 
     id: 'E', 
-    title: "KRİPTO VE WEB3 PAZARLAMA HİZMETLERİ", 
+    title: "Crypto & Web3 Marketing Services", 
     icon: '📣', 
     link: '#hizmetler/kripto-ve-web3-pazarlama',
     subServices: [
-      { title: "Web3 Büyüme Stratejisi", link: "#hizmetler/kripto-ve-web3-pazarlama/growth" },
-      { title: "Kripto Performans Pazarlaması", link: "#hizmetler/kripto-ve-web3-pazarlama/performance" },
-      { title: "Influencer & KOL Pazarlaması", link: "#hizmetler/kripto-ve-web3-pazarlama/influencer" },
-      { title: "PR & Medya Yayınları", link: "#hizmetler/kripto-ve-web3-pazarlama/pr" },
-      { title: "Kampanya & Hype Yönetimi", link: "#hizmetler/kripto-ve-web3-pazarlama/hype" },
-      { title: "Landing Page & Funnel Optimizasyonu", link: "#hizmetler/kripto-ve-web3-pazarlama/funnel" },
-      { title: "Analitik, Takip & KPI Raporlaması", link: "#hizmetler/kripto-ve-web3-pazarlama/analytics" },
-      { title: "Web3 Uyumlu Pazarlama Otomasyonu", link: "#hizmetler/kripto-ve-web3-pazarlama/automation" }
+      { title: "Web3 Growth Strategy", link: "#hizmetler/kripto-ve-web3-pazarlama/growth" },
+      { title: "Crypto Performance Marketing", link: "#hizmetler/kripto-ve-web3-pazarlama/performance" },
+      { title: "Influencer & KOL Marketing", link: "#hizmetler/kripto-ve-web3-pazarlama/influencer" },
+      { title: "PR & Media Publications", link: "#hizmetler/kripto-ve-web3-pazarlama/pr" },
+      { title: "Campaign & Hype Management", link: "#hizmetler/kripto-ve-web3-pazarlama/hype" },
+      { title: "Landing Page & Funnel Optimization", link: "#hizmetler/kripto-ve-web3-pazarlama/funnel" },
+      { title: "Analytics, Tracking & KPI Reporting", link: "#hizmetler/kripto-ve-web3-pazarlama/analytics" },
+      { title: "Web3-Compliant Marketing Automation", link: "#hizmetler/kripto-ve-web3-pazarlama/automation" }
     ]
   },
   { 
     id: 'F', 
-    title: "SOSYAL MEDYA VE TOPLULUK YÖNETİMİ", 
+    title: "Social Media & Community Management", 
     icon: '👥', 
     link: '#hizmetler/sosyal-medya-ve-topluluk-yonetimi',
     subServices: [
-      { title: "X (Twitter) İçerik ve Büyüme Yönetimi", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/twitter" },
-      { title: "Telegram Topluluk Yönetimi", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/telegram" },
-      { title: "Discord Topluluk Yönetimi", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/discord" },
-      { title: "7/24 Topluluk Moderasyonu", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/mod" },
-      { title: "Ambassador Programı Kurulumu", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/ambassador" },
-      { title: "Etkileşim Kampanyaları", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/engagement" },
-      { title: "FUD & Kriz Yönetimi", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/crisis" },
-      { title: "Topluluk Analitiği & Raporlama", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/analytics" }
+      { title: "X (Twitter) Content & Growth Management", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/twitter" },
+      { title: "Telegram Community Management", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/telegram" },
+      { title: "Discord Community Management", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/discord" },
+      { title: "24/7 Community Moderation", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/mod" },
+      { title: "Ambassador Program Setup", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/ambassador" },
+      { title: "Engagement Campaigns", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/engagement" },
+      { title: "FUD & Crisis Management", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/crisis" },
+      { title: "Community Analytics & Reporting", link: "#hizmetler/sosyal-medya-ve-topluluk-yonetimi/analytics" }
     ]
   },
   { 
     id: 'G', 
-    title: "İÇERİK ÜRETİMI (VİDEO VE TASARIM)", 
+    title: "Content Production (Video & Design)", 
     icon: '🎬', 
     link: '#hizmetler/icerik-uretimi',
     subServices: [
-      { title: "Marka Kimliği Tasarımı", link: "#hizmetler/icerik-uretimi/brand" },
-      { title: "Web3 UI / UX Tasarımı", link: "#hizmetler/icerik-uretimi/ui-ux" },
-      { title: "Motion Grafik & Explainer Video", link: "#hizmetler/icerik-uretimi/motion" },
-      { title: "Kısa Format Video İçerikleri (Reels / Shorts)", link: "#hizmetler/icerik-uretimi/shorts" },
-      { title: "Meme & Trend İçerik Üretimi", link: "#hizmetler/icerik-uretimi/meme" },
-      { title: "Duyuru & Listeleme İçerik Kitleri", link: "#hizmetler/icerik-uretimi/announcement" },
-      { title: "Sosyal Medya Görsel Paketleri", link: "#hizmetler/icerik-uretimi/social-kits" }
+      { title: "Brand Identity Design", link: "#hizmetler/icerik-uretimi/brand" },
+      { title: "Web3 UI / UX Design", link: "#hizmetler/icerik-uretimi/ui-ux" },
+      { title: "Motion Graphics & Explainer Videos", link: "#hizmetler/icerik-uretimi/motion" },
+      { title: "Short-Form Video Content (Reels / Shorts)", link: "#hizmetler/icerik-uretimi/shorts" },
+      { title: "Meme & Trend Content Production", link: "#hizmetler/icerik-uretimi/meme" },
+      { title: "Announcement & Listing Content Kits", link: "#hizmetler/icerik-uretimi/announcement" },
+      { title: "Social Media Visual Asset Packages", link: "#hizmetler/icerik-uretimi/social-kits" }
     ]
   },
   { 
     id: 'H', 
-    title: "PİYASA YAPICILIĞI VE LİKİDİTE ÇÖZÜMLERİ", 
+    title: "Market Making & Liquidity Solutions", 
     icon: '🌊', 
     link: '#hizmetler/piyasa-yapiciligi-ve-likidite',
     subServices: [
-      { title: "Piyasa Yapıcılığı Stratejisi", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/strategy" },
-      { title: "Likidite Planlaması", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/planning" },
-      { title: "Market Maker Seçimi & Koordinasyonu", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/mm-selection" },
-      { title: "Piyasa Yapıcılığı Sistem Danışmanlığı", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/consultancy" },
-      { title: "Bot Altyapısı Danışmanlığı", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/bot" },
-      { title: "Spread & Volatilite Optimizasyonu", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/optim" },
-      { title: "DEX & CEX Likidite Yönetimi", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/liquidity" },
-      { title: "Performans Takibi & Raporlama", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/perf" }
+      { title: "Market Making Strategy", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/strategy" },
+      { title: "Liquidity Planning", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/planning" },
+      { title: "Market Maker Selection & Coordination", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/mm-selection" },
+      { title: "Market Making System Consulting", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/consultancy" },
+      { title: "Bot Infrastructure Consulting", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/bot" },
+      { title: "Spread & Volatility Optimization", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/optim" },
+      { title: "DEX & CEX Liquidity Management", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/liquidity" },
+      { title: "Performance Monitoring & Reporting", link: "#hizmetler/piyasa-yapiciligi-ve-likidite/perf" }
     ]
   },
   { 
     id: 'I', 
-    title: "YATIRIM DANIŞMANLIĞI VE FON TOPLAMA", 
+    title: "Investment Consulting & Fundraising", 
     icon: '💸', 
     link: '#hizmetler/yatirim-danismanligi',
     subServices: [
-      { title: "Yatırıma Hazırlık Analizi", link: "#hizmetler/yatirim-danismanligi/audit" },
-      { title: "Fon Toplama Stratejisi & Planlaması", link: "#hizmetler/yatirim-danismanligi/funding-strategy" },
-      { title: "Seed / Private / Strategic Yatırım Turları", link: "#hizmetler/yatirim-danismanligi/tours" },
-      { title: "Yatırımcı Araştırması & Hedefleme", link: "#hizmetler/yatirim-danismanligi/research" },
-      { title: "Pitch Deck & Data Room Hazırlığı", link: "#hizmetler/yatirim-danismanligi/deck" },
-      { title: "Değerleme & Token Dağılım Danışmanlığı", link: "#hizmetler/yatirim-danismanligi/valuation" },
-      { title: "Stratejik Yatırımcı Bağlantıları", link: "#hizmetler/yatirim-danismanligi/network" },
-      { title: "Ortak Yatırım & Syndicate Yapılanması", link: "#hizmetler/yatirim-danismanligi/syndicate" },
-      { title: "Yatırımcı İlişkileri Yönetimi", link: "#hizmetler/yatirim-danismanligi/relations" }
+      { title: "Investment Readiness Analysis", link: "#hizmetler/yatirim-danismanligi/audit" },
+      { title: "Fundraising Strategy & Planning", link: "#hizmetler/yatirim-danismanligi/funding-strategy" },
+      { title: "Seed / Private / Strategic Investment Rounds", link: "#hizmetler/yatirim-danismanligi/tours" },
+      { title: "Investor Research & Targeting", link: "#hizmetler/yatirim-danismanligi/research" },
+      { title: "Pitch Deck & Data Room Preparation", link: "#hizmetler/yatirim-danismanligi/deck" },
+      { title: "Valuation & Token Allocation Consulting", link: "#hizmetler/yatirim-danismanligi/valuation" },
+      { title: "Strategic Investor Connections", link: "#hizmetler/yatirim-danismanligi/network" },
+      { title: "Co-Investment & Syndicate Structuring", link: "#hizmetler/yatirim-danismanligi/syndicate" },
+      { title: "Investor Relations Management", link: "#hizmetler/yatirim-danismanligi/relations" }
     ]
   },
   { 
     id: 'J', 
-    title: "İŞ ORTAKLIKLARI VE İŞ GELİŞTİRME", 
+    title: "Partnerships & Business Development", 
     icon: '🤝', 
     link: '#hizmetler/is-ortakliklari-ve-is-gelistirme',
     subServices: [
-      { title: "Stratejik Partnerlikler", link: "#hizmetler/is-ortakliklari-ve-is-gelistirme/partners" },
-      { title: "Ekosistem İş Birlikleri", link: "#hizmetler/is-ortakliklari-ve-is-gelistirme/ecosystem" },
-      { title: "Cross-Marketing Planlaması", link: "#hizmetler/is-ortakliklari-ve-is-gelistirme/cross" },
-      { title: "Kurumsal İş Geliştirme", link: "#hizmetler/is-ortakliklari-ve-is-gelistirme/corporate" }
+      { title: "Strategic Partnerships", link: "#hizmetler/is-ortakliklari-ve-is-gelistirme/partners" },
+      { title: "Ecosystem Collaborations", link: "#hizmetler/is-ortakliklari-ve-is-gelistirme/ecosystem" },
+      { title: "Cross-Marketing Planning", link: "#hizmetler/is-ortakliklari-ve-is-gelistirme/cross" },
+      { title: "Corporate Business Development", link: "#hizmetler/is-ortakliklari-ve-is-gelistirme/corporate" }
     ]
   },
 ];

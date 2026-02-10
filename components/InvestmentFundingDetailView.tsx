@@ -15,44 +15,44 @@ const InvestmentFundingDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject(status, `Yatırım Hedefi: ${fundingGoal}. Hedef: ${goal}`);
+    const result = await evaluateProject(status, `Funding Goal: ${fundingGoal}. Goal: ${goal}`);
     setAiResult(result);
     setLoading(false);
   };
 
   const scope = [
-    { title: "Yatırıma Hazırlık Analizi", desc: "Projenin yatırımcı gözüyle eksiklerinin tespiti ve giderilmesi.", icon: "🔍" },
-    { title: "Fon Toplama Stratejisi", desc: "Seed, Private ve Strategic turlar için doğru zamanlama ve değerleme.", icon: "💰" },
-    { title: "Yatırımcı Araştırması", desc: "Projeninin sektörüyle uyumlu VC ve melek yatırımcı networkü.", icon: "🤝" },
-    { title: "Pitch Deck & Data Room", desc: "Yatırımcıyı saniyeler içinde etkileyecek profesyonel dökümantasyon.", icon: "📈" },
-    { title: "Değerleme Danışmanlığı", desc: "Token ve şirket değerlemesinin piyasa standartlarına göre belirlenmesi.", icon: "📊" },
-    { title: "Stratejik Bağlantılar", desc: "Kripto ekosisteminin devleri ve fon yöneticileri ile doğrudan temas.", icon: "⚡" },
-    { title: "Ortak Yatırım Kurguları", desc: "Syndicate ve DAO tabanlı fon toplama modellerinin yapılandırılması.", icon: "🔗" },
-    { title: "Yatırımcı İlişkileri", desc: "Fon toplama sonrası raporlama ve sürdürülebilir iletişim yönetimi.", icon: "📱" }
+    { title: "Investment Readiness Analysis", desc: "Identifying and resolving project deficiencies from an investor's perspective.", icon: "🔍" },
+    { title: "Fundraising Strategy", desc: "Correct timing and valuation for Seed, Private, and Strategic rounds.", icon: "💰" },
+    { title: "Investor Research", desc: "VC and angel investor network compatible with the project's sector.", icon: "🤝" },
+    { title: "Pitch Deck & Data Room", desc: "Professional documentation to impress investors in seconds.", icon: "📈" },
+    { title: "Valuation Consulting", desc: "Determining token and company valuation according to market standards.", icon: "📊" },
+    { title: "Strategic Connections", desc: "Direct contact with crypto ecosystem giants and fund managers.", icon: "⚡" },
+    { title: "Co-Investment Designs", desc: "Structuring Syndicate and DAO-based fundraising models.", icon: "🔗" },
+    { title: "Investor Relations", desc: "Reporting and sustainable communication management after fundraising.", icon: "📱" }
   ];
 
   const reasons = [
     {
       icon: <><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></>,
-      title: 'NDA & Gizlilik Önceliği',
-      desc: 'Projelerinizin güvenliği bizim için en önemli konu'
+      title: 'NDA & Confidentiality Priority',
+      desc: 'The security of your projects is our most important concern'
     },
     {
       icon: <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>,
-      title: "A'dan Z'ye Proje Yaklaşımı",
-      desc: 'Fikir aşamasından lansmanına kadar her adımda yanınızdayız'
+      title: "End-to-End Project Approach",
+      desc: 'We are with you at every step from ideation to launch'
     },
     {
       icon: <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>,
-      title: 'Web3 & Crypto Odaklı Uzmanlık',
-      desc: 'Sadece kripto ve Web3 projelerine odaklanmış deneyimli ekip'
+      title: 'Web3 & Crypto Focused Expertise',
+      desc: 'Experienced team focused exclusively on crypto and Web3 projects'
     }
   ];
 
   const faqs = [
-    { q: "Hangi aşamadaki projelere fon desteği sağlıyorsunuz?", a: "Pre-seed'den Seri A aşamasına kadar, fikri olan veya ürünü bitmiş projelere danışmanlık veriyoruz." },
-    { q: "Pitch deck hazırlama desteğiniz var mı?", a: "Evet, yatırımcıların dikkatini çekecek profesyonel sunum ve data room hazırlığını bizzat yapıyoruz." },
-    { q: "Bir fon toplama süreci ne kadar sürer?", a: "Piyasa koşullarına ve projenin kalitesine göre 2 ila 6 ay arasında değişmektedir." }
+    { q: "What stages of projects do you provide funding support for?", a: "We provide consulting for projects from pre-seed to Series A, whether they are still at the idea stage or have a finished product." },
+    { q: "Do you offer pitch deck preparation support?", a: "Yes, we personally prepare professional presentations and data rooms that will capture investors' attention." },
+    { q: "How long does a fundraising process take?", a: "It varies between 2 to 6 months depending on market conditions and project quality." }
   ];
 
   return (
@@ -65,7 +65,7 @@ const InvestmentFundingDetailView: React.FC = () => {
         .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.85); z-index: 1; }
         .grad { position: absolute; inset: 0; background: linear-gradient(to bottom, #000, transparent 40%, transparent 60%, #000); z-index: 2; }
         .h1-style { font-size: 40px !important; font-weight: 700 !important; }
-        .h2-style { font-size: 30px !important; font-weight: 700 !important; }
+        .h2-style { font-size: 32px !important; font-weight: 700 !important; }
         .h3-style { font-size: 22px !important; font-weight: 600 !important; }
         .h4-style { font-size: 18px !important; font-weight: 600 !important; }
         .p-style { font-size: 16px !important; font-weight: 300 !important; }
@@ -110,11 +110,11 @@ const InvestmentFundingDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="hero-grid">
             <div className="hero-text-content">
-              <h1 className="h1-style">Yatırım Danışmanlığı ve Fon Toplama</h1>
-              <p className="hero-desc p-style">Sermaye sadece bir rakam değildir; projenizin büyüme yakıtıdır. Doğru yatırımcıyı bulun, vizyonunuzu finanse edin.</p>
+              <h1 className="h1-style">Investment Consulting & Fundraising</h1>
+              <p className="hero-desc p-style">Capital is not just a number; it's the fuel for your project's growth. Find the right investor, finance your vision.</p>
               
               <div className="hero-feature-list">
-                {["VC & Melek Yatırımcı Networkü", "Profesyonel Pitch Deck Hazırlığı", "Değerleme & Strateji Danışmanlığı", "Fon Toplama Süreç Yönetimi"].map((item, i) => (
+                {["VC & Angel Investor Network", "Professional Pitch Deck Preparation", "Valuation & Strategy Consulting", "Fundraising Process Management"].map((item, i) => (
                   <div key={i} className="hero-feature-item">
                     <div className="feature-icon-circle">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="4"><polyline points="20 6 9 17 4 12"/></svg>
@@ -125,15 +125,15 @@ const InvestmentFundingDetailView: React.FC = () => {
               </div>
             </div>
             <div className="form-card">
-              <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px'}}>Yatırım Değerlendirmesi</h3>
+              <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px'}}>Investment Evaluation</h3>
               <form onSubmit={handleSubmit}>
                 <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
-                  <option value="">Yatırım Aşaması</option><option value="pre-seed">Fikir/Pre-seed</option><option value="seed">Seed/Private</option>
+                  <option value="">Investment Stage</option><option value="pre-seed">Idea / Pre-seed</option><option value="seed">Seed / Private</option>
                 </select>
-                <input type="text" className="form-control" placeholder="Hedeflenen Yatırım Tutarı" value={fundingGoal} onChange={e=>setFundingGoal(e.target.value)} />
-                <textarea className="form-control" rows={3} placeholder="Hangi Sektörlere Odaklanıyorsunuz?" value={goal} onChange={e=>setGoal(e.target.value)} required />
-                <input type="text" className="form-control" placeholder="Telegram/E-posta" value={contact} onChange={e=>setContact(e.target.value)} required />
-                <button type="submit" className="form-button">{loading ? 'İŞLENİYOR...' : 'YATIRIM ANALİZİ AL'}</button>
+                <input type="text" className="form-control" placeholder="Target Investment Amount ($)" value={fundingGoal} onChange={e=>setFundingGoal(e.target.value)} />
+                <textarea className="form-control" rows={3} placeholder="Which sectors are you focusing on?" value={goal} onChange={e=>setGoal(e.target.value)} required />
+                <input type="text" className="form-control" placeholder="Telegram / Email" value={contact} onChange={e=>setContact(e.target.value)} required />
+                <button type="submit" className="form-button">{loading ? 'PROCESSING...' : 'GET INVESTMENT ANALYSIS'}</button>
               </form>
             </div>
           </div>
@@ -144,7 +144,7 @@ const InvestmentFundingDetailView: React.FC = () => {
         <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=2070&auto=format&fit=crop" className="bg-img" alt="Financial Success Background" />
         <div className="overlay" style={{ background: 'rgba(0,0,0,0.85)' }}></div><div className="grad"></div>
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Neden Bizimle Çalışmalısınız?</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Why Should You Work With Us?</h2>
           <div className="reasons-grid">
             {reasons.map((r, i) => (
               <div key={i} className="reason-card">
@@ -164,7 +164,7 @@ const InvestmentFundingDetailView: React.FC = () => {
         <img src="/gorsel/ag1.jpg" alt="Scope Background" className="bg-img" />
         <div className="overlay"></div><div className="grad"></div>
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Hizmet Kapsamımız</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Our Service Scope</h2>
           <div className="scope-grid">
             {scope.map((s, i) => (
               <div key={i} className="scope-card">
@@ -180,13 +180,13 @@ const InvestmentFundingDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="flex flex-col lg:flex-row items-center gap-20">
             <div className="flex-1">
-              <h2 className="h2-style" style={{marginBottom: '28px'}}>Stratejik Sermaye ve Network</h2>
+              <h2 className="h2-style" style={{marginBottom: '28px'}}>Strategic Capital and Network</h2>
               <p className="p-style" style={{marginBottom: '24px', color: '#d1d5db'}}>
-                Sadece fon toplamanıza yardımcı olmuyoruz; projenize değer katacak doğru VC ve melek yatırımcı networküyle sizi buluşturuyoruz.
+                We don't just help you raise funds; we connect you with the right VC and angel investor network that will add value to your project.
               </p>
-              <ul style={{listStyle: 'none', padding: 0}}>
-                {["Kapsamlı Yatırımcı Veritabanı", "Profesyonel Değerleme Modelleri", "Yatırımcı Sunum Koçluğu"].map((item, i) => (
-                  <li key={i} className="p-style" style={{display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '12px'}}>
+              <ul style={{listStyle: 'none', padding: 0, margin: 0}}>
+                {["Comprehensive Investor Database", "Professional Valuation Models", "Investor Pitch Coaching"].map((item, i) => (
+                  <li key={i} className="p-style" style={{display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px'}}>
                     <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {item}
                   </li>
                 ))}
@@ -201,14 +201,14 @@ const InvestmentFundingDetailView: React.FC = () => {
 
       <section className="bant-section">
         <div className="container-xl">
-          <h2 className="h2-style" style={{color: '#000', marginBottom: '20px'}}>Yatırım Turunuzu Profesyonelce Yönetin</h2>
-          <a href="#h-hero" className="bant-btn">Yatırım Hazırlığına Başla</a>
+          <h2 className="h2-style" style={{color: '#000', marginBottom: '20px'}}>Manage Your Investment Round Professionally</h2>
+          <a href="#h-hero" className="bant-btn">Start Investment Preparation</a>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((faq, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -224,7 +224,7 @@ const InvestmentFundingDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '80px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
-        <button onClick={() => window.location.hash = ''} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Ana Sayfaya Dön</button>
+        <button onClick={() => window.location.hash = ''} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Homepage</button>
       </div>
     </div>
   );

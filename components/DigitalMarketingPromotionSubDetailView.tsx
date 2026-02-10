@@ -16,25 +16,25 @@ const DigitalMarketingPromotionSubDetailView: React.FC = () => {
   const reasons = [
     {
       icon: <path d="M12 20v-6M6 20V10M18 20V4"/>,
-      title: 'Veri Odaklı Tanıtım',
-      desc: 'Sadece "hype" değil, projenize gerçek yatırımcı ve kullanıcı getiren ölçülebilir kanalları kullanıyoruz.'
+      title: 'Data-Driven Promotion',
+      desc: 'We use measurable channels that bring real investors and users to your project, not just "hype".'
     },
     {
       icon: <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>,
-      title: "Global Medya Gücü",
-      desc: 'Tier-1 kripto haber sitelerinden global PR ağlarına kadar projenizi tüm dünyaya duyuracak bağlantılara sahibiz.'
+      title: "Global Media Power",
+      desc: 'We have connections to announce your project to the whole world, from Tier-1 crypto news sites to global PR networks.'
     },
     {
       icon: <><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></>,
-      title: 'Hedeflenmiş KOL Ağı',
-      desc: 'Bot takipçili hesaplar yerine projenizin segmentine uygun, gerçek etkileşimli Web3 liderleriyle çalışıyoruz.'
+      title: 'Targeted KOL Network',
+      desc: 'We work with real, high-engagement Web3 leaders instead of bot-follower accounts.'
     }
   ];
 
   const faqs = [
-    { q: "Pazarlama stratejisi ne kadar sürede hazır olur?", a: "Projenizin kapsamına göre detaylı analiz ve uygulama planını 3 ila 7 iş günü içerisinde hazırlıyoruz." },
-    { q: "Hangi bölgelerde tanıtım yapıyorsunuz?", a: "Global odağımızla birlikte özellikle Asya, Amerika ve Avrupa pazarlarında güçlü bir haber ve influencer ağımız mevcut." },
-    { q: "Küçük bütçeli projeler için tanıtım mümkün mü?", a: "Evet, her bütçeye uygun 'etki odaklı' mini paketlerimiz ve büyüme kurgularımız bulunmaktadır." }
+    { q: "How long does it take to prepare a marketing strategy?", a: "According to your project's scope, we prepare a detailed analysis and application plan within 3 to 7 business days." },
+    { q: "In which regions do you promote?", a: "With our global focus, we have a strong news and influencer network, especially in Asia, America, and Europe markets." },
+    { q: "Is promotion possible for small budget projects?", a: "Yes, we have 'impact-oriented' mini packages and growth setups suitable for every budget." }
   ];
 
   return (
@@ -67,7 +67,7 @@ const DigitalMarketingPromotionSubDetailView: React.FC = () => {
         .detail-item { display: flex; flex-direction: column; gap: 40px; align-items: center; margin-bottom: 100px; }
         @media (min-width: 1024px) { 
           .detail-item { flex-direction: row; } 
-          .detail-item.reverse { flex-direction: row-reverse; }
+          .detail-item.reverse { flex-direction: row-reverse; } 
         }
         .detail-text { flex: 1; }
         .detail-visual { flex: 1; position: relative; border-radius: 32px; overflow: hidden; height: 400px; border: 1px solid rgba(255,177,0,0.2); }
@@ -90,15 +90,15 @@ const DigitalMarketingPromotionSubDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="hero-grid">
             <div>
-              <h1 className="h1-style">Dijital Pazarlama ve Tanıtım Danışmanlığı</h1>
-              <p className="hero-desc p-style">Sadece tanıtım yapmıyoruz, marka inşa ediyoruz. Web3 dünyasına uygun reklam ve tanıtım stratejileriyle sesinizi tüm dünyaya duyuruyoruz.</p>
+              <h1 className="h1-style">Digital Marketing & Promotion Consulting</h1>
+              <p className="hero-desc p-style">We don't just promote; we build a brand. We announce your voice to the whole world with advertising and promotion strategies suitable for the Web3 world.</p>
             </div>
             <div className="form-card">
-              <h3 className="h2-style" style={{textAlign: 'center', marginBottom: '20px', fontSize: '20px !important'}}>Tanıtım Talebi</h3>
+              <h3 className="h2-style" style={{textAlign: 'center', marginBottom: '20px', fontSize: '20px !important'}}>Promotion Request</h3>
               <form onSubmit={handleSubmit}>
-                <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Telegram / X Linki" required />
-                <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Hangi bölgelerde öne çıkmak istiyorsunuz?" required />
-                <button type="submit" disabled={loading} className="form-button">{loading ? 'MARKALANILIYOR...' : 'TANITIM STRATEJİSİ AL'}</button>
+                <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Telegram / X Link" required />
+                <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="In which regions do you want to stand out?" required />
+                <button type="submit" disabled={loading} className="form-button">{loading ? 'BRANDING...' : 'GET PROMOTION STRATEGY'}</button>
               </form>
             </div>
           </div>
@@ -108,7 +108,7 @@ const DigitalMarketingPromotionSubDetailView: React.FC = () => {
       {/* Why Us */}
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Tanıtımda Fark Yaratan Yaklaşımlar</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Approaches That Make a Difference in Promotion</h2>
           <div className="reasons-grid">
             {reasons.map((r, i) => (
               <div key={i} className="reason-card">
@@ -127,27 +127,29 @@ const DigitalMarketingPromotionSubDetailView: React.FC = () => {
       {/* Detailed Info */}
       <section className="section-padding" style={{background: '#050505'}}>
         <div className="container-xl">
-          <div className="detail-item">
-            <div className="detail-text">
-              <h2 className="h2-style" style={{marginBottom: '20px'}}>Marka Hikayesi İnşası</h2>
-              <p className="p-style" style={{color: '#d1d5db', lineHeight: '1.8'}}>
-                Web3'te dikkat çekmek için teknik detaylardan fazlası gerekir. Projenizin topluluğa dokunan ruhunu ve hikayesini kurguluyoruz. Doğru kanallarda, doğru dille konuşarak markanızı kalıcı hale getiriyoruz.
-              </p>
+          <div className="detail-row">
+            <div className="detail-item">
+              <div className="detail-text">
+                <h2 className="h2-style" style={{marginBottom: '20px'}}>Brand Story Construction</h2>
+                <p className="p-style" style={{color: '#d1d5db', lineHeight: '1.8'}}>
+                  More than technical details are needed to attract attention in Web3. We construct the soul and story of your project that touches the community. By speaking the right language in the right channels, we make your brand permanent.
+                </p>
+              </div>
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2070&auto=format&fit=crop" alt="Brand Building" />
+              </div>
             </div>
-            <div className="detail-visual">
-              <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2070&auto=format&fit=crop" alt="Brand Building" />
-            </div>
-          </div>
 
-          <div className="detail-item reverse">
-            <div className="detail-text">
-              <h2 className="h2-style" style={{marginBottom: '20px'}}>Küresel Görünürlük ve PR</h2>
-              <p className="p-style" style={{color: '#d1d5db', lineHeight: '1.8'}}>
-                Sadece bir bölgeye değil, tüm dünyaya hitap etmeniz için global haber ağlarını ve etkileşim kanallarını aktif kullanıyoruz. CoinTelegraph, Forbes ve büyük borsa portalları üzerinden markanızı devler ligine taşıyoruz.
-              </p>
-            </div>
-            <div className="detail-visual">
-              <img src="https://images.unsplash.com/photo-1557838923-2985c318be48?q=80&w=2062&auto=format&fit=crop" alt="Global PR" />
+            <div className="detail-item reverse">
+              <div className="detail-text">
+                <h2 className="h2-style" style={{marginBottom: '20px'}}>Global Visibility and PR</h2>
+                <p className="p-style" style={{color: '#d1d5db', lineHeight: '1.8'}}>
+                  We actively use global news networks and interaction channels so that you can reach not just one region, but the whole world. We carry your brand to the big leagues through CoinTelegraph, Forbes, and major exchange portals.
+                </p>
+              </div>
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1557838923-2985c318be48?q=80&w=2062&auto=format&fit=crop" alt="Global PR" />
+              </div>
             </div>
           </div>
         </div>
@@ -156,16 +158,16 @@ const DigitalMarketingPromotionSubDetailView: React.FC = () => {
       {/* CTA Box */}
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Markanızı Global Arenaya Taşıyalım</h2>
-          <p className="p-style" style={{color: '#555', maxWidth: '800px', margin: '20px auto 0'}}>Dünyanın dört bir yanındaki kripto yatırımcılarına ulaşın. Tier-1 PR ve KOL networkümüzle görünürlüğünüzü en üst seviyeye çıkarın.</p>
-          <a href="#h-hero" className="cta-btn">Tanıtım Paketi Al</a>
+          <h2 className="h2-style">Let's Carry Your Brand to the Global Arena</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Reach crypto investors from all over the world. Increase your visibility to the highest level with our Tier-1 PR and KOL network.</p>
+          <a href="#h-hero" className="cta-btn">Get Promotion Package</a>
         </div>
       </section>
 
       {/* FAQ */}
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((faq, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -181,7 +183,7 @@ const DigitalMarketingPromotionSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '80px 0', textAlign: 'center', background: '#000' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Hizmetler Sayfasına Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

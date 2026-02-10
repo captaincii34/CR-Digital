@@ -14,15 +14,15 @@ const SmartContractDevV2SubDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject(status, `Akıllı Kontrat V2: ${goal}`);
+    const result = await evaluateProject(status, `Smart Contract V2: ${goal}`);
     setAiResult(result);
     setLoading(false);
   };
 
   const reasons = [
-    { title: 'Zero Vulnerability', desc: 'Hata payı bırakmayan, matematiksel olarak doğrulanmış kontratlar.', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> },
-    { title: 'Gas Optimization', desc: 'İşlem maliyetlerini minimize eden verimli kod yapıları.', icon: <circle cx="12" cy="12" r="10"/><path d="M16 12l-4-4-4 4M12 8v8"/> },
-    { title: 'Upgradeable', desc: 'Proxy mimarisi ile gelecekte güncellenebilir esnek yapılar.', icon: <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/> }
+    { title: 'Zero Vulnerability', desc: 'Mathematically verified contracts that leave no margin for error.', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> },
+    { title: 'Gas Optimization', desc: 'Efficient code structures that minimize transaction costs.', icon: <circle cx="12" cy="12" r="10"/><path d="M16 12l-4-4-4 4M12 8v8"/> },
+    { title: 'Upgradeable', desc: 'Flexible structures that can be updated in the future with proxy architecture.', icon: <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/> }
   ];
 
   return (
@@ -38,9 +38,9 @@ const SmartContractDevV2SubDetailView: React.FC = () => {
         .h2-style { font-size: 32px !important; font-weight: 700 !important; }
         .p-style { font-size: 16px !important; font-weight: 300 !important; color: #d1d5db; line-height: 1.8; }
         #h-hero { position: relative; padding: 220px 0 120px; min-height: 85vh; display: flex; align-items: center; }
-        .hero-grid { display: flex; flex-direction: column; gap: 60px; position: relative; z-index: 10; width: 100%; }
+        .hero-grid { display: grid; grid-template-columns: 1fr; gap: 60px; position: relative; z-index: 10; width: 100%; }
         @media (min-width: 1024px) { .hero-grid { flex-direction: row; align-items: center; justify-content: space-between; } }
-        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: 0 auto; }
+        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: auto; }
         .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; color: #000; margin-bottom: 16px; }
         .form-button { width: 100%; background: var(--cray-gold); color: #000; padding: 18px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
         .reasons-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
@@ -72,19 +72,19 @@ const SmartContractDevV2SubDetailView: React.FC = () => {
           <div className="hero-grid">
             <div style={{flex: 1.2}}>
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Solidity & Rust</h5>
-              <h1 className="h1-style">Akıllı Kontrat Geliştirme</h1>
-              <p className="p-style">Kodunuzun yasanız olduğu bir dünyada hata payına yer yok. Siber güvenlik odaklı, yüksek performanslı ve siber saldırılara dirençli akıllı kontratlar geliştiriyoruz.</p>
+              <h1 className="h1-style">Smart Contract Development</h1>
+              <p className="p-style">In a world where your code is your law, there is no room for error. We develop cybersecurity-oriented, high-performance, and attack-resilient smart contracts.</p>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Kod İnceleme Talebi</h3>
-              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Yeniden Dene</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Code Review Request</h3>
+              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Try Again</button></div> : (
                 <form onSubmit={handleSubmit}>
                   <select className="form-control" required>
-                    <option value="">Ağ</option><option value="eth">Ethereum / L2</option><option value="sol">Solana / Rust</option>
+                    <option value="">Network</option><option value="eth">Ethereum / L2</option><option value="sol">Solana / Rust</option>
                   </select>
-                  <textarea className="form-control" rows={3} placeholder="Geliştirilecek mekanizmayı özetleyin..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="E-posta veya Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'KOD TARANIYOR...' : 'ANALİZ PLANI AL'}</button>
+                  <textarea className="form-control" rows={3} placeholder="Summarize the mechanism to be developed..." value={goal} onChange={e=>setGoal(e.target.value)} required />
+                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'SCANNING CODE...' : 'GET ANALYSIS PLAN'}</button>
                 </form>
               )}
             </div>
@@ -118,17 +118,17 @@ const SmartContractDevV2SubDetailView: React.FC = () => {
                 <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2000" alt="Audit" />
               </div>
               <div className="detail-text">
-                <h2 className="h2-style">Audit Öncesi Hazırlık</h2>
-                <p className="p-style">Majör audit firmalarına gitmeden önce kodunuzu biz denetliyoruz. Re-entrancy, overflow ve mantıksal tüm açıkları kapatarak %100 güvenli bir rapor almanızı sağlıyoruz.</p>
+                <h2 className="h2-style">Pre-Audit Preparation</h2>
+                <p className="p-style">We audit your code before going to major audit firms. By closing all re-entrancy, overflow, and logical vulnerabilities, we ensure you receive a 100% secure report.</p>
               </div>
             </div>
             <div className="detail-item reverse">
               <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1639322537504-6427a16b0a28?q=80&w=2000" alt="Efficiency" />
+                <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=2000" alt="Efficiency" />
               </div>
               <div className="detail-text">
-                <h2 className="h2-style">Gaz Optimizasyonu</h2>
-                <p className="p-style">Kullanıcılarınızın yüksek işlem ücretleri ödemesini istemezsiniz. Kod seviyesinde yaptığımız optimizasyonlarla işlem maliyetlerini %40'a kadar düşürüyoruz.</p>
+                <h2 className="h2-style">Gas Optimization</h2>
+                <p className="p-style">You don't want your users paying high transaction fees. We reduce transaction costs by up to 40% with optimizations we make at the code level.</p>
               </div>
             </div>
           </div>
@@ -137,18 +137,18 @@ const SmartContractDevV2SubDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Güvenilir ve Verimli Kodlarla Projenizi Koruyun</h2>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Kod Teklifi Al</a>
+          <h2 className="h2-style">Protect Your Project with Reliable and Efficient Code</h2>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Get Code Quote</a>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {[
-              { q: "Hangi ağları destekliyorsunuz?", a: "Ethereum, Solana, BNB Chain, TON ve tüm L2 ağlarında geliştirme yapıyoruz." },
-              { q: "Mevcut kontratımı güncelleyebilir misiniz?", a: "Evet, kontratınızın upgradeable olup olmadığını kontrol edip gerekli iyileştirmeleri sağlıyoruz." }
+              { q: "Which networks do you support?", a: "We develop on Ethereum, Solana, BNB Chain, TON, and all L2 networks." },
+              { q: "Can you update my existing contract?", a: "Yes, we check if your contract is upgradeable and provide the necessary improvements." }
             ].map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
                 <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
@@ -163,7 +163,7 @@ const SmartContractDevV2SubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

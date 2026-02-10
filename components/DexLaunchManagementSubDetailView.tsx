@@ -11,23 +11,23 @@ const DexLaunchManagementSubDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject('DEX Lansman', 'Likidite havuzu kurulumu ve slippage kontrolü analizi.');
+    const result = await evaluateProject('DEX Launch', 'Liquidity pool setup and slippage control analysis.');
     setAiResult(result);
     setLoading(false);
   };
 
   const reasons = [
-    { title: 'Likidite Güvenliği', desc: 'LP token kilitleme ve havuz güvenliği ile rug-pull risklerini sıfırlıyoruz.', icon: <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/> },
-    { title: 'Slippage Optimizasyonu', desc: 'Havuz derinliğini doğru kurgulayarak kullanıcılarınızın fiyat kaymasını önlüyoruz.', icon: <path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/> },
-    { title: 'Bot Koruması', desc: 'Lansman anındaki sniper botlara karşı teknik önlemler ve MEV koruması sağlıyoruz.', icon: <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/> }
+    { title: 'Liquidity Security', desc: 'We zero out rug-pull risks with LP token locking and pool security.', icon: <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/> },
+    { title: 'Slippage Optimization', desc: 'We prevent your users\' price slippage by correctly constructing pool depth.', icon: <path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/> },
+    { title: 'Bot Protection', desc: 'We provide technical measures and MEV protection against sniper bots at the time of launch.', icon: <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/> }
   ];
 
   const faqs = [
-    { q: "Hangi DEX'lerde lansman yapıyorsunuz?", a: "Uniswap (ETH/Polygon), PancakeSwap (BSC), Raydium (Solana) ve Ston.fi (TON) başta olmak üzere tüm majör DEX'lerde hizmet veriyoruz." },
-    { q: "Likidite miktarını kim belirliyor?", a: "Piyasa değeri hedefinize ve arz oranınıza göre matematiksel olarak en sağlıklı likidite tutarını size öneriyoruz." },
-    { q: "Likidite kilitleme neden önemli?", a: "Yatırımcıya güven vermenin ilk şartıdır. Likiditenin kilitli olduğunu on-chain kanıtlarla topluluğa duyuruyoruz." },
-    { q: "Sniper botları nasıl engellenir?", a: "Anti-bot fonksiyonları, kademeli alım limitleri ve özel likidite ekleme teknikleri ile bot etkisini minimize ediyoruz." },
-    { q: "DEX lansmanı sonrası CEX süreci nasıl işler?", a: "DEX'teki hacim ve holder verilerini borsalara sunarak CEX listeleme şansınızı %300 artırıyoruz." }
+    { q: "On which DEXs do you launch?", a: "We provide services on all major DEXs, primarily Uniswap (ETH/Polygon), PancakeSwap (BSC), Raydium (Solana), and Ston.fi (TON)." },
+    { q: "Who determines the amount of liquidity?", a: "We mathematically suggest the healthiest liquidity amount to you according to your market value target and supply ratio." },
+    { q: "Why is liquidity locking important?", a: "It is the first condition of giving confidence to the investor. We announce to the community that liquidity is locked with on-chain evidence." },
+    { q: "How are sniper bots prevented?", a: "We minimize bot impact with anti-bot functions, tiered purchase limits, and special liquidity addition techniques." },
+    { q: "How does the CEX process work after DEX launch?", a: "We increase your CEX listing chances by 300% by presenting volume and holder data on DEX to exchanges." }
   ];
 
   return (
@@ -79,30 +79,30 @@ const DexLaunchManagementSubDetailView: React.FC = () => {
           <div className="hero-grid">
             <div>
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>DeFi Liquidity Expert</h5>
-              <h1 className="h1-style">DEX Lansman Yönetimi</h1>
-              <p className="p-style">Merkeziyetsiz borsalarda sorunsuz bir başlangıç için likidite havuzlarınızı profesyonelce kurguluyoruz. Sıfır hata, maksimum güven.</p>
+              <h1 className="h1-style">DEX Launch Management</h1>
+              <p className="p-style">We professionally construct your liquidity pools for a seamless start on decentralized exchanges. Zero errors, maximum trust.</p>
               <div style={{marginTop: '30px'}}>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">MEV VE SNIPER BOT KORUMASI</span>
+                  <span className="bullet-text">MEV AND SNIPER BOT PROTECTION</span>
                 </div>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">LİKİDİTE KİLİTLEME VE GÜVENLİK</span>
+                  <span className="bullet-text">LIQUIDITY LOCKING AND SECURITY</span>
                 </div>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">MULTI-CHAIN HAVUZ KURULUMU</span>
+                  <span className="bullet-text">MULTI-CHAIN POOL SETUP</span>
                 </div>
               </div>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Havuz Analizi Al</h3>
-              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Pool Analysis</h3>
+              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Ağ (ETH, BSC, SOL vb.)" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Likidite hedefinizi belirtin..." required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'İŞLENİYOR...' : 'LİKİDİTE PLANI AL'}</button>
+                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Network (ETH, BSC, SOL etc.)" required />
+                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="State your liquidity target..." required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'PROCESSING...' : 'GET LIQUIDITY PLAN'}</button>
                 </form>
               )}
             </div>
@@ -131,8 +131,8 @@ const DexLaunchManagementSubDetailView: React.FC = () => {
           <div className="detail-row">
             <div className="detail-item">
               <div className="detail-text">
-                <h2 className="h2-style">Havuz Derinliği ve Dengeleme</h2>
-                <p className="p-style">Lansman anında gelen yoğun alım talebinin fiyatı sağlıksız bir şekilde uçurmaması veya derinlik azlığı nedeniyle aşırı düşmemesi için matematiksel havuz dengelemesi yapıyoruz. Kullanıcılarınız için adil bir işlem ortamı hazırlıyoruz.</p>
+                <h2 className="h2-style">Pool Depth and Balancing</h2>
+                <p className="p-style">We perform mathematical pool balancing so that the intense buying demand at the time of launch does not unhealthy inflate the price or drop it excessively due to lack of depth. We prepare a fair transaction environment for your users.</p>
               </div>
               <div className="detail-visual">
                 <img src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d?q=80&w=2000" alt="Pool Depth" />
@@ -140,8 +140,8 @@ const DexLaunchManagementSubDetailView: React.FC = () => {
             </div>
             <div className="detail-item reverse">
               <div className="detail-text">
-                <h2 className="h2-style">Anti-Bot ve Balina Koruması</h2>
-                <p className="p-style">DEX lansmanlarının en büyük düşmanı olan 'sniper bot'lara karşı akıllı kontrat seviyesinde ve havuz yönetimi tarafında teknik bariyerler kuruyoruz. Projenizin gerçek topluluğunun tokena ulaşmasını sağlıyoruz.</p>
+                <h2 className="h2-style">Anti-Bot and Whale Protection</h2>
+                <p className="p-style">We establish technical barriers at the smart contract level and in pool management against 'sniper bots', the biggest enemy of DEX launches. We ensure that your project's real community reaches the token.</p>
               </div>
               <div className="detail-visual">
                 <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2000" alt="Anti-Bot" />
@@ -153,15 +153,15 @@ const DexLaunchManagementSubDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">DEX Lansmanınızı Uzmanlarla Yönetin</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Havuz kurulumundan anti-bot korumasına kadar tüm teknik süreci biz üstlenelim, siz topluluğunuzu büyütmeye odaklanın.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Likidite Teklifi Al</a>
+          <h2 className="h2-style">Manage Your DEX Launch with Experts</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Let us take over the entire technical process from pool setup to anti-bot protection, so you can focus on growing your community.</p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Get Liquidity Quote</a>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -177,7 +177,7 @@ const DexLaunchManagementSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/token-lansman-ve-listeleme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/token-lansman-ve-listeleme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back</button>
       </div>
     </div>
   );

@@ -11,23 +11,23 @@ const ListingDocumentationSubDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject('Dokümantasyon', 'Borsa listeleme dosyaları ve kontrol listeleri analizi.');
+    const result = await evaluateProject('Documentation', 'Exchange listing files and checklist analysis.');
     setAiResult(result);
     setLoading(false);
   };
 
   const reasons = [
-    { title: 'Sıfır Hata Prensibi', desc: 'Borsaların en katı inceleme prosedürlerini bile tek seferde geçecek kusursuz dosyalar.', icon: <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/> },
-    { title: 'Hukuki Güvence', desc: 'Global kripto otoriteleriyle uyumlu, projenizi koruyan profesyonel metinler.', icon: <path d="M3 6l3 1h15M3 12l3 1h15M3 18l3 1h15"/> },
-    { title: 'Teknik Spesifikasyon', desc: 'Tokenomics verilerini ve kontrat detaylarını borsaların teknik ekiplerinin anlayacağı dilde sunuyoruz.', icon: <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/> }
+    { title: 'Zero Error Principle', desc: 'Flawless files that will pass even the strictest review procedures of exchanges at once.', icon: <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/> },
+    { title: 'Legal Assurance', desc: 'Professional texts compatible with global crypto authorities, protecting your project.', icon: <path d="M3 6l3 1h15M3 12l3 1h15M3 18l3 1h15"/> },
+    { title: 'Technical Specification', desc: 'We present tokenomics data and contract details in a language that the technical teams of the exchanges will understand.', icon: <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/> }
   ];
 
   const faqs = [
-    { q: "Hangi dökümanlar listeleme için şarttır?", a: "Whitepaper, Tokenomics Excel Tablosu, Hukuki Görüş (Legal Opinion) ve Güvenlik Denetim (Audit) raporları temeldir." },
-    { q: "Dokümanların İngilizce olması zorunlu mu?", a: "Evet, tüm kurumsal borsalar tüm dökümanları akademik ve profesyonel bir İngilizce ile talep eder." },
-    { q: "Hukuki süreçte destek veriyor musunuz?", a: "Evet, global Web3 hukuk büroları ile projenizin 'security' (menkul kıymet) sınıfına girmemesi için gerekli yapılandırmayı sağlıyoruz." },
-    { q: "Teknik kontrol listesi (Checklist) nedir?", a: "Borsanın cüzdan entegrasyonu, mainnet/testnet durumu ve Explorer verileri gibi 50'den fazla teknik kriterin kontrol edildiği listelerdir." },
-    { q: "Mevcut dökümanlarımızı revize ediyor musunuz?", a: "Evet, eksik veya hatalı dökümanlarınızı borsa standartlarına uygun hale getiriyoruz." }
+    { q: "Which documents are required for listing?", a: "Whitepaper, Tokenomics Excel Sheet, Legal Opinion, and Security Audit reports are fundamental." },
+    { q: "Is it mandatory for documents to be in English?", a: "Yes, all corporate exchanges request all documents in an academic and professional English." },
+    { q: "Do you provide support in the legal process?", a: "Yes, we provide the necessary configuration with global Web3 law firms to ensure your project does not fall into the 'security' class." },
+    { q: "What is a technical checklist?", a: "These are lists where more than 50 technical criteria such as the borsa's wallet integration, mainnet/testnet status, and Explorer data are checked." },
+    { q: "Do you revise our existing documents?", a: "Yes, we make your missing or incorrect documents compatible with exchange standards." }
   ];
 
   return (
@@ -79,30 +79,30 @@ const ListingDocumentationSubDetailView: React.FC = () => {
           <div className="hero-grid">
             <div>
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Audit & Compliance</h5>
-              <h1 className="h1-style">Listeleme Dokümantasyonu & Kontrol Listeleri</h1>
-              <p className="p-style">Borsaların inceleme komitelerinden "Kabul" almanın anahtarı kusursuz dokümantasyondur. Projenizi teknik, ekonomik ve hukuki olarak listelemeye hazır hale getiriyoruz.</p>
+              <h1 className="h1-style">Listing Documentation & Checklists</h1>
+              <p className="p-style">The key to receiving "Acceptance" from borsa review committees is flawless documentation. We prepare your project technically, economically, and legally ready for listing.</p>
               <div style={{marginTop: '30px'}}>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">HUKUKİ GÖRÜŞ VE UYUMLULUK DOSYASI</span>
+                  <span className="bullet-text">LEGAL OPINION AND COMPLIANCE DOSSIER</span>
                 </div>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">KURUMSAL WHITEPAPER VE TOKENOMICS</span>
+                  <span className="bullet-text">CORPORATE WHITEPAPER AND TOKENOMICS</span>
                 </div>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">KAPSAMLI TEKNİK CHECKLIST YÖNETİMİ</span>
+                  <span className="bullet-text">COMPREHENSIVE TECHNICAL CHECKLIST MANAGEMENT</span>
                 </div>
               </div>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Dosya Analizi Al</h3>
-              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Document Analysis</h3>
+              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Mevcut Doküman Linki (Opsiyonel)" />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Hangi belgeleriniz eksik?" required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'KONTROL EDİLİYOR...' : 'KONTROL LİSTESİ AL'}</button>
+                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Existing Document Link (Optional)" />
+                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Which documents are you missing?" required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'CHECKING...' : 'GET CHECKLIST'}</button>
                 </form>
               )}
             </div>
@@ -131,8 +131,8 @@ const ListingDocumentationSubDetailView: React.FC = () => {
           <div className="detail-row">
             <div className="detail-item">
               <div className="detail-text">
-                <h2 className="h2-style">Kurumsal Whitepaper ve Tokenomics Sunumu</h2>
-                <p className="p-style">Borsalar, Whitepaper'ınızın sadece fikrine değil, teknik gerçekçiliğine ve veriye dayalı Tokenomics yapısına bakar. Biz, verilerinizi borsa analistlerinin güvenini kazanacak profesyonel tablolar ve şeffaf açıklamalarla yeniden kurguluyoruz.</p>
+                <h2 className="h2-style">Corporate Whitepaper and Tokenomics Presentation</h2>
+                <p className="p-style">Exchanges look not just at the idea of your Whitepaper, but at its technical realism and data-driven Tokenomics structure. We re-construct your data with professional tables and transparent explanations that will earn the trust of borsa analysts.</p>
               </div>
               <div className="detail-visual">
                 <img src="https://images.unsplash.com/photo-1554224155-8d04182258f5?q=80&w=2000" alt="Whitepaper Review" />
@@ -140,8 +140,8 @@ const ListingDocumentationSubDetailView: React.FC = () => {
             </div>
             <div className="detail-item reverse">
               <div className="detail-text">
-                <h2 className="h2-style">Kapsamlı Teknik Checklist Yönetimi</h2>
-                <p className="p-style">Borsaların teknik entegrasyon formlarındaki her bir soruya (Ağ detayları, RPC endpointler, Explorer linkleri vb.) teknik mühendislerimizle yanıt veriyoruz. Teknik hatalar nedeniyle yaşanabilecek listeleme gecikmelerini önceden eliyoruz.</p>
+                <h2 className="h2-style">Comprehensive Technical Checklist Management</h2>
+                <p className="p-style">We answer every question in the technical integration forms of the exchanges (Network details, RPC endpoints, Explorer links, etc.) with our technical engineers. We pre-eliminate listing delays that may occur due to technical errors.</p>
               </div>
               <div className="detail-visual">
                 <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?q=80&w=2000" alt="Technical Checklist" />
@@ -153,15 +153,15 @@ const ListingDocumentationSubDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Listeleme Şansınızı Kusursuz Dosyalarla Artırın</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Eksik bir belge veya hatalı bir teknik veri projenizin aylarını kaybetmesine neden olabilir. Profesyonel dökümantasyon ekibimizle dosyanızı bugün tamamlayın.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Dökümantasyon Paketi İste</a>
+          <h2 className="h2-style">Increase Your Listing Chances with Flawless Files</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>A missing document or incorrect technical data can cause your project to lose months. Complete your dossier today with our professional documentation team.</p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Request Documentation Package</a>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -177,7 +177,7 @@ const ListingDocumentationSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/token-lansman-ve-listeleme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/token-lansman-ve-listeleme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back</button>
       </div>
     </div>
   );

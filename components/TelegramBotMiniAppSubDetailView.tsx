@@ -20,9 +20,9 @@ const TelegramBotMiniAppSubDetailView: React.FC = () => {
   };
 
   const reasons = [
-    { title: 'TON Ecosystem', desc: 'TON ağı ile tam entegre, yüksek etkileşimli viral sistemler.', icon: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/> },
-    { title: 'Viral Growth Loop', desc: 'Kullanıcıların birbirini davet ettiği ödüllendirme mekanizmaları.', icon: <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/> },
-    { title: 'Trading Automation', desc: 'Anlık fiyat takibi ve emir yönetimi yapan güvenli bot altyapıları.', icon: <path d="M22 12h-4l-3 9L9 3l-3 9H2"/> }
+    { title: 'TON Ecosystem', desc: 'Fully integrated viral systems with the TON network for high interaction.', icon: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/> },
+    { title: 'Viral Growth Loop', desc: 'Rewarding mechanisms where users invite one another.', icon: <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/> },
+    { title: 'Trading Automation', desc: 'Secure bot infrastructures that perform instant price tracking and order management.', icon: <path d="M22 12h-4l-3 9L9 3l-3 9H2"/> }
   ];
 
   return (
@@ -40,7 +40,7 @@ const TelegramBotMiniAppSubDetailView: React.FC = () => {
         #h-hero { position: relative; padding: 220px 0 120px; min-height: 85vh; display: flex; align-items: center; }
         .hero-grid { display: flex; flex-direction: column; gap: 60px; position: relative; z-index: 10; width: 100%; }
         @media (min-width: 1024px) { .hero-grid { flex-direction: row; align-items: center; justify-content: space-between; } }
-        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: 0 auto; }
+        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: auto; }
         .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; color: #000; margin-bottom: 16px; }
         .form-button { width: 100%; background: var(--cray-gold); color: #000; padding: 18px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
         .reasons-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
@@ -72,19 +72,19 @@ const TelegramBotMiniAppSubDetailView: React.FC = () => {
           <div className="hero-grid">
             <div style={{flex: 1.2}}>
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Telegram Mini Apps</h5>
-              <h1 className="h1-style">Telegram Bot & Mini App Geliştirme</h1>
-              <p className="p-style">900 milyon kullanıcıya Telegram üzerinden saniyeler içinde ulaşın. TON ekosisteminin gücünü projenize entegre edin.</p>
+              <h1 className="h1-style">Telegram Bot & Mini App Development</h1>
+              <p className="p-style">Reach 900 million users on Telegram in seconds. Integrate the power of the TON ecosystem into your project.</p>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Telegram Analizi Al</h3>
-              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Telegram Analysis</h3>
+              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Try Again</button></div> : (
                 <form onSubmit={handleSubmit}>
                   <select className="form-control" required>
-                    <option value="">İhtiyaç</option><option value="tma">Mini App (TMA)</option><option value="bot">Trading Bot</option>
+                    <option value="">Need</option><option value="tma">Mini App (TMA)</option><option value="bot">Trading Bot</option>
                   </select>
-                  <textarea className="form-control" rows={3} placeholder="Viral mekanizmanızı özetleyin..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="E-posta veya Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'HESAPLANIYOR...' : 'TELEGRAM PLANI AL'}</button>
+                  <textarea className="form-control" rows={3} placeholder="Summarize your viral mechanism..." value={goal} onChange={e=>setGoal(e.target.value)} required />
+                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'CALCULATING...' : 'GET TELEGRAM PLAN'}</button>
                 </form>
               )}
             </div>
@@ -116,8 +116,8 @@ const TelegramBotMiniAppSubDetailView: React.FC = () => {
                 <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2000" alt="TON" />
               </div>
               <div className="detail-text">
-                <h2 className="h2-style">TON Network Entegrasyonu</h2>
-                <p className="p-style">Uygulamanızın TON cüzdanlarıyla (Telegram Wallet, Tonkeeper) kusursuz çalışmasını sağlıyoruz. Jetton alım-satımı, NFT koleksiyonları ve on-chain görevleri Mini App'inize entegre ediyoruz.</p>
+                <h2 className="h2-style">TON Network Integration</h2>
+                <p className="p-style">We ensure your application works flawlessly with TON wallets (Telegram Wallet, Tonkeeper). We integrate Jetton trading, NFT collections, and on-chain tasks into your Mini App.</p>
               </div>
             </div>
             <div className="detail-item reverse">
@@ -125,8 +125,8 @@ const TelegramBotMiniAppSubDetailView: React.FC = () => {
                 <img src="https://images.unsplash.com/photo-1614680376739-414d95ff43df?q=80&w=2000" alt="Viral" />
               </div>
               <div className="detail-text">
-                <h2 className="h2-style">Viral Tapper & Mini Oyun Mekanikleri</h2>
-                <p className="p-style">Toplulukların bayıldığı 'Tap-to-Earn' mekaniklerini, günlük görevleri ve arkadaş davet sistemlerini (referral) kullanarak uygulamanızın organik ve hızlı şekilde yayılmasını sağlıyoruz.</p>
+                <h2 className="h2-style">Viral Tapper & Mini Game Mechanics</h2>
+                <p className="p-style">Using 'Tap-to-Earn' mechanics loved by communities, daily tasks, and friend invitation systems (referral), we ensure your application spreads organically and rapidly.</p>
               </div>
             </div>
           </div>
@@ -135,19 +135,19 @@ const TelegramBotMiniAppSubDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Telegram'da Viral Olmaya Hazır mısınız?</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>TON ekosistemi ve Telegram Mini Apps dünyası şu an kriptonun en büyük büyüme alanı. Bu devrimde yerinizi almak için profesyonel geliştirme desteği alın.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Hemen Mini App Başlat</a>
+          <h2 className="h2-style">Ready to Go Viral on Telegram?</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>The TON ecosystem and Telegram Mini Apps world is currently the biggest growth area in crypto. Get professional development support to take your place in this revolution.</p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Start Mini App Now</a>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {[
-              { q: "TMA onay süreci nasıl işler?", a: "Telegram Mini Apps merkezi bir onay gerektirmez, ancak bot store ve arama görünürlüğü için optimizasyon yapıyoruz." },
-              { q: "Oyun kurgusu ekleyebilir miyiz?", a: "Evet, tapper oyunlarından şans oyunlarına kadar tüm P2E kurgularını TON ağıyla entegre ediyoruz." }
+              { q: "How does the TMA approval process work?", a: "Telegram Mini Apps do not require centralized approval, but we perform optimization for bot store and search visibility." },
+              { q: "Can we add game mechanics?", a: "Yes, we integrate all P2E kurgular from tapper games to games of chance with the TON network." }
             ].map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
                 <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
@@ -162,7 +162,7 @@ const TelegramBotMiniAppSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

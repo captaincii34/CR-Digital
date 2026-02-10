@@ -15,43 +15,43 @@ const ContentProductionDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject(status, `İçerik Türü: ${contentType}. Hedef: ${goal}`);
+    const result = await evaluateProject(status, `Content Type: ${contentType}. Goal: ${goal}`);
     setAiResult(result);
     setLoading(false);
   };
 
   const scope = [
-    { title: "Marka Kimliği Tasarımı", desc: "Logo, font ve renk paleti ile profesyonel kurumsal kimlik.", icon: "🎨" },
-    { title: "Web3 UI / UX Tasarımı", desc: "Kripto kullanıcıları için optimize edilmiş modern arayüzler.", icon: "📱" },
-    { title: "Motion Grafik & Explainer", desc: "Projenizi saniyeler içinde anlatan etkileyici 2D/3D videolar.", icon: "🎬" },
-    { title: "Kısa Format Video", desc: "Reels ve Shorts için viral olma potansiyeli yüksek içerikler.", icon: "🤳" },
-    { title: "Meme & Trend Üretimi", desc: "Topluluğun ilgisini çeken güncel ve eğlenceli görsel içerikler.", icon: "🤡" },
-    { title: "Duyuru & Listeleme Kitleri", desc: "Borsa listelemeleri için profesyonel görsel paketleri.", icon: "📢" },
-    { title: "Sosyal Medya Paketleri", desc: "Günlük akış için şablonlar ve özgün tasarım setleri.", icon: "📦" }
+    { title: "Brand Identity Design", desc: "Professional corporate identity with logo, font, and color palette.", icon: "🎨" },
+    { title: "Web3 UI / UX Design", desc: "Modern interfaces optimized for crypto users.", icon: "📱" },
+    { title: "Motion Graphics & Explainer", desc: "Impressive 2D/3D videos explaining your project in seconds.", icon: "🎬" },
+    { title: "Short Format Video", desc: "Content with high viral potential for Reels and Shorts.", icon: "🤳" },
+    { title: "Meme & Trend Production", desc: "Engaging visual content that captures community interest.", icon: "" },
+    { title: "Announcement & Listing Kits", desc: "Professional visual packages for exchange listings.", icon: "📢" },
+    { title: "Social Media Packages", desc: "Templates and unique design sets for daily flow.", icon: "📦" }
   ];
 
   const reasons = [
     {
       icon: <><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></>,
-      title: 'NDA & Gizlilik Önceliği',
-      desc: 'Projelerinizin güvenliği bizim için en önemli konu'
+      title: 'NDA & Confidentiality Priority',
+      desc: 'The security of your projects is our most important concern'
     },
     {
       icon: <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>,
-      title: "A'dan Z'ye Proje Yaklaşımı",
-      desc: 'Fikir aşamasından lansmanına kadar her adımda yanınızdayız'
+      title: "End-to-End Project Approach",
+      desc: 'We are with you at every step from ideation to launch'
     },
     {
       icon: <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>,
-      title: 'Web3 & Crypto Odaklı Uzmanlık',
-      desc: 'Sadece kripto ve Web3 projelerine odaklanmış deneyimli ekip'
+      title: 'Web3 & Crypto Focused Expertise',
+      desc: 'Experienced team focused exclusively on crypto and Web3 projects'
     }
   ];
 
   const faqs = [
-    { q: "Bir video hazırlığı ne kadar sürer?", a: "Videonun türüne göre 3 ila 10 iş günü arasında teslimat sağlıyoruz." },
-    { q: "Mevcut logomuzu güncelleyebilir misiniz?", a: "Evet, marka kimliği (re-branding) çalışmalarımız kapsamında mevcut kimliğinizi modernize ediyoruz." },
-    { q: "Web3 odaklı tasarım neden farklıdır?", a: "Kripto kullanıcılarının görsel dili (neon, cyberpunk, minimalist vb.) ve güven veren bir UI yapısı çok kritiktir." }
+    { q: "How long does it take to prepare a video?", a: "Depending on the type of video, we provide delivery within 3 to 10 business days." },
+    { q: "Can you update our current logo?", a: "Yes, we modernize your existing identity within our brand identity (re-branding) efforts." },
+    { q: "Why is Web3-focused design different?", a: "The visual language of crypto users (neon, cyberpunk, minimalist, etc.) and a trustworthy UI structure are very critical." }
   ];
 
   return (
@@ -64,7 +64,7 @@ const ContentProductionDetailView: React.FC = () => {
         .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.85); z-index: 1; }
         .grad { position: absolute; inset: 0; background: linear-gradient(to bottom, #000, transparent 40%, transparent 60%, #000); z-index: 2; }
         .h1-style { font-size: 40px !important; font-weight: 700 !important; }
-        .h2-style { font-size: 30px !important; font-weight: 700 !important; }
+        .h2-style { font-size: 32px !important; font-weight: 700 !important; }
         .h3-style { font-size: 22px !important; font-weight: 600 !important; }
         .h4-style { font-size: 18px !important; font-weight: 600 !important; }
         .p-style { font-size: 16px !important; font-weight: 300 !important; }
@@ -109,11 +109,11 @@ const ContentProductionDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="hero-grid">
             <div className="hero-text-content">
-              <h1 className="h1-style">İçerik Üretimi (Video ve Tasarım)</h1>
-              <p className="hero-desc p-style">Web3 dünyasında görsel dilde konuşuyoruz. Projenizi anlatan, güven veren ve viral olan içeriklerle fark yaratın.</p>
+              <h1 className="h1-style">Content Production (Video & Design)</h1>
+              <p className="hero-desc p-style">We speak the visual language of the Web3 world. Stand out with content that explains your project, builds trust, and goes viral.</p>
               
               <div className="hero-feature-list">
-                {["2D/3D Motion Tasarım", "Profesyonel Marka Kimliği", "Viral Kısa Format Videolar", "Web3 Odaklı UI/UX"].map((item, i) => (
+                {["2D/3D Motion Design", "Professional Brand Identity", "Viral Short-Format Videos", "Web3 Oriented UI/UX"].map((item, i) => (
                   <div key={i} className="hero-feature-item">
                     <div className="feature-icon-circle">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="4"><polyline points="20 6 9 17 4 12"/></svg>
@@ -124,15 +124,15 @@ const ContentProductionDetailView: React.FC = () => {
               </div>
             </div>
             <div className="form-card">
-              <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px'}}>Yaratıcı Analiz</h3>
+              <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px'}}>Creative Analysis</h3>
               <form onSubmit={handleSubmit}>
                 <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
-                  <option value="">İhtiyaç Aşaması</option><option value="yeni">Yeni Marka Kimliği</option><option value="kampanya">Kampanya Bazlı İçerik</option>
+                  <option value="">Need Stage</option><option value="yeni">New Brand Identity</option><option value="kampanya">Campaign-Based Content</option>
                 </select>
-                <input type="text" className="form-control" placeholder="İhtiyaç Duyulan İçerik Türü" value={contentType} onChange={e=>setContentType(e.target.value)} />
-                <textarea className="form-control" rows={3} placeholder="Görsel Stil Beklentiniz Nedir?" value={goal} onChange={e=>setGoal(e.target.value)} required />
-                <input type="text" className="form-control" placeholder="Telegram/E-posta" value={contact} onChange={e=>setContact(e.target.value)} required />
-                <button type="submit" className="form-button">{loading ? 'İŞLENİYOR...' : 'TASARIM PLANI AL'}</button>
+                <input type="text" className="form-control" placeholder="Required Content Type" value={contentType} onChange={e=>setContentType(e.target.value)} />
+                <textarea className="form-control" rows={3} placeholder="What is your visual style expectation?" value={goal} onChange={e=>setGoal(e.target.value)} required />
+                <input type="text" className="form-control" placeholder="Telegram / Email" value={contact} onChange={e=>setContact(e.target.value)} required />
+                <button type="submit" className="form-button">{loading ? 'PROCESSING...' : 'GET DESIGN PLAN'}</button>
               </form>
             </div>
           </div>
@@ -143,7 +143,7 @@ const ContentProductionDetailView: React.FC = () => {
         <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=2070&auto=format&fit=crop" className="bg-img" alt="Creative Excellence Background" />
         <div className="overlay" style={{ background: 'rgba(0,0,0,0.85)' }}></div><div className="grad"></div>
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Neden Bizimle Çalışmalısınız?</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Why Should You Work With Us?</h2>
           <div className="reasons-grid">
             {reasons.map((r, i) => (
               <div key={i} className="reason-card">
@@ -163,7 +163,7 @@ const ContentProductionDetailView: React.FC = () => {
         <img src="/gorsel/ag1.jpg" alt="Scope Background" className="bg-img" />
         <div className="overlay"></div><div className="grad"></div>
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Hizmet Kapsamımız</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Our Service Scope</h2>
           <div className="scope-grid">
             {scope.map((s, i) => (
               <div key={i} className="scope-card">
@@ -179,12 +179,12 @@ const ContentProductionDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="flex flex-col lg:flex-row items-center gap-20">
             <div className="flex-1">
-              <h2 className="h2-style" style={{marginBottom: '28px'}}>Görsel Hikaye Anlatıcılığı</h2>
+              <h2 className="h2-style" style={{marginBottom: '28px'}}>Visual Storytelling</h2>
               <p className="p-style" style={{marginBottom: '24px', color: '#d1d5db'}}>
-                Karmaşık teknolojik kavramları herkesin anlayabileceği basit ve etkileyici görsellere dönüştürüyoruz. Projenizin 'wow' etkisini tasarım ekibimizle yaratın.
+                We transform complex technological concepts into simple and impressive visuals that everyone can understand. Create your project's 'wow' effect with our design team.
               </p>
-              <ul style={{listStyle: 'none', padding: 0}}>
-                {["Profesyonel Motion Animasyonlar", "Modern UI/UX Yaklaşımları", "Viral Meme İçerikler"].map((adv, i) => (
+              <ul style={{listStyle: 'none', padding: 0, margin: 0}}>
+                {["Professional Motion Animations", "Modern UI/UX Approaches", "Viral Meme Content"].map((adv, i) => (
                   <li key={i} className="p-style" style={{display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '12px'}}>
                     <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {adv}
                   </li>
@@ -200,14 +200,14 @@ const ContentProductionDetailView: React.FC = () => {
 
       <section className="bant-section">
         <div className="container-xl">
-          <h2 className="h2-style" style={{color: '#000', marginBottom: '20px'}}>Yaratıcı Sürecinizi Bugün Başlatın</h2>
-          <a href="#h-hero" className="bant-btn">Tasarım Paketi İste</a>
+          <h2 className="h2-style" style={{color: '#000', marginBottom: '20px'}}>Start Your Creative Process Today</h2>
+          <a href="#h-hero" className="bant-btn">Request Design Package</a>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((faq, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -223,7 +223,7 @@ const ContentProductionDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '80px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
-        <button onClick={() => window.location.hash = ''} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Ana Sayfaya Dön</button>
+        <button onClick={() => window.location.hash = ''} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Homepage</button>
       </div>
     </div>
   );

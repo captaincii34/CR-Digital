@@ -11,23 +11,23 @@ const TokenLaunchStrategySubDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject('Lansman Stratejisi', 'Token lansman takvimi ve pazar girişi analizi.');
+    const result = await evaluateProject('Launch Strategy', 'Token launch calendar and market entry analysis.');
     setAiResult(result);
     setLoading(false);
   };
 
   const reasons = [
-    { title: 'Zamanlama Analizi', desc: 'Piyasa döngülerine (Boğa/Ayı) en uygun lansman tarihini verilerle belirliyoruz.', icon: <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/> },
-    { title: 'Platform Seçimi', desc: 'Projenizin türüne göre en verimli Launchpad ve borsa eşleşmelerini yapıyoruz.', icon: <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/> },
-    { title: 'Likidite Mimarisi', desc: 'Lansman anında fiyat istikrarı için gerekli havuz derinliğini kurguluyoruz.', icon: <path d="M3 6l3 1h15M3 12l3 1h15M3 18l3 1h15"/> }
+    { title: 'Timing Analysis', desc: 'We determine the most suitable launch date according to market cycles (Bull/Bear) with data.', icon: <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/> },
+    { title: 'Platform Selection', desc: 'We make the most efficient Launchpad and exchange matches according to your project type.', icon: <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/> },
+    { title: 'Liquidity Architecture', desc: 'We construct the necessary pool depth for price stability at the time of launch.', icon: <path d="M3 6l3 1h15M3 12l3 1h15M3 18l3 1h15"/> }
   ];
 
   const faqs = [
-    { q: "Lansman stratejisi ne kadar sürede hazırlanır?", a: "Projenin kapsamına ve pazarın durumuna göre 1 ila 2 hafta içerisinde detaylı bir GTM (Go-to-Market) planı sunuyoruz." },
-    { q: "Doğru lansman platformunu nasıl seçiyorsunuz?", a: "Topluluk demografiniz, tokenomics yapınız ve bütçe hedeflerinize göre en yüksek ROI getirecek platformları analiz ediyoruz." },
-    { q: "Boğa piyasasını mı beklemeliyim?", a: "Lansman için her zaman 'boğa' gerekmez. Doğru niş kitle ve sağlam bir utility ile her mevsimde başarılı çıkışlar mümkündür." },
-    { q: "Lansman bütçesi ne kadar olmalı?", a: "Bu hedeflerinize göre değişir; ancak biz her bütçeyi en verimli (lean) şekilde kullanacak kademeli büyüme modelleri öneriyoruz." },
-    { q: "Lansman anında fiyatı nasıl koruyorsunuz?", a: "Anti-dump mekanizmaları, vesting takvimleri ve önceden planlanmış MM (Market Making) desteği ile fiyat istikrarını sağlıyoruz." }
+    { q: "How long does it take to prepare a launch strategy?", a: "Depending on the scope of the project and market conditions, we provide a detailed GTM (Go-to-Market) plan within 1 to 2 weeks." },
+    { q: "How do you choose the right launch platform?", a: "We analyze platforms that will bring the highest ROI according to your community demographics, tokenomics structure, and budget goals." },
+    { q: "Should I wait for a bull market?", a: "A 'bull' market is not always required for launch. Successful exits are possible in every season with the right niche audience and solid utility." },
+    { q: "What should the launch budget be?", a: "This varies according to your goals; however, we recommend tiered growth models that will use every budget in the most efficient (lean) way." },
+    { q: "How do you protect the price at launch?", a: "We ensure price stability with anti-dump mechanisms, vesting schedules, and pre-planned MM (Market Making) support." }
   ];
 
   return (
@@ -79,30 +79,30 @@ const TokenLaunchStrategySubDetailView: React.FC = () => {
           <div className="hero-grid">
             <div>
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>GTM Excellence</h5>
-              <h1 className="h1-style">Token Lansman Stratejisi</h1>
-              <p className="p-style">Pazara giriş anı projenizin geleceğini belirler. Doğru zamanlama, doğru platform ve doğru psikolojik kurgu ile lansmanınızı başarıya taşıyoruz.</p>
+              <h1 className="h1-style">Token Launch Strategy</h1>
+              <p className="p-style">The moment of market entry determines the future of your project. We carry your launch to success with the right timing, the right platform, and the right psychological setup.</p>
               <div style={{marginTop: '30px'}}>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">PİYASA DÖNGÜSÜ ANALİZİ</span>
+                  <span className="bullet-text">MARKET CYCLE ANALYSIS</span>
                 </div>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">DOĞRU LAUNCHPAD EŞLEŞTİRMESİ</span>
+                  <span className="bullet-text">ACCURATE LAUNCHPAD MATCHING</span>
                 </div>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">STRATEJİK LİKİDİTE KURGUSU</span>
+                  <span className="bullet-text">STRATEGIC LIQUIDITY SETUP</span>
                 </div>
               </div>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Strateji Analizi Al</h3>
-              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Strategy Analysis</h3>
+              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Proje Adı" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Lansman hedeflerinizi özetleyin..." required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'HESAPLANIYOR...' : 'STRATEJİ PLANI AL'}</button>
+                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Project Name" required />
+                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Summarize your launch goals..." required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'CALCULATING...' : 'GET STRATEGY PLAN'}</button>
                 </form>
               )}
             </div>
@@ -131,8 +131,8 @@ const TokenLaunchStrategySubDetailView: React.FC = () => {
           <div className="detail-row">
             <div className="detail-item">
               <div className="detail-text">
-                <h2 className="h2-style">Go-To-Market (GTM) Planlaması</h2>
-                <p className="p-style">Projenizin sadece "listelenmesini" değil, bir "olay" olarak piyasaya sürülmesini sağlıyoruz. Hedef kitlenizin olduğu coğrafyaları, en etkili marketing kanallarını ve lansman günü 'FOMO' kurgusunu adım adım planlıyoruz.</p>
+                <h2 className="h2-style">Go-To-Market (GTM) Planning</h2>
+                <p className="p-style">We ensure your project is not just "listed," but launched as an "event." We plan step-by-step the regions where your target audience is, the most effective marketing channels, and the 'FOMO' setup on launch day.</p>
               </div>
               <div className="detail-visual">
                 <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2000" alt="Market Plan" />
@@ -140,8 +140,8 @@ const TokenLaunchStrategySubDetailView: React.FC = () => {
             </div>
             <div className="detail-item reverse">
               <div className="detail-text">
-                <h2 className="h2-style">Lansman Sonrası Sürdürülebilirlik</h2>
-                <p className="p-style">Pek çok proje ilk günden sonra unutulur. Biz, lansman heyecanını holder sadakatine dönüştürecek 'post-launch' stratejileri kuruyoruz. İkinci dalga pazarlama ve borsa genişleme planlarıyla büyümenizi garanti altına alıyoruz.</p>
+                <h2 className="h2-style">Sustainability Post-Launch</h2>
+                <p className="p-style">Many projects are forgotten after the first day. We build 'post-launch' strategies that will turn launch excitement into holder loyalty. We guarantee your growth with the second wave of marketing and exchange expansion plans.</p>
               </div>
               <div className="detail-visual">
                 <img src="https://images.unsplash.com/photo-1454165833767-027ffea9e77b?q=80&w=2000" alt="Sustainability" />
@@ -153,15 +153,15 @@ const TokenLaunchStrategySubDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Lansman Gününüzü Bugün Planlayalım</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Kripto piyasasında ikinci bir şansınız yoktur. İlk çıkışınızı profesyonel bir stratejiyle yaparak rakiplerinizin önüne geçin.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Strateji Toplantısı Planla</a>
+          <h2 className="h2-style">Let's Plan Your Launch Day Today</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>You don't get a second chance in the crypto market. Make your first exit with a professional strategy and get ahead of your competitors.</p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Schedule Strategy Meeting</a>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -177,7 +177,7 @@ const TokenLaunchStrategySubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/token-lansman-ve-listeleme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/token-lansman-ve-listeleme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back</button>
       </div>
     </div>
   );

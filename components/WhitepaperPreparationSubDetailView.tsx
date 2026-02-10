@@ -22,39 +22,39 @@ const WhitepaperPreparationSubDetailView: React.FC = () => {
   const reasons = [
     {
       icon: <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>,
-      title: 'Teknik Derinlik',
-      desc: 'Sektör jargonuna hakim, teknik detayları akademik ve profesyonel bir dille aktaran kusursuz dokümanlar.'
+      title: 'Technical Depth',
+      desc: 'Flawless documents that dominate industry jargon and convey technical details in an academic and professional language.'
     },
     {
       icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>,
-      title: "Yatırımcı İknası",
-      desc: 'Sadece teknik veri değil, projenizin vizyonunu öne çıkaran etkileyici hikaye anlatımı.'
+      title: "Investor Persuasion",
+      desc: 'Not just technical data, but impressive storytelling that highlights your project’s vision.'
     },
     {
       icon: <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>,
-      title: 'Görsel Veri Sunumu',
-      desc: 'Karmaşık süreçleri şık diyagramlar ve infografiklerle herkesin anlayabileceği hale getiriyoruz.'
+      title: 'Visual Data Presentation',
+      desc: 'We make complex processes understandable for everyone with stylish diagrams and infographics.'
     }
   ];
 
   const faqs = [
-    { q: "Litepaper ve Whitepaper arasındaki fark nedir?", a: "Litepaper projenin özet vizyonudur; Whitepaper ise tüm teknik, ekonomik ve hukuki detayları içeren ana 'anayasa' dökümanıdır." },
-    { q: "Hangi dillerde hazırlık yapıyorsunuz?", a: "Global bir proje hedefliyorsanız ana dil mutlaka İngilizce olmalıdır. Tercüme ve yerelleştirme desteği de sunuyoruz." },
-    { q: "Hazırlık süreci ne kadar sürer?", a: "Projenin kapsamına göre teknik dökümanın tamamlanması 2 ila 4 hafta arasındadır." }
+    { q: "What is the difference between Litepaper and Whitepaper?", a: "Litepaper is the summary vision of the project; Whitepaper is the main 'constitution' document containing all technical, economic, and legal details." },
+    { q: "In which languages do you prepare?", a: "If you are targeting a global project, the main language must be English. We also offer translation and localization support." },
+    { q: "How long does the preparation process take?", a: "Completion of the technical document varies between 2 to 4 weeks according to the scope of the project." }
   ];
 
   return (
     <div className="crypto-detail-page">
       <style>{`
         .crypto-detail-page { background-color: #000; color: #fff; overflow-x: hidden; }
-        .section-padding { padding: 120px 0; position: relative; }
+        .section-padding { padding: 100px 0; position: relative; }
         .container-xl { max-width: 1280px; margin: 0 auto; padding: 0 32px; width: 100%; position: relative; z-index: 10; }
         .bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
         .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.8); z-index: 1; }
         .grad { position: absolute; inset: 0; background: linear-gradient(to bottom, #000, transparent 40%, transparent 60%, #000); z-index: 2; }
         .h1-style { font-size: 40px !important; font-weight: 700 !important; }
         .h2-style { font-size: 32px !important; font-weight: 700 !important; }
-        .p-style { font-size: 16px !important; font-weight: 300 !important; color: #d1d5db; }
+        .p-style { font-size: 16px !important; font-weight: 300 !important; color: #d1d5db; line-height: 1.8; }
         #h-hero { position: relative; padding: 220px 0 120px; min-height: 85vh; display: flex; align-items: center; }
         .hero-grid { display: flex; flex-direction: column; gap: 60px; position: relative; z-index: 10; width: 100%; }
         @media (min-width: 1024px) { .hero-grid { flex-direction: row; align-items: center; justify-content: space-between; } }
@@ -66,22 +66,6 @@ const WhitepaperPreparationSubDetailView: React.FC = () => {
         .reason-card { padding: 48px 32px; border-radius: 24px; text-align: center; background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); transition: 0.4s; }
         .reason-card:hover { transform: translateY(-10px); border-color: var(--cray-gold); background: rgba(255, 177, 0, 0.15); }
         .reason-icon-box { width: 60px; height: 60px; background-color: var(--cray-gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.3); }
-        .info-detail-section { background: #050505; }
-        .detail-row { display: flex; flex-direction: column; gap: 100px; }
-        .detail-item { display: flex; flex-direction: column; gap: 60px; align-items: center; width: 100%; }
-        @media (min-width: 1024px) { 
-            .detail-item { flex-direction: row; } 
-            .detail-item.reverse { flex-direction: row-reverse; } 
-            .detail-text, .detail-visual { width: 50%; flex: 1; }
-        }
-        .detail-visual { border-radius: 32px; overflow: hidden; height: 500px; border: 1px solid rgba(255,177,0,0.2); position: relative; width: 100%; }
-        .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
-        .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
-        .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
-        .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        .faq-accordion-body { padding: 0 32px 28px; color: #9ca3af; display: none; }
-        .faq-accordion-item.active .faq-accordion-body { display: block; }
-        .faq-accordion-item.active .faq-accordion-header { color: var(--cray-gold); }
       `}</style>
 
       {/* 1. Hero */}
@@ -91,24 +75,24 @@ const WhitepaperPreparationSubDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="hero-grid">
             <div style={{flex: 1.2}}>
-              <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Manifesto ve Teknik Doküman</h5>
-              <h1 className="h1-style">Whitepaper & Litepaper Hazırlığı</h1>
-              <p className="p-style" style={{marginTop: '20px', lineHeight: '1.7'}}>Projenizin manifestosunu yazıyoruz. Teknik derinliği yüksek, vizyoner ve yatırımcıyı harekete geçiren profesyonel dokümanlarla fark yaratın.</p>
+              <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Manifesto and Technical Document</h5>
+              <h1 className="h1-style">Whitepaper & Litepaper Preparation</h1>
+              <p className="p-style" style={{marginTop: '20px', lineHeight: '1.7'}}>We write your project’s manifesto. Stand out with professional documents that have high technical depth, are visionary, and prompt investors to take action.</p>
               <div style={{marginTop: '32px', display: 'flex', flexWrap: 'wrap', gap: '15px'}}>
-                <span style={{background: 'rgba(255,177,0,0.1)', color: 'var(--cray-gold)', padding: '8px 16px', borderRadius: '30px', fontSize: '12px', fontWeight: 700}}>✓ AKADEMİK DİL</span>
-                <span style={{background: 'rgba(255,177,0,0.1)', color: 'var(--cray-gold)', padding: '8px 16px', borderRadius: '30px', fontSize: '12px', fontWeight: 700}}>✓ İNFOGRAFİK DESTEĞİ</span>
+                <span style={{background: 'rgba(255,177,0,0.1)', color: 'var(--cray-gold)', padding: '8px 16px', borderRadius: '30px', fontSize: '12px', fontWeight: 700}}>✓ ACADEMIC LANGUAGE</span>
+                <span style={{background: 'rgba(255,177,0,0.1)', color: 'var(--cray-gold)', padding: '8px 16px', borderRadius: '30px', fontSize: '12px', fontWeight: 700}}>✓ INFOGRAPHIC SUPPORT</span>
               </div>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Taslak Analizi Al</h3>
-              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Yeniden Dene</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Draft Analysis</h3>
+              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Try Again</button></div> : (
                 <form onSubmit={handleSubmit}>
                   <select className="form-control" required>
-                    <option value="">Doküman Türü</option><option value="white">Whitepaper</option><option value="lite">Litepaper</option><option value="pitch">Pitch Deck (İçerik)</option>
+                    <option value="">Document Type</option><option value="white">Whitepaper</option><option value="lite">Litepaper</option><option value="pitch">Pitch Deck (Content)</option>
                   </select>
-                  <textarea className="form-control" rows={3} placeholder="Projenizin teknik ana başlıklarını belirtin..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="E-posta veya Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'İŞLENİYOR...' : 'TASLAK PLANI OLUŞTUR'}</button>
+                  <textarea className="form-control" rows={3} placeholder="State the technical main headings of your project..." value={goal} onChange={e=>setGoal(e.target.value)} required />
+                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'PROCESSING...' : 'CREATE DRAFT PLAN'}</button>
                 </form>
               )}
             </div>
@@ -118,8 +102,6 @@ const WhitepaperPreparationSubDetailView: React.FC = () => {
 
       {/* 2. Box Section */}
       <section className="section-padding">
-        <img src="https://images.unsplash.com/photo-1454165833767-027ffea9e77b?q=80&w=2000" className="bg-img" alt="Boxes Background" />
-        <div className="overlay" style={{background: 'rgba(0,0,0,0.85)'}}></div>
         <div className="container-xl">
           <div className="reasons-grid">
             {reasons.map((r, i) => (
@@ -135,76 +117,8 @@ const WhitepaperPreparationSubDetailView: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. Detailed Content (Z-Pattern %50-%50) */}
-      <section className="info-detail-section section-padding">
-        <div className="container-xl">
-          <div className="detail-row">
-            <div className="detail-item">
-              <div className="detail-text">
-                <h2 className="h2-style">Vizyonunuzu Teknik Dile Döküyoruz</h2>
-                <p className="p-style" style={{marginTop: '24px', lineHeight: '1.8'}}>Teknik mimarinizi, ağ seçiminizi ve konsensüs mekanizmanızı akademik standartlarda dökümante ediyoruz. Dokümanlarınız projenizin anayasası olur.</p>
-                <ul style={{marginTop: '32px', listStyle: 'none', padding: 0}}>
-                   {["Akademik Yazım Standartları", "Hukuki Uyumluluk Çerçevesi", "Detaylı Teknik Şemalar"].map((item, i) => (
-                    <li key={i} className="p-style" style={{marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '12px'}}>
-                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1454165833767-027ffea9e77b?q=80&w=2000" alt="Writing" />
-              </div>
-            </div>
-
-            <div className="detail-item reverse">
-              <div className="detail-text">
-                <h2 className="h2-style">İnfografik ve Diyagram Desteği</h2>
-                <p className="p-style" style={{marginTop: '24px', lineHeight: '1.8'}}>Karmaşık akış şemalarını ve token ekonomisi tablolarını, görsel hikaye anlatıcılığı ile projenizin kalbine dokunan tasarımlara dönüştürüyoruz.</p>
-                <ul style={{marginTop: '32px', listStyle: 'none', padding: 0}}>
-                   {["3D Model Görselleştirmeleri", "Dinamik Akış Şemaları", "Modern UI Örnekleri"].map((item, i) => (
-                    <li key={i} className="p-style" style={{marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '12px'}}>
-                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2000" alt="Visual Content" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. CTA Band */}
-      <section className="cta-box-section">
-        <div className="container-xl">
-          <h2 className="h2-style">Projenizin Sözleşmesi Profesyonelce Yazılsın</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px'}}>Global yatırımcıların dilinden konuşan, teknik olarak kusursuz dökümanlar için hemen başlayın.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Fiyat Teklifi Al</a>
-        </div>
-      </section>
-
-      {/* 5. FAQ */}
-      <section className="section-padding">
-        <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
-          <div style={{maxWidth: '850px', margin: '0 auto'}}>
-            {faqs.map((f, i) => (
-              <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
-                <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
-                  <span>{f.q}</span>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
-                </div>
-                <div className="faq-accordion-body p-style"><p>{f.a}</p></div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/token-ve-blokzincir-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/token-ve-blokzincir-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

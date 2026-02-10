@@ -11,23 +11,23 @@ const EcosystemCollaborationsSubDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject('Ekosistem İş Birliği', 'L1/L2 ağ entegrasyonu ve hibe (grant) danışmanlığı analizi.');
+    const result = await evaluateProject('Ecosystem Collaboration', 'L1/L2 network integration and grant consultancy analysis.');
     setAiResult(result);
     setLoading(false);
   };
 
   const reasons = [
-    { title: 'Foundation Bağlantıları', desc: 'Ethereum, Solana, TON ve BNB gibi dev ağların vakıfları (foundations) ile doğrudan iletişim sağlıyoruz.', icon: <path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/> },
-    { title: 'Hibe (Grant) Desteği', desc: 'Ağlardan hibe almanız için gereken teknik dokümantasyon, başvuru ve sunum süreçlerini profesyonelce yönetiyoruz.', icon: <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/> },
-    { title: 'Teknik Entegrasyon', desc: 'Projenizin ağın resmi araçlarına, cüzdanlarına ve dApp store’larına entegrasyonunu teknik ekibimizle koordine ediyoruz.', icon: <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/> }
+    { title: 'Foundation Connections', desc: 'We provide direct communication with foundations of major networks like Ethereum, Solana, TON, and BNB Chain.', icon: <path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/> },
+    { title: 'Grant Support', desc: 'We professionally manage technical documentation, application, and presentation processes to secure grants from networks.', icon: <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/> },
+    { title: 'Technical Integration', desc: 'We coordinate your project\'s integration with a network\'s official tools, wallets, and dApp stores via our technical team.', icon: <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/> }
   ];
 
   const faqs = [
-    { q: "Hangi ekosistemlerle çalışıyorsunuz?", a: "Ethereum, Solana, TON, BNB Chain, Polygon, Arbitrum, Optimism ve Base başta olmak üzere tüm majör ağlarda aktifiz." },
-    { q: "Grant (Hibe) almak garanti mi?", a: "Hiçbir hibe garantili değildir; ancak ağların kriterlerine %100 uyumlu bir teknik dosya ile şansınızı en üst seviyeye çıkarıyoruz." },
-    { q: "Ağların 'Official' duyurularında yer alabilir miyiz?", a: "Ekosistem iş birliği kapsamında, ağların resmi sosyal medya kanallarında duyurulmanız için gerekli PR çalışmalarını yürütüyoruz." },
-    { q: "Teknik entegrasyon desteği veriyor musunuz?", a: "Evet, projenizin ağın RPC nodeları, indexerları ve cüzdan standartlarıyla (EIP/SPL) tam uyumlu olmasını sağlıyoruz." },
-    { q: "Ecosystem grant bütçeleri ne kadardır?", a: "Ağın büyüklüğüne ve projenizin katma değerine göre 10.000$ ile 100.000$+ arasında değişen hibe fırsatları mevcuttur." }
+    { q: "Which ecosystems do you work with?", a: "We are active across all major networks, primarily Ethereum, Solana, TON, BNB Chain, Polygon, Arbitrum, Optimism, and Base." },
+    { q: "Is securing a grant guaranteed?", a: "No grant is guaranteed, but we maximize your chances with a technical dossier that is 100% compliant with network criteria." },
+    { q: "Can we be featured in a network's official announcements?", a: "As part of ecosystem collaboration, we conduct PR work to have your project announced on the official social media channels of the networks." },
+    { q: "Do you provide technical integration support?", a: "Yes, we ensure your project is fully compliant with the network's RPC nodes, indexers, and wallet standards (EIP/SPL)." },
+    { q: "How large are ecosystem grant budgets?", a: "Depending on the network size and your project's value proposition, grant opportunities ranging from $10,000 to over $100,000 are available." }
   ];
 
   return (
@@ -37,7 +37,7 @@ const EcosystemCollaborationsSubDetailView: React.FC = () => {
         .section-padding { padding: 100px 0; position: relative; }
         .container-xl { max-width: 1280px; margin: 0 auto; padding: 0 32px; width: 100%; position: relative; z-index: 10; }
         .bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
-        .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.8); z-index: 1; }
+        .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.85); z-index: 1; }
         .grad { position: absolute; inset: 0; background: linear-gradient(to bottom, #000, transparent 40%, transparent 60%, #000); z-index: 2; }
         .h1-style { font-size: 40px !important; font-weight: 700 !important; line-height: 1.2; }
         .h2-style { font-size: 32px !important; font-weight: 700 !important; }
@@ -79,30 +79,30 @@ const EcosystemCollaborationsSubDetailView: React.FC = () => {
           <div className="hero-grid">
             <div>
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Layer-Foundation Integration</h5>
-              <h1 className="h1-style">Ekosistem İş Birlikleri</h1>
-              <p className="p-style">Projenizi sadece bir borsa listelemesi olarak görmeyin. Onu bir ekosistemin yerel ve vazgeçilmez bir parçası haline getiriyoruz. L1 ve L2 ağlarıyla stratejik entegrasyonlar kuruyoruz.</p>
+              <h1 className="h1-style">Ecosystem Collaborations</h1>
+              <p className="p-style">Don't view your project simply as an exchange listing. We turn it into a native and indispensable part of an ecosystem by building strategic integrations with L1 and L2 networks.</p>
               <div style={{marginTop: '30px'}}>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">AĞ VAKIFLARI (FOUNDATIONS) İLE DOĞRUDAN TEMAS</span>
+                  <span className="bullet-text">DIRECT CONTACT WITH NETWORK FOUNDATIONS</span>
                 </div>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">HİBE (GRANT) PROGRAMLARI DANIŞMANLIĞI</span>
+                  <span className="bullet-text">GRANT PROGRAM CONSULTANCY</span>
                 </div>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">RESMİ EKOSİSTEM DESTEĞİ VE PR</span>
+                  <span className="bullet-text">OFFICIAL ECOSYSTEM SUPPORT AND PR</span>
                 </div>
               </div>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Ekosistem Analizi Al</h3>
-              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Ecosystem Analysis</h3>
+              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Hangi Ağda Geliştiriyorsunuz?" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Hibe veya teknik destek ihtiyacınızı özetleyin..." required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'HESAPLANIYOR...' : 'YOL HARİTASI AL'}</button>
+                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Which network are you developing on?" required />
+                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Summarize your grant or technical support needs..." required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'CALCULATING...' : 'GET ROADMAP'}</button>
                 </form>
               )}
             </div>
@@ -131,8 +131,8 @@ const EcosystemCollaborationsSubDetailView: React.FC = () => {
           <div className="detail-row">
             <div className="detail-item">
               <div className="detail-text">
-                <h2 className="h2-style">Grant (Hibe) Dünyasının Kapılarını Açın</h2>
-                <p className="p-style">Blokzincir ağları, kendi ekosistemlerini büyüten kaliteli projelere milyonlarca dolarlık hibeler (grants) ayırır. Biz, projenizin bu hibelerden faydalanması için gereken teknik dokümantasyonu hazırlıyor ve ağ yöneticileriyle görüşmeleri bizzat koordine ediyoruz.</p>
+                <h2 className="h2-style">Unlock the World of Grants</h2>
+                <p className="p-style">Blockchain networks allocate millions of dollars in grants to high-quality projects that grow their ecosystems. We prepare the technical documentation required for your project to benefit from these grants and coordinate meetings with network managers personally.</p>
               </div>
               <div className="detail-visual">
                 <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=2000" alt="Grants" />
@@ -140,8 +140,8 @@ const EcosystemCollaborationsSubDetailView: React.FC = () => {
             </div>
             <div className="detail-item reverse">
               <div className="detail-text">
-                <h2 className="h2-style">Ortak Altyapı ve Likidite Sinerjisi</h2>
-                <p className="p-style">Ekosistem iş birlikleri sadece reklam demek değildir. Aynı ağdaki diğer büyük dApp’ler (DEX’ler, Bridge’ler, Lending protokolleri) ile teknik ve likidite seviyesinde entegrasyonlar kurarak projenizin kullanım alanını (utility) maksimize ediyoruz.</p>
+                <h2 className="h2-style">Joint Infrastructure and Liquidity Synergy</h2>
+                <p className="p-style">Ecosystem collaborations are more than just advertising. We maximize your project's utility by establishing integrations at the technical and liquidity levels with other major dApps (DEXs, Bridges, Lending protocols) on the same network.</p>
               </div>
               <div className="detail-visual">
                 <img src="https://images.unsplash.com/photo-1639322537504-6427a16b0a28?q=80&w=2000" alt="Infrastructure" />
@@ -153,15 +153,15 @@ const EcosystemCollaborationsSubDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Projenizi Kendi Evinde Güçlendirelim</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Ağların sunduğu devasa imkanları projenize kazandırın. Ekosistem uzmanlarımızla hibe ve entegrasyon süreçlerini bugün planlayın.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Ekosistem Analizi İste</a>
+          <h2 className="h2-style">Strengthen Your Project in Its Home Base</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Secure the massive opportunities offered by networks for your project. Plan grant and integration processes with our ecosystem experts today.</p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Request Ecosystem Analysis</a>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -177,7 +177,7 @@ const EcosystemCollaborationsSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/is-ortakliklari-ve-is-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/is-ortakliklari-ve-is-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

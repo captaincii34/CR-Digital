@@ -15,44 +15,44 @@ const KriptoMarketingDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject(status, `Pazarlama Bütçesi: ${budget}. Hedef: ${goal}`);
+    const result = await evaluateProject(status, `Marketing Budget: ${budget}. Goal: ${goal}`);
     setAiResult(result);
     setLoading(false);
   };
 
   const marketingScope = [
-    { title: "Web3 Büyüme Stratejisi", desc: "Veriye dayalı büyüme planları ve ROI odaklı yaklaşımlar.", icon: "🎯" },
-    { title: "Performans Pazarlaması", desc: "Reklam ağları üzerinden hedeflenmiş kullanıcı edinimi.", icon: "⚡" },
-    { title: "Influencer & KOL", desc: "Global Web3 kanaat önderleri ile stratejik iş birlikleri.", icon: "🌟" },
-    { title: "PR & Medya Yayınları", desc: "CoinTelegraph, Forbes ve diğer majör mecralarda tanıtım.", icon: "📰" },
-    { title: "Kampanya & Hype Yönetimi", desc: "Toplulukta heyecan yaratan viral kampanya kurguları.", icon: "🔥" },
-    { title: "Landing Page Optimizasyonu", desc: "Daha yüksek dönüşüm oranları için teknik ve görsel iyileştirme.", icon: "🛠️" },
-    { title: "Analitik & KPI Raporlama", desc: "Tüm pazarlama verilerinin şeffaf ve ölçülebilir takibi.", icon: "📊" },
-    { title: "Pazarlama Otomasyonu", desc: "Web3 uyumlu CRM ve otomatik pazarlama araçları.", icon: "🤖" }
+    { title: "Web3 Growth Strategy", desc: "Data-driven growth plans and ROI-oriented approaches.", icon: "🎯" },
+    { title: "Performance Marketing", desc: "Targeted user acquisition via advertising networks.", icon: "⚡" },
+    { title: "Influencer & KOL", desc: "Strategic partnerships with global Web3 thought leaders.", icon: "🌟" },
+    { title: "PR & Media Publications", desc: "Promotion in major outlets like CoinTelegraph, Forbes, and more.", icon: "📰" },
+    { title: "Campaign & Hype Management", desc: "Viral campaign designs creating community excitement.", icon: "🔥" },
+    { title: "Landing Page Optimization", desc: "Technical and visual improvement for higher conversion rates.", icon: "🛠️" },
+    { title: "Analytics & KPI Reporting", desc: "Transparent and measurable tracking of all marketing data.", icon: "📊" },
+    { title: "Marketing Automation", desc: "Web3 compliant CRM and automated marketing tools.", icon: "🤖" }
   ];
 
   const reasons = [
     {
       icon: <><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></>,
-      title: 'NDA & Gizlilik Önceliği',
-      desc: 'Projelerinizin güvenliği bizim için en önemli konu'
+      title: 'NDA & Confidentiality Priority',
+      desc: 'The security of your projects is our most important concern'
     },
     {
       icon: <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>,
-      title: "A'dan Z'ye Proje Yaklaşımı",
-      desc: 'Fikir aşamasından lansmanına kadar her adımda yanınızdayız'
+      title: "End-to-End Project Approach",
+      desc: 'We are with you at every step from ideation to launch'
     },
     {
       icon: <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>,
-      title: 'Web3 & Crypto Odaklı Uzmanlık',
-      desc: 'Sadece kripto ve Web3 projelerine odaklanmış deneyimli ekip'
+      title: 'Web3 & Crypto Focused Expertise',
+      desc: 'Experienced team focused exclusively on crypto and Web3 projects'
     }
   ];
 
   const faqs = [
-    { q: "Pazarlama çalışmaları ne zaman sonuç verir?", a: "Stratejik çalışmalar ilk haftadan etkisini göstermeye başlar, ancak sürdürülebilir büyüme 3-6 aylık periyotlarda netleşir." },
-    { q: "Hangi platformlarda reklam veriyorsunuz?", a: "X (Twitter), YouTube ve Web3 odaklı niş reklam ağlarını (Coinzilla vb.) kullanıyoruz." },
-    { q: "Küçük bütçeli projeler için çözümünüz var mı?", a: "Evet, her bütçeye uygun 'Growth Hacking' paketlerimiz mevcuttur." }
+    { q: "When will marketing efforts show results?", a: "Strategic work starts showing impact in the first week, but sustainable growth becomes clear over 3-6 month periods." },
+    { q: "Which platforms do you advertise on?", a: "We use X (Twitter), YouTube, and niche Web3-focused ad networks (Coinzilla, etc.)." },
+    { q: "Do you have solutions for low-budget projects?", a: "Yes, we have 'Growth Hacking' packages suitable for every budget." }
   ];
 
   return (
@@ -110,11 +110,11 @@ const KriptoMarketingDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="hero-grid">
             <div className="hero-text-content">
-              <h1 className="h1-style">Kripto ve Web3 Pazarlama Hizmetleri</h1>
-              <p className="hero-desc p-style">Markanızı gürültünün arasından öne çıkarıyor, projenizin global çapta görünürlük kazanması için 360 derece büyüme modelleri sunuyoruz.</p>
+              <h1 className="h1-style">Crypto & Web3 Marketing Services</h1>
+              <p className="hero-desc p-style">We make your brand stand out from the noise, offering 360-degree growth models for your project to gain global visibility.</p>
               
               <div className="hero-feature-list">
-                {["ROI Odaklı Strateji", "Global Medya Networkü", "KOL & Influencer Yönetimi", "Veri Temelli Büyüme"].map((item, i) => (
+                {["ROI Focused Strategy", "Global Media Network", "KOL & Influencer Management", "Data-Driven Growth"].map((item, i) => (
                   <div key={i} className="hero-feature-item">
                     <div className="feature-icon-circle">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="4"><polyline points="20 6 9 17 4 12"/></svg>
@@ -125,16 +125,16 @@ const KriptoMarketingDetailView: React.FC = () => {
               </div>
             </div>
             <div className="form-card">
-              <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px'}}>Pazarlama Analizi</h3>
-              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px'}}>Marketing Analysis</h3>
+              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
                   <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
-                    <option value="">Proje Durumu</option><option value="yeni">Lansman Hazırlığı</option><option value="mevcut">Büyüme/Ölçekleme</option>
+                    <option value="">Project Status</option><option value="yeni">Launch Preparation</option><option value="mevcut">Growth / Scaling</option>
                   </select>
-                  <input type="text" className="form-control" placeholder="Aylık Bütçe Hedefi" value={budget} onChange={e=>setBudget(e.target.value)} />
-                  <textarea className="form-control" rows={3} placeholder="Hedef Kitleniz Neresi?" value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="Telegram/E-posta" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'İŞLENİYOR...' : 'STRATEJİ AL'}</button>
+                  <input type="text" className="form-control" placeholder="Monthly Budget Goal" value={budget} onChange={e=>setBudget(e.target.value)} />
+                  <textarea className="form-control" rows={3} placeholder="Where is your target audience?" value={goal} onChange={e=>setGoal(e.target.value)} required />
+                  <input type="text" className="form-control" placeholder="Telegram / Email" value={contact} onChange={e=>setContact(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'PROCESSING...' : 'GET STRATEGY'}</button>
                 </form>
               )}
             </div>
@@ -146,7 +146,7 @@ const KriptoMarketingDetailView: React.FC = () => {
         <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?q=80&w=2070&auto=format&fit=crop" className="bg-img" alt="Marketing Success Background" />
         <div className="overlay" style={{ background: 'rgba(0,0,0,0.85)' }}></div><div className="grad"></div>
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Neden Bizimle Çalışmalısınız?</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Why Should You Work With Us?</h2>
           <div className="reasons-grid">
             {reasons.map((r, i) => (
               <div key={i} className="reason-card">
@@ -166,7 +166,7 @@ const KriptoMarketingDetailView: React.FC = () => {
         <img src="/gorsel/ag1.jpg" alt="Marketing Scope" className="bg-img" />
         <div className="overlay"></div><div className="grad"></div>
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Hizmet Kapsamımız</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Our Service Scope</h2>
           <div className="scope-grid">
             {marketingScope.map((s, i) => (
               <div key={i} className="scope-card">
@@ -182,12 +182,12 @@ const KriptoMarketingDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="flex flex-col lg:flex-row items-center gap-20">
             <div className="flex-1">
-              <h2 className="h2-style" style={{marginBottom: '28px'}}>Pazarlamada Sürdürülebilir Büyüme</h2>
+              <h2 className="h2-style" style={{marginBottom: '28px'}}>Sustainable Growth in Marketing</h2>
               <p className="p-style" style={{marginBottom: '24px', color: '#d1d5db', lineHeight: '1.8'}}>
-                Kripto dünyasında hype geçicidir, topluluk ise kalıcı. Biz projenizin sadece bir kez konuşulmasını değil, ekosistemin bir parçası olmasını sağlıyoruz.
+                In the crypto world, hype is temporary, community is permanent. We ensure your project isn't just talked about once but becomes part of the ecosystem.
               </p>
               <ul style={{listStyle: 'none', padding: 0, margin: 0}}>
-                {["Gelişmiş ROI Takibi", "Viral Kampanya Kurguları", "Niş Kitle Hedefleme"].map((adv, i) => (
+                {["Advanced ROI Tracking", "Viral Campaign Designs", "Niche Audience Targeting"].map((adv, i) => (
                   <li key={i} className="p-style" style={{display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '12px'}}>
                     <span style={{color: 'var(--cray-gold)', fontWeight: 800, fontSize: '18px'}}>✓</span> {adv}
                   </li>
@@ -203,15 +203,15 @@ const KriptoMarketingDetailView: React.FC = () => {
 
       <section className="bant-section">
         <div className="container-xl">
-          <h2 className="h2-style" style={{color: '#000', marginBottom: '20px'}}>Pazarlama Stratejinizi Bugün Oluşturalım</h2>
-          <p className="p-style" style={{color: '#444', marginBottom: '40px'}}>Projenizi global arenada öne çıkaracak profesyonel destek için hemen iletişime geçin.</p>
-          <a href="#h-hero" className="bant-btn">Analiz Talep Et</a>
+          <h2 className="h2-style" style={{color: '#000', marginBottom: '20px'}}>Create Your Marketing Strategy Today</h2>
+          <p className="p-style" style={{color: '#444', marginBottom: '40px'}}>Contact us now for professional support that will make your project stand out on the global stage.</p>
+          <a href="#h-hero" className="bant-btn">Request Analysis</a>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((faq, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -227,7 +227,7 @@ const KriptoMarketingDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '80px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
-        <button onClick={() => window.location.hash = ''} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Ana Sayfaya Dön</button>
+        <button onClick={() => window.location.hash = ''} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Homepage</button>
       </div>
     </div>
   );

@@ -20,9 +20,9 @@ const Web3PlatformHeaderDetailView: React.FC = () => {
   };
 
   const reasons = [
-    { title: 'Digital Transformation', desc: 'Geleneksel web platformlarını blockchain tabanlı sistemlere dönüştürüyoruz.', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> },
-    { title: 'Scalable Architecture', desc: 'Milyonlarca kullanıcıyı destekleyen yüksek performanslı bulut altyapıları.', icon: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/> },
-    { title: 'Security First', desc: 'Uçtan uca şifrelenmiş veri akışı ve güvenli API servisleri.', icon: <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/> }
+    { title: 'Digital Transformation', desc: 'We transform traditional web platforms into decentralized blockchain-based systems.', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> },
+    { title: 'Scalable Architecture', desc: 'High-performance cloud infrastructures supporting millions of users.', icon: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/> },
+    { title: 'Security First', desc: 'End-to-end encrypted data flow and secure API services.', icon: <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/> }
   ];
 
   return (
@@ -39,8 +39,12 @@ const Web3PlatformHeaderDetailView: React.FC = () => {
         .p-style { font-size: 16px !important; font-weight: 300 !important; color: #d1d5db; line-height: 1.8; }
         #h-hero { position: relative; padding: 220px 0 120px; min-height: 85vh; display: flex; align-items: center; }
         .hero-grid { display: flex; flex-direction: column; gap: 60px; position: relative; z-index: 10; width: 100%; }
-        @media (min-width: 1024px) { .hero-grid { flex-direction: row; align-items: center; justify-content: space-between; } }
+        @media (min-width: 1024px) { 
+            .hero-grid { flex-direction: row; align-items: center; justify-content: space-between; } 
+        }
+        .hero-text { flex: 1.2; }
         .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: 0 auto; }
+        @media (min-width: 1024px) { .form-card { margin: 0; flex: 0.8; } }
         .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; color: #000; margin-bottom: 16px; }
         .form-button { width: 100%; background: var(--cray-gold); color: #000; padding: 18px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
         .reasons-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
@@ -70,21 +74,21 @@ const Web3PlatformHeaderDetailView: React.FC = () => {
         <div className="overlay"></div><div className="grad"></div>
         <div className="container-xl">
           <div className="hero-grid">
-            <div style={{flex: 1.2}}>
+            <div className="hero-text">
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Digital Foundations</h5>
-              <h1 className="h1-style">Web3 & Platform Yazılımları</h1>
-              <p className="p-style">Geleneksel iş modellerini merkeziyetsiz dünyaya taşıyan, ölçeklenebilir ve güvenli platformlar inşa ediyoruz.</p>
+              <h1 className="h1-style">Web3 & Platform Software</h1>
+              <p className="p-style">We transform traditional business models into decentralized platforms that are scalable and secure.</p>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Platform Analizi Al</h3>
-              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Yeniden</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Platform Analysis</h3>
+              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
                   <select className="form-control" required>
-                    <option value="">Hedef</option><option value="saas">Web3 SaaS</option><option value="eco">Ecosystem</option>
+                    <option value="">Goal</option><option value="saas">Web3 SaaS</option><option value="eco">Ecosystem</option>
                   </select>
-                  <textarea className="form-control" rows={3} placeholder="Platform vizyonunuzu özetleyin..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="E-posta veya Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'ANALİZ EDİLİYOR...' : 'TEKLİF AL'}</button>
+                  <textarea className="form-control" rows={3} placeholder="Summarize your platform vision..." value={goal} onChange={e=>setGoal(e.target.value)} required />
+                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'ANALYZING...' : 'GET QUOTE'}</button>
                 </form>
               )}
             </div>
@@ -116,8 +120,8 @@ const Web3PlatformHeaderDetailView: React.FC = () => {
                 <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2000" alt="Architecture" />
               </div>
               <div className="detail-text">
-                <h2 className="h2-style">Esnek Veri Mimarisi</h2>
-                <p className="p-style">Hem on-chain hem off-chain veriyi harmanlayan hibrid mimariler kuruyoruz. Kullanıcılarınızın veri güvenliğini blockchain ile sağlarken, performansını yüksek hızlı backend servisleriyle destekliyoruz.</p>
+                <h2 className="h2-style">Flexible Data Architecture</h2>
+                <p className="p-style">We build hybrid architectures that blend both on-chain and off-chain data. While ensuring the security of your users' data with blockchain, we support its performance with high-speed backend services.</p>
               </div>
             </div>
             <div className="detail-item reverse">
@@ -125,8 +129,8 @@ const Web3PlatformHeaderDetailView: React.FC = () => {
                 <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2000" alt="SaaS" />
               </div>
               <div className="detail-text">
-                <h2 className="h2-style">Uçtan Uca Platform Yönetimi</h2>
-                <p className="p-style">Bir platformun başarısı sürdürülebilirliğine bağlıdır. Geliştirdiğimiz yazılımları modern DevOps süreçleriyle destekliyor, otomatik yedekleme ve siber güvenlik katmanlarıyla 7/24 kesintisiz çalışmasını sağlıyoruz.</p>
+                <h2 className="h2-style">End-to-End Platform Management</h2>
+                <p className="p-style">The success of a platform depends on its sustainability. We support the software we develop with modern DevOps processes and ensure 24/7 uninterrupted operation with automatic backup and cyber security layers.</p>
               </div>
             </div>
           </div>
@@ -135,19 +139,19 @@ const Web3PlatformHeaderDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Platformunuzu Geleceğe Hazırlayalım</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Web3 dönüşümü bir seçenek değil, artık bir zorunluluktur. İş modelinizi merkeziyetsiz bir altyapıya taşımak ve ekosistemde öncü olmak için hemen strateji randevunuzu planlayın.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Hemen Platform Planla</a>
+          <h2 className="h2-style">Let's Prepare Your Platform for the Future</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Web3 transformation is not an option, it is now a necessity. Plan your strategy appointment now to move your business model to a decentralized infrastructure and lead the ecosystem.</p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Plan Platform Now</a>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {[
-              { q: "Mevcut sistemimi Web3'e nasıl entegre ederim?", a: "API katmanları ve cüzdan bağlantı modülleriyle mevcut sisteminizi bozmadan Web3 yetenekleri kazandırıyoruz." },
-              { q: "Kurumsal çözümleriniz var mı?", a: "Evet, büyük ölçekli şirketler için özel blokzincir ağları ve kapalı devre sistemler geliştiriyoruz." }
+              { q: "How do I integrate my existing system with Web3?", a: "We provide Web3 capabilities to your existing system without breaking it, using API layers and wallet connection modules." },
+              { q: "Do you have enterprise solutions?", a: "Yes, we develop private blockchain networks and closed-circuit systems for large-scale companies." }
             ].map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
                 <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
@@ -162,7 +166,7 @@ const Web3PlatformHeaderDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

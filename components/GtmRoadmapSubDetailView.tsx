@@ -22,25 +22,25 @@ const GtmRoadmapSubDetailView: React.FC = () => {
   const reasons = [
     {
       icon: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>,
-      title: 'Zamanlama Stratejisi',
-      desc: 'Piyasa döngülerine uygun, doğru borsa lansmanı ve marketing zamanlaması planlıyoruz.'
+      title: 'Timing Strategy',
+      desc: 'We plan the right borsa launch and marketing timing in accordance with market cycles.'
     },
     {
       icon: <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>,
-      title: "Çeyrek Bazlı Hedefler",
-      desc: "Q1'den Q4'e kadar hem teknik hem de topluluk odaklı net kilometre taşları belirliyoruz."
+      title: 'Quarterly Milestones',
+      desc: 'We set clear technical and community-oriented milestones from Q1 to Q4.'
     },
     {
       icon: <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/>,
-      title: 'Büyüme Motorları',
-      desc: 'Lansman sonrası topluluk etkileşimini ve token holder sayısını artıracak kurgular kuruyoruz.'
+      title: 'Growth Engines',
+      desc: 'We establish post-launch mechanics to increase community engagement and token holder count.'
     }
   ];
 
   const faqs = [
-    { q: "GTM planı neyi kapsar?", a: "Hedef kitle analizi, borsa listeleme sırası, bütçe dağılımı ve lansman günü stratejilerinin tamamını kapsar." },
-    { q: "Roadmap neden esnek olmalı?", a: "Kripto piyasası çok hızlı değişir. Stratejimiz, ana hedeften sapmadan piyasa koşullarına uyum sağlayacak şekilde kurgulanır." },
-    { q: "Topluluk büyümesini nasıl planlıyorsunuz?", a: "Viral döngüler ve doğru bölge odaklı pazarlama kanalları ile adım adım bir büyüme projeksiyonu çiziyoruz." }
+    { q: "What does a GTM plan cover?", a: "It covers target audience analysis, exchange listing sequence, budget distribution, and full launch day strategies." },
+    { q: "Why should a roadmap be flexible?", a: "The crypto market changes very rapidly. Our strategy is designed to adapt to market conditions without deviating from the main goal." },
+    { q: "How do you plan community growth?", a: "We map out step-by-step growth projections using viral loops and correct region-focused marketing channels." }
   ];
 
   return (
@@ -58,7 +58,7 @@ const GtmRoadmapSubDetailView: React.FC = () => {
         #h-hero { position: relative; padding: 220px 0 120px; min-height: 85vh; display: flex; align-items: center; }
         .hero-grid { display: flex; flex-direction: column; gap: 60px; position: relative; z-index: 10; width: 100%; }
         @media (min-width: 1024px) { .hero-grid { flex-direction: row; align-items: center; justify-content: space-between; } }
-        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: 0 auto; }
+        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: auto; }
         .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; color: #000; margin-bottom: 16px; }
         .form-button { width: 100%; background: var(--cray-gold); color: #000; padding: 18px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
         .reasons-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
@@ -91,24 +91,24 @@ const GtmRoadmapSubDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="hero-grid">
             <div style={{flex: 1.2}}>
-              <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Pazara Giriş & Büyüme</h5>
-              <h1 className="h1-style">Roadmap & GTM Planlaması</h1>
-              <p className="p-style" style={{marginTop: '20px', lineHeight: '1.7'}}>Harika bir ürününüz olabilir ama doğru pazara giriş stratejiniz yoksa görünmez kalırsınız. Projenizi patlayıcı bir lansmanla sahneye çıkarıyoruz.</p>
+              <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Entry & Growth</h5>
+              <h1 className="h1-style">Roadmap & Go-To-Market (GTM) Planning</h1>
+              <p className="p-style" style={{marginTop: '20px', lineHeight: '1.7'}}>You might have a great product, but without the right market entry strategy, you'll remain invisible. We bring your project to the stage with an explosive launch.</p>
               <div style={{marginTop: '32px', display: 'flex', flexWrap: 'wrap', gap: '15px'}}>
-                <span style={{background: 'rgba(255,177,0,0.1)', color: 'var(--cray-gold)', padding: '8px 16px', borderRadius: '30px', fontSize: '12px', fontWeight: 700}}>✓ LANSman TAKVİMİ</span>
-                <span style={{background: 'rgba(255,177,0,0.1)', color: 'var(--cray-gold)', padding: '8px 16px', borderRadius: '30px', fontSize: '12px', fontWeight: 700}}>✓ BÜYÜME PROJEKSİYONU</span>
+                <span style={{background: 'rgba(255,177,0,0.1)', color: 'var(--cray-gold)', padding: '8px 16px', borderRadius: '30px', fontSize: '12px', fontWeight: 700}}>✓ LAUNCH CALENDAR</span>
+                <span style={{background: 'rgba(255,177,0,0.1)', color: 'var(--cray-gold)', padding: '8px 16px', borderRadius: '30px', fontSize: '12px', fontWeight: 700}}>✓ GROWTH PROJECTION</span>
               </div>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Lansman Analizi Al</h3>
-              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Yeniden Dene</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Launch Analysis</h3>
+              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Try Again</button></div> : (
                 <form onSubmit={handleSubmit}>
                   <select className="form-control" required>
-                    <option value="">Aşama</option><option value="fikir">Fikir/Geliştirme</option><option value="yayinda">Yayında/Pivot</option>
+                    <option value="">Stage</option><option value="idea">Idea/Development</option><option value="live">Live/Pivot</option>
                   </select>
-                  <textarea className="form-control" rows={3} placeholder="Lansman hedeflerinizi özetleyin..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="E-posta veya Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'HESAPLANIYOR...' : 'GTM STRATEJİSİ AL'}</button>
+                  <textarea className="form-control" rows={3} placeholder="Summarize your launch goals..." value={goal} onChange={e=>setGoal(e.target.value)} required />
+                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'CALCULATING...' : 'GET GTM STRATEGY'}</button>
                 </form>
               )}
             </div>
@@ -118,8 +118,6 @@ const GtmRoadmapSubDetailView: React.FC = () => {
 
       {/* 2. Box Section */}
       <section className="section-padding">
-        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2000" className="bg-img" alt="Boxes Background" />
-        <div className="overlay" style={{background: 'rgba(0,0,0,0.85)'}}></div>
         <div className="container-xl">
           <div className="reasons-grid">
             {reasons.map((r, i) => (
@@ -135,16 +133,16 @@ const GtmRoadmapSubDetailView: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. Detailed Content (Z-Pattern %50-%50) */}
+      {/* 3. Detailed Content */}
       <section className="info-detail-section section-padding">
         <div className="container-xl">
           <div className="detail-row">
             <div className="detail-item">
               <div className="detail-text">
-                <h2 className="h2-style">Adım Adım Başarı Projeksiyonu</h2>
-                <p className="p-style" style={{marginTop: '24px', lineHeight: '1.8'}}>Teknik geliştirmelerden borsa listelemelerine kadar her adımı bir takvime bağlıyoruz. Yatırımcılarınıza güven veren profesyonel bir roadmap sunuyoruz.</p>
+                <h2 className="h2-style">Step-by-Step Success Projection</h2>
+                <p className="p-style" style={{marginTop: '24px', lineHeight: '1.8'}}>We link every step from technical developments to exchange listings to a timeline. We present a professional roadmap that gives confidence to your investors.</p>
                 <ul style={{marginTop: '32px', listStyle: 'none', padding: 0}}>
-                   {["Kısa ve Uzun Vadeli KPI'lar", "Listeleme Takvimi Yönetimi", "Likidite Sağlama Planı"].map((item, i) => (
+                   {["Short and Long Term KPIs", "Listing Calendar Management", "Liquidity Provision Plan"].map((item, i) => (
                     <li key={i} className="p-style" style={{marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '12px'}}>
                       <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {item}
                     </li>
@@ -158,10 +156,10 @@ const GtmRoadmapSubDetailView: React.FC = () => {
 
             <div className="detail-item reverse">
               <div className="detail-text">
-                <h2 className="h2-style">Pazara Hakimiyet Stratejisi</h2>
-                <p className="p-style" style={{marginTop: '24px', lineHeight: '1.8'}}>Hangi bölgede hangi kanalı kullanmalısınız? Projenizin hedef kitlesine en hızlı ulaşacak dijital kanalları ve büyüme kurgularını planımıza dahil ediyoruz.</p>
+                <h2 className="h2-style">Market Dominance Strategy</h2>
+                <p className="p-style" style={{marginTop: '24px', lineHeight: '1.8'}}>Which channel should you use in which region? We include digital channels and growth structures in our plan that will reach your project's target audience fastest.</p>
                 <ul style={{marginTop: '32px', listStyle: 'none', padding: 0}}>
-                   {["Viral Büyüme Döngüleri", "Kanal Bazlı ROI Analizi", "Bölgesel Genişleme Planı"].map((item, i) => (
+                   {["Viral Growth Loops", "Channel-Based ROI Analysis", "Regional Expansion Plan"].map((item, i) => (
                     <li key={i} className="p-style" style={{marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '12px'}}>
                       <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {item}
                     </li>
@@ -176,19 +174,19 @@ const GtmRoadmapSubDetailView: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. CTA Band */}
+      {/* 4. CTA */}
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Lansman Gününüzü Bugün Planlayalım</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px'}}>Piyasaya fırtına gibi girmek ve orada kalıcı olmak için profesyonel GTM planınızı hazırlayalım.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>GTM Teklifi Al</a>
+          <h2 className="h2-style">Let's Plan Your Launch Day Today</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px'}}>Prepare your professional GTM plan to enter the market like a storm and remain permanent.</p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Get GTM Quote</a>
         </div>
       </section>
 
       {/* 5. FAQ */}
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -204,7 +202,7 @@ const GtmRoadmapSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/token-ve-blokzincir-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/token-ve-blokzincir-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

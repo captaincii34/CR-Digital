@@ -17,52 +17,52 @@ const TokenListingDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject(status, `Listeleme Hedefi: ${listingType}. Hedef: ${goal}`);
+    const result = await evaluateProject(status, `Listing Goal: ${listingType}. Goal: ${goal}`);
     setAiResult(result);
     setLoading(false);
   };
 
   const listingScope = [
-    { title: "Token Lansman Stratejisi", desc: "Piyasa koşullarına göre en doğru zamanlama ve platform seçimi.", icon: "🚀" },
-    { title: "DEX Lansman Yönetimi", desc: "Uniswap, PancakeSwap ve Raydium likidite kurulumu.", icon: "🥞" },
-    { title: "CEX Listeleme Danışmanlığı", desc: "Tier-1 ve Tier-2 borsalarla iletişim ve başvuru süreçleri.", icon: "🏛️" },
-    { title: "Launchpad Hazırlık Süreçleri", desc: "Projenin launchpad kriterlerine uygun hale getirilmesi.", icon: "🛫" },
-    { title: "Listeleme Öncesi Pazarlama", desc: "Topluluk oluşturma, hype yönetimi ve ön tanıtım.", icon: "📈" },
-    { title: "Listeleme Sonrası Büyüme", desc: "Sürdürülebilir hacim ve holder artışı stratejileri.", icon: "💎" },
-    { title: "Borsa İletişim & Süreç Yönetimi", desc: "Borsalarla teknik ve ticari tüm müzakerelerin takibi.", icon: "📱" },
-    { title: "Listeleme Dokümantasyonu", desc: "Teknik inceleme ve hukuki dokümanların hazırlanması.", icon: "📋" }
+    { title: "Token Launch Strategy", desc: "Selecting the most correct timing and platform based on market conditions.", icon: "🚀" },
+    { title: "DEX Launch Management", desc: "Uniswap, PancakeSwap, and Raydium liquidity setup.", icon: "🥞" },
+    { title: "CEX Listing Consulting", desc: "Communication and application processes with Tier-1 and Tier-2 exchanges.", icon: "🏛️" },
+    { title: "Launchpad Prep Processes", desc: "Making the project compliant with launchpad criteria.", icon: "🛫" },
+    { title: "Pre-Listing Marketing", desc: "Community building, hype management, and pre-promotion.", icon: "📈" },
+    { title: "Post-Listing Growth", desc: "Sustainable volume and holder increase strategies.", icon: "💎" },
+    { title: "Exchange Comm & Process Management", desc: "Tracking all technical and commercial negotiations with exchanges.", icon: "📱" },
+    { title: "Listing Documentation", desc: "Preparing technical reviews and legal documents.", icon: "📋" }
   ];
 
   const reasons = [
     {
       icon: <><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></>,
-      title: 'NDA & Gizlilik Önceliği',
-      desc: 'Projelerinizin güvenliği bizim için en önemli konu'
+      title: 'NDA & Confidentiality Priority',
+      desc: 'The security of your projects is our most important concern'
     },
     {
       icon: <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>,
-      title: "A'dan Z'ye Proje Yaklaşımı",
-      desc: 'Fikir aşamasından lansmanına kadar her adımda yanınızdayız'
+      title: "End-to-End Project Approach",
+      desc: 'We are with you at every step from ideation to launch'
     },
     {
       icon: <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>,
-      title: 'Web3 & Crypto Odaklı Uzmanlık',
-      desc: 'Sadece kripto ve Web3 projelerine odaklanmış deneyimli ekip'
+      title: 'Web3 & Crypto Focused Expertise',
+      desc: 'Experienced team focused exclusively on crypto and Web3 projects'
     }
   ];
 
   const advantages = [
-    "Daha hızlı listeleme onayı",
-    "Borsa komisyonlarında avantajlar",
-    "Profesyonel likidite yönetimi",
-    "Daha güçlü borsa ilişkileri"
+    "Faster listing approval",
+    "Advantages in exchange commissions",
+    "Professional liquidity management",
+    "Stronger exchange relationships"
   ];
 
   const faqs = [
-    { q: "Hangi borsalarda listeleme yapabiliyorsunuz?", a: "Binance, OKX, Bybit gibi Tier-1 borsalardan MEXC, Gate.io gibi Tier-2 borsalara kadar geniş bir partner ağımız bulunuyor." },
-    { q: "DEX listelemesi için ne gerekiyor?", a: "Doğru kurgulanmış bir likidite havuzu, token kontratı ve borsa arayüzü entegrasyonu. Tüm süreci biz yönetiyoruz." },
-    { q: "Market making desteği veriyor musunuz?", a: "Evet, listeleme sonrası tahta sağlığı ve hacim yönetimi için profesyonel likidite çözümleri sunuyoruz." },
-    { q: "Listeleme süreci ne kadar sürer?", a: "Borsanın türüne ve projenin hazırlık durumuna göre 2 haftadan 2 aya kadar değişebilmektedir." }
+    { q: "On which exchanges can you list?", a: "We have an extensive partner network ranging from Tier-1 exchanges like Binance, OKX, Bybit to Tier-2 exchanges like MEXC, Gate.io." },
+    { q: "What are the DEX listing requirements?", a: "A correctly structured liquidity pool, token contract, and exchange interface integration. We manage the entire process." },
+    { q: "Do you provide market making support?", a: "Yes, we offer professional liquidity solutions for post-listing order book health and volume management." },
+    { q: "How long does the listing process take?", a: "It varies between 2 weeks to 2 months depending on the type of exchange and project readiness." }
   ];
 
   return (
@@ -105,7 +105,7 @@ const TokenListingDetailView: React.FC = () => {
         @media (min-width: 768px) { .reasons-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 1024px) { .reasons-grid { grid-template-columns: repeat(3, 1fr); } }
         
-        .reason-card { padding: 48px 32px; border-radius: 24px; text-align: center; transition: 0.4s; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); }
+        .reason-card { padding: 48px 32px; border-radius: 24px; text-align: center; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); transition: 0.4s; }
         .reason-card:hover { background: rgba(255, 177, 0, 0.08); border-color: rgba(255, 177, 0, 0.5); transform: translateY(-10px); }
         .reason-icon-box { width: 60px; height: 60px; background-color: var(--cray-gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.3); }
 
@@ -141,13 +141,13 @@ const TokenListingDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="hero-grid">
             <div className="hero-text-content">
-              <h1 className="hero-title h1-style">Token Lansman ve Listeleme Hizmetleri</h1>
+              <h1 className="hero-title h1-style">Token Launch & Listing Services</h1>
               <p className="hero-desc p-style">
-                Projenizin global borsalarda (CEX) veya merkeziyetsiz platformlarda (DEX) başarılı bir lansman yapması için uçtan uca strateji sunuyoruz. Borsa ilişkilerinden likidite yönetimine kadar her adımda yanınızdayız.
+                We offer end-to-end strategy for your project to have a successful launch on global exchanges (CEX) or decentralized platforms (DEX). We stand by you at every step, from exchange relations to liquidity management.
               </p>
               
               <div className="hero-feature-list">
-                {["Tier-1 ve Tier-2 Borsa Networkü", "Stratejik Lansman Planlaması", "Hukuki ve Teknik Uyum Desteği", "DEX Likidite Optimizasyonu"].map((item, i) => (
+                {["Tier-1 and Tier-2 Exchange Network", "Strategic Launch Planning", "Legal and Technical Compliance Support", "DEX Liquidity Optimization"].map((item, i) => (
                   <div key={i} className="hero-feature-item">
                     <div className="feature-icon-circle">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="4"><polyline points="20 6 9 17 4 12"/></svg>
@@ -160,37 +160,37 @@ const TokenListingDetailView: React.FC = () => {
 
             <div className="form-card-container">
               <div className="form-card">
-                <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '24px'}}>Listeleme Değerlendirmesi</h3>
+                <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '24px'}}>Listing Evaluation</h3>
                 {aiResult ? (
                   <div className="ai-result">
                     <p className="p-style" style={{ fontStyle: 'italic', marginBottom: '24px' }}>"{aiResult.summary}"</p>
-                    <button onClick={() => setAiResult(null)} className="form-button">Yeniden Analiz Et</button>
+                    <button onClick={() => setAiResult(null)} className="form-button">Analyze Again</button>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit}>
                     <div className="form-group">
                       <select className="form-control p-style" value={status} onChange={(e) => setStatus(e.target.value)} required>
-                        <option value="">Proje Aşaması</option>
-                        <option value="yeni">Lansman Öncesi</option>
-                        <option value="mevcut">Listeli / Yeni Borsa Hedefi</option>
+                        <option value="">Project Phase</option>
+                        <option value="new">Pre-Launch</option>
+                        <option value="existing">Listed / New Exchange Goal</option>
                       </select>
                     </div>
                     <div className="form-group">
                       <select className="form-control p-style" value={listingType} onChange={(e) => setListingType(e.target.value)} required>
-                        <option value="">Hedef Listeleme</option>
-                        <option value="dex">Sadece DEX (Uniswap vb.)</option>
-                        <option value="cex">CEX Listelemesi</option>
-                        <option value="ikisi">Hem DEX Hem CEX</option>
+                        <option value="">Target Listing</option>
+                        <option value="dex">DEX Only (Uniswap etc.)</option>
+                        <option value="cex">CEX Listing</option>
+                        <option value="both">Both DEX and CEX</option>
                       </select>
                     </div>
                     <div className="form-group">
-                      <textarea className="form-control p-style" rows={3} placeholder="Hedeflediğiniz borsalar var mı?" value={goal} onChange={(e) => setGoal(e.target.value)} required style={{resize: 'none'}} />
+                      <textarea className="form-control p-style" rows={3} placeholder="Are there target exchanges?" value={goal} onChange={(e) => setGoal(e.target.value)} required style={{resize: 'none'}} />
                     </div>
                     <div className="form-group">
-                      <input type="text" className="form-control p-style" placeholder="E-posta / Telegram" value={contact} onChange={(e) => setContact(e.target.value)} required />
+                      <input type="text" className="form-control p-style" placeholder="Email / Telegram" value={contact} onChange={(e) => setContact(e.target.value)} required />
                     </div>
                     <button type="submit" disabled={loading} className="form-button">
-                      {loading ? 'ANALİZ EDİLİYOR...' : 'LİSTELEME ANALİZİ AL'}
+                      {loading ? 'ANALYZING...' : 'GET LISTING ANALYSIS'}
                     </button>
                   </form>
                 )}
@@ -206,7 +206,7 @@ const TokenListingDetailView: React.FC = () => {
         <div className="overlay"></div>
         <div className="grad"></div>
         <div className="container-xl">
-          <h2 className="h2-style" style={{ textAlign: 'center', marginBottom: '64px' }}>Listelemede Neden Bizimle Çalışmalısınız?</h2>
+          <h2 className="h2-style" style={{ textAlign: 'center', marginBottom: '64px' }}>Why Work With Us for Listing?</h2>
           <div className="reasons-grid">
             {reasons.map((reason, idx) => (
               <div key={idx} className="reason-card">
@@ -230,9 +230,9 @@ const TokenListingDetailView: React.FC = () => {
         <div className="grad"></div>
         <div className="container-xl">
           <div className="scope-header">
-            <h2 className="h2-style">Hizmet Kapsamımız</h2>
+            <h2 className="h2-style">Our Service Scope</h2>
             <p className="p-style" style={{ color: '#d1d5db', maxWidth: '800px', margin: '16px auto 0' }}>
-              Başarılı bir lansman süreci için sunduğumuz profesyonel listeleme ve operasyon hizmetleri.
+              Professional listing and operational services we offer for a successful launch process.
             </p>
           </div>
 
@@ -253,9 +253,9 @@ const TokenListingDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="flex flex-col lg:flex-row items-center gap-20">
             <div className="flex-1">
-              <h2 className="h2-style" style={{marginBottom: '28px'}}>Listeleme Sonrası Başarıyı Sürdürülebilir Kılıyoruz</h2>
+              <h2 className="h2-style" style={{marginBottom: '28px'}}>Making Post-Listing Success Sustainable</h2>
               <p className="p-style" style={{marginBottom: '24px', color: '#d1d5db', lineHeight: '1.8'}}>
-                Bir borsada listelenmek sadece başlangıçtır. Asıl başarı, listeleme sonrası hacmin korunması ve projenizdeki güvenilir bir grafik sergilemesidir. Biz bu süreci veriye dayalı olarak yönetiyoruz.
+                Listing on an exchange is just the beginning. Real success lies in maintaining volume after listing and exhibiting a reliable chart for your project. We manage this process based on data.
               </p>
               <ul style={{listStyle: 'none', padding: 0, margin: 0}}>
                 {advantages.map((adv, i) => (
@@ -275,18 +275,18 @@ const TokenListingDetailView: React.FC = () => {
       {/* CTA Band */}
       <section className="bant-section">
         <div className="container-xl">
-          <h2 className="h2-style" style={{color: '#000', marginBottom: '20px'}}>Token Listeleme Sürecinizi Bugün Başlatın</h2>
+          <h2 className="h2-style" style={{color: '#000', marginBottom: '20px'}}>Start Your Token Listing Process Today</h2>
           <p className="p-style" style={{color: '#444', marginBottom: '40px', maxWidth: '750px', margin: '0 auto 40px'}}>
-            Projenizi global borsalara taşımak için gereken tüm teknik ve ticari hazırlıkları profesyonel ekibimizle tamamlayın.
+            Complete all technical and commercial preparations required to carry your project to global exchanges with our professional team.
           </p>
-          <a href="#h-hero" className="bant-btn">Listeleme Şartlarını Görüş</a>
+          <a href="#h-hero" className="bant-btn">Discuss Listing Terms</a>
         </div>
       </section>
 
       {/* FAQ */}
       <section id="h-faq" className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((faq, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -307,7 +307,7 @@ const TokenListingDetailView: React.FC = () => {
 
       <div style={{ padding: '80px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
         <button onClick={() => window.location.hash = ''} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase', fontSize: '14px !important', transition: '0.3s' }} onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--cray-gold)'} onMouseLeave={(e) => e.currentTarget.style.borderColor = '#444'}>
-          Ana Sayfaya Dön
+          Back to Homepage
         </button>
       </div>
     </div>

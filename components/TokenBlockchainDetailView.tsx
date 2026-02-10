@@ -17,52 +17,52 @@ const TokenBlockchainDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject(status, `Blockchain Tercihi: ${blockchain}. Hedef: ${goal}`);
+    const result = await evaluateProject(status, `Blockchain Preference: ${blockchain}. Goal: ${goal}`);
     setAiResult(result);
     setLoading(false);
   };
 
   const roadmapSteps = [
-    { title: "Token Proje Danışmanlığı", desc: "Teknik ve iş modeli analizi.", icon: "💎" },
-    { title: "Blokzincir & Ağ Seçimi", desc: "En uygun ağın belirlenmesi.", icon: "🔗" },
-    { title: "Akıllı Kontrat Geliştirme", desc: "Güvenli ve optimize kod.", icon: "💻" },
-    { title: "Tokenomics Tasarımı", desc: "Sürdürülebilir ekonomi.", icon: "📊" },
-    { title: "Whitepaper & Litepaper", desc: "Profesyonel dokümanlar.", icon: "📄" },
-    { title: "Pitch Deck Sunumları", desc: "Yatırımcı odaklı sunumlar.", icon: "📈" },
-    { title: "Roadmap & GTM Planı", desc: "Pazara çıkış stratejisi.", icon: "🗺️" },
-    { title: "Audit Hazırlık Süreçleri", desc: "Kontrat ön kontrolleri.", icon: "🛡️" }
+    { title: "Token Project Consulting", desc: "Technical and business model analysis.", icon: "💎" },
+    { title: "Blockchain & Network Selection", desc: "Determining the most suitable network.", icon: "🔗" },
+    { title: "Smart Contract Development", desc: "Secure and optimized code.", icon: "💻" },
+    { title: "Tokenomics Design", desc: "Sustainable economy.", icon: "📊" },
+    { title: "Whitepaper & Litepaper", desc: "Professional documents.", icon: "📄" },
+    { title: "Pitch Deck Presentations", desc: "Investor-oriented presentations.", icon: "📈" },
+    { title: "Roadmap & GTM Plan", desc: "Go-to-market strategy.", icon: "🗺️" },
+    { title: "Audit Preparation Processes", desc: "Contract pre-checks.", icon: "🛡️" }
   ];
 
   const reasons = [
     {
       icon: <><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></>,
-      title: 'NDA & Gizlilik Önceliği',
-      desc: 'Projelerinizin güvenliği bizim için en önemli konu'
+      title: 'NDA & Confidentiality Priority',
+      desc: 'The security of your projects is our most important concern'
     },
     {
       icon: <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>,
-      title: "A'dan Z'ye Proje Yaklaşımı",
-      desc: 'Fikir aşamasından lansmanına kadar her adımda yanınızdayız'
+      title: "End-to-End Project Approach",
+      desc: 'We are with you at every step from ideation to launch'
     },
     {
       icon: <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>,
-      title: 'Web3 & Crypto Odaklı Uzmanlık',
-      desc: 'Sadece kripto ve Web3 projelerine odaklanmış deneyimli ekip'
+      title: 'Web3 & Crypto Focused Expertise',
+      desc: 'Experienced team focused exclusively on crypto and Web3 projects'
     }
   ];
 
   const advantages = [
-    "Yatırımcı güveni",
-    "Listeleme uyumu",
-    "Sürdürülebilir büyüme",
-    "Güçlü teknik altyapı"
+    "Investor trust",
+    "Listing compliance",
+    "Sustainable growth",
+    "Strong technical infrastructure"
   ];
 
   const faqs = [
-    { q: "Hangi blokzinciri seçmeliyim?", a: "Projenizin hedeflerine, işlem hızı ihtiyacına ve maliyet beklentilerine göre birlikte analiz ederek karar veriyoruz." },
-    { q: "Tokenomics’i siz mi hazırlıyorsunuz?", a: "Evet. Token ekonomisinin (arz, dağıtım, vesting, yakım mekanizmaları vb.) tamamını profesyonelce tasarlıyoruz." },
-    { q: "Audit zorunlu mu?", a: "Her ciddi proje için şiddetle önerilir. Biz audit öncesi tüm teknik hazırlıkları ve ön kontrolleri yaparız." },
-    { q: "Sadece token geliştirme hizmeti alabilir miyim?", a: "Evet. Ancak bu hizmet, A’dan Z’ye proje danışmanlığı yaklaşımımızın en temel teknik taşıdır." }
+    { q: "Which blockchain should I choose?", a: "We decide together by analyzing your project goals, transaction speed needs, and cost expectations." },
+    { q: "Do you prepare the Tokenomics?", a: "Yes. We professionally design the entire token economy (supply, distribution, vesting, burn mechanisms, etc.)." },
+    { q: "Is an audit mandatory?", a: "It is strongly recommended for every serious project. We perform all technical preparations and pre-checks before the audit." },
+    { q: "Can I get only token development services?", a: "Yes. However, this service is the most fundamental technical stone of our end-to-end project consulting approach." }
   ];
 
   return (
@@ -73,7 +73,7 @@ const TokenBlockchainDetailView: React.FC = () => {
         .container-xl { max-width: 1280px; margin: 0 auto; padding: 0 32px; width: 100%; position: relative; z-index: 10; }
         
         .bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
-        .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.75); z-index: 1; }
+        .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.85); z-index: 1; }
         .grad { position: absolute; inset: 0; background: linear-gradient(to bottom, #000, transparent 40%, transparent 60%, #000); z-index: 2; }
 
         .h1-style { font-size: 40px !important; font-weight: 700 !important; }
@@ -192,14 +192,14 @@ const TokenBlockchainDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="hero-grid">
             <div className="hero-text-content">
-              <h1 className="hero-title h1-style">Token ve Blokzincir Geliştirme Hizmetleri</h1>
+              <h1 className="hero-title h1-style">Token & Blockchain Development Services</h1>
               <p className="hero-desc p-style">
-                Bir kripto projesinin başarısı, doğru tasarlanmış token yapısı ve sağlam bir blokzincir altyapısıyla başlar. 
-                Token fikrinizin konseptten üretime tüm sürecini profesyonel şekilde planlıyoruz.
+                The success of a crypto project begins with a correctly designed token structure and a solid blockchain infrastructure. 
+                We professionally plan the entire process of your token idea from concept to production.
               </p>
               
               <div className="hero-feature-list">
-                {["Strateji + Teknik Geliştirme Birlikte", "Audit’e Hazır Altyapı", "Yatırımcı ve Listeleme Uyumlu Yapı", "A’dan Z’ye Proje Yaklaşımı"].map((item, i) => (
+                {["Strategy + Technical Development Together", "Audit-Ready Infrastructure", "Investor & Listing Compliant Structure", "End-to-End Project Approach"].map((item, i) => (
                   <div key={i} className="hero-feature-item">
                     <div className="feature-icon-circle">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="4"><polyline points="20 6 9 17 4 12"/></svg>
@@ -212,40 +212,40 @@ const TokenBlockchainDetailView: React.FC = () => {
 
             <div className="form-card-container">
               <div className="form-card">
-                <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '24px'}}>Teknik Ön Değerlendirme</h3>
+                <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '24px'}}>Technical Pre-Evaluation</h3>
                 {aiResult ? (
                   <div className="ai-result">
                     <p className="p-style" style={{ fontStyle: 'italic', marginBottom: '24px' }}>"{aiResult.summary}"</p>
-                    <button onClick={() => setAiResult(null)} className="form-button">Yeniden Analiz Et</button>
+                    <button onClick={() => setAiResult(null)} className="form-button">Analyze Again</button>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit}>
                     <div className="form-group">
                       <select className="form-control p-style" value={status} onChange={(e) => setStatus(e.target.value)} required>
-                        <option value="">Proje Durumu Seçiniz</option>
-                        <option value="yeni">Yeni token fikri</option>
-                        <option value="geliştirme">Geliştirme aşamasında</option>
-                        <option value="mevcut">Mevcut token / yeniden yapılandırma</option>
+                        <option value="">Select Project Status</option>
+                        <option value="new">New Token Idea</option>
+                        <option value="development">Under Development</option>
+                        <option value="existing">Existing Token / Restructuring</option>
                       </select>
                     </div>
                     <div className="form-group">
                       <select className="form-control p-style" value={blockchain} onChange={(e) => setBlockchain(e.target.value)} required>
-                        <option value="">Blockchain Tercihi</option>
-                        <option value="kararsız">Kararsızım</option>
+                        <option value="">Blockchain Preference</option>
+                        <option value="undecided">Undecided</option>
                         <option value="eth">Ethereum (ERC-20)</option>
                         <option value="bnb">BNB Chain (BEP-20)</option>
                         <option value="sol">Solana (SPL)</option>
-                        <option value="diğer">Diğer</option>
+                        <option value="other">Other</option>
                       </select>
                     </div>
                     <div className="form-group">
-                      <textarea className="form-control p-style" rows={3} placeholder="Proje hedefiniz nedir?" value={goal} onChange={(e) => setGoal(e.target.value)} required style={{resize: 'none'}} />
+                      <textarea className="form-control p-style" rows={3} placeholder="What is your project goal?" value={goal} onChange={(e) => setGoal(e.target.value)} required style={{resize: 'none'}} />
                     </div>
                     <div className="form-group">
-                      <input type="text" className="form-control p-style" placeholder="E-posta / Telegram" value={contact} onChange={(e) => setContact(e.target.value)} required />
+                      <input type="text" className="form-control p-style" placeholder="Email / Telegram" value={contact} onChange={(e) => setContact(e.target.value)} required />
                     </div>
                     <button type="submit" disabled={loading} className="form-button">
-                      {loading ? 'ANALİZ EDİLİYOR...' : 'DEĞERLENDİRME AL'}
+                      {loading ? 'ANALYZING...' : 'GET EVALUATION'}
                     </button>
                   </form>
                 )}
@@ -261,7 +261,7 @@ const TokenBlockchainDetailView: React.FC = () => {
         <div className="overlay" style={{ background: 'rgba(0,0,0,0.85)' }}></div>
         <div className="grad"></div>
         <div className="container-xl">
-          <h2 className="h2-style" style={{ textAlign: 'center', marginBottom: '60px' }}>Neden Bizimle Çalışmalısınız?</h2>
+          <h2 className="h2-style" style={{ textAlign: 'center', marginBottom: '60px' }}>Why Should You Work With Us?</h2>
           <div className="reasons-grid">
             {reasons.map((reason, idx) => (
               <div key={idx} className="reason-card">
@@ -285,9 +285,9 @@ const TokenBlockchainDetailView: React.FC = () => {
         <div className="grad"></div>
         <div className="container-xl">
           <div className="scope-header">
-            <h2 className="h2-style">Geliştirme Kapsamımız</h2>
+            <h2 className="h2-style">Our Development Scope</h2>
             <p className="p-style" style={{ color: '#d1d5db', maxWidth: '800px', margin: '16px auto 0' }}>
-              Aşağıda yer alan tüm hizmetler, Token ve Blokzincir Geliştirme sürecimizin parçalarıdır ve ihtiyaca göre tek tek veya bütüncül olarak sunulur.
+              All services listed below are part of our Token and Blockchain Development process and are offered individually or holistically as needed.
             </p>
           </div>
 
@@ -308,9 +308,9 @@ const TokenBlockchainDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="flex flex-col lg:flex-row items-center gap-16">
             <div className="flex-1">
-              <h2 className="h2-style" style={{marginBottom: '24px'}}>Başarılı Bir Kripto Projesi, Sağlam Bir Temelle Başlar</h2>
+              <h2 className="h2-style" style={{marginBottom: '24px'}}>A Successful Crypto Project Starts with a Solid Foundation</h2>
               <p className="p-style" style={{marginBottom: '20px', color: '#d1d5db'}}>
-                Yanlış tokenomics veya zayıf teknik altyapı; birçok projenin başarısız olmasının temel nedenidir. Biz projenizi sadece bugün için değil, uzun vadeli büyüme için inşa ederiz.
+                Incorrect tokenomics or weak technical infrastructure are the primary reasons many projects fail. We build your project not just for today, but for long-term growth.
               </p>
               <ul style={{listStyle: 'none', padding: 0, margin: 0}}>
                 {advantages.map((adv, i) => (
@@ -330,18 +330,18 @@ const TokenBlockchainDetailView: React.FC = () => {
       {/* CTA Band */}
       <section className="bant-section">
         <div className="container-xl">
-          <h2 className="h2-style" style={{color: '#000', marginBottom: '16px'}}>Token ve Blokzincir Altyapınızı Profesyonel Şekilde Oluşturalım</h2>
+          <h2 className="h2-style" style={{color: '#000', marginBottom: '16px'}}>Let's Build Your Token & Blockchain Infrastructure Professionally</h2>
           <p className="p-style" style={{color: '#333', marginBottom: '32px', maxWidth: '700px', margin: '0 auto 32px'}}>
-            İster yeni bir token fikri, ister mevcut bir altyapının yeniden yapılandırılması olsun; doğru teknik yol haritasını birlikte oluşturalım.
+            Whether it's a new token idea or restructuring an existing infrastructure; let's create the right technical roadmap together.
           </p>
-          <a href="#h-hero" className="bant-btn">Teknik Ön Değerlendirme Al</a>
+          <a href="#h-hero" className="bant-btn">Get Technical Pre-Evaluation</a>
         </div>
       </section>
 
       {/* FAQ Section */}
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '40px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '40px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '800px', margin: '0 auto'}}>
             {faqs.map((faq, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -362,7 +362,7 @@ const TokenBlockchainDetailView: React.FC = () => {
 
       <div style={{ padding: '60px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
         <button onClick={() => window.location.hash = ''} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase', fontSize: '14px !important' }}>
-          Ana Sayfaya Dön
+          Back to Homepage
         </button>
       </div>
     </div>

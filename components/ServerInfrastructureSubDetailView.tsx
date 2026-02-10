@@ -14,15 +14,15 @@ const ServerInfrastructureSubDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject(status, `Altyapı Talebi: ${goal}`);
+    const result = await evaluateProject(status, `Infrastructure Request: ${goal}`);
     setAiResult(result);
     setLoading(false);
   };
 
   const reasons = [
-    { title: 'High Availability', desc: 'Kesintisiz çalışan, yedekli sunucu ve node mimarileri.', icon: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/> },
-    { title: 'Anti-DDoS Protection', desc: 'Kripto projelerine yönelik siber saldırıları engelleyen gelişmiş güvenlik duvarları.', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> },
-    { title: 'Global Edge', desc: 'Dünyanın her yerindeki kullanıcılar için düşük gecikmeli (low latency) erişim.', icon: <circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20"/> }
+    { title: 'High Availability', desc: 'Redundant server and node architectures that work uninterrupted.', icon: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/> },
+    { title: 'Anti-DDoS Protection', desc: 'Advanced firewalls that prevent cyber attacks targeting crypto projects.', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> },
+    { title: 'Global Edge', desc: 'Low latency access for users all around the world.', icon: <circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20"/> }
   ];
 
   return (
@@ -40,7 +40,9 @@ const ServerInfrastructureSubDetailView: React.FC = () => {
         #h-hero { position: relative; padding: 220px 0 120px; min-height: 85vh; display: flex; align-items: center; }
         .hero-grid { display: flex; flex-direction: column; gap: 60px; position: relative; z-index: 10; width: 100%; }
         @media (min-width: 1024px) { .hero-grid { flex-direction: row; align-items: center; justify-content: space-between; } }
-        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: 0 auto; }
+        .hero-text { flex: 1.2; }
+        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: 0 auto; flex: 0.8; }
+        @media (min-width: 1024px) { .form-card { margin: 0; } }
         .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; color: #000; margin-bottom: 16px; }
         .form-button { width: 100%; background: var(--cray-gold); color: #000; padding: 18px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
         .reasons-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
@@ -70,28 +72,28 @@ const ServerInfrastructureSubDetailView: React.FC = () => {
         <div className="overlay"></div><div className="grad"></div>
         <div className="container-xl">
           <div className="hero-grid">
-            <div style={{flex: 1.2}}>
+            <div className="hero-text">
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Backend & Devops</h5>
-              <h1 className="h1-style">Sunucu & Altyapı Kurulumu</h1>
-              <p className="p-style">Web3 projeleri için yüksek erişilebilirlikli sunucu mimarileri kuruyoruz. Node yönetimi ve DDoS korumasıyla projenizi 7/24 aktif tutuyoruz.</p>
+              <h1 className="h1-style">Server & Infrastructure Setup</h1>
+              <p className="p-style">We build high-availability server architectures for Web3 projects. With node management and DDoS protection, we keep your project active 24/7.</p>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Altyapı Teklifi Al</h3>
-              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Infrastructure Quote</h3>
+              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Try Again</button></div> : (
                 <form onSubmit={handleSubmit}>
                   <select className="form-control" required>
-                    <option value="">İhtiyaç</option><option value="hosting">Hosting & Cloud</option><option value="node">Node Setup</option>
+                    <option value="">Need</option><option value="hosting">Hosting & Cloud</option><option value="node">Node Setup</option>
                   </select>
-                  <textarea className="form-control" rows={3} placeholder="Beklenen kullanıcı yükü ve ağ tercihlerini belirtin..." value={goal} onChange={e=>setGoal(e.target.value)} required />
+                  <textarea className="form-control" rows={3} placeholder="Specify expected user load and network preferences..." value={goal} onChange={e=>setGoal(e.target.value)} required />
                   <input 
                     type="text" 
                     className="form-control" 
-                    placeholder="E-posta veya Telegram"
+                    placeholder="Email or Telegram"
                     value={contact}
                     onChange={e => setContact(e.target.value)}
                     required 
                   />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'HESAPLANIYOR...' : 'ALTYAPI PLANI AL'}</button>
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'CALCULATING...' : 'GET INFRASTRUCTURE PLAN'}</button>
                 </form>
               )}
             </div>
@@ -123,8 +125,8 @@ const ServerInfrastructureSubDetailView: React.FC = () => {
                 <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc51?q=80&w=2000" alt="Architecture" />
               </div>
               <div className="detail-text">
-                <h2 className="h2-style">Yüksek Erişilebilirlik (High Availability)</h2>
-                <p className="p-style">Projenizin her an aktif kalması için yedekli sunucu yapıları ve load balancer çözümleri sunuyoruz. %99.9 uptime garantisi ile Web3 ekosisteminde güven kazanın.</p>
+                <h2 className="h2-style">High Availability</h2>
+                <p className="p-style">We provide redundant server structures and load balancer solutions so that your project remains active at all times. Gain trust in the Web3 ecosystem with a 99.9% uptime guarantee.</p>
               </div>
             </div>
             <div className="detail-item reverse">
@@ -132,8 +134,8 @@ const ServerInfrastructureSubDetailView: React.FC = () => {
                 <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2000" alt="Node Management" />
               </div>
               <div className="detail-text">
-                <h2 className="h2-style">Dedicated Node & RPC Hizmetleri</h2>
-                <p className="p-style">Halka açık RPC servislerinin yavaşlığından kurtulun. Projenize özel kurduğumuz yüksek hızlı blokzincir nodeları ile işlemlerinizi saniyeler içinde on-chain’e iletin ve veri çekme hızınızı maksimize edin.</p>
+                <h2 className="h2-style">Dedicated Node & RPC Services</h2>
+                <p className="p-style">Get rid of the slowness of public RPC services. Submit your transactions to on-chain in seconds and maximize your data fetching speed with our high-speed blockchain nodes custom-built for your project.</p>
               </div>
             </div>
           </div>
@@ -142,19 +144,19 @@ const ServerInfrastructureSubDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Altyapınızı Profesyonel Ellere Teslim Edin</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Teknik aksaklıklar projenize olan güveni sarsar. Siber saldırılara dayanıklı ve her daim aktif bir altyapı için DevOps uzmanlarımızla çalışın.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Hemen Altyapı Planla</a>
+          <h2 className="h2-style">Entrust Your Infrastructure to Professionals</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Technical glitches shake the confidence in your project. Work with our DevOps experts for an infrastructure that is resistant to cyber attacks and active at all times.</p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Plan Infrastructure Now</a>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {[
-              { q: "Hangi bulut sağlayıcılarını kullanıyorsunuz?", a: "AWS, Google Cloud ve projenin gizlilik ihtiyacına göre özel veri merkezleri ile çalışıyoruz." },
-              { q: "Node kurulumu ne kadar sürer?", a: "Ağ senkronizasyon süresine bağlı olarak 24-48 saat içinde hazır hale getiriyoruz." }
+              { q: "Which cloud providers do you use?", a: "We work with AWS, Google Cloud, and private data centers depending on the privacy needs of the project." },
+              { q: "How long does node setup take?", a: "We make it ready within 24-48 hours depending on the network synchronization time." }
             ].map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
                 <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
@@ -169,7 +171,7 @@ const ServerInfrastructureSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

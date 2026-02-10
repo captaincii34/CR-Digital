@@ -14,15 +14,15 @@ const DAOInfrastructureSubDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject(status, `DAO Altyapı: ${goal}`);
+    const result = await evaluateProject(status, `DAO Infrastructure: ${goal}`);
     setAiResult(result);
     setLoading(false);
   };
 
   const reasons = [
-    { title: 'Governance Design', desc: 'Adil ve manipülasyona kapalı on-chain oylama mekanizmaları.', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> },
-    { title: 'Treasury Management', desc: 'Multi-sig (Gnosis) ve akıllı kontrat kontrollü şeffaf hazine yönetimi.', icon: <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/> },
-    { title: 'Incentive Models', desc: 'Topluluk katılımını ve sadakati artıran ödül ve teşvik kurguları.', icon: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/> }
+    { title: 'Governance Design', desc: 'Fair and manipulation-proof on-chain voting mechanisms.', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> },
+    { title: 'Treasury Management', desc: 'Transparent treasury management controlled by multi-sig (Gnosis) and smart contracts.', icon: <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/> },
+    { title: 'Incentive Models', desc: 'Reward and incentive setups that increase community participation and loyalty.', icon: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/> }
   ];
 
   return (
@@ -40,7 +40,7 @@ const DAOInfrastructureSubDetailView: React.FC = () => {
         #h-hero { position: relative; padding: 220px 0 120px; min-height: 85vh; display: flex; align-items: center; }
         .hero-grid { display: flex; flex-direction: column; gap: 60px; position: relative; z-index: 10; width: 100%; }
         @media (min-width: 1024px) { .hero-grid { flex-direction: row; align-items: center; justify-content: space-between; } }
-        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: 0 auto; }
+        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: auto; }
         .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; color: #000; margin-bottom: 16px; }
         .form-button { width: 100%; background: var(--cray-gold); color: #000; padding: 18px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
         .reasons-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
@@ -72,19 +72,19 @@ const DAOInfrastructureSubDetailView: React.FC = () => {
           <div className="hero-grid">
             <div style={{flex: 1.2}}>
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Community Governance</h5>
-              <h1 className="h1-style">DAO Altyapı Kurulumu</h1>
-              <p className="p-style">Projenizi topluluğunuzla birlikte yönetin. Karar alma süreçlerini tamamen on-chain hale getiren profesyonel yönetişim altyapıları kuruyoruz.</p>
+              <h1 className="h1-style">DAO Infrastructure Setup</h1>
+              <p className="p-style">Manage your project together with your community. We establish professional governance infrastructures that make decision-making processes completely on-chain.</p>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Yönetişim Planı Al</h3>
-              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Governance Plan</h3>
+              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Try Again</button></div> : (
                 <form onSubmit={handleSubmit}>
                   <select className="form-control" required>
-                    <option value="">Ağ</option><option value="eth">Ethereum / L2</option><option value="sol">Solana</option>
+                    <option value="">Network</option><option value="eth">Ethereum / L2</option><option value="sol">Solana</option>
                   </select>
-                  <textarea className="form-control" rows={3} placeholder="Hazine ve oylama beklentilerinizi belirtin..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="E-posta veya Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'HESAPLANIYOR...' : 'DAO PLANI AL'}</button>
+                  <textarea className="form-control" rows={3} placeholder="Specify your treasury and voting expectations..." value={goal} onChange={e=>setGoal(e.target.value)} required />
+                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'CALCULATING...' : 'GET DAO PLAN'}</button>
                 </form>
               )}
             </div>
@@ -118,8 +118,8 @@ const DAOInfrastructureSubDetailView: React.FC = () => {
                 <img src="https://images.unsplash.com/photo-1554224155-8d04182258f5?q=80&w=2000" alt="Safe Management" />
               </div>
               <div className="detail-text">
-                <h2 className="h2-style">Güvenli Hazine Yönetimi</h2>
-                <p className="p-style">DAO'nuzun finansal gücünü koruyoruz. Multi-sig (çoklu imza) cüzdan yapıları ve harcama limitleri kurgulayarak hazine yönetimini topluluk onayına tabi tutuyoruz.</p>
+                <h2 className="h2-style">Secure Treasury Management</h2>
+                <p className="p-style">We protect your DAO's financial power. By constructing multi-sig wallet structures and spending limits, we subject treasury management to community approval.</p>
               </div>
             </div>
             <div className="detail-item reverse">
@@ -127,8 +127,8 @@ const DAOInfrastructureSubDetailView: React.FC = () => {
                 <img src="https://images.unsplash.com/photo-1541873676947-9ca65459a8c1?q=80&w=2000" alt="Voting" />
               </div>
               <div className="detail-text">
-                <h2 className="h2-style">Esnek Oylama Sistemleri</h2>
-                <p className="p-style">Token ağırlıklı oylamadan, quadratic voting'e kadar farklı modeller sunuyoruz. Snapshot entegrasyonu veya doğrudan on-chain kontratlar üzerinden şeffaf kararlar alın.</p>
+                <h2 className="h2-style">Flexible Voting Systems</h2>
+                <p className="p-style">We offer different models from token-weighted voting to quadratic voting. Make transparent decisions via Snapshot integration or directly through on-chain contracts.</p>
               </div>
             </div>
           </div>
@@ -137,18 +137,18 @@ const DAOInfrastructureSubDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Topluluğunuzun Gücünü Yönetişime Dönüştürelim</h2>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>DAO Altyapısı Kur</a>
+          <h2 className="h2-style">Let's Turn Your Community's Power Into Governance</h2>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Setup DAO Infrastructure</a>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {[
-              { q: "DAO kurmak için bir token şart mı?", a: "Genellikle oylama gücü için gereklidir, ancak NFT tabanlı veya imza tabanlı modeller de kurabiliriz." },
-              { q: "Mevcut projeme DAO ekleyebilir misiniz?", a: "Evet, topluluğunuzu yönetişime dahil etmek için mevcut akıllı kontratlarınıza DAO katmanı ekliyoruz." }
+              { q: "Is a token required to setup a DAO?", a: "It is generally required for voting power, but we can also set up models based on NFTs or multi-signature signatures." },
+              { q: "Can you add a DAO to my existing project?", a: "Yes, we add a DAO layer to your existing smart contracts to involve your community in governance." }
             ].map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
                 <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
@@ -163,7 +163,7 @@ const DAOInfrastructureSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

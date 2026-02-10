@@ -22,29 +22,21 @@ const ConsultancyDetailView: React.FC = () => {
   };
 
   const roadmapSteps = [
-    { title: "Kripto Proje Danışmanlığı", desc: "Projenizin genel çerçevesini belirler, hedefleri ve potansiyeli analiz ederiz.", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-proje-danismanligi" },
-    { title: "Kripto Fikir ve Konsept Danışmanlığı", desc: "Fikrinizin teknik uygulanabilirliği ve pazar karşılığı değerlendirilir.", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-fikir-ve-konsept-danismanligi" },
-    { title: "Kripto İş Modeli ve Strateji Danışmanlığı", desc: "Sürdürülebilir bir ekosistem yapısı ve gelir modeli kurgularız.", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-is-modeli-ve-strateji-danismanligi" },
-    { title: "Kripto Yol Haritası ve Tokenomics Danışmanlığı", desc: "Token ekonomisi ve teknik kilometre taşlarını planlarız.", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-yol-haritasi-ve-tocenomics-danismanligi" },
-    { title: "Bütçe Odaklı Kripto Proje Danışmanlığı", desc: "Mevcut bütçenize göre en verimli ilerleme yolunu belirleriz.", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/butce-odakli-kripto-proje-danismanligi" },
-    { title: "Uçtan Uca Kripto Proje Yönetim Danışmanlığı", desc: "Tüm süreçlerin profesyonel ekiplerce koordine edilmesini sağlarız.", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/uctan-uca-kripto-proje-yonetim-danismanligi" },
-    { title: "Lansman ve Büyüme Danışmanlığı", desc: "Piyasaya giriş stratejileri ve ölçeklenebilir büyüme planları.", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/lansman-ve-buyume-danismanligi" },
-    { title: "Dijital Pazarlama ve Tanıtım Danışmanlığı", desc: "Görünürlük, marka bilinirliği ve kullanıcı edinimi çalışmaları.", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/dijital-pazarlama-ve-tanitim-danismanligi" }
-  ];
-
-  const advantages = [
-    "Parça parça ajanslarla uğraşmazsınız",
-    "Zaman ve bütçe kaybı yaşamazsınız",
-    "Tüm ekip aynı hedefe odaklanır",
-    "Tutarlı marka ve büyüme elde edersiniz",
-    "Projeniz kontrol altında ilerler"
+    { title: "Crypto Project Consulting", desc: "We define the general framework of your project, analyzing goals and potential.", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-proje-danismanligi" },
+    { title: "Idea & Concept Consulting", desc: "Technical feasibility and market demand for your idea are evaluated.", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-fikir-ve-konsept-danismanligi" },
+    { title: "Business Model & Strategy Consulting", desc: "We design a sustainable ecosystem structure and revenue model.", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-is-modeli-ve-strateji-danismanligi" },
+    { title: "Roadmap & Tokenomics Consulting", desc: "We plan the token economy and technical milestones.", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/kripto-yol-haritasi-ve-tocenomics-danismanligi" },
+    { title: "Budget-Oriented Crypto Project Consulting", desc: "We determine the most efficient path based on your current budget.", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/butce-odakli-kripto-proje-danismanligi" },
+    { title: "End-to-End Project Management Consulting", desc: "We ensure all processes are coordinated by professional teams.", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/uctan-uca-kripto-proje-yonetim-danismanligi" },
+    { title: "Launch & Growth Consulting", desc: "Market entry strategies and scalable growth plans.", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/lansman-ve-buyume-danismanligi" },
+    { title: "Digital Marketing & Promotion Consulting", desc: "Visibility, brand awareness, and user acquisition efforts.", link: "#hizmetler/a-dan-z-ye-kripto-proje-danismanligi/dijital-pazarlama-ve-tanitim-danismanligi" }
   ];
 
   const faqs = [
-    { q: "A'dan Z'ye danışmanlık ne kadar sürer?", a: "Projenin kapsamına ve teknik gereksinimlerine göre değişmekle birlikte, fikir aşamasından lansman aşamasına gelmek genellikle 3 ila 6 ay sürer." },
-    { q: "Sadece belirli bir aşama için hizmet alabilir miyim?", a: "Evet, ancak bu paketimiz uçtan uca çözüm arayan ve projesinin her adımının profesyonelce koordine edilmesini isteyen projeler içindir." },
-    { q: "Bütçem kısıtlıysa ne yapmalıyım?", a: "Bütçe odaklı proje yapılandırması yapıyoruz. Önemli olan bütçenizin miktarı değil, o bütçeyi en doğru hedeflere harcamaktır." },
-    { q: "NDA (Gizlilik Sözleşmesi) imzalıyor musunuz?", a: "Kesinlikle. Süreç başlamadan önce tüm fikir ve verileriniz yasal koruma altına alınır." }
+    { q: "How long does end-to-end consulting take?", a: "While it varies based on project scope and technical requirements, it usually takes 3 to 6 months to go from idea to launch." },
+    { q: "Can I get service only for a specific stage?", a: "Yes, however, this package is designed for projects seeking end-to-end solutions where every step is professionally coordinated." },
+    { q: "What should I do if my budget is limited?", a: "We provide budget-oriented project structuring. What matters isn't just the amount, but spending it on the right goals." },
+    { q: "Do you sign an NDA (Non-Disclosure Agreement)?", a: "Absolutely. All your ideas and data are legally protected before the process begins." }
   ];
 
   return (
@@ -87,13 +79,12 @@ const ConsultancyDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="hero-grid">
             <div className="hero-text-content">
-              <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Uçtan Uca Proje Ortaklığı</h5>
-              <h1 className="h1-style">A'dan Z'ye Crypto Proje Danışmanlığı</h1>
-              <p className="p-style" style={{marginTop: '20px', color: '#d1d5db', lineHeight: '1.7'}}>Bir kripto projesini hayata geçirmek için gereken tüm stratejik, teknik ve operasyonel süreçleri tek çatı altında profesyonelce sunuyoruz.</p>
+              <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>End-to-End Project Partnership</h5>
+              <h1 className="h1-style">End-to-End Crypto Project Consulting</h1>
+              <p className="p-style" style={{marginTop: '20px', color: '#d1d5db', lineHeight: '1.7'}}>We provide all the strategic, technical, and operational processes required to launch a crypto project under one roof, professionally.</p>
               <div style={{marginTop: '32px'}}>
-                {["NDA Kapsamında %100 Gizlilik", "Teknik ve Ekonomik Mimari Tasarımı", "Global Borsa ve Pazarlama Networkü"].map((item, i) => (
+                {["100% Confidentiality Under NDA", "Technical and Economic Architecture Design", "Global Exchange and Marketing Network"].map((item, i) => (
                   <div key={i} style={{display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px'}}>
-                    {/* Fixed justify-content to justifyContent */}
                     <div style={{width: '24px', height: '24px', background: 'var(--cray-gold)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center'}}><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4"><polyline points="20 6 9 17 4 12" /></svg></div>
                     <span style={{fontSize: '11px', fontWeight: 700, textTransform: 'uppercase'}}>{item}</span>
                   </div>
@@ -101,15 +92,17 @@ const ConsultancyDetailView: React.FC = () => {
               </div>
             </div>
             <div className="form-card">
-              <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '24px', color: '#000'}}>Ücretsiz Ön Değerlendirme</h3>
-              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '24px', color: '#000'}}>Free Pre-Evaluation</h3>
+              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
                   <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
-                    <option value="">Proje Durumu</option><option value="yeni">Yeni proje</option><option value="mevcut">Mevcut proje</option>
+                    <option value="">Project Status</option>
+                    <option value="new">New Project</option>
+                    <option value="existing">Existing Project</option>
                   </select>
-                  <textarea className="form-control" rows={3} placeholder="Hedefiniz nedir?" value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="E-posta / Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'İŞLENİYOR...' : 'DEĞERLENDİRME AL'}</button>
+                  <textarea className="form-control" rows={3} placeholder="What is your goal?" value={goal} onChange={e=>setGoal(e.target.value)} required />
+                  <input type="text" className="form-control" placeholder="Email / Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'PROCESSING...' : 'GET EVALUATION'}</button>
                 </form>
               )}
             </div>
@@ -120,7 +113,7 @@ const ConsultancyDetailView: React.FC = () => {
       {/* Roadmap */}
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Danışmanlık Yol Haritası</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Consulting Roadmap</h2>
           <div className="roadmap-wrapper">
             <div className="roadmap-track"></div>
             {roadmapSteps.map((step, i) => (
@@ -141,7 +134,7 @@ const ConsultancyDetailView: React.FC = () => {
       {/* FAQ */}
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((faq, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -157,7 +150,7 @@ const ConsultancyDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
-        <button onClick={() => window.location.hash = ''} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Ana Sayfaya Dön</button>
+        <button onClick={() => window.location.hash = ''} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Homepage</button>
       </div>
     </div>
   );

@@ -14,7 +14,7 @@ const CryptoBusinessModelStrategySubDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject(status, `İş Modeli ve Strateji Hedefi: ${goal}`);
+    const result = await evaluateProject(status, `Business Model & Strategy Goal: ${goal}`);
     setAiResult(result);
     setLoading(false);
   };
@@ -22,25 +22,25 @@ const CryptoBusinessModelStrategySubDetailView: React.FC = () => {
   const reasons = [
     {
       icon: <><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></>,
-      title: 'Hassas Gizlilik (NDA)',
-      desc: 'İş modeliniz ve ticari sırlarınız bizimle tamamen güvende. Her süreç yasal koruma altında başlar.'
+      title: 'Sensitive Confidentiality (NDA)',
+      desc: 'Your business model and trade secrets are completely safe with us. Every process begins under legal protection.'
     },
     {
       icon: <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>,
-      title: "Sürdürülebilir Ekonomi",
-      desc: 'Sadece anlık kazanç değil, token ve ekosistem döngüsünün yıllarca çalışmasını sağlayacak modeller kurguluyoruz.'
+      title: "Sustainable Economy",
+      desc: 'We construct models that will ensure the token and ecosystem cycle works for years, not just for instant gains.'
     },
     {
       icon: <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>,
-      title: 'Stratejik Yol Haritası',
-      desc: 'Piyasa dalgalanmalarına karşı dayanıklı, esnek ve büyüme odaklı "Go-to-Market" planları hazırlıyoruz.'
+      title: 'Strategic Roadmap',
+      desc: 'We prepare "Go-to-Market" plans that are resilient to market fluctuations, flexible, and growth-oriented.'
     }
   ];
 
   const faqs = [
-    { q: "İş modeli tasarımı neleri kapsar?", a: "Gelir kanalları, kullanıcı edinme maliyetleri, token faydası (utility) ve ekosistem içi ekonomik döngülerin tamamını kapsar." },
-    { q: "Mevcut projemin modelini değiştirebilir misiniz?", a: "Evet, 'Pivot' danışmanlığımız ile projenizin eksik yönlerini tespit edip güncel pazar koşullarına uygun şekilde yeniden yapılandırıyoruz." },
-    { q: "Yatırımcılar için strateji neden önemlidir?", a: "Yatırımcılar teknoloji kadar 'paranın nasıl döneceğine' bakar. Sağlam bir iş modeli, fon toplama şansınızı %300 artırır." }
+    { q: "What does business model design cover?", a: "It covers revenue channels, user acquisition costs, token utility, and entire intra-ecosystem economic cycles." },
+    { q: "Can you change my existing project's model?", a: "Yes, with our 'Pivot' consultancy, we identify the missing aspects of your project and restructure it according to current market conditions." },
+    { q: "Why is strategy important for investors?", a: "Investors look at 'how the money will cycle' as much as the technology. A solid business model increases your fundraising chance by 300%." }
   ];
 
   return (
@@ -108,11 +108,11 @@ const CryptoBusinessModelStrategySubDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="hero-grid">
             <div className="hero-text-content">
-              <h1 className="h1-style">Kripto İş Modeli ve Strateji Danışmanlığı</h1>
-              <p className="hero-desc p-style">Sürdürülebilir bir Web3 ekonomisi inşa edin. İş modelinizi sadece bugün için değil, geleceğin merkeziyetsiz dünyası için kurguluyoruz.</p>
+              <h1 className="h1-style">Crypto Business Model & Strategy Consulting</h1>
+              <p className="hero-desc p-style">Build a sustainable Web3 economy. We construct your business model not just for today, but for the decentralized world of the future.</p>
               
               <div className="hero-feature-list">
-                {["Gelir Odaklı Ekosistem Mimari", "Büyüme ve Ölçekleme Stratejileri", "Rekabetçi Konumlandırma", "Borsalara Hazırlık Stratejisi"].map((item, i) => (
+                {["Revenue-Oriented Ecosystem Architecture", "Growth and Scaling Strategies", "Competitive Positioning", "Exchange Readiness Strategy"].map((item, i) => (
                   <div key={i} className="hero-feature-item">
                     <div className="feature-icon-circle">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="4"><polyline points="20 6 9 17 4 12"/></svg>
@@ -123,18 +123,18 @@ const CryptoBusinessModelStrategySubDetailView: React.FC = () => {
               </div>
             </div>
             <div className="form-card">
-              <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px'}}>Strateji Analizi</h3>
-              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px'}}>Strategy Analysis</h3>
+              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
                   <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
-                    <option value="">İş Geliştirme Durumu</option>
-                    <option value="kurulum">Gelir Modeli Kurulumu</option>
-                    <option value="optimizasyon">Mevcut Modelin Optimizasyonu</option>
-                    <option value="global">Global Açılım Stratejisi</option>
+                    <option value="">Business Development Status</option>
+                    <option value="setup">Revenue Model Setup</option>
+                    <option value="optimization">Optimization of Existing Model</option>
+                    <option value="global">Global Expansion Strategy</option>
                   </select>
-                  <textarea className="form-control" rows={3} placeholder="Ekosistem hedeflerinizi özetleyin..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="E-posta veya Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'MİMARİ ANALİZ EDİLİYOR...' : 'STRATEJİ ANALİZİ AL'}</button>
+                  <textarea className="form-control" rows={3} placeholder="Summarize your ecosystem goals..." value={goal} onChange={e=>setGoal(e.target.value)} required />
+                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'ANALYZING ARCHITECTURE...' : 'GET STRATEGY ANALYSIS'}</button>
                 </form>
               )}
             </div>
@@ -147,7 +147,7 @@ const CryptoBusinessModelStrategySubDetailView: React.FC = () => {
         <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=2071&auto=format&fit=crop" className="bg-img" alt="Expert Strategy" />
         <div className="overlay" style={{ background: 'rgba(0,0,0,0.92)' }}></div><div className="grad"></div>
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Neden Bizimle Çalışmalısınız?</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Why Work With Us?</h2>
           <div className="reasons-grid">
             {reasons.map((r, i) => (
               <div key={i} className="reason-card">
@@ -169,12 +169,12 @@ const CryptoBusinessModelStrategySubDetailView: React.FC = () => {
           <div className="detail-row">
             <div className="detail-item">
               <div className="detail-text">
-                <h2 className="h2-style" style={{marginBottom: '20px'}}>Ticari Başarı Mimari</h2>
+                <h2 className="h2-style" style={{marginBottom: '20px'}}>Commercial Success Architecture</h2>
                 <p className="p-style" style={{color: '#d1d5db', lineHeight: '1.8'}}>
-                  Harika bir teknolojiye sahip olabilirsiniz, ancak sürdürülebilir bir iş modeliniz yoksa Web3 dünyasında kalıcı olamazsınız. Biz projenizi bir "yazılım" olmaktan çıkarıp, kendi ayakları üzerinde durabilen, gelir üreten ve ekosisteme değer katan profesyonel bir "işletme" haline getiriyoruz.
+                  You might have great technology, but without a sustainable business model, you cannot remain permanent in the Web3 world. We transform your project from being just a "software" into a professional "business" that can stand on its own feet, generate revenue, and add value to the ecosystem.
                 </p>
                 <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
-                  {["Gelir Akışları Tasarımı", "Maliyet Yapısı ve Finansal Modelleme", "Pazar Segmentasyonu"].map((li, i) => (
+                  {["Revenue Streams Design", "Cost Structure and Financial Modeling", "Market Segmentation"].map((li, i) => (
                     <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
                       <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
                     </li>
@@ -188,12 +188,12 @@ const CryptoBusinessModelStrategySubDetailView: React.FC = () => {
 
             <div className="detail-item reverse">
               <div className="detail-text">
-                <h2 className="h2-style" style={{marginBottom: '20px'}}>Global Rekabet Gücü</h2>
+                <h2 className="h2-style" style={{marginBottom: '20px'}}>Global Competitive Power</h2>
                 <p className="p-style" style={{color: '#d1d5db', lineHeight: '1.8'}}>
-                  Global ölçekte yüzlerce rakibiniz var. Sizi onlardan ayıracak olan sadece token grafiğiniz değil, projenizin sektörel duruşu ve uzun vadeli vizyonudur. Stratejik ortaklık kurgularımız ve büyüme modellerimizle sizi yerelden globale bir başarı hikayesi olarak taşıyoruz.
+                  You have hundreds of competitors on a global scale. What sets you apart from them is not just your token chart, but your project's sectoral stance and long-term vision. We carry you from local to a global success story with our strategic partnership setups and growth models.
                 </p>
                 <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
-                  {["SWOT ve Rakip Analizi", "Partnerlik ve İş Geliştirme Planı", "Kullanıcı Sadakat Stratejileri"].map((li, i) => (
+                  {["SWOT and Competitor Analysis", "Partnership and Business Development Plan", "User Loyalty Strategies"].map((li, i) => (
                     <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
                       <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
                     </li>
@@ -211,18 +211,18 @@ const CryptoBusinessModelStrategySubDetailView: React.FC = () => {
       {/* CTA Box */}
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style" style={{color: '#000'}}>Geleceğin Web3 Devleri Arasında Yerinizi Alın</h2>
+          <h2 className="h2-style" style={{color: '#000'}}>Take Your Place Among the Web3 Giants of the Future</h2>
           <p className="p-style" style={{color: '#555', maxWidth: '800px', margin: '20px auto 0'}}>
-            İş modelinizi ve stratejinizi profesyonel bir bakış açısıyla kurgulamak için bugün ilk adımı atın. Projenizi sağlam temeller üzerine inşa edelim.
+            Take the first step today to construct your business model and strategy with a professional perspective. Let's build your project on solid foundations.
           </p>
-          <a href="#h-hero" className="cta-btn">Stratejik Danışmanlık Al</a>
+          <a href="#h-hero" className="cta-btn">Get Strategic Consultancy</a>
         </div>
       </section>
 
       {/* FAQ Section */}
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((faq, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -238,7 +238,7 @@ const CryptoBusinessModelStrategySubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '80px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Hizmetler Sayfasına Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

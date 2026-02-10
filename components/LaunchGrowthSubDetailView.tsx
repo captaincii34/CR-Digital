@@ -16,25 +16,25 @@ const LaunchGrowthSubDetailView: React.FC = () => {
   const reasons = [
     {
       icon: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>,
-      title: 'Patlayıcı Başlangıç',
-      desc: 'Lansman anında ihtiyacınız olan likidite, hacim ve topluluk ilgisini senkronize şekilde yaratıyoruz.'
+      title: 'Explosive Start',
+      desc: 'We create the liquidity, volume, and community interest you need at the time of launch in a synchronized way.'
     },
     {
       icon: <><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></>,
-      title: "Viral Büyüme Motorları",
-      desc: 'Sadece reklam değil, kullanıcıların birbirini davet ettiği organik ve teknik büyüme kurguları kuruyoruz.'
+      title: "Viral Growth Engines",
+      desc: 'We build organic and technical growth setups where users invite each other, not just advertising.'
     },
     {
       icon: <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>,
-      title: 'Uzun Vadeli Tutundurma',
-      desc: 'Lansmandan sonra sönen projelerden olmayın. Holder sadakatini ve sürekli katılımı sağlayan modellerimiz hazır.'
+      title: 'Long-Term Retention',
+      desc: 'Don’t be one of the projects that fade after launch. Our models that provide holder loyalty and continuous participation are ready.'
     }
   ];
 
   const faqs = [
-    { q: "Lansman için en doğru zaman ne zaman?", a: "Piyasa trendleri (bull/bear), rakip projelerin takvimi ve kendi topluluğunuzun olgunluk seviyesine göre bu zamanı birlikte belirliyoruz." },
-    { q: "Growth Hacking nedir?", a: "Minimum maliyetle maksimum kullanıcıya ulaşmayı hedefleyen, teknik ve psikolojik tetikleyicilerle dolu pazarlama yöntemleridir." },
-    { q: "Lansman sonrası destek veriyor musunuz?", a: "Kesinlikle. Lansman sadece bir başlangıçtır; asıl önemli olan listeleme sonrası sürdürülebilir hacim ve büyümedir." }
+    { q: "When is the most correct time for launch?", a: "We determine this time together based on market trends (bull/bear), the schedule of competitor projects, and the maturity level of your own community." },
+    { q: "What is Growth Hacking?", a: "These are marketing methods aimed at reaching the maximum users with minimum cost, filled with technical and psychological triggers." },
+    { q: "Do you provide post-launch support?", a: "Absolutely. Launch is just a start; the real important part is sustainable volume and growth after listing." }
   ];
 
   return (
@@ -90,15 +90,15 @@ const LaunchGrowthSubDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="hero-grid">
             <div>
-              <h1 className="h1-style">Lansman ve Büyüme Danışmanlığı</h1>
-              <p className="hero-desc p-style">Piyasaya fırtına gibi girin ve orada kalın. Doğru zamanlama ve ölçeklenebilir büyüme motorları ile projenizi kalıcı hale getiriyoruz.</p>
+              <h1 className="h1-style">Launch & Growth Consulting</h1>
+              <p className="hero-desc p-style">Enter the market like a storm and stay there. We make your project permanent with the right timing and scalable growth engines.</p>
             </div>
             <div className="form-card">
-              <h3 className="h2-style" style={{textAlign: 'center', marginBottom: '20px', fontSize: '20px !important'}}>Büyüme Planı</h3>
+              <h3 className="h2-style" style={{textAlign: 'center', marginBottom: '20px', fontSize: '20px !important'}}>Growth Plan</h3>
               <form onSubmit={handleSubmit}>
-                <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Mevcut Kullanıcı Sayısı" required />
-                <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="3 aylık büyüme hedefiniz nedir?" required />
-                <button type="submit" disabled={loading} className="form-button">{loading ? 'STRATEJİ HAZIRLANIYOR...' : 'LİSTELEME & BÜYÜME PLANI AL'}</button>
+                <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Current User Count" required />
+                <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="What is your 3-month growth target?" required />
+                <button type="submit" disabled={loading} className="form-button">{loading ? 'PREPARING STRATEGY...' : 'GET LISTING & GROWTH PLAN'}</button>
               </form>
             </div>
           </div>
@@ -108,7 +108,7 @@ const LaunchGrowthSubDetailView: React.FC = () => {
       {/* Why Us */}
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Başarıyı Hızlandıran Faktörler</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Factors That Accelerate Success</h2>
           <div className="reasons-grid">
             {reasons.map((r, i) => (
               <div key={i} className="reason-card">
@@ -127,27 +127,29 @@ const LaunchGrowthSubDetailView: React.FC = () => {
       {/* Detailed Info */}
       <section className="section-padding" style={{background: '#050505'}}>
         <div className="container-xl">
-          <div className="detail-item">
-            <div className="detail-text">
-              <h2 className="h2-style" style={{marginBottom: '20px'}}>Pazara Patlayıcı Giriş</h2>
-              <p className="p-style" style={{color: '#d1d5db', lineHeight: '1.8'}}>
-                Lansman günü her saniye kritiktir. Likiditenin açılmasıyla beraber pazarlama çalışmalarının pik yapmasını, topluluğun "FOMO" etkisine girmesini sağlıyoruz. Sizi sadece bir listeleme olarak değil, bir 'olay' olarak piyasaya sürüyoruz.
-              </p>
+          <div className="detail-row">
+            <div className="detail-item">
+              <div className="detail-text">
+                <h2 className="h2-style">Explosive Market Entry</h2>
+                <p className="p-style" style={{color: '#d1d5db', lineHeight: '1.8'}}>
+                  Every second is critical on launch day. We ensure that marketing efforts peak with the opening of liquidity, bringing the community into the "FOMO" effect. We launch you not just as a listing, but as an 'event'.
+                </p>
+              </div>
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1516245834210-c4c142787335?q=80&w=2069&auto=format&fit=crop" alt="Market Entry" />
+              </div>
             </div>
-            <div className="detail-visual">
-              <img src="https://images.unsplash.com/photo-1516245834210-c4c142787335?q=80&w=2069&auto=format&fit=crop" alt="Market Entry" />
-            </div>
-          </div>
 
-          <div className="detail-item reverse">
-            <div className="detail-text">
-              <h2 className="h2-style" style={{marginBottom: '20px'}}>Büyüme Motorları ve Tutundurma</h2>
-              <p className="p-style" style={{color: '#d1d5db', lineHeight: '1.8'}}>
-                Lansman sonrası sönüp giden projelerden olmayın. Viral büyüme döngüleri, referral sistemleri ve Web3 sadakat programları ile kullanıcı tabanınızı her geçen gün genişletiyoruz. Sürdürülebilir büyüme için projenizi bir ekosisteme dönüştürüyoruz.
-              </p>
-            </div>
-            <div className="detail-visual">
-              <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2070&auto=format&fit=crop" alt="Growth Engines" />
+            <div className="detail-item reverse">
+              <div className="detail-text">
+                <h2 className="h2-style">Growth Engines and Retention</h2>
+                <p className="p-style" style={{color: '#d1d5db', lineHeight: '1.8'}}>
+                  Don't be one of the projects that fade after launch. We constantly expand your user base with viral growth loops, referral systems, and Web3 loyalty programs. We transform your project into an ecosystem for sustainable growth.
+                </p>
+              </div>
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2070&auto=format&fit=crop" alt="Growth Engines" />
+              </div>
             </div>
           </div>
         </div>
@@ -156,16 +158,16 @@ const LaunchGrowthSubDetailView: React.FC = () => {
       {/* CTA Box */}
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Geleceğin Web3 Devleri Arasında Yerinizi Alın</h2>
-          <p className="p-style" style={{color: '#555', maxWidth: '800px', margin: '20px auto 0'}}>Lansman stratejinizi sıfır hata ile kurgulayın. Piyasa koşullarına en uygun GTM planı için profesyonel destek alın.</p>
-          <a href="#h-hero" className="cta-btn">Lansman Stratejisi Al</a>
+          <h2 className="h2-style">Take Your Place Among the Web3 Giants of the Future</h2>
+          <p className="p-style" style={{color: '#555', maxWidth: '800px', margin: '20px auto 0'}}>Construct your launch strategy with zero errors. Get professional support for the GTM plan best suited to market conditions.</p>
+          <a href="#h-hero" className="cta-btn">Get Launch Strategy</a>
         </div>
       </section>
 
       {/* FAQ */}
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((faq, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -181,7 +183,7 @@ const LaunchGrowthSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '80px 0', textAlign: 'center', background: '#000' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Hizmetler Sayfasına Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

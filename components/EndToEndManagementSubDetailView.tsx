@@ -16,25 +16,25 @@ const EndToEndManagementSubDetailView: React.FC = () => {
   const reasons = [
     {
       icon: <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>,
-      title: 'Multidisipliner Uzmanlık',
-      desc: 'Teknikten pazarlamaya, hukuktan finansa kadar her alanda projenizi sahiplenen bir ekip.'
+      title: 'Multidisciplinary Expertise',
+      desc: 'A team that embraces your project in every field from technical to marketing, legal to finance.'
     },
     {
       icon: <><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></>,
-      title: "Uyumlu Koordinasyon",
-      desc: 'Farklı ekiplerin (yazılım, sosyal medya, MM) birbiriyle uyum içinde çalışmasını sağlıyoruz.'
+      title: "Harmonious Coordination",
+      desc: 'We ensure different teams (software, social media, MM) work in harmony with each other.'
     },
     {
       icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>,
-      title: 'Proaktif Risk Yönetimi',
-      desc: 'Olası krizleri henüz ortaya çıkmadan tespit ediyor ve projenizi her daim güvenli limanda tutuyoruz.'
+      title: 'Proactive Risk Management',
+      desc: 'We detect potential crises before they arise and always keep your project in a safe harbor.'
     }
   ];
 
   const faqs = [
-    { q: "Yönetim süreci projenin hangi aşamasında başlamalı?", a: "İdeal olan fikir aşamasında başlamaktır; ancak projeniz yayındayken de yönetimi devralıp optimizasyon sağlayabiliriz." },
-    { q: "Ekiplerimizle nasıl iletişim kuruyoruz?", a: "Size özel atanan proje yöneticisi üzerinden Telegram, Slack ve Zoom aracılığıyla 7/24 iletişim sağlıyoruz." },
-    { q: "Raporlama süreci nasıl?", a: "Haftalık detaylı performans raporları ve anlık veri dashboardları ile şeffaf bir süreç yürütüyoruz." }
+    { q: "At what stage should the management process start?", a: "Ideally, it should start at the idea stage; however, we can take over management and provide optimization while your project is live." },
+    { q: "How do we communicate with our teams?", a: "We provide 24/7 communication through Telegram, Slack, and Zoom via your dedicated project manager." },
+    { q: "How is the reporting process?", a: "We conduct a transparent process with weekly detailed performance reports and instant data dashboards." }
   ];
 
   return (
@@ -90,15 +90,15 @@ const EndToEndManagementSubDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="hero-grid">
             <div>
-              <h1 className="h1-style">Uçtan Uca Kripto Proje Yönetim Danışmanlığı</h1>
-              <p className="hero-desc p-style">Siz vizyona odaklanın, biz operasyonu yönetelim. Tüm süreçleri profesyonel ekiplerimizle orkestre ediyoruz.</p>
+              <h1 className="h1-style">End-to-End Crypto Project Management Consulting</h1>
+              <p className="hero-desc p-style">You focus on the vision, we manage the operation. We orchestrate all processes with our professional teams.</p>
             </div>
             <div className="form-card">
-              <h3 className="h2-style" style={{textAlign: 'center', marginBottom: '20px', fontSize: '20px !important'}}>Yönetim Talebi</h3>
+              <h3 className="h2-style" style={{textAlign: 'center', marginBottom: '20px', fontSize: '20px !important'}}>Management Request</h3>
               <form onSubmit={handleSubmit}>
-                <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Proje Adı" required />
-                <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Mevcut eksikleriniz neler?" required />
-                <button type="submit" disabled={loading} className="form-button">{loading ? 'BAĞLANILIYOR...' : 'OPERASYON PLANI AL'}</button>
+                <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Project Name" required />
+                <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="What are your current gaps?" required />
+                <button type="submit" disabled={loading} className="form-button">{loading ? 'CONNECTING...' : 'GET OPERATION PLAN'}</button>
               </form>
             </div>
           </div>
@@ -108,7 +108,7 @@ const EndToEndManagementSubDetailView: React.FC = () => {
       {/* Why Us */}
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Profesyonel Yönetim Gücü</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Professional Management Power</h2>
           <div className="reasons-grid">
             {reasons.map((r, i) => (
               <div key={i} className="reason-card">
@@ -127,27 +127,29 @@ const EndToEndManagementSubDetailView: React.FC = () => {
       {/* Detailed Info */}
       <section className="section-padding" style={{background: '#050505'}}>
         <div className="container-xl">
-          <div className="detail-item">
-            <div className="detail-text">
-              <h2 className="h2-style" style={{marginBottom: '20px'}}>Operasyonel Mükemmellik</h2>
-              <p className="p-style" style={{color: '#d1d5db', lineHeight: '1.8'}}>
-                Web3'te hız her şeydir. Biz projenizin hantal yapılardan kurtulmasını, ekiplerin birbirini beklemeden paralel şekilde ilerlemesini sağlıyoruz.
-              </p>
+          <div className="detail-row">
+            <div className="detail-item">
+              <div className="detail-text">
+                <h2 className="h2-style" style={{marginBottom: '20px'}}>Operational Excellence</h2>
+                <p className="p-style" style={{color: '#d1d5db', lineHeight: '1.8'}}>
+                  Speed is everything in Web3. We ensure your project is freed from cumbersome structures, allowing teams to progress in parallel without waiting for each other.
+                </p>
+              </div>
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" alt="Operational Excellence" />
+              </div>
             </div>
-            <div className="detail-visual">
-              <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" alt="Operational Excellence" />
-            </div>
-          </div>
 
-          <div className="detail-item reverse">
-            <div className="detail-text">
-              <h2 className="h2-style" style={{marginBottom: '20px'}}>Stratejik Koordinasyon</h2>
-              <p className="p-style" style={{color: '#d1d5db', lineHeight: '1.8'}}>
-                Geliştirme, pazarlama ve topluluk ekiplerinin tek bir vizyon etrafında toplanmasını sağlıyoruz. Karmaşık süreçleri basitleştirerek projenizin her daim hedefe odaklı kalmasını garantiliyoruz.
-              </p>
-            </div>
-            <div className="detail-visual">
-              <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop" alt="Synergy" />
+            <div className="detail-item reverse">
+              <div className="detail-text">
+                <h2 className="h2-style" style={{marginBottom: '20px'}}>Strategic Coordination</h2>
+                <p className="p-style" style={{color: '#d1d5db', lineHeight: '1.8'}}>
+                  We ensure development, marketing, and community teams gather around a single vision. By simplifying complex processes, we guarantee your project always stays goal-oriented.
+                </p>
+              </div>
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop" alt="Synergy" />
+              </div>
             </div>
           </div>
         </div>
@@ -156,16 +158,16 @@ const EndToEndManagementSubDetailView: React.FC = () => {
       {/* CTA Box */}
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Operasyonu Biz Yönetelim, Siz Vizyona Odaklanın</h2>
-          <p className="p-style" style={{color: '#555', maxWidth: '800px', margin: '20px auto 0'}}>Girişiminizin günlük karmaşasını profesyonel bir ekibe devrederek büyümenize odaklanın. 7/24 kesintisiz operasyon desteği için iletişime geçin.</p>
-          <a href="#h-hero" className="cta-btn">Yönetim Paketi İste</a>
+          <h2 className="h2-style">Let Us Manage the Operation, You Focus on the Vision</h2>
+          <p className="p-style" style={{color: '#555', maxWidth: '800px', margin: '20px auto 0'}}>Delegate the daily chaos of your startup to a professional team and focus on your growth. Contact us for 24/7 uninterrupted operation support.</p>
+          <a href="#h-hero" className="cta-btn">Request Management Package</a>
         </div>
       </section>
 
       {/* FAQ */}
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((faq, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -181,7 +183,7 @@ const EndToEndManagementSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '80px 0', textAlign: 'center', background: '#000' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Hizmetler Sayfasına Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

@@ -14,7 +14,7 @@ const AuditPreparationSubDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject(status, `Audit Hazırlığı: ${goal}`);
+    const result = await evaluateProject(status, `Audit Preparation: ${goal}`);
     setAiResult(result);
     setLoading(false);
   };
@@ -22,25 +22,25 @@ const AuditPreparationSubDetailView: React.FC = () => {
   const reasons = [
     {
       icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>,
-      title: 'Ön Denetim (Pre-Audit)',
-      desc: 'Bağımsız audit firmasına gitmeden önce tüm teknik açıkların kapatıldığı derinlemesine kod tarama süreci.'
+      title: 'Pre-Audit Inspection',
+      desc: 'A deep code scanning process where all technical vulnerabilities are closed before going to an independent audit firm.'
     },
     {
       icon: <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87"/>,
       title: "Partner Network",
-      desc: "CertiK, Hacken ve SlowMist gibi firmalarla projeniz için en uygun fiyat ve hızlı teslimat eşleşmesi."
+      desc: "Matching your project with firms like CertiK, Hacken, and SlowMist for the best price and fastest delivery."
     },
     {
       icon: <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>,
-      title: 'Skor Optimizasyonu',
-      desc: 'Audit raporunuzda en yüksek güvenlik skorunu almanız için kodunuzu %100 uyumlu hale getiriyoruz.'
+      title: 'Score Optimization',
+      desc: 'We make your code 100% compliant so you receive the highest security score in your audit report.'
     }
   ];
 
   const faqs = [
-    { q: "Audit neden zorunludur?", a: "Büyük borsalar ve kurumsal yatırımcılar, güvenliği kanıtlanmamış (auditsiz) projelere kapılarını kapatır." },
-    { q: "Sertifika veriyor musunuz?", a: "Hayır, biz hazırlık sürecini yönetiyor ve bağımsız partner denetim firmalarından sertifika almanızı sağlıyoruz." },
-    { q: "Hazırlık süreci ne kadar sürer?", a: "Kodun hacmine göre 1 ila 2 hafta süren bir iç denetim ve düzeltme aşamasıdır." }
+    { q: "Why is an audit mandatory?", a: "Major exchanges and institutional investors close their doors to projects without proven security (unaudited)." },
+    { q: "Do you issue certificates?", a: "No, we manage the preparation process and ensure you receive certification from independent partner audit firms." },
+    { q: "How long does the preparation process take?", a: "It is an internal inspection and correction phase that lasts 1 to 2 weeks depending on the volume of code." }
   ];
 
   return (
@@ -58,7 +58,7 @@ const AuditPreparationSubDetailView: React.FC = () => {
         #h-hero { position: relative; padding: 220px 0 120px; min-height: 85vh; display: flex; align-items: center; }
         .hero-grid { display: flex; flex-direction: column; gap: 60px; position: relative; z-index: 10; width: 100%; }
         @media (min-width: 1024px) { .hero-grid { flex-direction: row; align-items: center; justify-content: space-between; } }
-        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: 0 auto; }
+        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: auto; }
         .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; color: #000; margin-bottom: 16px; }
         .form-button { width: 100%; background: var(--cray-gold); color: #000; padding: 18px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
         .reasons-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
@@ -91,24 +91,24 @@ const AuditPreparationSubDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="hero-grid">
             <div style={{flex: 1.2}}>
-              <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Siber Güvenlik Sertifikasyonu</h5>
-              <h1 className="h1-style">Audit Hazırlık Süreçleri</h1>
-              <p className="p-style" style={{marginTop: '20px', lineHeight: '1.7'}}>Güvenlik sertifikası olmayan bir proje eksiktir. Sektör lideri audit firmalarından kusursuz rapor almanız için teknik denetim ve hazırlık sürecinizi yönetiyoruz.</p>
+              <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Cyber Security Certification</h5>
+              <h1 className="h1-style">Audit Preparation Processes</h1>
+              <p className="p-style" style={{marginTop: '20px', lineHeight: '1.7'}}>A project without a security certificate is incomplete. We manage your technical audit and preparation process to ensure you receive flawless reports from industry-leading audit firms.</p>
               <div style={{marginTop: '32px', display: 'flex', flexWrap: 'wrap', gap: '15px'}}>
-                <span style={{background: 'rgba(255,177,0,0.1)', color: 'var(--cray-gold)', padding: '8px 16px', borderRadius: '30px', fontSize: '12px', fontWeight: 700}}>✓ KOD DENETİMİ</span>
-                <span style={{background: 'rgba(255,177,0,0.1)', color: 'var(--cray-gold)', padding: '8px 16px', borderRadius: '30px', fontSize: '12px', fontWeight: 700}}>✓ MANTIKSAL ANALİZ</span>
+                <span style={{background: 'rgba(255,177,0,0.1)', color: 'var(--cray-gold)', padding: '8px 16px', borderRadius: '30px', fontSize: '12px', fontWeight: 700}}>✓ CODE AUDIT</span>
+                <span style={{background: 'rgba(255,177,0,0.1)', color: 'var(--cray-gold)', padding: '8px 16px', borderRadius: '30px', fontSize: '12px', fontWeight: 700}}>✓ LOGICAL ANALYSIS</span>
               </div>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Güvenlik Taraması Başlat</h3>
-              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Yeniden Dene</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Start Security Scan</h3>
+              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Try Again</button></div> : (
                 <form onSubmit={handleSubmit}>
                   <select className="form-control" required>
-                    <option value="">Aşama</option><option value="yeni">Lansman Öncesi</option><option value="mevcut">Mevcut Kontrat Revizyonu</option>
+                    <option value="">Stage</option><option value="new">Pre-Launch</option><option value="existing">Existing Contract Revision</option>
                   </select>
-                  <textarea className="form-control" rows={3} placeholder="Kontrat adresiniz (varsa) veya kod yapınız hakkında bilgi verin..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="E-posta veya Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'TARANIYOR...' : 'ÖN DENETİM TALEP ET'}</button>
+                  <textarea className="form-control" rows={3} placeholder="Provide information about your contract address (if any) or code structure..." value={goal} onChange={e=>setGoal(e.target.value)} required />
+                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'SCANNING...' : 'REQUEST PRE-AUDIT'}</button>
                 </form>
               )}
             </div>
@@ -118,8 +118,6 @@ const AuditPreparationSubDetailView: React.FC = () => {
 
       {/* 2. Box Section */}
       <section className="section-padding">
-        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2000" className="bg-img" alt="Boxes Background" />
-        <div className="overlay" style={{background: 'rgba(0,0,0,0.85)'}}></div>
         <div className="container-xl">
           <div className="reasons-grid">
             {reasons.map((r, i) => (
@@ -135,16 +133,16 @@ const AuditPreparationSubDetailView: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. Detailed Content (Z-Pattern %50-%50) */}
+      {/* 3. Detailed Content */}
       <section className="info-detail-section section-padding">
         <div className="container-xl">
           <div className="detail-row">
             <div className="detail-item">
               <div className="detail-text">
-                <h2 className="h2-style">Siber Tehditlere Karşı Koruma</h2>
-                <p className="p-style" style={{marginTop: '24px', lineHeight: '1.8'}}>Sadece statik kod analizi yapmıyoruz; aynı zamanda mantıksal hatalara karşı manuel denetimler gerçekleştiriyoruz. Projenizin likiditesini tehlikeye atacak her türlü açığı kapatıyoruz.</p>
+                <h2 className="h2-style">Protection Against Cyber Threats</h2>
+                <p className="p-style" style={{marginTop: '24px', lineHeight: '1.8'}}>We don't just perform static code analysis; we also conduct manual inspections against logical errors. We close every vulnerability that might endanger your project's liquidity.</p>
                 <ul style={{marginTop: '32px', listStyle: 'none', padding: 0}}>
-                   {["Re-entrancy Koruması", "Oracle Manipülasyon Analizi", "Gelişmiş Kontrat Testleri"].map((item, i) => (
+                   {["Re-entrancy Protection", "Oracle Manipulation Analysis", "Advanced Contract Tests"].map((item, i) => (
                     <li key={i} className="p-style" style={{marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '12px'}}>
                       <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {item}
                     </li>
@@ -158,10 +156,10 @@ const AuditPreparationSubDetailView: React.FC = () => {
 
             <div className="detail-item reverse">
               <div className="detail-text">
-                <h2 className="h2-style">Maliyet ve Zaman Yönetimi</h2>
-                <p className="p-style" style={{marginTop: '24px', lineHeight: '1.8'}}>Büyük denetim firmalarıyla olan stratejik partnerliğimiz sayesinde, projenizin sertifikasyon sürecini daha uygun fiyatlarla ve çok daha hızlı bir takvimde tamamlıyoruz.</p>
+                <h2 className="h2-style">Cost and Time Management</h2>
+                <p className="p-style" style={{marginTop: '24px', lineHeight: '1.8'}}>Thanks to our strategic partnerships with major audit firms, we complete your project's certification process at more affordable prices and in a much faster timeline.</p>
                 <ul style={{marginTop: '32px', listStyle: 'none', padding: 0}}>
-                   {["Tier-1 Audit Partnerlikleri", "Hızlı Raporlama Takvimi", "Sertifika Sonrası Destek"].map((item, i) => (
+                   {["Tier-1 Audit Partnerships", "Fast Reporting Calendar", "Post-Certification Support"].map((item, i) => (
                     <li key={i} className="p-style" style={{marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '12px'}}>
                       <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {item}
                     </li>
@@ -176,19 +174,19 @@ const AuditPreparationSubDetailView: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. CTA Band */}
+      {/* 4. CTA */}
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Güvenilirliğinizi Sertifika ile Taçlandırın</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px'}}>Kullanıcılarınıza ve yatırımcılarınıza en yüksek güvenlik standartlarını kanıtlayın.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Audit Danışmanlığı Al</a>
+          <h2 className="h2-style">Crown Your Credibility with Certification</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px'}}>Prove the highest security standards to your users and investors.</p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Get Audit Consulting</a>
         </div>
       </section>
 
       {/* 5. FAQ */}
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -203,8 +201,8 @@ const AuditPreparationSubDetailView: React.FC = () => {
         </div>
       </section>
 
-      <div style={{ padding: '40px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/token-ve-blokzincir-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+      <div style={{ padding: '60px 0', textAlign: 'center' }}>
+        <button onClick={() => window.location.hash = '#hizmetler/token-ve-blokzincir-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

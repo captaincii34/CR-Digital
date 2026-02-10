@@ -11,7 +11,7 @@ const BudgetOrientedConsultancySubDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject('butce', 'Verimli bütçe yönetimi ve maksimum ROI hedefi.');
+    const result = await evaluateProject('budget', 'Efficient budget management and maximum ROI goal.');
     setAiResult(result);
     setLoading(false);
   };
@@ -19,25 +19,25 @@ const BudgetOrientedConsultancySubDetailView: React.FC = () => {
   const reasons = [
     {
       icon: <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>,
-      title: 'Maksimum ROI Odaklı',
-      desc: 'Her 1 dolarlık harcamanın projeye en az 3 dolarlık değer katmasını hedefleyen stratejiler kurguluyoruz.'
+      title: 'Maximum ROI Focused',
+      desc: 'We construct strategies aiming for every $1 spent to add at least $3 of value to the project.'
     },
     {
       icon: <><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></>,
-      title: "Gereksiz Gider Analizi",
-      desc: 'Web3 dünyasındaki fahiş ve etkisiz marketing harcamalarını eleyip bütçenizi doğru kanallara aktarıyoruz.'
+      title: "Waste Expense Analysis",
+      desc: 'We eliminate exorbitant and ineffective marketing expenses in the Web3 world and direct your budget to the right channels.'
     },
     {
       icon: <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>,
-      title: 'Performans Bazlı Büyüme',
-      desc: 'Sadece vanity metrikler değil, holder sayısı ve hacim gibi doğrudan başarı odaklı bir yönetim sunuyoruz.'
+      title: 'Performance-Based Growth',
+      desc: 'We offer management focused directly on success, such as holder count and volume, not just vanity metrics.'
     }
   ];
 
   const faqs = [
-    { q: "Sınırlı bütçe ile borsa listelemesi mümkün mü?", a: "Evet, kademeli listeleme stratejileri ve hacim ortaklıkları ile bütçenizi zorlamadan borsalarda yer alabilirsiniz." },
-    { q: "Marketing bütçesini nasıl optimize ediyorsunuz?", a: "Etkisiz influencerlar yerine dönüşüm oranı yüksek KOL (Kanaat Önderleri) ve hedef odaklı PR çalışmalarıyla." },
-    { q: "Danışmanlık ücreti bütçeye göre mi belirleniyor?", a: "Hizmet kapsamımızı bütçenize ve hedeflerinize göre ölçeklendirerek size en verimli paketi sunuyoruz." }
+    { q: "Is exchange listing possible with a limited budget?", a: "Yes, you can be listed on exchanges without straining your budget with tiered listing strategies and volume partnerships." },
+    { q: "How do you optimize the marketing budget?", a: "Through high-conversion KOLs (Key Opinion Leaders) and goal-oriented PR work instead of ineffective influencers." },
+    { q: "Is the consultancy fee determined according to the budget?", a: "We offer you the most efficient package by scaling our service scope according to your budget and goals." }
   ];
 
   return (
@@ -94,16 +94,16 @@ const BudgetOrientedConsultancySubDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="hero-grid">
             <div>
-              <h1 className="h1-style">Bütçe Odaklı Kripto Proje Danışmanlığı</h1>
-              <p className="hero-desc p-style">Sınırlı kaynaklarla sınırsız etki yaratın. Bütçenizi en verimli şekilde kullanarak maksimum ROI sağlayan stratejiler geliştiriyoruz.</p>
+              <h1 className="h1-style">Budget-Focused Crypto Project Consulting</h1>
+              <p className="hero-desc p-style">Create unlimited impact with limited resources. We develop strategies that maximize ROI by using your budget in the most efficient way.</p>
             </div>
             <div className="form-card">
-              <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px'}}>Verimlilik Analizi</h3>
-              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Yeniden</button></div> : (
+              <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px'}}>Efficiency Analysis</h3>
+              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Tahmini Bütçe Aralığı" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Öncelikli hedefiniz nedir?" required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'HESAPLANIYOR...' : 'VERİMLİLİK PLANI AL'}</button>
+                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Estimated Budget Range" required />
+                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="What is your primary goal?" required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'CALCULATING...' : 'GET EFFICIENCY PLAN'}</button>
                 </form>
               )}
             </div>
@@ -114,7 +114,7 @@ const BudgetOrientedConsultancySubDetailView: React.FC = () => {
       {/* Why Us */}
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Verimli Büyüme Stratejisi</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Efficient Growth Strategy</h2>
           <div className="reasons-grid">
             {reasons.map((r, i) => (
               <div key={i} className="reason-card">
@@ -135,9 +135,9 @@ const BudgetOrientedConsultancySubDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="detail-item">
             <div className="detail-text">
-              <h2 className="h2-style" style={{marginBottom: '20px'}}>Akıllı Kaynak Yönetimi</h2>
+              <h2 className="h2-style" style={{marginBottom: '20px'}}>Smart Resource Management</h2>
               <p className="p-style" style={{color: '#d1d5db', lineHeight: '1.8'}}>
-                Büyük bütçeler değil, akıllıca harcanan bütçeler başarı getirir. Web3 ekosistemindeki şişirilmiş fiyatları biliyoruz ve projeniz için en maliyet-etkin çözümleri sunuyoruz.
+                It's not large budgets, but smartly spent budgets that bring success. We know the inflated prices in the Web3 ecosystem and offer the most cost-effective solutions for your project.
               </p>
             </div>
             <div className="detail-visual">
@@ -147,9 +147,9 @@ const BudgetOrientedConsultancySubDetailView: React.FC = () => {
 
           <div className="detail-item reverse">
             <div className="detail-text">
-              <h2 className="h2-style" style={{marginBottom: '20px'}}>Büyüme ve Ölçeklendirme</h2>
+              <h2 className="h2-style" style={{marginBottom: '20px'}}>Growth and Scaling</h2>
               <p className="p-style" style={{color: '#d1d5db', lineHeight: '1.8'}}>
-                Kısıtlı bütçeyle başlanan projelerde en kritik aşama, elde edilen geliri doğru ölçeklendirme kanallarına aktarmaktır. Adım adım büyüyen ve kendi kendini finanse eden ekosistem modelleri kuruyoruz.
+                The most critical stage in projects started with a limited budget is directing the generated income to the correct scaling channels. We build ecosystem models that grow step by step and finance themselves.
               </p>
             </div>
             <div className="detail-visual">
@@ -162,16 +162,16 @@ const BudgetOrientedConsultancySubDetailView: React.FC = () => {
       {/* CTA Box */}
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Bütçenizi Güce Dönüştürelim</h2>
-          <p className="p-style" style={{color: '#555', maxWidth: '800px', margin: '20px auto 0'}}>Mevcut bütçenizle ulaşabileceğiniz en iyi sonuçları birlikte planlayalım. Verimlilik odaklı yol haritanız için hemen başlayın.</p>
-          <a href="#h-hero" className="cta-btn">Hemen Başlayın</a>
+          <h2 className="h2-style">Turn Your Budget Into Power</h2>
+          <p className="p-style" style={{color: '#555', maxWidth: '800px', margin: '20px auto 0'}}>Let's plan together for the best results you can reach with your current budget. Start now for your efficiency-oriented roadmap.</p>
+          <a href="#h-hero" className="cta-btn">Get Started Now</a>
         </div>
       </section>
 
       {/* FAQ */}
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((faq, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -187,7 +187,7 @@ const BudgetOrientedConsultancySubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '80px 0', textAlign: 'center', background: '#000' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Hizmetler Sayfasına Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

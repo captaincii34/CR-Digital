@@ -11,23 +11,23 @@ const StrategicPartnershipsSubDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject('Stratejik Partnerlik', 'Sektörel devlerle iş birliği ve değer katma analizi.');
+    const result = await evaluateProject('Strategic Partnership', 'Collaboration with industry leaders and value-add analysis.');
     setAiResult(result);
     setLoading(false);
   };
 
   const reasons = [
-    { title: 'Küratörlü Partner Ağı', desc: 'Sadece "logo" değil, projenize gerçek değer, likidite ve kullanıcı katacak partnerleri seçiyoruz.', icon: <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/> },
-    { title: 'Müzakere ve Sözleşme Yönetimi', desc: 'Partnerlik şartlarını projeniz lehine optimize ediyor, ticari ve teknik protokolleri yönetiyoruz.', icon: <path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2z"/> },
-    { title: 'Sürdürülebilir Sinerji', desc: 'Tek seferlik duyurular yerine, her iki projenin de uzun vadeli büyümesini sağlayan entegrasyonlar kurguluyoruz.', icon: <path d="M13 10V3L4 14h7v7l9-11h-7z"/> }
+    { title: 'Curated Partner Network', desc: 'We select partners that bring real value, liquidity, and users to your project, not just a logo.', icon: <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/> },
+    { title: 'Negotiation & Contract Management', desc: 'We optimize partnership terms in your project\'s favor, managing both commercial and technical protocols.', icon: <path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2z"/> },
+    { title: 'Sustainable Synergy', desc: 'Instead of one-time announcements, we design integrations that ensure long-term growth for both projects.', icon: <path d="M13 10V3L4 14h7v7l9-11h-7z"/> }
   ];
 
   const faqs = [
-    { q: "Doğru partneri nasıl seçiyorsunuz?", a: "Projenizin hedef kitlesi, teknik altyapısı ve eksik yönlerini analiz ederek, bu boşlukları en verimli şekilde dolduracak partnerleri match ediyoruz." },
-    { q: "Partnerlik süreci ne kadar sürer?", a: "İlk tanıştırmadan resmi duyuruya kadar olan süreç, entegrasyonun kapsamına göre genellikle 2 ila 4 hafta arasındadır." },
-    { q: "Borsalar partnerliklere önem veriyor mu?", a: "Evet, Tier-1 borsalar listeleme öncesi projenin ekosistemdeki ağırlığını ve hangi projelerle 'el sıkıştığını' mutlaka inceler." },
-    { q: "Partnerliklerde maliyet oluşur mu?", a: "Genellikle karşılıklı değer takası (Cross-marketing) üzerine kurulu modeller geliştiriyoruz; ancak bazı durumlarda ortak havuz veya teknik maliyetler oluşabilir." },
-    { q: "Küçük projeler büyük partnerler bulabilir mi?", a: "Doğru bir değer önermesi ve profesyonel bir sunum ile, niş bir alanda çözüm sunan projelerin devlerle partner olması mümkündür." }
+    { q: "How do you choose the right partner?", a: "We analyze your project's target audience, technical infrastructure, and missing links to match you with partners that fill those gaps most efficiently." },
+    { q: "How long does the partnership process take?", a: "From the initial introduction to the official announcement, the process typically takes 2 to 4 weeks depending on the scope of integration." },
+    { q: "Do exchanges value partnerships?", a: "Yes, Tier-1 exchanges specifically look at a project's weight within the ecosystem and which reputable projects they have aligned with before listing." },
+    { q: "Are there costs involved in partnerships?", a: "We generally develop models based on mutual value exchange (cross-marketing), but in some cases, shared pools or technical integration costs may arise." },
+    { q: "Can small projects partner with industry giants?", a: "With a unique value proposition and a professional presentation, it is entirely possible for projects providing niche solutions to partner with major players." }
   ];
 
   return (
@@ -37,7 +37,7 @@ const StrategicPartnershipsSubDetailView: React.FC = () => {
         .section-padding { padding: 100px 0; position: relative; }
         .container-xl { max-width: 1280px; margin: 0 auto; padding: 0 32px; width: 100%; position: relative; z-index: 10; }
         .bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
-        .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.8); z-index: 1; }
+        .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.85); z-index: 1; }
         .grad { position: absolute; inset: 0; background: linear-gradient(to bottom, #000, transparent 40%, transparent 60%, #000); z-index: 2; }
         .h1-style { font-size: 40px !important; font-weight: 700 !important; line-height: 1.2; }
         .h2-style { font-size: 32px !important; font-weight: 700 !important; }
@@ -79,30 +79,30 @@ const StrategicPartnershipsSubDetailView: React.FC = () => {
           <div className="hero-grid">
             <div>
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Synergy Building</h5>
-              <h1 className="h1-style">Stratejik Partnerlikler</h1>
-              <p className="p-style">Web3 dünyasında "tek başına" olmak büyümenin en büyük engelidir. Projenize prestij ve güç katacak, ekosistemi genişletecek doğru partnerlerle köprüler kuruyoruz.</p>
+              <h1 className="h1-style">Strategic Partnerships</h1>
+              <p className="p-style">In the Web3 world, isolation is the biggest obstacle to growth. We build bridges with the right partners to bring prestige, power, and ecosystem expansion to your project.</p>
               <div style={{marginTop: '30px'}}>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">HEDEF ODAKLI PARTNER EŞLEŞTİRME</span>
+                  <span className="bullet-text">GOAL-ORIENTED PARTNER MATCHING</span>
                 </div>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">TİCARİ VE TEKNİK MÜZAKERE YÖNETİMİ</span>
+                  <span className="bullet-text">COMMERCIAL AND TECHNICAL NEGOTIATION MANAGEMENT</span>
                 </div>
                 <div className="bullet-point">
                   <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">UZUN VADELİ EKOSİSTEM ENTEGRASYONU</span>
+                  <span className="bullet-text">LONG-TERM ECOSYSTEM INTEGRATION</span>
                 </div>
               </div>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Partnerlik Analizi Al</h3>
-              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Partnership Analysis</h3>
+              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Proje Kategorisi (DeFi, GameFi, vb.)" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Nasıl bir partnerlik (Teknik, Likidite, Marketing) arıyorsunuz?" required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'ARAŞTIRILIYOR...' : 'PARTNERLİK PLANI AL'}</button>
+                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Project Category (DeFi, GameFi, etc.)" required />
+                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="What type of partnership (Technical, Liquidity, Marketing) are you looking for?" required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'RESEARCHING...' : 'GET PARTNERSHIP PLAN'}</button>
                 </form>
               )}
             </div>
@@ -131,8 +131,8 @@ const StrategicPartnershipsSubDetailView: React.FC = () => {
           <div className="detail-row">
             <div className="detail-item">
               <div className="detail-text">
-                <h2 className="h2-style">Doğru Kapıları Doğru Anahtarlarla Açın</h2>
-                <p className="p-style">Piyasada binlerce proje varken hangisinin sizin için doğru partner olduğunu saptamak zaman alıcı olabilir. Biz, projenizin tokenomics ve teknik yapısıyla tam uyumlu, karşılıklı fayda sağlayacak partnerleri 5+ yıllık global networkümüzle buluyoruz.</p>
+                <h2 className="h2-style">Open the Right Doors with the Right Keys</h2>
+                <p className="p-style">With thousands of projects in the market, identifying the right partner can be time-consuming. We find partners who are fully compatible with your tokenomics and technical structure, creating mutual benefits through our 5+ year global network.</p>
               </div>
               <div className="detail-visual">
                 <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2000" alt="Networking" />
@@ -140,8 +140,8 @@ const StrategicPartnershipsSubDetailView: React.FC = () => {
             </div>
             <div className="detail-item reverse">
               <div className="detail-text">
-                <h2 className="h2-style">Lansman Öncesi Güç Birliği</h2>
-                <p className="p-style">Güçlü bir partnerlik listesi, projenizin lansman anındaki güven skorunu doğrudan etkiler. Yatırımcıların ve borsaların en çok dikkat ettiği "Ekosistem Gücü"nü, projenize entegre ederek listeleme ve fon toplama şansınızı artırıyoruz.</p>
+                <h2 className="h2-style">Pre-Launch Power Unity</h2>
+                <p className="p-style">A strong list of partnerships directly impacts your project's trust score at launch. We integrate "Ecosystem Power"—the factor investors and exchanges care about most—into your project to increase your listing and fundraising chances.</p>
               </div>
               <div className="detail-visual">
                 <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=2000" alt="Success Coordination" />
@@ -153,15 +153,15 @@ const StrategicPartnershipsSubDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Ekosisteminizi Devlerle Büyütelim</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Doğru bir partnerlik projenizin kaderini bir gecede değiştirebilir. Profesyonel BD (Business Development) desteği ile tanışın.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Partnerlik Hattını Başlat</a>
+          <h2 className="h2-style">Grow Your Ecosystem with Industry Giants</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>The right partnership can change your project's fate overnight. Meet professional BD (Business Development) support.</p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Start Partnership Line</a>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -177,7 +177,7 @@ const StrategicPartnershipsSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/is-ortakliklari-ve-is-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/is-ortakliklari-ve-is-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

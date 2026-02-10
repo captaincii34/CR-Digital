@@ -14,7 +14,7 @@ const CryptoRoadmapTokenomicsSubDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject(status, `Yol Haritası ve Tokenomics Hedefi: ${goal}`);
+    const result = await evaluateProject(status, `Roadmap and Tokenomics Goal: ${goal}`);
     setAiResult(result);
     setLoading(false);
   };
@@ -22,25 +22,25 @@ const CryptoRoadmapTokenomicsSubDetailView: React.FC = () => {
   const reasons = [
     {
       icon: <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>,
-      title: 'Matematiksel Kusursuzluk',
-      desc: 'Enflasyonist ve deflasyonist modelleri dengeleyerek token ekonominizin uzun vadeli sağlığını koruyoruz.'
+      title: 'Mathematical Perfection',
+      desc: 'We protect the long-term health of your token economy by balancing inflationary and deflationary models.'
     },
     {
       icon: <><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></>,
-      title: "Vesting & Dağıtım",
-      desc: 'Yatırımcı güvenini sarsmayacak, piyasa satış baskısını minimize eden dağıtım takvimleri kurguluyoruz.'
+      title: "Vesting & Distribution",
+      desc: 'We construct distribution schedules that do not shake investor confidence and minimize market selling pressure.'
     },
     {
       icon: <><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></>,
-      title: 'Gerçekçi Kilometre Taşları',
-      desc: 'Topluluğa ve yatırımcıya güven veren, tutarlı ve ulaşılabilir bir teknik/ticari yol haritası çiziyoruz.'
+      title: 'Realistic Milestones',
+      desc: 'We draw a technical/commercial roadmap that is consistent, reachable, and gives confidence to the community and investors.'
     }
   ];
 
   const faqs = [
-    { q: "Tokenomics tasarımı neden kritiktir?", a: "Hatalı bir arz-talep dengesi, projeniz teknik olarak harika olsa bile token değerinin korunmasını imkansız hale getirir." },
-    { q: "Vesting sürelerini nasıl belirliyorsunuz?", a: "Piyasa standartları, projenin nakit akışı ihtiyacı ve yatırımcı psikolojisini analiz ederek her segmente özel kilit takvimleri hazırlıyoruz." },
-    { q: "Roadmap revize edilebilir mi?", a: "Evet, piyasa koşullarına göre esneklik payı bırakarak projenin güncelliğini korumasını sağlıyoruz." }
+    { q: "Why is tokenomics design critical?", a: "A faulty supply-demand balance makes it impossible to maintain token value even if your project is technically great." },
+    { q: "How do you determine vesting periods?", a: "By analyzing market standards, the project's cash flow needs, and investor psychology, we prepare custom lockup schedules for each segment." },
+    { q: "Can the roadmap be revised?", a: "Yes, we ensure the project stays up-to-date by leaving a margin for flexibility according to market conditions." }
   ];
 
   return (
@@ -106,10 +106,10 @@ const CryptoRoadmapTokenomicsSubDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="hero-grid">
             <div>
-              <h1 className="h1-style">Kripto Yol Haritası ve Tokenomics Danışmanlığı</h1>
-              <p className="hero-desc p-style">Token ekonominizi ve büyüme planınızı veriye dayalı, sürdürülebilir modellerle inşa ediyoruz. Başarı için matematiksel temel şarttır.</p>
+              <h1 className="h1-style">Crypto Roadmap & Tokenomics Consulting</h1>
+              <p className="hero-desc p-style">We build your token economy and growth plan with data-driven, sustainable models. A mathematical foundation is essential for success.</p>
               <div className="hero-feature-list">
-                {["Dinamik Arz Mekanizmaları", "Vesting ve Kilit Takvimi", "Topluluk Teşvik Modelleri", "Yatırımcı Odaklı Roadmap"].map((item, i) => (
+                {["Dynamic Supply Mechanisms", "Vesting and Lockup Schedule", "Community Incentive Models", "Investor-Oriented Roadmap"].map((item, i) => (
                   <div key={i} className="hero-feature-item">
                     <div className="feature-icon-circle"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="4"><polyline points="20 6 9 17 4 12"/></svg></div>
                     <span className="feature-item-text">{item}</span>
@@ -118,15 +118,15 @@ const CryptoRoadmapTokenomicsSubDetailView: React.FC = () => {
               </div>
             </div>
             <div className="form-card">
-              <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px'}}>Ekonomi Analizi</h3>
-              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px'}}>Economy Analysis</h3>
+              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
                   <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
-                    <option value="">Token Durumu</option><option value="fikir">Sadece Fikir</option><option value="taslak">Taslak Hazır</option><option value="yayinda">Yayında / Pivot</option>
+                    <option value="">Token Status</option><option value="idea">Idea Only</option><option value="draft">Draft Ready</option><option value="live">Live / Pivot</option>
                   </select>
-                  <textarea className="form-control" rows={3} placeholder="Token kullanım amacınız nedir?" value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="Telegram / E-posta" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'ANALİZ EDİLİYOR...' : 'EKONOMİ PLANI AL'}</button>
+                  <textarea className="form-control" rows={3} placeholder="What is your token's intended utility?" value={goal} onChange={e=>setGoal(e.target.value)} required />
+                  <input type="text" className="form-control" placeholder="Telegram / Email" value={contact} onChange={e=>setContact(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'ANALYZING...' : 'GET ECONOMY PLAN'}</button>
                 </form>
               )}
             </div>
@@ -137,7 +137,7 @@ const CryptoRoadmapTokenomicsSubDetailView: React.FC = () => {
       {/* Why Us */}
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Neden Biz?</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Why Us?</h2>
           <div className="reasons-grid">
             {reasons.map((r, i) => (
               <div key={i} className="reason-card">
@@ -158,9 +158,9 @@ const CryptoRoadmapTokenomicsSubDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="detail-item">
             <div className="detail-text">
-              <h2 className="h2-style" style={{marginBottom: '20px'}}>Sürdürülebilir Ekonomik Denge</h2>
+              <h2 className="h2-style" style={{marginBottom: '20px'}}>Sustainable Economic Balance</h2>
               <p className="p-style" style={{color: '#d1d5db', lineHeight: '1.8'}}>
-                Tokenların piyasadaki başarısı sadece reklamla değil, matematiksel arz-talep kurgusuyla sağlanır. Dağıtım miktarlarından yakım (burn) mekanizmalarına kadar her detayı projenizin geleceği için optimize ediyoruz.
+                The success of tokens in the market is not achieved just by advertising, but by mathematical supply-demand construction. We optimize every detail from distribution amounts to burn mechanisms for your project's future.
               </p>
             </div>
             <div className="detail-visual">
@@ -170,9 +170,9 @@ const CryptoRoadmapTokenomicsSubDetailView: React.FC = () => {
 
           <div className="detail-item reverse">
             <div className="detail-text">
-              <h2 className="h2-style" style={{marginBottom: '20px'}}>Stratejik Takvimleme</h2>
+              <h2 className="h2-style" style={{marginBottom: '20px'}}>Strategic Scheduling</h2>
               <p className="p-style" style={{color: '#d1d5db', lineHeight: '1.8'}}>
-                Doğru zamanda doğru adımı atmak hayati önem taşır. Lansman öncesi hazırlıklardan borsa listelemelerine kadar tüm süreci kapsayan, yatırımcıya güven veren bir yol haritası (Roadmap) inşa ediyoruz.
+                Taking the right step at the right time is of vital importance. We build a roadmap that gives confidence to investors, covering the entire process from pre-launch preparations to exchange listings.
               </p>
             </div>
             <div className="detail-visual">
@@ -185,16 +185,16 @@ const CryptoRoadmapTokenomicsSubDetailView: React.FC = () => {
       {/* CTA Box */}
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Ekonominizi Sağlam Temellere Oturtalım</h2>
-          <p className="p-style" style={{color: '#555', maxWidth: '800px', margin: '20px auto 0'}}>Projenizin kalbi olan ekonomiyi uzman ellere teslim edin. Bugün iletişime geçerek detaylı analiz raporunuzu oluşturun.</p>
-          <a href="#h-hero" className="cta-btn">Analiz Talep Et</a>
+          <h2 className="h2-style">Let's Place Your Economy on Solid Foundations</h2>
+          <p className="p-style" style={{color: '#555', maxWidth: '800px', margin: '20px auto 0'}}>Entrust the economy, which is the heart of your project, to expert hands. Contact us today to create your detailed analysis report.</p>
+          <a href="#h-hero" className="cta-btn">Request Analysis</a>
         </div>
       </section>
 
       {/* FAQ Section */}
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((faq, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -210,7 +210,7 @@ const CryptoRoadmapTokenomicsSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '80px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Hizmetler Sayfasına Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/a-dan-z-ye-kripto-proje-danismanligi'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

@@ -14,15 +14,15 @@ const BlockchainDevHeaderDetailView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await evaluateProject(status, `Blokzincir Geliştirme: ${goal}`);
+    const result = await evaluateProject(status, `Blockchain Development: ${goal}`);
     setAiResult(result);
     setLoading(false);
   };
 
   const reasons = [
-    { title: 'Güvenli Altyapı', desc: 'Audit onaylı, siber saldırılara dayanıklı ağ mimarileri.', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> },
-    { title: 'Yüksek Hız', desc: 'Saniyede binlerce işlem kapasitesine sahip ölçeklenebilir ağlar.', icon: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/> },
-    { title: 'Esnek Mimari', desc: 'Gelecekteki ihtiyaçlara göre güncellenebilir modüler yapılar.', icon: <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/> }
+    { title: 'Secure Infrastructure', desc: 'Audit-approved network architectures resilient against cyber attacks.', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> },
+    { title: 'High Speed', desc: 'Scalable networks with capacity for thousands of transactions per second.', icon: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/> },
+    { title: 'Flexible Architecture', desc: 'Upgradeable modular structures for future needs.', icon: <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/> }
   ];
 
   return (
@@ -40,7 +40,7 @@ const BlockchainDevHeaderDetailView: React.FC = () => {
         #h-hero { position: relative; padding: 220px 0 120px; min-height: 85vh; display: flex; align-items: center; }
         .hero-grid { display: flex; flex-direction: column; gap: 60px; position: relative; z-index: 10; width: 100%; }
         @media (min-width: 1024px) { .hero-grid { flex-direction: row; align-items: center; justify-content: space-between; } }
-        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: 0 auto; }
+        .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: auto; }
         .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; color: #000; margin-bottom: 16px; }
         .form-button { width: 100%; background: var(--cray-gold); color: #000; padding: 18px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
         .reasons-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
@@ -72,19 +72,19 @@ const BlockchainDevHeaderDetailView: React.FC = () => {
           <div className="hero-grid">
             <div style={{flex: 1.2}}>
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Engineering & Innovation</h5>
-              <h1 className="h1-style">Blokzincir Geliştirme Hizmetleri</h1>
-              <p className="p-style">Geleceğin merkeziyetsiz ekonomisini bugün inşa edin. Akıllı kontratlardan özel ağ mimarilerine kadar uçtan uca teknik mühendislik sağlıyoruz.</p>
+              <h1 className="h1-style">Blockchain Development Services</h1>
+              <p className="p-style">Build the decentralized economy of the future today. We provide end-to-end technical engineering from smart contracts to custom network architectures.</p>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Teknik İhtiyaç Analizi</h3>
-              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Tekrar</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Technical Needs Analysis</h3>
+              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Try Again</button></div> : (
                 <form onSubmit={handleSubmit}>
                   <select className="form-control" required>
-                    <option value="">Aşama</option><option value="fikir">Fikir / Taslak</option><option value="gelistirme">Geliştirme</option>
+                    <option value="">Stage</option><option value="idea">Idea / Draft</option><option value="dev">Development</option>
                   </select>
-                  <textarea className="form-control" rows={3} placeholder="Teknik hedefleriniz nelerdir?" value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="E-posta veya Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'ANALİZ EDİLİYOR...' : 'ANALİZ RAPORU AL'}</button>
+                  <textarea className="form-control" rows={3} placeholder="What are your technical goals?" value={goal} onChange={e=>setGoal(e.target.value)} required />
+                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'ANALYZING...' : 'GET ANALYSIS REPORT'}</button>
                 </form>
               )}
             </div>
@@ -116,8 +116,8 @@ const BlockchainDevHeaderDetailView: React.FC = () => {
                 <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=2000" alt="Scalable Tech" />
               </div>
               <div className="detail-text">
-                <h2 className="h2-style">Ölçeklenebilir Katmanlar</h2>
-                <p className="p-style">Blokzincir trilemmasını projenizin ihtiyaçlarına göre optimize ediyoruz. Güvenlikten ödün vermeden, saniyede binlerce işlemi destekleyen L2 ve yan zincir çözümleri kuruyoruz.</p>
+                <h2 className="h2-style">Scalable Layers</h2>
+                <p className="p-style">We optimize the blockchain trilemma according to your project's needs. We establish L2 and side-chain solutions that support thousands of transactions per second without compromising security.</p>
               </div>
             </div>
             <div className="detail-item reverse">
@@ -125,8 +125,8 @@ const BlockchainDevHeaderDetailView: React.FC = () => {
                 <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc51?q=80&w=2000" alt="Interoperability" />
               </div>
               <div className="detail-text">
-                <h2 className="h2-style">Birlikte Çalışabilirlik (Interoperability)</h2>
-                <p className="p-style">Ağlar arası köprüler ve cross-chain protokolleri ile projenizin likiditeye her noktadan ulaşmasını sağlıyoruz. Ethereum, Solana ve TON gibi majör ağlarda tam entegrasyon sunarak kullanıcı havuzunuzu genişletiyoruz.</p>
+                <h2 className="h2-style">Interoperability</h2>
+                <p className="p-style">We ensure your project reaches liquidity at every point with cross-chain protocols and bridges between networks. We expand your user pool by offering full integration on major networks such as Ethereum, Solana, and TON.</p>
               </div>
             </div>
           </div>
@@ -135,19 +135,19 @@ const BlockchainDevHeaderDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Blokzincir Vizyonunuzu Gerçeğe Dönüştürelim</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Doğru teknik mimari, bir projenin hayatta kalması için en kritik unsurdur. Uzman mühendis kadromuzla tanışmak ve projenizi bir üst seviyeye taşımak için hemen ön değerlendirme isteyin.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Teknik Görüşme Planla</a>
+          <h2 className="h2-style">Let's Turn Your Blockchain Vision Into Reality</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Correct technical architecture is the most critical element for a project's survival. Meet our expert engineering team and request an evaluation to take your project to the next level.</p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Schedule Technical Meeting</a>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {[
-              { q: "Hangi dilleri kullanıyorsunuz?", a: "Ağ mimarisine göre Solidity, Rust ve Go dillerinde uzman mühendis kadromuzla hizmet veriyoruz." },
-              { q: "Audit desteği veriyor musunuz?", a: "Evet, tüm geliştirmelerimiz audit standartlarına uygundur ve CertiK gibi firmalardan onay almanızı sağlıyoruz." }
+              { q: "Which languages do you use?", a: "We serve with an expert engineering team in Solidity, Rust, and Go, depending on the network architecture." },
+              { q: "Do you provide audit support?", a: "Yes, all our developments are compliant with audit standards and we ensure you receive approval from firms like CertiK." }
             ].map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
                 <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
@@ -162,7 +162,7 @@ const BlockchainDevHeaderDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

@@ -22,39 +22,39 @@ const PitchDeckPreparationSubDetailView: React.FC = () => {
   const reasons = [
     {
       icon: <path d="M12 20v-6M6 20V10M18 20V4"/>,
-      title: 'Görsel Etki',
-      desc: 'Yatırımcıyı saniyeler içinde etkileyen, Web3 estetiğine uygun premium ve modern sunum tasarımları.'
+      title: 'Visual Impact',
+      desc: 'Premium and modern presentation designs suitable for Web3 aesthetics, impressing the investor in seconds.'
     },
     {
       icon: <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>,
-      title: "Kritik Veri Vurgusu",
-      desc: "VC'lerin görmek istediği TAM/SAM/SOM, gelir modelleri ve KPI verilerini doğru şekilde sunuyoruz."
+      title: "Critical Data Emphasis",
+      desc: "We correctly present TAM/SAM/SOM, revenue models, and KPI data that VCs want to see."
     },
     {
       icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>,
-      title: 'İkna Edici Akış',
-      desc: 'Problemden çözüme, ekipten finansallara kadar psikolojik olarak kurgulanmış profesyonel bir sunum akışı.'
+      title: 'Convincing Flow',
+      desc: 'A professional presentation flow psychologically constructed from problem to solution, team to financials.'
     }
   ];
 
   const faqs = [
-    { q: "Kaç slaytlık bir sunum olmalı?", a: "İdeal bir pitch deck 10-15 slayt arasında olmalı ve projeninin kalbini en kısa sürede yatırımcıya aktarmalıdır." },
-    { q: "Tasarım dışında içerik desteği veriyor musunuz?", a: "Evet, sunumdaki tüm metinlerin yatırımcı diline (VC language) uygun şekilde revize edilmesini sağlıyoruz." },
-    { q: "Yatırımcı görüşmelerine destek oluyor musunuz?", a: "Sunum hazırlığı sonrası 'Pitch Training' seansları ile sizi gelebilecek zor sorulara hazırlıyoruz." }
+    { q: "How many slides should a presentation have?", a: "An ideal pitch deck should be between 10-15 slides and convey the project's heart to the investor in the shortest time." },
+    { q: "Do you provide content support besides design?", a: "Yes, we ensure all texts in the presentation are revised to be suitable for investor language (VC language)." },
+    { q: "Do you support investor meetings?", a: "Yes, with 'Pitch Training' sessions after presentation preparation, we prepare you for potential tough questions." }
   ];
 
   return (
     <div className="crypto-detail-page">
       <style>{`
         .crypto-detail-page { background-color: #000; color: #fff; overflow-x: hidden; }
-        .section-padding { padding: 120px 0; position: relative; }
+        .section-padding { padding: 100px 0; position: relative; }
         .container-xl { max-width: 1280px; margin: 0 auto; padding: 0 32px; width: 100%; position: relative; z-index: 10; }
         .bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
         .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.85); z-index: 1; }
         .grad { position: absolute; inset: 0; background: linear-gradient(to bottom, #000, transparent 40%, transparent 60%, #000); z-index: 2; }
         .h1-style { font-size: 40px !important; font-weight: 700 !important; }
         .h2-style { font-size: 32px !important; font-weight: 700 !important; }
-        .p-style { font-size: 16px !important; font-weight: 300 !important; color: #d1d5db; }
+        .p-style { font-size: 16px !important; font-weight: 300 !important; color: #d1d5db; line-height: 1.8; }
         #h-hero { position: relative; padding: 220px 0 120px; min-height: 85vh; display: flex; align-items: center; }
         .hero-grid { display: flex; flex-direction: column; gap: 60px; position: relative; z-index: 10; width: 100%; }
         @media (min-width: 1024px) { .hero-grid { flex-direction: row; align-items: center; justify-content: space-between; } }
@@ -78,10 +78,13 @@ const PitchDeckPreparationSubDetailView: React.FC = () => {
         .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
         .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
         .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
-        .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; width: 100%; text-align: left; }
         .faq-accordion-body { padding: 0 32px 28px; color: #9ca3af; display: none; }
         .faq-accordion-item.active .faq-accordion-body { display: block; }
         .faq-accordion-item.active .faq-accordion-header { color: var(--cray-gold); }
+        .bullet-point { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .bullet-icon { width: 20px; height: 20px; background: var(--cray-gold); border-radius: 50%; display: flex; align-items: center; justifyContent: center; flex-shrink: 0; }
+        .bullet-text { font-size: 11px !important; font-weight: 700 !important; text-transform: uppercase; letter-spacing: 1px; color: #fff; }
       `}</style>
 
       {/* 1. Hero */}
@@ -90,25 +93,25 @@ const PitchDeckPreparationSubDetailView: React.FC = () => {
         <div className="overlay"></div><div className="grad"></div>
         <div className="container-xl">
           <div className="hero-grid">
-            <div style={{flex: 1.2}}>
-              <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Yatırımcı Odaklı Sunum</h5>
-              <h1 className="h1-style">Pitch Deck & Sunum Hazırlığı</h1>
-              <p className="p-style" style={{marginTop: '20px', lineHeight: '1.7'}}>Yatırımcının masasına koyacağınız en güçlü silahınız. Projenizin potansiyelini profesyonel tasarımlar ve ikna edici verilerle sunun.</p>
+            <div>
+              <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Investor-Oriented Presentation</h5>
+              <h1 className="h1-style">Pitch Deck & Investor Presentations</h1>
+              <p className="p-style" style={{marginTop: '20px', lineHeight: '1.7'}}>Your most powerful weapon to put on the investor's table. Present the potential of your project with professional designs and convincing data.</p>
               <div style={{marginTop: '32px', display: 'flex', flexWrap: 'wrap', gap: '15px'}}>
                 <span style={{background: 'rgba(255,177,0,0.1)', color: 'var(--cray-gold)', padding: '8px 16px', borderRadius: '30px', fontSize: '12px', fontWeight: 700}}>✓ VC COMPLIANT</span>
-                <span style={{background: 'rgba(255,177,0,0.1)', color: 'var(--cray-gold)', padding: '8px 16px', borderRadius: '30px', fontSize: '12px', fontWeight: 700}}>✓ STRATEJİK HİKAYE</span>
+                <span style={{background: 'rgba(255,177,0,0.1)', color: 'var(--cray-gold)', padding: '8px 16px', borderRadius: '30px', fontSize: '12px', fontWeight: 700}}>✓ STRATEGIC STORY</span>
               </div>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Sunum Analizi Al</h3>
-              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Yeniden Dene</button></div> : (
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Presentation Analysis</h3>
+              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Try Again</button></div> : (
                 <form onSubmit={handleSubmit}>
                   <select className="form-control" required>
-                    <option value="">Yatırım Turu</option><option value="seed">Seed (Tohum)</option><option value="private">Private (Özel)</option><option value="strategic">Strategic (Stratejik)</option>
+                    <option value="">Investment Round</option><option value="seed">Seed</option><option value="private">Private</option><option value="strategic">Strategic</option>
                   </select>
-                  <textarea className="form-control" rows={3} placeholder="Hedeflediğiniz yatırım tutarı ve projenizi özetleyin..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="E-posta veya Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'İŞLENİYOR...' : 'STRATEJİK ANALİZ AL'}</button>
+                  <textarea className="form-control" rows={3} placeholder="Summarize your project and targeted investment amount..." value={goal} onChange={e=>setGoal(e.target.value)} required />
+                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'PROCESSING...' : 'GET STRATEGIC ANALYSIS'}</button>
                 </form>
               )}
             </div>
@@ -141,10 +144,10 @@ const PitchDeckPreparationSubDetailView: React.FC = () => {
           <div className="detail-row">
             <div className="detail-item">
               <div className="detail-text">
-                <h2 className="h2-style">Hikaye Anlatıcılığı (Storytelling)</h2>
-                <p className="p-style" style={{marginTop: '24px', lineHeight: '1.8'}}>Yatırımcılar sadece rakamlara değil, bir vizyona yatırım yapar. Projenizin hikayesini, yarattığı problemi ve sunduğu devrimsel çözümü büyüleyici bir akışla kurguluyoruz.</p>
+                <h2 className="h2-style">Storytelling</h2>
+                <p className="p-style" style={{marginTop: '24px', lineHeight: '1.8'}}>Investors don’t just invest in numbers, they invest in a vision. We construct the story of your project so it resonates with VCs and strategic partners alike, focusing on the problem you solve and the future you are building.</p>
                 <ul style={{marginTop: '32px', listStyle: 'none', padding: 0}}>
-                   {["Psikolojik Sunum Akışı", "Problemin Dramatizasyonu", "Gelecek Vizyonu Kurgusu"].map((item, i) => (
+                   {["Market Analysis", "Competitive Advantage", "Financial Projections"].map((item, i) => (
                     <li key={i} className="p-style" style={{marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '12px'}}>
                       <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {item}
                     </li>
@@ -152,16 +155,16 @@ const PitchDeckPreparationSubDetailView: React.FC = () => {
                 </ul>
               </div>
               <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2000" alt="Storytelling" />
+                <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2000" alt="Pitch Content" />
               </div>
             </div>
 
             <div className="detail-item reverse">
               <div className="detail-text">
-                <h2 className="h2-style">Profesyonel VC Dili ve Metrikler</h2>
-                <p className="p-style" style={{marginTop: '24px', lineHeight: '1.8'}}>Risk sermayesi dünyasının beklentilerini biliyoruz. Sunumunuzu, "Exit Strategy", "Burn Rate" ve "Market Entry" kavramlarını doğru vurgulayarak hazırlıyoruz.</p>
+                <h2 className="h2-style">Data-Driven Insights</h2>
+                <p className="p-style" style={{marginTop: '24px', lineHeight: '1.8'}}>A great design must be backed by solid numbers. We ensure your deck includes clear market analysis, revenue projections, and technical milestones that demonstrate a clear path to success and profitability.</p>
                 <ul style={{marginTop: '32px', listStyle: 'none', padding: 0}}>
-                   {["TAM/SAM/SOM Analizleri", "Gelir Projeksiyonu Tasarımı", "Token Dağılım Grafikleri"].map((item, i) => (
+                   {["Tokenomics Deep Dive", "Go-To-Market Roadmap", "Risk Mitigation Strategy"].map((item, i) => (
                     <li key={i} className="p-style" style={{marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '12px'}}>
                       <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {item}
                     </li>
@@ -169,7 +172,7 @@ const PitchDeckPreparationSubDetailView: React.FC = () => {
                 </ul>
               </div>
               <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1454165833767-027ffea9e77b?q=80&w=2000" alt="VC Analytics" />
+                <img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=2000" alt="Data Structure" />
               </div>
             </div>
           </div>
@@ -179,16 +182,16 @@ const PitchDeckPreparationSubDetailView: React.FC = () => {
       {/* 4. CTA Band */}
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Yatırım Almaya Hazır mısınız?</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px'}}>VC dünyasının kapılarını projeniz için birlikte aralayalım. Profesyonel sunum paketimizle tanışın.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Sunum Paketi İste</a>
+          <h2 className="h2-style">Ready to Impress Your Next Investor?</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Let us help you build a world-class pitch deck that opens doors and secures funding. Contact our strategic design team today.</p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Get Your Deck Started</a>
         </div>
       </section>
 
-      {/* 5. FAQ */}
+      {/* 5. FAQ Section */}
       <section className="section-padding">
         <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -204,7 +207,7 @@ const PitchDeckPreparationSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/token-ve-blokzincir-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Geri Dön</button>
+        <button onClick={() => window.location.hash = '#hizmetler/token-ve-blokzincir-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );
