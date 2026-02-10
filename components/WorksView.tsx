@@ -20,7 +20,7 @@ const WorksView: React.FC = () => {
       slug: 'aixovia',
       title: 'AIXOVIA', 
       categories: ['AI', 'Token'], 
-      image: '/gorsel/works/AIXOVIA.jpg', 
+      image: '/gorsel/works/aixovia.jpg', 
       desc: 'Dünyanın ilk tam otonom AI agent mining altyapısı ve token ekosistemi.' 
     },
     { 
@@ -28,7 +28,7 @@ const WorksView: React.FC = () => {
       slug: 'aixovia-play',
       title: 'AIXOVIA Play', 
       categories: ['AI', 'Gaming'], 
-      image: '/gorsel/works/AIXOVIA Play.jpg', 
+      image: '/gorsel/works/aixplay.jpg', 
       desc: 'AI destekli oyun deneyimi ve on-chain oyun mekanikleri.' 
     },
     { 
@@ -36,7 +36,7 @@ const WorksView: React.FC = () => {
       slug: 'bccoin',
       title: 'BCCOIN', 
       categories: ['AI', 'Crypto'], 
-      image: '/gorsel/works/BCCOIN.jpg', 
+      image: '/gorsel/works/bccoin.jpg', 
       desc: 'Yüksek performanslı kripto ekosistemi için stratejik marka yükseltmesi.' 
     },
     { 
@@ -44,7 +44,7 @@ const WorksView: React.FC = () => {
       slug: 'curva-nft',
       title: 'Curva NFT', 
       categories: ['NFT'], 
-      image: '/gorsel/works/Curva NFT.jpg', 
+      image: '/gorsel/works/curvanft.jpg', 
       desc: 'Küresel spor taraftarları için özel dijital koleksiyon serisi.' 
     },
     { 
@@ -52,7 +52,7 @@ const WorksView: React.FC = () => {
       slug: 'ecom',
       title: 'eCOM', 
       categories: ['Gaming'], 
-      image: '/gorsel/works/eCOM.jpg', 
+      image: '/gorsel/works/ecom.jpg', 
       desc: 'Birleşik oyun merkezi ve topluluk büyüme stratejisi.' 
     },
     { 
@@ -60,7 +60,7 @@ const WorksView: React.FC = () => {
       slug: 'ftn',
       title: 'FTN', 
       categories: ['Token'], 
-      image: '/gorsel/works/FTN.jpg', 
+      image: '/gorsel/works/ftn.jpg', 
       desc: 'Fast Token ekosistemi lansmanı ve küresel pazarlama erişimi.' 
     },
     { 
@@ -68,7 +68,7 @@ const WorksView: React.FC = () => {
       slug: 'helpsteps',
       title: 'HelpSteps', 
       categories: ['Token'], 
-      image: '/gorsel/works/HelpSteps.jpg', 
+      image: '/gorsel/works/helpsteps.jpg', 
       desc: 'Sosyal etkinin ve hareket odaklı ödüllerin tokenizasyonu.' 
     },
     { 
@@ -76,7 +76,7 @@ const WorksView: React.FC = () => {
       slug: 'nexum',
       title: 'Nexum', 
       categories: ['Token'], 
-      image: '/gorsel/works/Nexum.jpg', 
+      image: '/gorsel/works/nexum.jpg', 
       desc: 'Yeni nesil denizcilik ve lojistik finansmanı token stratejisi.' 
     },
     { 
@@ -84,7 +84,7 @@ const WorksView: React.FC = () => {
       slug: 'nova',
       title: 'Nova', 
       categories: ['Blockchain'], 
-      image: '/gorsel/works/Nova.jpg', 
+      image: '/gorsel/works/nova.jpg', 
       desc: 'Çekirdek blokzincir altyapısı ve teknik veri yönetimi.' 
     },
     { 
@@ -92,7 +92,7 @@ const WorksView: React.FC = () => {
       slug: 'snapmuse',
       title: 'Snapmuse', 
       categories: ['Token'], 
-      image: '/gorsel/works/Snapmuse.jpg', 
+      image: '/gorsel/works/snapmuse.jpg', 
       desc: 'Platform tokenomics ve içerik üreticisi ekonomisi entegrasyonu.' 
     },
     { 
@@ -100,7 +100,7 @@ const WorksView: React.FC = () => {
       slug: 'refplus',
       title: 'RefPlus', 
       categories: ['Blockchain'], 
-      image: '/gorsel/works/RefPlus.jpg', 
+      image: '/gorsel/works/refplus.jpg', 
       desc: 'Referans tabanlı blokzincir ölçeklendirme ve node büyüme protokolleri.' 
     },
     { 
@@ -108,7 +108,7 @@ const WorksView: React.FC = () => {
       slug: 'the-crypt',
       title: 'The Crypt', 
       categories: ['News'], 
-      image: '/gorsel/works/The Crypt.jpg', 
+      image: '/gorsel/works/thecrypt.jpg', 
       desc: 'Premium kripto haber merkezi ve piyasa duyarlılık analizi.' 
     }
   ];
