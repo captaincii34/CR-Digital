@@ -21,6 +21,7 @@ import AboutUsView from './components/AboutUsView';
 import WorksView from './components/WorksView';
 import AixoviaWorkDetailView from './components/AixoviaWorkDetailView';
 import AixoviaPlayWorkDetailView from './components/AixoviaPlayWorkDetailView';
+import ContactView from './components/ContactView';
 
 // Alt Sayfalar - Grup A
 import CryptoProjectConsultancySubDetailView from './components/CryptoProjectConsultancySubDetailView';
@@ -156,6 +157,10 @@ const App: React.FC = () => {
 
     if (normalizedView === '#works/aixovia-play') {
       return <AixoviaPlayWorkDetailView />;
+    }
+
+    if (normalizedView === '#contact') {
+      return <ContactView />;
     }
 
     switch(normalizedView) {
