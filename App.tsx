@@ -20,6 +20,7 @@ import PartnershipBusinessDetailView from './components/PartnershipBusinessDetai
 import AboutUsView from './components/AboutUsView';
 import WorksView from './components/WorksView';
 import AixoviaWorkDetailView from './components/AixoviaWorkDetailView';
+import AixoviaPlayWorkDetailView from './components/AixoviaPlayWorkDetailView';
 
 // Alt Sayfalar - Grup A
 import CryptoProjectConsultancySubDetailView from './components/CryptoProjectConsultancySubDetailView';
@@ -151,6 +152,10 @@ const App: React.FC = () => {
 
     if (normalizedView === '#works/aixovia') {
       return <AixoviaWorkDetailView />;
+    }
+
+    if (normalizedView === '#works/aixovia-play') {
+      return <AixoviaPlayWorkDetailView />;
     }
 
     switch(normalizedView) {

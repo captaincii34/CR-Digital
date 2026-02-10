@@ -1,23 +1,22 @@
 import React from 'react';
 
-const AixoviaWorkDetailView: React.FC = () => {
-  // /gorsel klasöründeki .jpg uzantılı görsellerin stratejik haritası
+const AixoviaPlayWorkDetailView: React.FC = () => {
   const galleryImages = [
-    { src: '/gorsel/7.jpg', title: 'Source Intelligence', desc: 'Price is just a shadow, we see the source.' },
-    { src: '/gorsel/1.jpg', title: 'The Momentum Engine', desc: 'Teknik altyapı ölçeklendirme ve strateji.' },
-    { src: '/gorsel/3.jpg', title: 'Neural Re-Engineering', desc: 'Otonom AI agent geliştirme ve optimizasyon.' },
-    { src: '/gorsel/2.jpg', title: 'Seasonal Campaigns', desc: 'Topluluk etkileşimi için yaratıcı kampanya yönetimi.' },
-    { src: '/gorsel/5.jpg', title: 'Financial Machine', desc: 'Kapalı döngü finansal mühendislik görselleştirmesi.' },
-    { src: '/gorsel/4.jpg', title: 'The Superxovia', desc: 'Marka karakter tasarımı ve ekosistem utilitisi.' },
-    { src: '/gorsel/6.jpg', title: 'Hybrid Intelligence', desc: 'Piyasanın önünde koşan hibrit zeka modeli.' }
+    { src: '/gorsel/2.jpg', title: 'Seasonal Mechanics', desc: 'Oyun içi etkinlikler ve topluluk turnuvaları tasarımı.' },
+    { src: '/gorsel/6.jpg', title: 'Hybrid Competition', desc: 'AI ve insan etkileşimli multiplayer rekabet sahası.' },
+    { src: '/gorsel/4.jpg', title: 'Superxovia Characters', desc: 'NFT tabanlı oyun içi karakterlerin teknik entegrasyonu.' },
+    { src: '/gorsel/1.jpg', title: 'Engine Scaling', desc: 'Multiplayer sunucu altyapısı ve veri senkronizasyonu.' },
+    { src: '/gorsel/3.jpg', title: 'Neural Agents', desc: 'Oyun içi akıllı botlar ve rakip AI tasarımı.' },
+    { src: '/gorsel/5.jpg', title: 'Economy Engine', desc: 'Sürdürülebilir P2E (Play-to-Earn) matematiksel modeli.' },
+    { src: '/gorsel/7.jpg', title: 'Strategic Depth', desc: 'Oyun içi strateji ve kullanıcı deneyimi haritalaması.' }
   ];
 
   const services = [
-    { icon: '📱', title: 'Telegram App Yazılımı', desc: 'Topluluğa özel trade sinyalleri üreten AI tabanlı Telegram Mini App yazılımı ve bot entegrasyonu.' },
-    { icon: '🌐', title: 'Web Yazılımı & Platform', desc: 'aixovia.com platformunun stratejik tasarımı, UI/UX mimarisi ve full-stack yazılım süreçleri.' },
-    { icon: '📊', title: 'Listing Danışmanlığı', desc: 'MEXC borsası listeleme süreçleri, borsa iletişimi ve teknik dokümantasyon hazırlığı.' },
-    { icon: '🎬', title: 'İçerik & Video Tasarımı', desc: 'Sosyal medya yönetimi için fütüristik 3D tasarımlar, etkileyici video prodüksiyonları.' },
-    { icon: '👥', title: 'Community Yönetimi', desc: 'Küresel topluluk büyüme mimarisi, 7/24 aktif kanal moderasyonu ve büyüme stratejileri.' }
+    { icon: '🎮', title: 'Telegram Game Yazılımı', desc: 'play.aixovia.com altyapısında çalışan, TON entegreli multiplayer Telegram Mini App oyunu.' },
+    { icon: '💰', title: 'Pre-Sale Yönetimi', desc: 'Yüksek hacimli fon toplayan ön satış (Pre-sale) sürecinin teknik ve stratejik yönetimi.' },
+    { icon: '🏛️', title: 'Listing Danışmanlığı', desc: 'Tier-1 ve Tier-2 borsalarda listeleme süreçleri ve borsa ilişkileri yönetimi.' },
+    { icon: '🎨', title: 'Game Design & UI', desc: 'Oyun mekanikleri, karakter tasarımları ve kullanıcı arayüzü (UI/UX) mühendisliği.' },
+    { icon: '📣', title: 'Hype & Marketing', desc: 'Oyunun viral yayılımı için tasarlanan airdrop ve etkileşim kampanyaları.' }
   ];
 
   return (
@@ -25,7 +24,7 @@ const AixoviaWorkDetailView: React.FC = () => {
       <style>{`
         .work-detail-page { background: #000; color: #fff; min-height: 100vh; padding-top: 100px; }
         .hero-section { position: relative; height: 90vh; display: flex; align-items: center; overflow: hidden; border-bottom: 1px solid rgba(255,177,0,0.15); }
-        .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.6; filter: brightness(0.7) contrast(1.1); transition: transform 10s linear; }
+        .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.6; filter: brightness(0.6) contrast(1.1); transition: transform 10s linear; }
         .hero-section:hover .hero-bg { transform: scale(1.1); }
         .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #000 0%, transparent 60%, rgba(0,0,0,0.5) 100%); }
         
@@ -107,16 +106,15 @@ const AixoviaWorkDetailView: React.FC = () => {
         }
         .back-btn:hover { color: var(--cray-gold); transform: translateX(-8px); }
 
-        .mexc-badge {
+        .status-badge {
           display: flex;
           align-items: center;
-          gap: 18px;
+          gap: 12px;
           background: rgba(255,177,0,0.12);
-          padding: 14px 35px;
+          padding: 10px 25px;
           border-radius: 100px;
           border: 1px solid rgba(255,177,0,0.4);
           width: fit-content;
-          box-shadow: 0 0 25px rgba(255,177,0,0.1);
         }
         
         .highlight-text {
@@ -135,19 +133,19 @@ const AixoviaWorkDetailView: React.FC = () => {
       </div>
 
       <section className="hero-section">
-        {/* Ana Hero Görseli: 1.jpg */}
-        <img src="/gorsel/1.jpg" className="hero-bg" alt="Aixovia Hero" />
+        {/* Ana Hero Görseli: 2.jpg */}
+        <img src="/gorsel/2.jpg" className="hero-bg" alt="Aixovia Play Hero" />
         <div className="hero-overlay"></div>
         <div className="container-xl">
           <div style={{maxWidth: '1000px'}}>
-            <h5 style={{color: 'var(--cray-gold)', letterSpacing: '10px', textTransform: 'uppercase', marginBottom: '30px', fontWeight: 800, fontSize: '12px !important'}}>AI Web3 Innovation</h5>
-            <h1 className="h1-style" style={{fontSize: '110px !important', fontWeight: 900, lineHeight: 0.8, marginBottom: '45px'}}>AIXOVIA</h1>
-            <p className="p-style" style={{fontSize: '26px !important', color: '#eee', lineHeight: 1.4, maxWidth: '850px', fontWeight: 300}}>Dünyanın ilk <span className="highlight-text">tam otonom AI agent</span> mining altyapısını kuran Web3 projesi. CRAY Digital olarak bu otonom vizyonu küresel bir markaya dönüştürdük.</p>
+            <h5 style={{color: 'var(--cray-gold)', letterSpacing: '10px', textTransform: 'uppercase', marginBottom: '30px', fontWeight: 800, fontSize: '12px !important'}}>Web3 Social Gaming</h5>
+            <h1 className="h1-style" style={{fontSize: '110px !important', fontWeight: 900, lineHeight: 0.8, marginBottom: '45px'}}>AIXOVIA PLAY</h1>
+            <p className="p-style" style={{fontSize: '26px !important', color: '#eee', lineHeight: 1.4, maxWidth: '850px', fontWeight: 300}}>Aixovia ekosisteminin eğlence kolu. <span className="highlight-text">Multiplayer Telegram oyunu</span> ile binlerce oyuncuyu on-chain dünyada buluşturduk.</p>
             <div style={{marginTop: '65px', display: 'flex', flexWrap: 'wrap', gap: '25px'}}>
-              <a href="https://aixovia.com" target="_blank" rel="noopener noreferrer" className="cta-button" style={{padding: '24px 65px', fontSize: '14px !important', borderRadius: '18px'}}>Websitesini Gör</a>
-              <div className="mexc-badge">
-                <span style={{fontSize: '11px', fontWeight: 900, color: 'var(--cray-gold)', letterSpacing: '3px'}}>BORSADA LISTELİ:</span>
-                <span style={{fontSize: '17px', fontWeight: 900, color: '#fff'}}>MEXC GLOBAL</span>
+              <a href="https://play.aixovia.com" target="_blank" rel="noopener noreferrer" className="cta-button" style={{padding: '24px 65px', fontSize: '14px !important', borderRadius: '18px'}}>Hemen Oyna</a>
+              <div className="status-badge">
+                <div className="w-3 h-3 bg-cray-gold rounded-full animate-pulse"></div>
+                <span style={{fontSize: '11px', fontWeight: 900, color: 'var(--cray-gold)', letterSpacing: '3px'}}>LİSTELEME AŞAMASINDA</span>
               </div>
             </div>
           </div>
@@ -172,24 +170,24 @@ const AixoviaWorkDetailView: React.FC = () => {
           <div className="case-text-box">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
               <div>
-                <h2 className="h2-style" style={{color: 'var(--cray-gold)', marginBottom: '35px', fontSize: '46px !important', lineHeight: 1.1, letterSpacing: '-1.5px'}}>Stratejik İş Ortaklığı ve Web3 Mühendisliği</h2>
+                <h2 className="h2-style" style={{color: 'var(--cray-gold)', marginBottom: '35px', fontSize: '46px !important', lineHeight: 1.1, letterSpacing: '-1.5px'}}>Oyun Ekonomisi ve Ön Satış Başarısı</h2>
                 <p className="p-style" style={{color: '#eee', marginBottom: '35px', fontSize: '20px !important', lineHeight: 1.8, fontWeight: 300}}>
-                  Aixovia projesinin tüm dijital ekosistemini inşa etmek için 360 derece stratejik sorumluluk üstlendik. Sosyal medya yönetimi, dijital içerik üretimi ve topluluğun nabzını tutan topluluk yönetimini (Community Management) CRAY Digital standartlarında hayata geçirdik.
+                  Aixovia projesinde kurduğumuz otonom zekayı, Aixovia Play ile eğlenceli ve rekabetçi bir boyuta taşıdık. Ön satış (pre-sale) aşamasında topluluğun yoğun ilgisiyle karşılanan proje, <span className="text-white font-bold">yüksek hacimli bir yatırım topladı.</span>
                 </p>
                 <p className="p-style" style={{color: '#999', fontSize: '18px !important', lineHeight: 1.9, fontWeight: 300}}>
-                  Teknik tarafta, topluluğa gerçek zamanlı trade sinyalleri sunan karmaşık <strong>Telegram Application yazılımını</strong> ve projenin dijital vitrini olan <strong>resmi websitesinin yazılımını</strong> başarıyla tamamladık. Token listeleme (MEXC) süreçlerinde ve ekosistem geliştirmelerinde danışmanlık sağlayarak projenin pazar değerini artırdık.
+                  CRAY Digital olarak bu süreçte; oyunun **play.aixovia.com** üzerinden erişilen teknik altyapısını, Telegram Mini App entegrasyonunu ve çok oyunculu (multiplayer) rekabet mekaniklerini kurguladık. Şu an borsada listeleme süreçleri ve topluluk büyüme stratejileri tüm hızıyla devam etmektedir.
                 </p>
               </div>
               <div style={{position: 'relative', borderRadius: '48px', overflow: 'hidden', border: '1px solid rgba(255,177,0,0.35)', boxShadow: '0 40px 80px rgba(0,0,0,0.8)'}}>
-                {/* Vurgu Görseli: 5.jpg */}
-                <img src="/gorsel/5.jpg" alt="Aixovia Analytics" style={{width: '100%', height: 'auto', display: 'block'}} />
+                {/* Vurgu Görseli: 6.jpg */}
+                <img src="/gorsel/6.jpg" alt="Aixovia Play Race" style={{width: '100%', height: 'auto', display: 'block'}} />
               </div>
             </div>
           </div>
 
           <div className="section-header">
-            <h2 className="h1-style">Görsel Kimlik & Kreatif Evren</h2>
-            <p className="p-style text-zinc-500 max-w-2xl text-lg">Aixovia ekosistemi için yarattığımız, teknoloji ve sanatı harmanlayan görsel dünyayı keşfedin. Tüm görseller /gorsel klasöründen çekilmektedir.</p>
+            <h2 className="h1-style">Gaming & Asset Gallery</h2>
+            <p className="p-style text-zinc-500 max-w-2xl text-lg">Aixovia Play'in teknolojik derinliğini ve görsel zenginliğini yansıtan özel çalışma alanlarımız.</p>
           </div>
           
           <div className="gallery-grid">
@@ -209,13 +207,13 @@ const AixoviaWorkDetailView: React.FC = () => {
       {/* CTA Section */}
       <section className="section-padding" style={{background: 'linear-gradient(rgba(255,177,0,0.08), transparent)', borderTop: '1px solid rgba(255,177,0,0.15)', padding: '160px 0'}}>
         <div className="container-xl text-center">
-          <h2 className="h2-style mb-8" style={{fontSize: '48px !important'}}>Siz de Kendi Başarı Hikayenizi Yazın</h2>
-          <p className="p-style text-zinc-400 mb-12 max-w-3xl mx-auto text-xl">Aixovia gibi küresel ölçekte ses getiren bir Web3 stratejisine mi ihtiyacınız var? Mühendislikten pazarlamaya, listelemeden büyümeye kadar yanınızdayız.</p>
-          <a href="#booking-section" className="cta-button" style={{padding: '26px 80px', borderRadius: '20px', fontSize: '15px !important'}}>Keşif Toplantısı Planla</a>
+          <h2 className="h2-style mb-8" style={{fontSize: '48px !important'}}>Projenizi Web3 Gaming Dünyasına Taşıyın</h2>
+          <p className="p-style text-zinc-400 mb-12 max-w-3xl mx-auto text-xl">Aixovia Play gibi viral başarı yakalayan bir oyun projesine mi ihtiyacınız var? Tokenomics'ten yazılıma, listing'den büyümeye kadar CRAY yanınızda.</p>
+          <a href="#booking-section" className="cta-button" style={{padding: '26px 80px', borderRadius: '20px', fontSize: '15px !important'}}>Oyun Stratejini Planla</a>
         </div>
       </section>
     </div>
   );
 };
 
-export default AixoviaWorkDetailView;
+export default AixoviaPlayWorkDetailView;
