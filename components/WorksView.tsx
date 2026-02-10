@@ -185,4 +185,87 @@ const WorksView: React.FC = () => {
           font-weight: 800 !important; 
           font-size: 9px !important; 
           text-transform: uppercase; 
-          letter-spacing: 1.
+          letter-spacing: 1.5px; 
+          background: rgba(255, 177, 0, 0.1);
+          padding: 4px 10px;
+          border-radius: 6px;
+          border: 1px solid rgba(255, 177, 0, 0.2);
+        }
+        
+        .work-title { font-size: 32px !important; font-weight: 800 !important; margin-bottom: 15px; color: #fff; line-height: 1; }
+        .work-desc { color: #888; font-size: 14px !important; line-height: 1.5; margin-bottom: 25px; transition: 0.3s; }
+        .work-card:hover .work-desc { color: #bbb; }
+
+        .view-case-btn { 
+          display: flex; 
+          align-items: center; 
+          gap: 10px; 
+          color: #fff; 
+          font-weight: 800 !important; 
+          font-size: 11px !important; 
+          text-transform: uppercase; 
+          letter-spacing: 1px;
+          opacity: 0.7;
+          transition: 0.3s;
+        }
+        .work-card:hover .view-case-btn { opacity: 1; color: var(--cray-gold); }
+        
+        .section-header { text-align: center; margin-bottom: 80px; }
+        .section-header h1 { margin-bottom: 20px; font-size: 48px !important; font-weight: 900 !important; }
+        .section-header p { max-width: 800px; margin: 0 auto; color: #777; font-size: 18px !important; }
+      `}</style>
+
+      <div className="container-xl">
+        <div className="section-header">
+          <h5 style={{color: 'var(--cray-gold)', letterSpacing: '6px', textTransform: 'uppercase', marginBottom: '20px', fontWeight: 800, fontSize: '12px !important'}}>Portfolio</h5>
+          <h1 className="h1-style">Case Studies</h1>
+          <p className="p-style">CRAY Digital tarafından geliştirilen ve pazarlanan sektörel değişim yaratan Web3 projeleri.</p>
+        </div>
+
+        <div className="filter-bar">
+          {filterCategories.map(cat => (
+            <button 
+              key={cat} 
+              onClick={() => setFilter(cat)}
+              className={`filter-btn ${filter === cat ? 'active' : ''}`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        <div className="works-grid">
+          {filteredWorks.map((work) => (
+            <div key={work.id} className="work-card" onClick={() => handleWorkClick(work.slug)}>
+              <img src={work.image} alt={work.title} />
+              <div className="work-overlay">
+                <div className="tag-group">
+                  {work.categories.map((cat, idx) => (
+                    <span key={idx} className="work-tag">{cat}</span>
+                  ))}
+                </div>
+                <h3 className="h3-style work-title">{work.title}</h3>
+                <p className="p-style work-desc">{work.desc}</p>
+                <div className="view-case-btn">
+                  Success Story'i Görüntüle
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M5 12h14M12 5l7 7-7-7"/></svg>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA Section */}
+        <section className="section-padding" style={{marginTop: '120px', borderTop: '1px solid rgba(255,255,255,0.05)'}}>
+          <div style={{textAlign: 'center', background: 'linear-gradient(rgba(255,177,0,0.05), transparent)', padding: '80px 40px', borderRadius: '40px', border: '1px solid rgba(255,177,0,0.1)'}}>
+            <h2 className="h2-style mb-6">Projenizi Burada Görmek İster Misiniz?</h2>
+            <p className="p-style text-zinc-500 mb-10 max-w-2xl mx-auto">Dünyanın en başarılı Web3 markalarının portföyüne katılın. Başarı mimarinizi birlikte inşa edelim.</p>
+            <a href="#booking-section" className="cta-button" style={{padding: '22px 60px', borderRadius: '15px', fontSize: '13px !important'}}>Keşif Görüşmesi Ayarla</a>
+          </div>
+        </section>
+      </div>
+    </div>
+  );
+};
+
+export default WorksView;
