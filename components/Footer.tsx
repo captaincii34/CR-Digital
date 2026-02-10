@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Footer: React.FC = () => {
   return (
@@ -251,7 +251,7 @@ const Footer: React.FC = () => {
             <ul className="footer-links-list">
               <li><a href="#" className="footer-link">Hakkımızda</a></li>
               <li><a href="#" className="footer-link">İletişim</a></li>
-              <li><a href="#" className="footer-link">Referanslar</a></li>
+              <li><a href="#" className="footer-link">Works</a></li>
               <li><a href="#" className="footer-link">Kaynaklar</a></li>
               <li><a href="#" className="footer-link">Çözümler</a></li>
             </ul>

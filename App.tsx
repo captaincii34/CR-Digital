@@ -18,6 +18,8 @@ import MarketMakingDetailView from './components/MarketMakingDetailView';
 import InvestmentFundingDetailView from './components/InvestmentFundingDetailView';
 import PartnershipBusinessDetailView from './components/PartnershipBusinessDetailView';
 import AboutUsView from './components/AboutUsView';
+import WorksView from './components/WorksView';
+import AixoviaWorkDetailView from './components/AixoviaWorkDetailView';
 
 // Alt Sayfalar - Grup A
 import CryptoProjectConsultancySubDetailView from './components/CryptoProjectConsultancySubDetailView';
@@ -137,12 +139,18 @@ const App: React.FC = () => {
   }, []);
 
   const renderView = () => {
-    // Normalizasyon: Küçük harf, sondaki slaşları sil ve Türkçe karakterleri/URL encoding'i temizle
     const normalizedView = decodeURIComponent(view.toLowerCase().replace(/\/$/, ''));
 
-    // Hakkımızda sayfası için çoklu kontrol (Türkçe ve İngilizce karakter uyumu)
     if (normalizedView === '#hakkimizda' || normalizedView === '#hakkımızda') {
       return <AboutUsView />;
+    }
+
+    if (normalizedView === '#works') {
+      return <WorksView />;
+    }
+
+    if (normalizedView === '#works/aixovia') {
+      return <AixoviaWorkDetailView />;
     }
 
     switch(normalizedView) {

@@ -226,6 +226,12 @@ const Header: React.FC = () => {
     closeAll();
   };
 
+  const handleWorksClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.location.hash = 'works';
+    closeAll();
+  };
+
   const handleLinkClick = () => {
     closeAll();
   };
@@ -346,7 +352,7 @@ const Header: React.FC = () => {
               </div>
             </li>
 
-            <li><a href="#" className="nav-link">REFERENCES</a></li>
+            <li><a href="#works" onClick={handleWorksClick} className="nav-link">WORKS</a></li>
             <li><a href="#booking-section" onClick={handleLinkClick} className="nav-link">CONTACT</a></li>
           </ul>
 
@@ -440,8 +446,8 @@ const Header: React.FC = () => {
           </li>
 
           <li className="mobile-nav-item">
-            <a href="#" onClick={closeAll} className="mobile-nav-link">
-              REFERENCES
+            <a href="#works" onClick={handleWorksClick} className="mobile-nav-link">
+              WORKS
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 18l6-6-6-6"/></svg>
             </a>
           </li>
