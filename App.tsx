@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -268,14 +267,31 @@ const App: React.FC = () => {
             <Hero />
             <ConsultancySection />
             <WhyUsSection />
-            <InfoSection id="info-section-left" className="info-section-left" title="Kripto Projenizi Bir Üst Seviyeye Taşıyalım" desc="Kripto projenizi; doğru strateji, pazarlama ve teknik optimizasyon ile buluşturarak ulaşmak istediği noktaya birlikte taşıyoruz." points={["Projenizi analiz ederiz", "Eksikleri tespit ederiz", "Yeniden konumlandırır ve büyütürüz", "Gizlilik ana kuralımız!"]} image="/gorsel/y.jpg" reverse cta="Projemi Değerlendirin" />
+            <InfoSection 
+              id="info-section-left" 
+              className="info-section-left" 
+              title="Let’s Take Your Crypto Project to the Next Level" 
+              desc="We combine your crypto project with the right strategy, marketing, and technical optimization to reach its full potential together." 
+              points={["We analyze your project", "We identify the gaps", "We reposition and scale it", "Confidentiality is our core principle!"]} 
+              image="/gorsel/y.jpg" 
+              reverse 
+              cta="Evaluate My Project" 
+            />
             <ServicesSection />
-            <InfoSection id="info-section-right" className="info-section-right" title="Yatırım Gücünüzü Doğru Strateji İle Kullanın, Büyüme Sağlayın!" desc="Web3 ve kripto dünyasında doğru yatırım, sadece sermaye değil doğru strateji gerektirir." points={["Yatırım fırsatlarını analiz ederiz", "Riskleri değerlendiririz", "Uygun modelleri belirleriz", "Uçtan uca danışmanlık alın!"]} image="/gorsel/z.jpg" cta="Strateji Danışmanlığı Al" />
+            <InfoSection 
+              id="info-section-right" 
+              className="info-section-right" 
+              title="Use Your Investment Power with the Right Strategy and Achieve Growth!" 
+              desc="Web3 and the crypto world, a right investment requires not just capital but the right strategy." 
+              points={["We analyze investment opportunities", "We evaluate risks", "We determine suitable models", "Get end-to-end consulting!"]} 
+              image="/gorsel/z.jpg" 
+              cta="Get Strategy Consulting" 
+            />
             <BookingSection />
             <section className="final-cta-section" style={{padding: '60px 0', textAlign: 'center', background: 'rgba(255, 177, 0, 0.05)'}}>
               <div className="container-xl">
-                <h2 className="h2-style" style={{marginBottom: '40px'}}>Kripto Projenizi Bir Sonraki Seviyeye Taşımaya Hazır mısınız?</h2>
-                <a href="#section1" className="cta-button" style={{padding: '20px 40px'}}>Ücretsiz Ön Değerlendirme Al</a>
+                <h2 className="h2-style" style={{marginBottom: '40px'}}>Are You Ready to Take Your Crypto Project to the Next Level?</h2>
+                <a href="#section1" className="cta-button" style={{padding: '20px 40px'}}>Get a Free Pre-Evaluation</a>
               </div>
             </section>
           </main>

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 
 interface SubService {
@@ -183,49 +182,10 @@ const servicesList: ServiceItem[] = [
   },
 ];
 
-// SVG Bayrak Komponentleri
-const FlagTR = () => (
-  <svg width="24" height="18" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
-    <rect width="1200" height="800" fill="#E30A17"/>
-    <circle cx="425" cy="400" r="200" fill="#FFF"/>
-    <circle cx="475" cy="400" r="160" fill="#E30A17"/>
-    <polygon points="580,400 706.5,441.1 658.2,308.9 753.5,400 658.2,491.1 706.5,358.9" fill="#FFF" transform="translate(40,0)"/>
-  </svg>
-);
-
-const FlagGB = () => (
-  <svg width="24" height="18" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
-    <clipPath id="s">
-      <path d="M0,0 v30 h60 v-30 z"/>
-    </clipPath>
-    <path d="M0,0 v30 h60 v-30 z" fill="#012169"/>
-    <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" strokeWidth="6" clipPath="url(#s)"/>
-    <path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" strokeWidth="4" clipPath="url(#s)"/>
-    <path d="M30,0 v30 M0,15 h60" stroke="#fff" strokeWidth="10"/>
-    <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" strokeWidth="6"/>
-  </svg>
-);
-
-const FlagES = () => (
-  <svg width="24" height="18" viewBox="0 0 750 500" xmlns="http://www.w3.org/2000/svg">
-    <rect width="750" height="500" fill="#c60b1e"/>
-    <rect y="125" width="750" height="250" fill="#ffc400"/>
-    <path d="M125,150 a50,50 0 0,1 100,0 v50 a50,50 0 0,1 -100,0 z" fill="#ffc400" stroke="#c60b1e" strokeWidth="5"/>
-  </svg>
-);
-
-const languages = [
-  { code: 'tr', name: 'Türkçe', flag: <FlagTR /> },
-  { code: 'en', name: 'İngilizce', flag: <FlagGB /> },
-  { code: 'es', name: 'İspanyolca', flag: <FlagES /> }
-];
-
 const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSubMenu, setActiveSubMenu] = useState<string | null>(null);
-  const [isLangOpen, setIsLangOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState(languages[0]);
 
   const [mobileHizmetlerOpen, setMobileHizmetlerOpen] = useState(false);
   const [mobileActiveServiceId, setMobileActiveServiceId] = useState<string | null>(null);
@@ -251,7 +211,6 @@ const Header: React.FC = () => {
     setMobileHizmetlerOpen(false);
     setMobileActiveServiceId(null);
     setActiveSubMenu(null);
-    setIsLangOpen(false);
   };
 
   const handleHomeClick = (e: React.MouseEvent) => {
@@ -287,93 +246,12 @@ const Header: React.FC = () => {
   return (
     <header id="cray-header" className={`cray-header ${scrolled ? 'scrolled' : ''}`}>
       <style>{`
-        .lang-selector-container {
-          position: relative;
-          display: flex;
-          align-items: center;
-        }
-        .lang-box {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          padding: 8px 12px;
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 10px;
-          cursor: pointer;
-          transition: 0.3s;
-          position: relative;
-          z-index: 1001;
-        }
-        .lang-box:hover {
-          border-color: var(--cray-gold);
-          background: rgba(255, 255, 255, 0.08);
-        }
-        .current-flag {
-          display: flex;
-          align-items: center;
-          width: 22px;
-          height: 15px;
-          overflow: hidden;
-          border-radius: 2px;
-          box-shadow: 0 0 5px rgba(0,0,0,0.5);
-          pointer-events: none;
-        }
-        .current-flag svg {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-        .lang-dropdown-wrapper {
-          position: absolute;
-          top: 100%;
-          right: 0;
-          padding-top: 12px; /* Köprü alanı */
-          z-index: 1000;
-        }
-        .lang-dropdown-inner {
-          background: #0d0d0d;
-          border: 1px solid rgba(255, 177, 0, 0.2);
-          border-radius: 12px;
-          width: 170px;
-          box-shadow: 0 20px 40px rgba(0,0,0,0.9);
-          overflow: hidden;
-        }
-        .lang-item {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          padding: 12px 16px;
-          font-size: 13px !important;
-          font-weight: 600 !important;
-          color: #ccc;
-          transition: 0.2s;
-          cursor: pointer;
-        }
-        .lang-item:hover {
-          background: rgba(255, 177, 0, 0.1);
-          color: var(--cray-gold);
-        }
-        .lang-item.active {
-          color: var(--cray-gold);
-          background: rgba(255, 177, 0, 0.05);
-        }
-        .lang-item .current-flag {
-          flex-shrink: 0;
-        }
-
         /* Visibility Controls */
-        .desktop-lang {
-          display: flex;
-        }
         .mobile-action-group {
           display: none;
         }
 
         @media (max-width: 1024px) {
-          .desktop-lang { 
-            display: none !important; 
-          }
           .mobile-action-group { 
             display: flex !important; 
             align-items: center; 
@@ -393,12 +271,12 @@ const Header: React.FC = () => {
 
         <div className="main-nav">
           <ul className="nav-links">
-            <li><a href="#" onClick={handleHomeClick} className="nav-link">Ana Sayfa</a></li>
-            <li><a href="#hakkimizda" onClick={handleAboutClick} className="nav-link">Hakkımızda</a></li>
+            <li><a href="#" onClick={handleHomeClick} className="nav-link">HOMEPAGE</a></li>
+            <li><a href="#hakkimizda" onClick={handleAboutClick} className="nav-link">ABOUT US</a></li>
             
             <li className="has-mega-menu" onMouseLeave={() => setActiveSubMenu(null)}>
               <button className="nav-link mega-menu-trigger">
-                Hizmetler
+                SERVICES
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
                   <path d="M19 9l-7 7-7-7" />
                 </svg>
@@ -468,76 +346,17 @@ const Header: React.FC = () => {
               </div>
             </li>
 
-            <li><a href="#" className="nav-link">Referanslar</a></li>
-            <li><a href="#booking-section" onClick={handleLinkClick} className="nav-link">İletişim</a></li>
+            <li><a href="#" className="nav-link">REFERENCES</a></li>
+            <li><a href="#booking-section" onClick={handleLinkClick} className="nav-link">CONTACT</a></li>
           </ul>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-            <a href="#booking-section" onClick={closeAll} className="cta-button">TAKVİM OLUŞTUR</a>
-            
-            {/* Masaüstü Dil Seçeneği */}
-            <div className="lang-selector-container desktop-lang" onMouseLeave={() => setIsLangOpen(false)}>
-              <div className="lang-box" onClick={() => setIsLangOpen(!isLangOpen)}>
-                <div className="current-flag">{currentLang.flag}</div>
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="4" style={{ transform: isLangOpen ? 'rotate(180deg)' : '', transition: '0.3s' }}>
-                  <path d="M19 9l-7 7-7-7" />
-                </svg>
-              </div>
-              {isLangOpen && (
-                <div className="lang-dropdown-wrapper animate-in fade-in slide-in-from-top-2 duration-200">
-                  <div className="lang-dropdown-inner">
-                    {languages.map(lang => (
-                      <div 
-                        key={lang.code} 
-                        className={`lang-item ${currentLang.code === lang.code ? 'active' : ''}`}
-                        onClick={(e) => { 
-                          e.stopPropagation();
-                          setCurrentLang(lang); 
-                          setIsLangOpen(false); 
-                        }}
-                      >
-                        <div className="current-flag">{lang.flag}</div>
-                        <span>{lang.name}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
+            <a href="#booking-section" onClick={closeAll} className="cta-button">CALENDAR</a>
           </div>
         </div>
 
         {/* Mobil Aksiyon Grubu */}
         <div className="mobile-action-group">
-          <div className="lang-selector-container">
-            <div className="lang-box" onClick={() => setIsLangOpen(!isLangOpen)}>
-              <div className="current-flag">{currentLang.flag}</div>
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="4" style={{ transform: isLangOpen ? 'rotate(180deg)' : '', transition: '0.3s' }}>
-                <path d="M19 9l-7 7-7-7" />
-              </svg>
-            </div>
-            {isLangOpen && (
-              <div className="lang-dropdown-wrapper animate-in fade-in slide-in-from-top-2 duration-200" style={{ right: 0 }}>
-                <div className="lang-dropdown-inner">
-                  {languages.map(lang => (
-                    <div 
-                      key={lang.code} 
-                      className={`lang-item ${currentLang.code === lang.code ? 'active' : ''}`}
-                      onClick={(e) => { 
-                        e.stopPropagation();
-                        setCurrentLang(lang); 
-                        setIsLangOpen(false); 
-                      }}
-                    >
-                      <div className="current-flag">{lang.flag}</div>
-                      <span>{lang.name}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-
           <button className="mobile-hamburger" onClick={toggleMobileMenu}>
             <span style={isMobileMenuOpen ? { transform: 'translateY(8px) rotate(45deg)' } : {}}></span>
             <span style={isMobileMenuOpen ? { opacity: 0 } : {}}></span>
@@ -550,20 +369,20 @@ const Header: React.FC = () => {
         <ul className="mobile-nav-list">
           <li className="mobile-nav-item">
             <a href="#" onClick={handleHomeClick} className="mobile-nav-link">
-              Ana Sayfa
+              HOMEPAGE
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 18l6-6-6-6"/></svg>
             </a>
           </li>
           <li className="mobile-nav-item">
             <a href="#hakkimizda" onClick={handleAboutClick} className="mobile-nav-link">
-              Hakkımızda
+              ABOUT US
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 18l6-6-6-6"/></svg>
             </a>
           </li>
           
           <li className="mobile-nav-item">
             <button onClick={() => setMobileHizmetlerOpen(!mobileHizmetlerOpen)} className="mobile-nav-link" style={{ background: 'none', border: 'none', width: '100%', padding: '18px 0' }}>
-              Hizmetler
+              SERVICES
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{ transform: mobileHizmetlerOpen ? 'rotate(180deg)' : '' }}>
                 <path d="M19 9l-7 7-7-7" />
               </svg>
@@ -622,20 +441,20 @@ const Header: React.FC = () => {
 
           <li className="mobile-nav-item">
             <a href="#" onClick={closeAll} className="mobile-nav-link">
-              Referanslar
+              REFERENCES
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 18l6-6-6-6"/></svg>
             </a>
           </li>
           <li className="mobile-nav-item">
             <a href="#booking-section" onClick={closeAll} className="mobile-nav-link">
-              İletişim
+              CONTACT
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 18l6-6-6-6"/></svg>
             </a>
           </li>
         </ul>
 
         <div style={{ marginTop: '40px', paddingBottom: '20px' }}>
-          <a href="#booking-section" onClick={closeAll} className="cta-button" style={{ display: 'block', textAlign: 'center', fontSize: '13px', padding: '16px' }}>TAKVİM OLUŞTUR</a>
+          <a href="#booking-section" onClick={closeAll} className="cta-button" style={{ display: 'block', textAlign: 'center', fontSize: '13px', padding: '16px' }}>CALENDAR</a>
         </div>
       </div>
     </header>

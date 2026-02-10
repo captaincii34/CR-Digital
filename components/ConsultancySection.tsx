@@ -146,7 +146,7 @@ const ConsultancySection: React.FC = () => {
           font-weight: 700 !important;
           text-align: center;
           transition: 0.3s;
-          box-shadow: 0 4px 15px rgba(255, 177, 0, 0.4);
+          box-shadow: 0 40px 80px rgba(0,0,0,0.7);
           text-decoration: none;
           text-transform: uppercase;
           font-size: 14px !important;
@@ -259,7 +259,7 @@ const ConsultancySection: React.FC = () => {
           display: flex;
           justify-content: center;
           text-decoration: none;
-          z-index: 100;
+          z-index: 10;
           position: relative;
         }
 
@@ -283,45 +283,45 @@ const ConsultancySection: React.FC = () => {
       <div className="consultancy-container">
         <div className="consultancy-grid">
           <div>
-            <h1 className="consultancy-title">A'dan Z'ye Danışmanlık</h1>
-            <h2 className="consultancy-subtitle">Profesyonel Hizmet</h2>
-            <h2 className="consultancy-subtitle">Marketing ve 360 Çözümler</h2>
+            <h1 className="consultancy-title">End-to-End Consulting</h1>
+            <h2 className="consultancy-subtitle">Professional Services</h2>
+            <h2 className="consultancy-subtitle">Marketing & 360° Solutions</h2>
 
             <p className="consultancy-desc">
-              Bir kripto projesini hayata geçirmek, büyütmek ve sürdürülebilir hale getirmek için ihtiyacınız olan tüm teknik, stratejik ve operasyonel süreçleri tek çatı altında sunuyoruz. Ya da mevcut olan projenin ihtiyaçlarına göre aksiyon alarak beraber büyüme sağlıyoruz.
+              We provide all the technical, strategic, and operational processes required to launch, grow, and sustain a crypto project under one roof. Or we take action based on your existing project’s needs and grow together.
             </p>
             <p className="consultancy-subdesc">
-              Yeni bir proje yapmayı mı düşünüyorsunuz? Yoksa mevcut projenizi ihtiyaçlarınızı belirleyip geliştirmeyi mi amaçlıyorsunuz?
+              Are you planning a new project? Or do you want to identify and improve your existing project’s needs?
             </p>
 
             <div className="consultancy-buttons">
               <a href="#" className="btn-main">
-                Yeni Bir Crypto Projem Var
+                I Have a New Crypto Project
               </a>
               <a href="#" className="btn-outline">
-                Mevcut Projemi Geliştirmek İstiyorum
+                I Want to Improve My Existing Project
               </a>
             </div>
 
             <div className="consultancy-features">
               <div className="feature-item">
-                <span className="feature-check">✓</span> NDA & Gizlilik
+                <span className="feature-check">✓</span> NDA & Confidentiality
               </div>
               <div className="feature-item">
-                <span className="feature-check">✓</span> Web3 Odaklı Uzmanlık
+                <span className="feature-check">✓</span> Web3-Focused Expertise
               </div>
               <div className="feature-item">
-                <span className="feature-check">✓</span> Global Standartlar
+                <span className="feature-check">✓</span> Global Standards
               </div>
             </div>
           </div>
 
           <div className="form-card-white">
-            <h3 className="form-title">Ücretsiz Ön Değerlendirme</h3>
+            <h3 className="form-title">Free Pre-Evaluation</h3>
             
             {aiResult ? (
               <div className="ai-result-box">
-                <p className="ai-title">Analiz Sonucu</p>
+                <p className="ai-title">Analysis Result</p>
                 <p className="ai-summary">"{aiResult.summary}"</p>
                 <ul className="ai-list">
                   {aiResult.opportunities.map((o: string, i: number) => (
@@ -335,32 +335,32 @@ const ConsultancySection: React.FC = () => {
                   onClick={() => setAiResult(null)}
                   className="w-full border border-gray-300 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors uppercase text-xs tracking-widest"
                 >
-                  Yeniden Analiz Et
+                  Analyze Again
                 </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit}>
                 <div className="mb-2">
-                  <label className="form-label">Proje Durumu</label>
+                  <label className="form-label">Project Status</label>
                   <select 
                     className="form-field"
                     value={status}
                     onChange={(e) => setStatus(e.target.value)}
                     required
                   >
-                    <option value="">Seçiniz</option>
-                    <option value="yeni">Yeni proje</option>
-                    <option value="mevcut">Mevcut proje</option>
-                    <option value="yatirim">Yatırım aşaması</option>
+                    <option value="">Select</option>
+                    <option value="yeni">New Project</option>
+                    <option value="mevcut">Existing Project</option>
+                    <option value="yatirim">Investment Stage</option>
                   </select>
                 </div>
 
                 <div className="mb-2">
-                  <label className="form-label">Kısa Hedef Açıklaması</label>
+                  <label className="form-label">Brief Goal Description</label>
                   <textarea 
                     className="form-field"
                     rows={3}
-                    placeholder="Ne yapmak istiyorsunuz?"
+                    placeholder="What would you like to achieve?"
                     value={goal}
                     onChange={(e) => setGoal(e.target.value)}
                     required
@@ -369,11 +369,11 @@ const ConsultancySection: React.FC = () => {
                 </div>
 
                 <div className="mb-4">
-                  <label className="form-label">E-posta / Telegram</label>
+                  <label className="form-label">Email / Telegram</label>
                   <input 
                     type="text"
                     className="form-field"
-                    placeholder="İletişim bilginiz"
+                    placeholder="Your contact info"
                     value={contact}
                     onChange={(e) => setContact(e.target.value)}
                     required
@@ -385,7 +385,7 @@ const ConsultancySection: React.FC = () => {
                   disabled={loading}
                   className="btn-submit"
                 >
-                  {loading ? 'ANALİZ EDİLİYOR...' : 'GÖNDER'}
+                  {loading ? 'ANALYZING...' : 'SEND'}
                 </button>
               </form>
             )}
@@ -393,7 +393,7 @@ const ConsultancySection: React.FC = () => {
         </div>
       </div>
 
-      <a href="#section-why-us" className="consultancy-scroll-indicator">
+      <a href="#section-why" className="consultancy-scroll-indicator">
         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
           <path d="M7 13l5 5 5-5" />
           <path d="M7 6l5 5 5-5" />

@@ -3,33 +3,33 @@ import React from 'react';
 const reasons = [
   {
     icon: <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>,
-    title: 'Web3 & Crypto Odaklı Uzmanlık',
-    desc: 'Sadece kripto ve Web3 projelerine odaklanmış deneyimli ekip'
+    title: 'Web3 & Crypto-Focused Expertise',
+    desc: 'An experienced team focused exclusively on crypto and Web3 projects'
   },
   {
     icon: <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>,
-    title: "A'dan Z'ye Proje Yaklaşımı",
-    desc: 'Fikir aşamasından lansmanına kadar her adımda yanınızdayız'
+    title: "End-to-End Project Approach",
+    desc: 'We stand by you at every step from ideation to launch'
   },
   {
     icon: <><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></>,
-    title: 'Tek Noktadan Yönetim',
-    desc: 'Tüm süreçleri koordine eden entegre ekip yapısı'
+    title: 'Single-Point Management',
+    desc: 'An integrated team structure coordinating all processes'
   },
   {
     icon: <><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></>,
-    title: 'NDA & Gizlilik Önceliği',
-    desc: 'Projelerinizin güvenliği bizim için en önemli konu'
+    title: 'NDA & Confidentiality Priority',
+    desc: 'Your project’s security is our top priority'
   },
   {
     icon: <><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></>,
-    title: 'Veri Odaklı Karar Mekanizması',
-    desc: 'Her kararımız analitik verilerle desteklenir'
+    title: 'Data-Driven Decision Making',
+    desc: 'Every decision we make is backed by analytical data'
   },
   {
     icon: <><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></>,
-    title: 'Global Standartlarda Süreçler',
-    desc: 'Uluslararası kalite standartlarında hizmet sunuyoruz'
+    title: 'Processes at Global Standards',
+    desc: 'We deliver services aligned with international quality standards'
   }
 ];
 
@@ -183,7 +183,7 @@ const WhyUsSection: React.FC = () => {
 
       <div className="why-us-container">
         <div className="why-us-header">
-          <h2 className="why-us-title">Neden Bizimle Çalışmalısınız?</h2>
+          <h2 className="why-us-title">Why Should You Work With Us?</h2>
         </div>
 
         <div className="reasons-grid">
@@ -202,7 +202,7 @@ const WhyUsSection: React.FC = () => {
 
         <div className="why-us-footer">
           <a href="#section1" className="btn-more">
-            Daha Fazla Bilgi Al
+            Get More Information
           </a>
         </div>
       </div>

@@ -2,14 +2,14 @@ import React from 'react';
 import { ProcessStep } from '../types';
 
 const steps: ProcessStep[] = [
-  { number: '01', title: 'Fikir & Konsept\nAnalizi', pos: { left: '4%', top: '57%' } },
-  { number: '02', title: 'Strateji &\nYol Haritası', pos: { left: '16.5%', top: '29%' } },
-  { number: '03', title: 'Tokenomics &\nTeknik Altyapı', pos: { left: '29%', top: '43%' } },
-  { number: '04', title: 'Yazılım & Ürün\nGeliştirme', pos: { left: '41.5%', top: '54%' } },
-  { number: '05', title: 'Branding &\nPazarlama', pos: { left: '54%', top: '43%' } },
-  { number: '06', title: 'Topluluk &\nGrowth', pos: { left: '66.5%', top: '29%' } },
+  { number: '01', title: 'Idea & Concept\nAnalysis', pos: { left: '4%', top: '57%' } },
+  { number: '02', title: 'Strategy &\nRoadmap', pos: { left: '16.5%', top: '29%' } },
+  { number: '03', title: 'Tokenomics &\nTechnical Infrastructure', pos: { left: '29%', top: '43%' } },
+  { number: '04', title: 'Software & Product\nDevelopment', pos: { left: '41.5%', top: '54%' } },
+  { number: '05', title: 'Branding &\nMarketing', pos: { left: '54%', top: '43%' } },
+  { number: '06', title: 'Community &\nGrowth', pos: { left: '66.5%', top: '29%' } },
   { number: '07', title: 'Launch &\nListing', pos: { left: '79%', top: '43%' } },
-  { number: '08', title: 'Market Making\n& Likidite', pos: { left: '94.5%', top: '41%' } },
+  { number: '08', title: 'Market Making\n& Liquidity', pos: { left: '94.5%', top: '41%' } },
 ];
 
 const Hero: React.FC = () => {
@@ -241,13 +241,13 @@ const Hero: React.FC = () => {
       <div className="hero-content">
         <div className="hero-header">
           <h1 className="hero-title">
-            Hayallerinize Kavuşmak İçin Profesyonel Hizmet Alın
+            Get Professional Service to Reach Your Dreams
           </h1>
           <p className="hero-description">
-            Fikir aşamasından teknik altyapıya, pazarlama tekniklerinden listeleme süreçlerine, yatırım sürecinden likidite yönetimine kadar ihtiyacınız olan tüm süreçleri gizlilik içerisinde beraber planlar, uygular ve yönetiriz.
+            We plan, implement, and manage all the processes you need from the idea stage to technical infrastructure, marketing techniques to listing processes, and investment processes to liquidity management, all within confidentiality.
           </p>
           <h3 className="hero-highlight">
-            Bu yaklaşım klasik "ajans hizmeti" değil, uçtan uca proje ortaklığıdır. Tüm süreç gizlilik içerisinde sürdürülmektedir.
+            This approach is not a classic "agency service," but an end-to-end project partnership. The entire process is conducted in confidentiality.
           </h3>
         </div>
 
@@ -281,7 +281,7 @@ const Hero: React.FC = () => {
 
         <div className="hero-cta-container">
           <a href="#section1" className="hero-cta-button">
-            İhtiyaçlarını Belirle, Hayallerine Yaklaş
+            Define Your Needs, Get Closer to Your Dreams
           </a>
         </div>
       </div>
