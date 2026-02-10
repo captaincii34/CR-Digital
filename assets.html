@@ -1,16 +1,68 @@
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Yönlendiriliyor...</title>
-    <script>
-        // Eğer bu dosya doğrudan açılırsa, React içindeki debugger'a yönlendir
-        window.location.href = "index.html#assets";
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRAY Digital - Asset Control Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700;800&display=swap" rel="stylesheet" />
+    <style>
+        :root { --gold: #ffb100; --dark: #09090b; }
+        body { font-family: 'Open Sans', sans-serif; background: #000; color: #fff; margin: 0; padding: 40px; }
+        .header { border-bottom: 1px solid rgba(255,177,0,0.2); padding-bottom: 20px; margin-bottom: 40px; }
+        .header h1 { font-size: 24px; font-weight: 800; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; }
+        .asset-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        .asset-card { background: #111; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); overflow: hidden; transition: 0.3s; }
+        .asset-card:hover { border-color: var(--gold); transform: translateY(-5px); }
+        .img-preview { width: 100%; aspect-ratio: 16/9; background: #050505; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .img-preview img { width: 100%; height: 100%; object-fit: cover; }
+        .info { padding: 20px; }
+        .info h3 { font-size: 14px; font-weight: 800; margin: 0 0 10px 0; color: #fff; }
+        .path-badge { background: rgba(255,177,0,0.1); color: var(--gold); padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; display: inline-block; }
+        .back-link { margin-top: 40px; display: inline-block; color: #666; text-decoration: none; font-size: 12px; font-weight: 700; text-transform: uppercase; transition: 0.3s; }
+        .back-link:hover { color: var(--gold); }
+    </style>
 </head>
 <body>
-    <p>Lütfen bekleyin, varlık kontrol paneline yönlendiriliyorsunuz...</p>
-    <p>Eğer yönlendirme çalışmazsa <a href="index.html#assets">buraya tıklayın</a>.</p>
+    <div class="header">
+        <h1>Aixovia Proje Varlıkları (Assets)</h1>
+        <p style="color: #888; font-size: 14px;">Bu görseller GitHub ana dizinindeki <b>/gorsel/</b> klasöründe saklanmaktadır.</p>
+    </div>
+
+    <div class="asset-grid">
+        <div class="asset-card">
+            <div class="img-preview"><img src="/gorsel/0.png" alt="Asset 0"></div>
+            <div class="info"><h3>Autonomous Mining (Hero)</h3><span class="path-badge">/gorsel/0.png</span></div>
+        </div>
+        <div class="asset-card">
+            <div class="img-preview"><img src="/gorsel/1.png" alt="Asset 1"></div>
+            <div class="info"><h3>The Momentum Engine</h3><span class="path-badge">/gorsel/1.png</span></div>
+        </div>
+        <div class="asset-card">
+            <div class="img-preview"><img src="/gorsel/2.png" alt="Asset 2"></div>
+            <div class="info"><h3>Seasonal Campaigns (Santa)</h3><span class="path-badge">/gorsel/2.png</span></div>
+        </div>
+        <div class="asset-card">
+            <div class="img-preview"><img src="/gorsel/3.png" alt="Asset 3"></div>
+            <div class="info"><h3>Neural Re-Engineering</h3><span class="path-badge">/gorsel/3.png</span></div>
+        </div>
+        <div class="asset-card">
+            <div class="img-preview"><img src="/gorsel/4.png" alt="Asset 4"></div>
+            <div class="info"><h3>The Superxovia (Character)</h3><span class="path-badge">/gorsel/4.png</span></div>
+        </div>
+        <div class="asset-card">
+            <div class="img-preview"><img src="/gorsel/5.png" alt="Asset 5"></div>
+            <div class="info"><h3>Financial Machine Architecture</h3><span class="path-badge">/gorsel/5.png</span></div>
+        </div>
+        <div class="asset-card">
+            <div class="img-preview"><img src="/gorsel/6.png" alt="Asset 6"></div>
+            <div class="info"><h3>Hybrid Intelligence Race</h3><span class="path-badge">/gorsel/6.png</span></div>
+        </div>
+        <div class="asset-card">
+            <div class="img-preview"><img src="/gorsel/7.png" alt="Asset 7"></div>
+            <div class="info"><h3>Intelligence Source Analysis</h3><span class="path-badge">/gorsel/7.png</span></div>
+        </div>
+    </div>
+
+    <a href="index.html#works" class="back-link">← Portfolio Sayfasına Dön</a>
 </body>
 </html>

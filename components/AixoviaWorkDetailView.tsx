@@ -1,16 +1,16 @@
 import React from 'react';
 
 const AixoviaWorkDetailView: React.FC = () => {
-  // Kullanıcının paylaştığı görselleri doğrudan referans alıyoruz
+  // Görselleri senin istediğin /gorsel/ klasör yapısından çekiyoruz
   const galleryImages = [
-    { src: 'input_file_7.png', title: 'Source Intelligence', desc: 'Price is just a shadow, we see the source.' },
-    { src: 'input_file_1.png', title: 'The Momentum Engine', desc: 'Teknik altyapı ölçeklendirme ve strateji.' },
-    { src: 'input_file_3.png', title: 'Neural Re-Engineering', desc: 'Otonom AI agent geliştirme ve optimizasyon.' },
-    { src: 'input_file_0.png', title: 'Autonomous Mining', desc: 'AI destekli mining süreçleri görsel hikaye anlatımı.' },
-    { src: 'input_file_5.png', title: 'Financial Machine', desc: 'Kapalı döngü finansal mühendislik görselleştirmesi.' },
-    { src: 'input_file_4.png', title: 'The Superxovia', desc: 'Marka karakter tasarımı ve ekosistem utilitisi.' },
-    { src: 'input_file_6.png', title: 'Hybrid Intelligence', desc: 'Piyasanın önünde koşan hibrit zeka modeli.' },
-    { src: 'input_file_2.png', title: 'Seasonal Campaigns', desc: 'Topluluk etkileşimi için yaratıcı kampanya yönetimi.' }
+    { src: '/gorsel/7.png', title: 'Source Intelligence', desc: 'Price is just a shadow, we see the source.' },
+    { src: '/gorsel/1.png', title: 'The Momentum Engine', desc: 'Teknik altyapı ölçeklendirme ve strateji.' },
+    { src: '/gorsel/3.png', title: 'Neural Re-Engineering', desc: 'Otonom AI agent geliştirme ve optimizasyon.' },
+    { src: '/gorsel/0.png', title: 'Autonomous Mining', desc: 'AI destekli mining süreçleri görsel hikaye anlatımı.' },
+    { src: '/gorsel/5.png', title: 'Financial Machine', desc: 'Kapalı döngü finansal mühendislik görselleştirmesi.' },
+    { src: '/gorsel/4.png', title: 'The Superxovia', desc: 'Marka karakter tasarımı ve ekosistem utilitisi.' },
+    { src: '/gorsel/6.png', title: 'Hybrid Intelligence', desc: 'Piyasanın önünde koşan hibrit zeka modeli.' },
+    { src: '/gorsel/2.png', title: 'Seasonal Campaigns', desc: 'Topluluk etkileşimi için yaratıcı kampanya yönetimi.' }
   ];
 
   const services = [
@@ -132,7 +132,7 @@ const AixoviaWorkDetailView: React.FC = () => {
       </div>
 
       <section className="hero-section">
-        <img src="input_file_0.png" className="hero-bg" alt="Aixovia Hero" />
+        <img src="/gorsel/0.png" className="hero-bg" alt="Aixovia Hero" />
         <div className="hero-overlay"></div>
         <div className="container-xl">
           <div style={{maxWidth: '950px'}}>
@@ -177,7 +177,7 @@ const AixoviaWorkDetailView: React.FC = () => {
                 </p>
               </div>
               <div style={{position: 'relative', borderRadius: '40px', overflow: 'hidden', border: '1px solid rgba(255,177,0,0.3)', boxShadow: '0 30px 60px rgba(0,0,0,0.6)'}}>
-                <img src="input_file_5.png" alt="Aixovia Analytics" style={{width: '100%', height: 'auto', display: 'block'}} />
+                <img src="/gorsel/5.png" alt="Aixovia Analytics" style={{width: '100%', height: 'auto', display: 'block'}} />
               </div>
             </div>
           </div>
