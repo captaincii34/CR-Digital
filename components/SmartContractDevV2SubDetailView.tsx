@@ -25,6 +25,13 @@ const SmartContractDevV2SubDetailView: React.FC = () => {
     { title: 'Upgradeable', desc: 'Flexible structures that can be updated in the future with proxy architecture.', icon: <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/> }
   ];
 
+  const faqs = [
+    { q: "Which networks do you support?", a: "We develop on Ethereum, Solana, BNB Chain, TON, and all L2 networks like Arbitrum, Base, and Optimism." },
+    { q: "Can you update my existing contract?", a: "Yes, we check if your contract uses proxy patterns and provide the necessary improvements for upgradability." },
+    { q: "How do you handle security?", a: "We perform multiple rounds of internal testing, static analysis, and formal verification before delivery." },
+    { q: "Do you offer post-deployment support?", a: "Yes, we provide monitoring and maintenance services to ensure your contracts operate correctly in production." }
+  ];
+
   return (
     <div className="crypto-detail-page">
       <style>{`
@@ -39,7 +46,7 @@ const SmartContractDevV2SubDetailView: React.FC = () => {
         .p-style { font-size: 16px !important; font-weight: 300 !important; color: #d1d5db; line-height: 1.8; }
         #h-hero { position: relative; padding: 220px 0 120px; min-height: 85vh; display: flex; align-items: center; }
         .hero-grid { display: grid; grid-template-columns: 1fr; gap: 60px; position: relative; z-index: 10; width: 100%; }
-        @media (min-width: 1024px) { .hero-grid { flex-direction: row; align-items: center; justify-content: space-between; } }
+        @media (min-width: 1024px) { .hero-grid { grid-template-columns: 1.2fr 1fr; align-items: center; } }
         .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: auto; }
         .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; color: #000; margin-bottom: 16px; }
         .form-button { width: 100%; background: var(--cray-gold); color: #000; padding: 18px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
@@ -48,6 +55,7 @@ const SmartContractDevV2SubDetailView: React.FC = () => {
         .reason-card { padding: 48px 32px; border-radius: 24px; text-align: center; background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); transition: 0.4s; }
         .reason-card:hover { transform: translateY(-10px); border-color: var(--cray-gold); background: rgba(255, 177, 0, 0.15); }
         .reason-icon-box { width: 60px; height: 60px; background-color: var(--cray-gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.3); }
+        
         .detail-row { display: flex; flex-direction: column; gap: 100px; }
         .detail-item { display: flex; flex-direction: column; gap: 60px; align-items: center; width: 100%; }
         @media (min-width: 1024px) { 
@@ -57,6 +65,7 @@ const SmartContractDevV2SubDetailView: React.FC = () => {
         }
         .detail-visual { border-radius: 32px; overflow: hidden; height: 500px; border: 1px solid rgba(255,177,0,0.2); position: relative; width: 100%; }
         .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
+        
         .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
         .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
         .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
@@ -71,7 +80,7 @@ const SmartContractDevV2SubDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="hero-grid">
             <div style={{flex: 1.2}}>
-              <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Solidity & Rust</h5>
+              <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Solidity & Rust Engineering</h5>
               <h1 className="h1-style">Smart Contract Development</h1>
               <p className="p-style">In a world where your code is your law, there is no room for error. We develop cybersecurity-oriented, high-performance, and attack-resilient smart contracts.</p>
             </div>
@@ -93,8 +102,6 @@ const SmartContractDevV2SubDetailView: React.FC = () => {
       </section>
 
       <section className="section-padding">
-        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2000" className="bg-img" alt="Tech" />
-        <div className="overlay" style={{background: 'rgba(0,0,0,0.85)'}}></div>
         <div className="container-xl">
           <div className="reasons-grid">
             {reasons.map((r, i) => (
@@ -119,7 +126,14 @@ const SmartContractDevV2SubDetailView: React.FC = () => {
               </div>
               <div className="detail-text">
                 <h2 className="h2-style">Pre-Audit Preparation</h2>
-                <p className="p-style">We audit your code before going to major audit firms. By closing all re-entrancy, overflow, and logical vulnerabilities, we ensure you receive a 100% secure report.</p>
+                <p className="p-style">We audit your code before going to major audit firms. By closing all re-entrancy, overflow, and logical vulnerabilities, we ensure you receive a 100% secure report from firms like CertiK or Hacken.</p>
+                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
+                  {["Static & Dynamic Analysis", "Formal Verification", "Logical Error Stress Tests"].map((li, i) => (
+                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
+                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
             <div className="detail-item reverse">
@@ -127,8 +141,15 @@ const SmartContractDevV2SubDetailView: React.FC = () => {
                 <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=2000" alt="Efficiency" />
               </div>
               <div className="detail-text">
-                <h2 className="h2-style">Gas Optimization</h2>
-                <p className="p-style">You don't want your users paying high transaction fees. We reduce transaction costs by up to 40% with optimizations we make at the code level.</p>
+                <h2 className="h2-style">Gas Optimization & Scaling</h2>
+                <p className="p-style">You don't want your users paying high transaction fees. We reduce transaction costs by up to 40% with optimizations we make at the code level, while building architectures that can scale with your project.</p>
+                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
+                  {["Memory Management", "Optimized Storage Patterns", "L2 Specific Configurations"].map((li, i) => (
+                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
+                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
@@ -137,7 +158,10 @@ const SmartContractDevV2SubDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Protect Your Project with Reliable and Efficient Code</h2>
+          <h2 className="h2-style" style={{color: '#000'}}>Protect Your Project with Reliable and Efficient Code</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>
+            Don't risk your project's future with unverified contracts. Get a technical quote from our lead engineers today.
+          </p>
           <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Get Code Quote</a>
         </div>
       </section>
@@ -146,12 +170,9 @@ const SmartContractDevV2SubDetailView: React.FC = () => {
         <div className="container-xl">
           <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
-            {[
-              { q: "Which networks do you support?", a: "We develop on Ethereum, Solana, BNB Chain, TON, and all L2 networks." },
-              { q: "Can you update my existing contract?", a: "Yes, we check if your contract is upgradeable and provide the necessary improvements." }
-            ].map((f, i) => (
+            {faqs.map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
-                <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
+                <div className="faq-accordion-header h4-style">
                   <span>{f.q}</span>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
                 </div>
@@ -162,7 +183,7 @@ const SmartContractDevV2SubDetailView: React.FC = () => {
         </div>
       </section>
 
-      <div style={{ padding: '60px 0', textAlign: 'center' }}>
+      <div style={{ padding: '60px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
         <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>

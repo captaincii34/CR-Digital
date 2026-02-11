@@ -21,10 +21,10 @@ const PartnershipBusinessDetailView: React.FC = () => {
   };
 
   const scope = [
-    { title: "Strategic Partnerships", desc: "Long-term collaborations that add value to your project with industry giants.", icon: "💎" },
-    { title: "Ecosystem Collaborations", desc: "Integration support with Layer-1/Layer-2 networks and ecosystem funds.", icon: "🔗" },
-    { title: "Cross-Marketing", desc: "Joint audience sharing and shared marketing campaigns with partner projects.", icon: "🔄" },
-    { title: "Corporate Business Development", desc: "Matching traditional companies with your project in their Web3 transformation.", icon: "🏛️" }
+    { title: "Strategic Partnerships", desc: "Long-term collaborations that add value to your project with industry giants.", icon: "💎", link: "#services/partnerships/partners" },
+    { title: "Ecosystem Collaborations", desc: "Integration support with Layer-1/Layer-2 networks and ecosystem funds.", icon: "🔗", link: "#services/partnerships/ecosystem" },
+    { title: "Cross-Marketing", desc: "Joint audience sharing and shared marketing campaigns with partner projects.", icon: "🔄", link: "#services/partnerships/cross" },
+    { title: "Corporate Business Development", desc: "Matching traditional companies with your project in their Web3 transformation.", icon: "🏛️", link: "#services/partnerships/corporate" }
   ];
 
   const reasons = [
@@ -58,7 +58,7 @@ const PartnershipBusinessDetailView: React.FC = () => {
         .section-padding { padding: 100px 0; position: relative; }
         .container-xl { max-width: 1280px; margin: 0 auto; padding: 0 32px; width: 100%; position: relative; z-index: 10; }
         .bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
-        .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.85); z-index: 1; }
+        .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.8); z-index: 1; }
         .grad { position: absolute; inset: 0; background: linear-gradient(to bottom, #000, transparent 40%, transparent 60%, #000); z-index: 2; }
         .h1-style { font-size: 40px !important; font-weight: 700 !important; }
         .h2-style { font-size: 32px !important; font-weight: 700 !important; }
@@ -86,9 +86,14 @@ const PartnershipBusinessDetailView: React.FC = () => {
         
         .scope-section { position: relative; padding: 120px 0; overflow: hidden; background-color: #000; }
         .scope-grid { display: grid; grid-template-columns: 1fr; gap: 24px; position: relative; z-index: 10; }
-        @media (min-width: 768px) { .scope-grid { grid-template-columns: repeat(2, 1fr); } }
-        .scope-card { padding: 36px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.15); text-align: center; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); transition: 0.3s; }
-        .scope-card:hover { border-color: var(--cray-gold); transform: translateY(-5px); }
+        @media (min-width: 640px) { .scope-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .scope-grid { grid-template-columns: repeat(4, 1fr); } }
+        
+        .scope-link { text-decoration: none; display: block; height: 100%; }
+        .scope-card { padding: 36px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.15); text-align: center; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); transition: 0.3s; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .scope-card:hover { border-color: var(--cray-gold); transform: translateY(-5px); background: rgba(255, 177, 0, 0.05); }
+        .scope-card-title { color: #fff; transition: color 0.3s; }
+        .scope-card:hover .scope-card-title { color: var(--cray-gold); }
         
         .bant-section { background: #f9f9f9; padding: 80px 0; text-align: center; }
         .bant-btn { background: var(--cray-gold); color: #000; padding: 18px 40px; border-radius: 12px; font-weight: 700 !important; text-decoration: none; display: inline-block; box-shadow: 0 10px 25px rgba(255,177,0,0.4); }
@@ -100,11 +105,12 @@ const PartnershipBusinessDetailView: React.FC = () => {
       `}</style>
 
       <section id="h-hero">
-        <img src="https://images.unsplash.com/photo-1521791136064-7986c2959210?q=80&w=2070&auto=format&fit=crop" className="bg-img" alt="Partnerships Hero" />
+        <img src="https://images.unsplash.com/photo-1556761175-5b413da4baf72?q=80&w=2000&auto=format&fit=crop" className="bg-img" alt="Partnerships & Business Development" />
         <div className="overlay"></div><div className="grad"></div>
         <div className="container-xl">
           <div className="hero-grid">
             <div className="hero-text-content">
+              <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px', fontWeight: 800, fontSize: '12px !important'}}>Ecosystem & Growth</h5>
               <h1 className="h1-style">Partnerships & Business Development</h1>
               <p className="hero-desc p-style">If you want to go fast, go alone; if you want to go far, go together. Maximize your project's ecosystem impact with the right partnerships.</p>
               
@@ -120,7 +126,7 @@ const PartnershipBusinessDetailView: React.FC = () => {
               </div>
             </div>
             <div className="form-card">
-              <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px'}}>Partnership Analysis</h3>
+              <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Partnership Analysis</h3>
               <form onSubmit={handleSubmit}>
                 <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
                   <option value="">Business Dev Stage</option><option value="baslangıc">Network Setup</option><option value="buyume">Expanding Partnerships</option>
@@ -155,17 +161,20 @@ const PartnershipBusinessDetailView: React.FC = () => {
         </div>
       </section>
 
-      <section className="scope-section">
+      <section className="scope-section section-padding">
         <img src="/gorsel/ag1.jpg" alt="Scope Background" className="bg-img" />
-        <div className="overlay"></div><div className="grad"></div>
+        <div className="overlay" style={{ background: 'rgba(0,0,0,0.75)' }}></div><div className="grad"></div>
         <div className="container-xl">
           <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Our Service Scope</h2>
           <div className="scope-grid">
             {scope.map((s, i) => (
-              <div key={i} className="scope-card">
-                <div style={{fontSize: '40px', marginBottom: '20px'}}>{s.icon}</div>
-                <h4 className="h4-style">{s.title}</h4><p className="p-style" style={{fontSize: '13px'}}>{s.desc}</p>
-              </div>
+              <a href={s.link} key={i} className="scope-link">
+                <div className="scope-card">
+                  <div style={{fontSize: '40px', marginBottom: '20px'}}>{s.icon}</div>
+                  <h4 className="h4-style scope-card-title">{s.title}</h4>
+                  <p className="p-style" style={{fontSize: '13px', color: '#9ca3af'}}>{s.desc}</p>
+                </div>
+              </a>
             ))}
           </div>
         </div>
@@ -207,7 +216,7 @@ const PartnershipBusinessDetailView: React.FC = () => {
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
-                <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
+                <div className="faq-accordion-header h4-style">
                   <span>{f.q}</span>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
                 </div>
@@ -218,7 +227,7 @@ const PartnershipBusinessDetailView: React.FC = () => {
         </div>
       </section>
 
-      <div style={{ padding: '80px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
+      <div style={{ padding: '60px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
         <button onClick={() => window.location.hash = ''} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Homepage</button>
       </div>
     </div>

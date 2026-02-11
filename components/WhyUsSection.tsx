@@ -51,111 +51,22 @@ const WhyUsSection: React.FC = () => {
           top: 0;
           left: 0;
           width: 100%;
-          height: 100%;
-          object-fit: cover;
-          z-index: 0;
-          opacity: 0.4;
-        }
-
-        .why-us-overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: rgba(0, 0, 0, 0.75);
-          z-index: 1;
-        }
-
-        .why-us-gradient {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(to bottom, #000, transparent 40%, transparent 60%, #000);
-          z-index: 2;
-        }
-
-        .why-us-container {
-          position: relative;
-          z-index: 10;
-          max-width: 1280px;
-          margin: 0 auto;
-          padding: 0 32px;
-        }
-
-        .why-us-header {
-          text-align: center;
-          margin-bottom: 70px;
-        }
-
-        .why-us-title {
-          margin-bottom: 16px;
-        }
-
-        .reasons-grid {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 32px;
-        }
-
-        @media (min-width: 768px) {
-          .reasons-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (min-width: 1024px) {
-          .reasons-grid { grid-template-columns: repeat(3, 1fr); }
-        }
-
-        .reason-card {
-          padding: 40px 32px;
-          border-radius: 20px;
-          text-align: center;
-          transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .reason-card:hover {
-          background: rgba(255, 177, 0, 0.06);
-          border-color: rgba(255, 177, 0, 0.3);
-          transform: translateY(-8px);
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .reason-icon-box {
-          width: 54px;
-          height: 54px;
-          background-color: var(--cray-gold);
-          border-radius: 14px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin: 0 auto 24px;
-          transition: 0.3s;
-          box-shadow: 0 10px 20px rgba(255, 177, 0, 0.2);
-        }
-
-        .reason-card:hover .reason-icon-box {
-          transform: rotate(10deg) scale(1.1);
-        }
-
-        .reason-title {
-          margin-bottom: 16px;
-          line-height: 1.3;
-        }
-
-        .reason-desc {
-          color: #d1d5db;
-          line-height: 1.6;
-        }
-
-        .why-us-footer {
-          text-align: center;
-          margin-top: 60px;
-        }
-
+          height: 100%; object-fit: cover; z-index: 0; opacity: 0.4; }
+        .why-us-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.75); z-index: 1; }
+        .why-us-gradient { position: absolute; inset: 0; background: linear-gradient(to bottom, #000, transparent 40%, transparent 60%, #000); z-index: 2; }
+        .why-us-container { position: relative; z-index: 10; max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+        .why-us-header { text-align: center; margin-bottom: 70px; }
+        .why-us-title { margin-bottom: 16px; }
+        .reasons-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
+        @media (min-width: 768px) { .reasons-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .reasons-grid { grid-template-columns: repeat(3, 1fr); } }
+        .reason-card { padding: 40px 32px; border-radius: 20px; text-align: center; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .reason-card:hover { background: rgba(255, 177, 0, 0.06); border-color: rgba(255, 177, 0, 0.3); transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); }
+        .reason-icon-box { width: 54px; height: 54px; background-color: var(--cray-gold); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; transition: 0.3s; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.2); }
+        .reason-card:hover .reason-icon-box { transform: rotate(10deg) scale(1.1); }
+        .reason-title { margin-bottom: 16px; line-height: 1.3; }
+        .reason-desc { color: #d1d5db; line-height: 1.6; }
+        .why-us-footer { text-align: center; margin-top: 60px; }
         .btn-more {
           background: var(--cray-gold);
           color: #000;
@@ -170,7 +81,6 @@ const WhyUsSection: React.FC = () => {
           font-size: 14px !important;
           box-shadow: 0 8px 25px rgba(255, 177, 0, 0.3);
         }
-
         .btn-more:hover { 
           transform: translateY(-3px); 
           box-shadow: 0 12px 35px rgba(255, 177, 0, 0.5);
@@ -201,7 +111,7 @@ const WhyUsSection: React.FC = () => {
         </div>
 
         <div className="why-us-footer">
-          <a href="#section1" className="btn-more">
+          <a href="#about-us" className="btn-more">
             Get More Information
           </a>
         </div>

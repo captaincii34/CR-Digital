@@ -21,14 +21,14 @@ const MarketMakingDetailView: React.FC = () => {
   };
 
   const scope = [
-    { title: "Market Making Strategy", desc: "Professional algorithmic setups for order book health and price stability.", icon: "🏦" },
-    { title: "Liquidity Planning", desc: "Liquidity pool management based on token supply and volume targets.", icon: "🌊" },
-    { title: "Market Maker Selection", desc: "Matching your project with the most suitable professional MM partners.", icon: "🤖" },
-    { title: "Market Making Consulting", desc: "Efficiency analysis and improvement of existing MM processes.", icon: "📏" },
-    { title: "Bot Infrastructure Consulting", desc: "Technical infrastructure support for automated trading and volume bots.", icon: "⚙️" },
-    { title: "Spread & Volatility", desc: "Optimization for low spread and healthy price movements.", icon: "📊" },
-    { title: "DEX & CEX Management", desc: "Simultaneous liquidity monitoring on centralized and decentralized exchanges.", icon: "🔄" },
-    { title: "Performance Reporting", desc: "Transparent daily reports on volume, depth, and order book health.", icon: "📅" }
+    { title: "Market Making Strategy", desc: "Professional algorithmic setups for order book health and price stability.", icon: "🏦", link: "#services/market-making/strategy" },
+    { title: "Liquidity Planning", desc: "Liquidity pool management based on token supply and volume targets.", icon: "🌊", link: "#services/market-making/planning" },
+    { title: "Market Maker Selection", desc: "Matching your project with the most suitable professional MM partners.", icon: "🤖", link: "#services/market-making/mm-selection" },
+    { title: "Market Making Consulting", desc: "Efficiency analysis and improvement of existing MM processes.", icon: "📏", link: "#services/market-making/consultancy" },
+    { title: "Bot Infrastructure Consulting", desc: "Technical infrastructure support for automated trading and volume bots.", icon: "⚙️", link: "#services/market-making/bot" },
+    { title: "Spread & Volatility", desc: "Optimization for low spread and healthy price movements.", icon: "📊", link: "#services/market-making/optim" },
+    { title: "DEX & CEX Management", desc: "Simultaneous liquidity monitoring on centralized and decentralized exchanges.", icon: "🔄", link: "#services/market-making/liquidity" },
+    { title: "Performance Reporting", desc: "Transparent daily reports on volume, depth, and order book health.", icon: "📅", link: "#services/market-making/perf" }
   ];
 
   const reasons = [
@@ -92,8 +92,12 @@ const MarketMakingDetailView: React.FC = () => {
         .scope-grid { display: grid; grid-template-columns: 1fr; gap: 24px; position: relative; z-index: 10; }
         @media (min-width: 768px) { .scope-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 1024px) { .scope-grid { grid-template-columns: repeat(4, 1fr); } }
-        .scope-card { padding: 36px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.15); text-align: center; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); transition: 0.3s; }
-        .scope-card:hover { border-color: var(--cray-gold); transform: translateY(-5px); }
+        
+        .scope-link { text-decoration: none; display: block; height: 100%; }
+        .scope-card { padding: 36px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.15); text-align: center; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); transition: 0.3s; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .scope-card:hover { border-color: var(--cray-gold); transform: translateY(-5px); background: rgba(255, 177, 0, 0.05); }
+        .scope-title { color: #fff; transition: color 0.3s; margin-top: 15px; }
+        .scope-card:hover .scope-title { color: var(--cray-gold); }
         
         .bant-section { background: #f9f9f9; padding: 80px 0; text-align: center; }
         .bant-btn { background: var(--cray-gold); color: #000; padding: 18px 40px; border-radius: 12px; font-weight: 700 !important; text-decoration: none; display: inline-block; box-shadow: 0 10px 25px rgba(255,177,0,0.4); }
@@ -167,10 +171,13 @@ const MarketMakingDetailView: React.FC = () => {
           <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Our Service Scope</h2>
           <div className="scope-grid">
             {scope.map((s, i) => (
-              <div key={i} className="scope-card">
-                <div style={{fontSize: '40px', marginBottom: '20px'}}>{s.icon}</div>
-                <h4 className="h4-style">{s.title}</h4><p className="p-style" style={{fontSize: '13px'}}>{s.desc}</p>
-              </div>
+              <a href={s.link} key={i} className="scope-link">
+                <div className="scope-card">
+                  <div style={{fontSize: '40px'}}>{s.icon}</div>
+                  <h4 className="h4-style scope-title">{s.title}</h4>
+                  <p className="p-style" style={{fontSize: '13px', color: '#9ca3af', marginTop: '10px'}}>{s.desc}</p>
+                </div>
+              </a>
             ))}
           </div>
         </div>
@@ -192,7 +199,7 @@ const MarketMakingDetailView: React.FC = () => {
                 ))}
               </ul>
             </div>
-            <div className="flex-1" style={{position: 'relative', borderRadius: '32px', overflow: 'hidden', height: '400px', border: '1px solid rgba(255,177,0,0.2)'}}>
+            <div className="flex-1" style={{position: 'relative', borderRadius: '32px', overflow: 'hidden', height: '440px', border: '1px solid rgba(255,177,0,0.2)'}}>
               <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=2070&auto=format&fit=crop" className="bg-img" alt="Trading" />
             </div>
           </div>

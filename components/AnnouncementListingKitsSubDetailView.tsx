@@ -22,6 +22,12 @@ const AnnouncementListingKitsSubDetailView: React.FC = () => {
     { title: 'Unified Aesthetic', desc: 'Cross-platform visual consistency across X, Telegram, Discord, and your official website.', icon: <path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/> }
   ];
 
+  const faqs = [
+    { q: "What's included in an announcement kit?", a: "A standard kit includes high-res banners for X, Telegram announcement images, Discord event graphics, and specialized partnership badges." },
+    { q: "Do you handle the copywriting for announcements?", a: "Yes, we provide professionally drafted text optimized for engagement and FOMO to accompany the visual assets." },
+    { q: "Can we use these for exchange listing applications?", a: "Definitely. Exchanges look at your marketing assets to gauge your project's readiness and visual authority." }
+  ];
+
   return (
     <div className="crypto-detail-page">
       <style>{`
@@ -44,6 +50,23 @@ const AnnouncementListingKitsSubDetailView: React.FC = () => {
         .reason-card { padding: 48px 32px; border-radius: 24px; text-align: center; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); transition: 0.4s; }
         .reason-card:hover { transform: translateY(-10px); border-color: var(--cray-gold); background: rgba(255, 177, 0, 0.1); }
         .reason-icon-box { width: 60px; height: 60px; background-color: var(--cray-gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.3); }
+
+        .detail-row { display: flex; flex-direction: column; gap: 100px; }
+        .detail-item { display: flex; flex-direction: column; gap: 60px; align-items: center; width: 100%; }
+        @media (min-width: 1024px) { 
+            .detail-item { flex-direction: row; } 
+            .detail-item.reverse { flex-direction: row-reverse; } 
+            .detail-text, .detail-visual { width: 50%; flex: 1; }
+        }
+        .detail-visual { border-radius: 32px; overflow: hidden; height: 500px; border: 1px solid rgba(255,177,0,0.2); position: relative; width: 100%; }
+        .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
+        .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
+        .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-accordion-body { padding: 0 32px 28px; color: #9ca3af; display: none; }
+        .faq-accordion-item.active .faq-accordion-body { display: block; }
+        .faq-accordion-item.active .faq-accordion-header { color: var(--cray-gold); }
       `}</style>
 
       <section id="h-hero">
@@ -80,6 +103,72 @@ const AnnouncementListingKitsSubDetailView: React.FC = () => {
                 </div>
                 <h4 className="h2-style" style={{fontSize: '20px !important', marginBottom: '15px'}}>{r.title}</h4>
                 <p className="p-style" style={{fontSize: '14px'}}>{r.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding" style={{background: '#050505'}}>
+        <div className="container-xl">
+          <div className="detail-row">
+            <div className="detail-item">
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=2000" alt="Exchange Ready" />
+              </div>
+              <div className="detail-text">
+                <h2 className="h2-style">Institutional Presence</h2>
+                <p className="p-style">Tier-1 exchanges and major VCs expect a certain level of visual polish. We provide listing kits that don't just 'look good'—they signal institutional maturity. When you announce your Bybit or OKX listing, your visuals should reflect the prestige of the event.</p>
+                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
+                  {["Official Exchange Brand Sync", "High-Resolution Source Assets", "Transparent UI Elements"].map((li, i) => (
+                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
+                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div className="detail-item reverse">
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2000" alt="Speed to Market" />
+              </div>
+              <div className="detail-text">
+                <h2 className="h2-style">Agile News Delivery</h2>
+                <p className="p-style">In crypto, being first is everything. Our kit system allows your team to generate professional, brand-aligned graphics in minutes. No more waiting for designers while the market moves—own the narrative instantly with our modular kit systems.</p>
+                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
+                  {["Pre-Designed Social Templates", "Dynamic Text Modules", "Cross-Platform Optimization"].map((li, i) => (
+                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
+                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="cta-box-section">
+        <div className="container-xl">
+          <h2 className="h2-style" style={{color: '#000'}}>Announce Your Success with Professional Power</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>
+            Don't let amateur graphics ruin your big milestone. Secure a high-end announcement kit for your next major update.
+          </p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Request Kit Proposal</a>
+        </div>
+      </section>
+
+      <section className="section-padding">
+        <div className="container-xl">
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
+          <div style={{maxWidth: '850px', margin: '0 auto'}}>
+            {faqs.map((f, i) => (
+              <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
+                <div className="faq-accordion-header h4-style">
+                  <span>{f.q}</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
+                </div>
+                <div className="faq-accordion-body p-style"><p>{f.a}</p></div>
               </div>
             ))}
           </div>

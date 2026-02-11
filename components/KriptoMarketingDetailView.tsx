@@ -21,14 +21,14 @@ const KriptoMarketingDetailView: React.FC = () => {
   };
 
   const marketingScope = [
-    { title: "Web3 Growth Strategy", desc: "Data-driven growth plans and ROI-oriented approaches.", icon: "🎯" },
-    { title: "Performance Marketing", desc: "Targeted user acquisition via advertising networks.", icon: "⚡" },
-    { title: "Influencer & KOL", desc: "Strategic partnerships with global Web3 thought leaders.", icon: "🌟" },
-    { title: "PR & Media Publications", desc: "Promotion in major outlets like CoinTelegraph, Forbes, and more.", icon: "📰" },
-    { title: "Campaign & Hype Management", desc: "Viral campaign designs creating community excitement.", icon: "🔥" },
-    { title: "Landing Page Optimization", desc: "Technical and visual improvement for higher conversion rates.", icon: "🛠️" },
-    { title: "Analytics & KPI Reporting", desc: "Transparent and measurable tracking of all marketing data.", icon: "📊" },
-    { title: "Marketing Automation", desc: "Web3 compliant CRM and automated marketing tools.", icon: "🤖" }
+    { title: "Web3 Growth Strategy", desc: "Data-driven growth plans and ROI-oriented approaches.", icon: "🎯", link: "#services/crypto-marketing/growth" },
+    { title: "Performance Marketing", desc: "Targeted user acquisition via advertising networks.", icon: "⚡", link: "#services/crypto-marketing/performance" },
+    { title: "Influencer & KOL", desc: "Strategic partnerships with global Web3 thought leaders.", icon: "🌟", link: "#services/crypto-marketing/influencer" },
+    { title: "PR & Media Publications", desc: "Promotion in major outlets like CoinTelegraph, Forbes, and more.", icon: "📰", link: "#services/crypto-marketing/pr" },
+    { title: "Campaign & Hype Management", desc: "Viral campaign designs creating community excitement.", icon: "🔥", link: "#services/crypto-marketing/hype" },
+    { title: "Landing Page Optimization", desc: "Technical and visual improvement for higher conversion rates.", icon: "🛠️", link: "#services/crypto-marketing/funnel" },
+    { title: "Analytics & KPI Reporting", desc: "Transparent and measurable tracking of all marketing data.", icon: "📊", link: "#services/crypto-marketing/analytics" },
+    { title: "Marketing Automation", desc: "Web3 compliant CRM and automated marketing tools.", icon: "🤖", link: "#services/crypto-marketing/automation" }
   ];
 
   const reasons = [
@@ -65,7 +65,7 @@ const KriptoMarketingDetailView: React.FC = () => {
         .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.85); z-index: 1; }
         .grad { position: absolute; inset: 0; background: linear-gradient(to bottom, #000, transparent 40%, transparent 60%, #000); z-index: 2; }
         .h1-style { font-size: 40px !important; font-weight: 700 !important; }
-        .h2-style { font-size: 30px !important; font-weight: 700 !important; }
+        .h2-style { font-size: 32px !important; font-weight: 700 !important; }
         .h3-style { font-size: 22px !important; font-weight: 600 !important; }
         .h4-style { font-size: 18px !important; font-weight: 600 !important; }
         .p-style { font-size: 16px !important; font-weight: 300 !important; }
@@ -92,8 +92,12 @@ const KriptoMarketingDetailView: React.FC = () => {
         .scope-grid { display: grid; grid-template-columns: 1fr; gap: 24px; position: relative; z-index: 10; }
         @media (min-width: 768px) { .scope-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 1024px) { .scope-grid { grid-template-columns: repeat(4, 1fr); } }
-        .scope-card { padding: 36px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.15); text-align: center; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); transition: 0.3s; }
-        .scope-card:hover { border-color: var(--cray-gold); transform: translateY(-5px); }
+        
+        .scope-link { text-decoration: none; display: block; height: 100%; }
+        .scope-card { padding: 36px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.15); text-align: center; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); transition: 0.3s; height: 100%; display: flex; flex-direction: column; align-items: center; }
+        .scope-card:hover { border-color: var(--cray-gold); transform: translateY(-5px); background: rgba(255, 177, 0, 0.05); }
+        .scope-card h4 { transition: color 0.3s; }
+        .scope-card:hover h4 { color: var(--cray-gold); }
         
         .bant-section { background: #f9f9f9; padding: 80px 0; text-align: center; }
         .bant-btn { background: var(--cray-gold); color: #000; padding: 18px 40px; border-radius: 12px; font-weight: 700 !important; text-decoration: none; display: inline-block; box-shadow: 0 10px 25px rgba(255,177,0,0.4); }
@@ -169,10 +173,13 @@ const KriptoMarketingDetailView: React.FC = () => {
           <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Our Service Scope</h2>
           <div className="scope-grid">
             {marketingScope.map((s, i) => (
-              <div key={i} className="scope-card">
-                <div style={{fontSize: '40px', marginBottom: '20px'}}>{s.icon}</div>
-                <h4 className="h4-style">{s.title}</h4><p className="p-style" style={{fontSize: '13px'}}>{s.desc}</p>
-              </div>
+              <a href={s.link} key={i} className="scope-link">
+                <div className="scope-card">
+                  <div style={{fontSize: '40px', marginBottom: '20px'}}>{s.icon}</div>
+                  <h4 className="h4-style">{s.title}</h4>
+                  <p className="p-style" style={{fontSize: '13px'}}>{s.desc}</p>
+                </div>
+              </a>
             ))}
           </div>
         </div>
@@ -226,7 +233,7 @@ const KriptoMarketingDetailView: React.FC = () => {
         </div>
       </section>
 
-      <div style={{ padding: '80px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
+      <div style={{ padding: '60px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
         <button onClick={() => window.location.hash = ''} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Homepage</button>
       </div>
     </div>

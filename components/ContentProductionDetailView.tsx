@@ -21,13 +21,13 @@ const ContentProductionDetailView: React.FC = () => {
   };
 
   const scope = [
-    { title: "Brand Identity Design", desc: "Professional corporate identity with logo, font, and color palette.", icon: "🎨" },
-    { title: "Web3 UI / UX Design", desc: "Modern interfaces optimized for crypto users.", icon: "📱" },
-    { title: "Motion Graphics & Explainer", desc: "Impressive 2D/3D videos explaining your project in seconds.", icon: "🎬" },
-    { title: "Short Format Video", desc: "Content with high viral potential for Reels and Shorts.", icon: "🤳" },
-    { title: "Meme & Trend Production", desc: "Engaging visual content that captures community interest.", icon: "" },
-    { title: "Announcement & Listing Kits", desc: "Professional visual packages for exchange listings.", icon: "📢" },
-    { title: "Social Media Packages", desc: "Templates and unique design sets for daily flow.", icon: "📦" }
+    { title: "Brand Identity Design", desc: "Professional corporate identity with logo, font, and color palette.", icon: "🎨", link: "#services/content-production/brand" },
+    { title: "Web3 UI / UX Design", desc: "Modern interfaces optimized for crypto users.", icon: "📱", link: "#services/content-production/ui-ux" },
+    { title: "Motion Graphics & Explainer", desc: "Impressive 2D/3D videos explaining your project in seconds.", icon: "🎬", link: "#services/content-production/motion" },
+    { title: "Short Format Video", desc: "Content with high viral potential for Reels and Shorts.", icon: "🤳", link: "#services/content-production/shorts" },
+    { title: "Meme & Trend Production", desc: "Engaging visual content that captures community interest.", icon: "🔥", link: "#services/content-production/meme" },
+    { title: "Announcement & Listing Kits", desc: "Professional visual packages for exchange listings.", icon: "📢", link: "#services/content-production/announcement" },
+    { title: "Social Media Packages", desc: "Templates and unique design sets for daily flow.", icon: "📦", link: "#services/content-production/social-kits" }
   ];
 
   const reasons = [
@@ -91,8 +91,12 @@ const ContentProductionDetailView: React.FC = () => {
         .scope-grid { display: grid; grid-template-columns: 1fr; gap: 24px; position: relative; z-index: 10; }
         @media (min-width: 768px) { .scope-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 1024px) { .scope-grid { grid-template-columns: repeat(4, 1fr); } }
-        .scope-card { padding: 36px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.15); text-align: center; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); transition: 0.3s; }
-        .scope-card:hover { border-color: var(--cray-gold); transform: translateY(-5px); }
+        
+        .scope-link { text-decoration: none; display: block; height: 100%; }
+        .scope-card { padding: 36px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.15); text-align: center; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); transition: 0.3s; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; }
+        .scope-card:hover { border-color: var(--cray-gold); transform: translateY(-5px); background: rgba(255, 177, 0, 0.05); }
+        .scope-card h4 { color: #fff; transition: color 0.3s; }
+        .scope-card:hover h4 { color: var(--cray-gold); }
         
         .bant-section { background: #f9f9f9; padding: 80px 0; text-align: center; }
         .bant-btn { background: var(--cray-gold); color: #000; padding: 18px 40px; border-radius: 12px; font-weight: 700 !important; text-decoration: none; display: inline-block; box-shadow: 0 10px 25px rgba(255,177,0,0.4); }
@@ -166,10 +170,12 @@ const ContentProductionDetailView: React.FC = () => {
           <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Our Service Scope</h2>
           <div className="scope-grid">
             {scope.map((s, i) => (
-              <div key={i} className="scope-card">
-                <div style={{fontSize: '40px', marginBottom: '20px'}}>{s.icon}</div>
-                <h4 className="h4-style">{s.title}</h4><p className="p-style" style={{fontSize: '13px'}}>{s.desc}</p>
-              </div>
+              <a href={s.link} key={i} className="scope-link">
+                <div className="scope-card">
+                  <div style={{fontSize: '40px', marginBottom: '20px'}}>{s.icon}</div>
+                  <h4 className="h4-style">{s.title}</h4><p className="p-style" style={{fontSize: '13px'}}>{s.desc}</p>
+                </div>
+              </a>
             ))}
           </div>
         </div>
@@ -222,7 +228,7 @@ const ContentProductionDetailView: React.FC = () => {
         </div>
       </section>
 
-      <div style={{ padding: '80px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
+      <div style={{ padding: '60px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
         <button onClick={() => window.location.hash = ''} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Homepage</button>
       </div>
     </div>

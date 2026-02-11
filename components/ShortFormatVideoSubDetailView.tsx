@@ -22,6 +22,12 @@ const ShortFormatVideoSubDetailView: React.FC = () => {
     { title: 'Community Sharing', desc: 'Create snackable content that your community actually wants to share and discuss.', icon: <path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/> }
   ];
 
+  const faqs = [
+    { q: "What is the best platform for short videos?", a: "For crypto, X (Twitter) and TikTok are the top performers for organic reach, while YouTube Shorts provides long-term SEO benefits." },
+    { q: "Do you use AI for editing?", a: "We use AI tools for captioning and basic tasks, but the storytelling and viral hook engineering are handled by our human strategic editors." },
+    { q: "How many videos should we post per week?", a: "Consistency is vital. We recommend a minimum of 3-5 short-form videos per week to stay relevant in the algorithm's feed." }
+  ];
+
   return (
     <div className="crypto-detail-page">
       <style>{`
@@ -44,6 +50,23 @@ const ShortFormatVideoSubDetailView: React.FC = () => {
         .reason-card { padding: 48px 32px; border-radius: 24px; text-align: center; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); transition: 0.4s; }
         .reason-card:hover { transform: translateY(-10px); border-color: var(--cray-gold); background: rgba(255, 177, 0, 0.1); }
         .reason-icon-box { width: 60px; height: 60px; background-color: var(--cray-gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.3); }
+
+        .detail-row { display: flex; flex-direction: column; gap: 100px; }
+        .detail-item { display: flex; flex-direction: column; gap: 60px; align-items: center; width: 100%; }
+        @media (min-width: 1024px) { 
+            .detail-item { flex-direction: row; } 
+            .detail-item.reverse { flex-direction: row-reverse; } 
+            .detail-text, .detail-visual { width: 50%; flex: 1; }
+        }
+        .detail-visual { border-radius: 32px; overflow: hidden; height: 500px; border: 1px solid rgba(255,177,0,0.2); position: relative; width: 100%; }
+        .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
+        .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
+        .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-accordion-body { padding: 0 32px 28px; color: #9ca3af; display: none; }
+        .faq-accordion-item.active .faq-accordion-body { display: block; }
+        .faq-accordion-item.active .faq-accordion-header { color: var(--cray-gold); }
       `}</style>
 
       <section id="h-hero">
@@ -80,6 +103,72 @@ const ShortFormatVideoSubDetailView: React.FC = () => {
                 </div>
                 <h4 className="h2-style" style={{fontSize: '20px !important', marginBottom: '15px'}}>{r.title}</h4>
                 <p className="p-style" style={{fontSize: '14px'}}>{r.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding" style={{background: '#050505'}}>
+        <div className="container-xl">
+          <div className="detail-row">
+            <div className="detail-item">
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2000" alt="Viral Hooks" />
+              </div>
+              <div className="detail-text">
+                <h2 className="h2-style">The Art of the 3-Second Hook</h2>
+                <p className="p-style">In a world of infinite scrolling, attention is the scarcest resource. Our short-form specialists focus on 'hooks'—explosive visual or verbal starts that force users to stop scrolling and engage with your project's story.</p>
+                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
+                  {["Trend-Matched Audio & Editing", "Captivating Text Overlays", "High-Energy Pacing"].map((li, i) => (
+                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
+                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div className="detail-item reverse">
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?q=80&w=2000" alt="Platform Optimization" />
+              </div>
+              <div className="detail-text">
+                <h2 className="h2-style">Algorithmic Dominance</h2>
+                <p className="p-style">Short-form video is currently the most favored content type across social algorithms. We help your brand exploit this to achieve massive organic reach, bridging the gap between degen community culture and high-end project standards.</p>
+                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
+                  {["X/TikTok Trend Mapping", "Cross-Platform Asset Packs", "Community-Led Video Challenges"].map((li, i) => (
+                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
+                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="cta-box-section">
+        <div className="container-xl">
+          <h2 className="h2-style" style={{color: '#000'}}>Go Viral with Professional Video Engineering</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>
+            Scale your brand's visibility with high-impact shorts. Let our creative squad build your daily viral output.
+          </p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Plan Video Batch</a>
+        </div>
+      </section>
+
+      <section className="section-padding">
+        <div className="container-xl">
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
+          <div style={{maxWidth: '850px', margin: '0 auto'}}>
+            {faqs.map((f, i) => (
+              <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
+                <div className="faq-accordion-header h4-style">
+                  <span>{f.q}</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
+                </div>
+                <div className="faq-accordion-body p-style"><p>{f.a}</p></div>
               </div>
             ))}
           </div>

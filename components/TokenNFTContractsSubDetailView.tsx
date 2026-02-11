@@ -25,6 +25,13 @@ const TokenNFTContractsSubDetailView: React.FC = () => {
     { title: 'Multi-Airdrop', desc: 'Low-cost simultaneous distribution infrastructure for thousands of wallets.', icon: <path d="M22 12h-4l-3 9L9 3l-3 9H2"/> }
   ];
 
+  const faqs = [
+    { q: "Do you offer a ready interface for NFT minting?", a: "Yes, we develop custom web-based minting pages that work fully integrated with the smart contract and IPFS." },
+    { q: "Which network should I release my token on?", a: "We determine the most suitable network (ETH, SOL, BSC, etc.) together based on your target audience and liquidity needs." },
+    { q: "Can we implement complex tax mechanisms?", a: "Absolutely. We specialize in custom token logic including buy/sell taxes, burn rates, and holder reflections." },
+    { q: "Do you handle metadata management?", a: "Yes, we provide end-to-end support for NFT metadata generation and permanent storage on IPFS/Arweave." }
+  ];
+
   return (
     <div className="crypto-detail-page">
       <style>{`
@@ -48,6 +55,7 @@ const TokenNFTContractsSubDetailView: React.FC = () => {
         .reason-card { padding: 48px 32px; border-radius: 24px; text-align: center; background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); transition: 0.4s; }
         .reason-card:hover { transform: translateY(-10px); border-color: var(--cray-gold); background: rgba(255, 177, 0, 0.15); }
         .reason-icon-box { width: 60px; height: 60px; background-color: var(--cray-gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.3); }
+
         .detail-row { display: flex; flex-direction: column; gap: 100px; }
         .detail-item { display: flex; flex-direction: column; gap: 60px; align-items: center; width: 100%; }
         @media (min-width: 1024px) { 
@@ -57,6 +65,7 @@ const TokenNFTContractsSubDetailView: React.FC = () => {
         }
         .detail-visual { border-radius: 32px; overflow: hidden; height: 500px; border: 1px solid rgba(255,177,0,0.2); position: relative; width: 100%; }
         .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
+        
         .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
         .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
         .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
@@ -71,7 +80,7 @@ const TokenNFTContractsSubDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="hero-grid">
             <div style={{flex: 1.2}}>
-              <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Digital Assets</h5>
+              <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Digital Assets & RWA</h5>
               <h1 className="h1-style">Token & NFT Contracts</h1>
               <p className="p-style">We develop asset contracts at global standards for your collections and projects. We establish secure minting and marketplace infrastructures in seconds.</p>
             </div>
@@ -93,8 +102,6 @@ const TokenNFTContractsSubDetailView: React.FC = () => {
       </section>
 
       <section className="section-padding">
-        <img src="https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?q=80&w=2000" className="bg-img" alt="NFT Art" />
-        <div className="overlay" style={{background: 'rgba(0,0,0,0.85)'}}></div>
         <div className="container-xl">
           <div className="reasons-grid">
             {reasons.map((r, i) => (
@@ -119,7 +126,14 @@ const TokenNFTContractsSubDetailView: React.FC = () => {
               </div>
               <div className="detail-text">
                 <h2 className="h2-style">Dynamic NFT Architectures</h2>
-                <p className="p-style">We construct smart NFT structures that are more than just visuals, usable in games, or changeable according to on-chain data. Fully secure solutions with metadata management and IPFS integration.</p>
+                <p className="p-style">We construct smart NFT structures that are more than just visuals. Build assets that are usable in games, evolve according to on-chain data, and feature permanent storage with IPFS/Arweave integration.</p>
+                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
+                  {["On-Chain Metadata", "IPFS Integration", "Marketplace Compatibility"].map((li, i) => (
+                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
+                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
             <div className="detail-item reverse">
@@ -127,8 +141,15 @@ const TokenNFTContractsSubDetailView: React.FC = () => {
                 <img src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d?q=80&w=2000" alt="Token Tech" />
               </div>
               <div className="detail-text">
-                <h2 className="h2-style">RWA Tokenization</h2>
-                <p className="p-style">We carry real-world assets onto the blockchain. We provide legal and technical compliant contracts for fractional ownership of real estate, commodities, or works of art.</p>
+                <h2 className="h2-style">RWA & Defi Integration</h2>
+                <p className="p-style">We carry real-world assets onto the blockchain. We provide technical compliant contracts for fractional ownership of real estate, commodities, or specialized financial instruments.</p>
+                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
+                  {["Fractional Asset Logic", "Stake & Yield Mechanisms", "Advanced Tokenomics Implementation"].map((li, i) => (
+                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
+                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
@@ -137,8 +158,11 @@ const TokenNFTContractsSubDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Let's Carry Your Assets to Blockchain Standards</h2>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Get Quote</a>
+          <h2 className="h2-style" style={{color: '#000'}}>Let's Carry Your Assets to Blockchain Standards</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>
+            Establish a professional and secure foundation for your token or NFT collection. Our development team is ready to architect your vision.
+          </p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Request Asset Plan</a>
         </div>
       </section>
 
@@ -146,10 +170,7 @@ const TokenNFTContractsSubDetailView: React.FC = () => {
         <div className="container-xl">
           <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
-            {[
-              { q: "Do you offer a ready interface for NFT minting?", a: "Yes, we develop web-based minting pages that work fully integrated with the contract." },
-              { q: "Which network should I release my token on?", a: "We determine the most suitable network (ETH, SOL, BSC, etc.) together based on your target audience and liquidity needs." }
-            ].map((f, i) => (
+            {faqs.map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
                 <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
                   <span>{f.q}</span>
@@ -162,7 +183,7 @@ const TokenNFTContractsSubDetailView: React.FC = () => {
         </div>
       </section>
 
-      <div style={{ padding: '60px 0', textAlign: 'center' }}>
+      <div style={{ padding: '60px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
         <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>

@@ -66,6 +66,23 @@ const WhitepaperPreparationSubDetailView: React.FC = () => {
         .reason-card { padding: 48px 32px; border-radius: 24px; text-align: center; background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); transition: 0.4s; }
         .reason-card:hover { transform: translateY(-10px); border-color: var(--cray-gold); background: rgba(255, 177, 0, 0.15); }
         .reason-icon-box { width: 60px; height: 60px; background-color: var(--cray-gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.3); }
+
+        .detail-row { display: flex; flex-direction: column; gap: 100px; }
+        .detail-item { display: flex; flex-direction: column; gap: 60px; align-items: center; width: 100%; }
+        @media (min-width: 1024px) { 
+            .detail-item { flex-direction: row; } 
+            .detail-item.reverse { flex-direction: row-reverse; } 
+            .detail-text, .detail-visual { width: 50%; flex: 1; }
+        }
+        .detail-visual { border-radius: 32px; overflow: hidden; height: 500px; border: 1px solid rgba(255,177,0,0.2); position: relative; width: 100%; }
+        .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
+        .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
+        .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-accordion-body { padding: 0 32px 28px; color: #9ca3af; display: none; }
+        .faq-accordion-item.active .faq-accordion-body { display: block; }
+        .faq-accordion-item.active .faq-accordion-header { color: var(--cray-gold); }
       `}</style>
 
       {/* 1. Hero */}
@@ -78,10 +95,6 @@ const WhitepaperPreparationSubDetailView: React.FC = () => {
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Manifesto and Technical Document</h5>
               <h1 className="h1-style">Whitepaper & Litepaper Preparation</h1>
               <p className="p-style" style={{marginTop: '20px', lineHeight: '1.7'}}>We write your project’s manifesto. Stand out with professional documents that have high technical depth, are visionary, and prompt investors to take action.</p>
-              <div style={{marginTop: '32px', display: 'flex', flexWrap: 'wrap', gap: '15px'}}>
-                <span style={{background: 'rgba(255,177,0,0.1)', color: 'var(--cray-gold)', padding: '8px 16px', borderRadius: '30px', fontSize: '12px', fontWeight: 700}}>✓ ACADEMIC LANGUAGE</span>
-                <span style={{background: 'rgba(255,177,0,0.1)', color: 'var(--cray-gold)', padding: '8px 16px', borderRadius: '30px', fontSize: '12px', fontWeight: 700}}>✓ INFOGRAPHIC SUPPORT</span>
-              </div>
             </div>
             <div className="form-card">
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Draft Analysis</h3>
@@ -117,8 +130,74 @@ const WhitepaperPreparationSubDetailView: React.FC = () => {
         </div>
       </section>
 
-      <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/token-ve-blokzincir-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
+      <section className="section-padding" style={{background: '#050505'}}>
+        <div className="container-xl">
+          <div className="detail-row">
+            <div className="detail-item">
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?q=80&w=2000" alt="MANIFESTO" />
+              </div>
+              <div className="detail-text">
+                <h2 className="h2-style">Technical Manifesto Drafting</h2>
+                <p className="p-style">A great project needs a solid constitutional document. We draft comprehensive technical manifestos that explain your consensus mechanisms, cryptographic protocols, and core architectural innovations in a way that establishes industry-leading authority.</p>
+                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
+                  {["Architecture Deep-Dives", "Network Governance Specs", "Mathematical Proof Annexes"].map((li, i) => (
+                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
+                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div className="detail-item reverse">
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2000" alt="STORYTELLING" />
+              </div>
+              <div className="detail-text">
+                <h2 className="h2-style">Visionary Storytelling for VCs</h2>
+                <p className="p-style">Investors look for vision, not just variables. We refine your message to highlight the "Why" behind your technology, using powerful storytelling and clear logic to prove your project's potential for mass adoption and high-tier market dominance.</p>
+                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
+                  {["Product-Market Fit Narrative", "Scalable Growth Projection", "Competitive Moat Strategy"].map((li, i) => (
+                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
+                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="cta-box-section">
+        <div className="container-xl">
+          <h2 className="h2-style" style={{color: '#000'}}>Document Your Vision at Institutional Standards</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>
+            Don't let a poorly written document hold back your project's potential. Let our specialized technical writers and strategists draft your path to success.
+          </p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Request Draft Review</a>
+        </div>
+      </section>
+
+      <section className="section-padding">
+        <div className="container-xl">
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
+          <div style={{maxWidth: '850px', margin: '0 auto'}}>
+            {faqs.map((f, i) => (
+              <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
+                <div className="faq-accordion-header h4-style">
+                  <span>{f.q}</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
+                </div>
+                <div className="faq-accordion-body p-style"><p>{f.a}</p></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div style={{ padding: '60px 0', textAlign: 'center', background: '#000' }}>
+        <button onClick={() => window.location.hash = '#services/token-and-blockchain-development'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

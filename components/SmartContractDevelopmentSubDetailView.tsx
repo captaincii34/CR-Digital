@@ -66,6 +66,23 @@ const SmartContractDevelopmentSubDetailView: React.FC = () => {
         .reason-card { padding: 48px 32px; border-radius: 24px; text-align: center; background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); transition: 0.4s; }
         .reason-card:hover { transform: translateY(-10px); border-color: var(--cray-gold); background: rgba(255, 177, 0, 0.15); }
         .reason-icon-box { width: 60px; height: 60px; background-color: var(--cray-gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.3); }
+
+        .detail-row { display: flex; flex-direction: column; gap: 100px; }
+        .detail-item { display: flex; flex-direction: column; gap: 60px; align-items: center; width: 100%; }
+        @media (min-width: 1024px) { 
+            .detail-item { flex-direction: row; } 
+            .detail-item.reverse { flex-direction: row-reverse; } 
+            .detail-text, .detail-visual { width: 50%; flex: 1; }
+        }
+        .detail-visual { border-radius: 32px; overflow: hidden; height: 500px; border: 1px solid rgba(255,177,0,0.2); position: relative; width: 100%; }
+        .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
+        .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
+        .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-accordion-body { padding: 0 32px 28px; color: #9ca3af; display: none; }
+        .faq-accordion-item.active .faq-accordion-body { display: block; }
+        .faq-accordion-item.active .faq-accordion-header { color: var(--cray-gold); }
       `}</style>
 
       {/* 1. Hero */}
@@ -78,10 +95,6 @@ const SmartContractDevelopmentSubDetailView: React.FC = () => {
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Cyber Security & Engineering</h5>
               <h1 className="h1-style">Smart Contract Development</h1>
               <p className="p-style" style={{marginTop: '20px', lineHeight: '1.7'}}>Your code is your law. We develop high-performance smart contracts that leave no room for error and are resilient against cyber attacks.</p>
-              <div style={{marginTop: '32px', display: 'flex', flexWrap: 'wrap', gap: '15px'}}>
-                <span style={{background: 'rgba(255,177,0,0.1)', color: 'var(--cray-gold)', padding: '8px 16px', borderRadius: '30px', fontSize: '12px', fontWeight: 700}}>✓ ERC-20 / ERC-721 / ERC-1155</span>
-                <span style={{background: 'rgba(255,177,0,0.1)', color: 'var(--cray-gold)', padding: '8px 16px', borderRadius: '30px', fontSize: '12px', fontWeight: 700}}>✓ CUSTOM PROTOCOLS</span>
-              </div>
             </div>
             <div className="form-card">
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Technical Review Request</h3>
@@ -117,8 +130,74 @@ const SmartContractDevelopmentSubDetailView: React.FC = () => {
         </div>
       </section>
 
-      <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/token-ve-blokzincir-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
+      <section className="section-padding" style={{background: '#050505'}}>
+        <div className="container-xl">
+          <div className="detail-row">
+            <div className="detail-item">
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2000" alt="Clean Code" />
+              </div>
+              <div className="detail-text">
+                <h2 className="h2-style">Security-First Coding</h2>
+                <p className="p-style">Our developers follow the most rigorous security protocols in the industry. Every contract undergoes rigorous internal logic testing and fuzzing to ensure that project liquidity is shielded from known exploits like flash loan attacks and re-entrancy bugs.</p>
+                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
+                  {["Formal Verification", "Static Analysis Integration", "Logic Boundary Testing"].map((li, i) => (
+                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
+                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div className="detail-item reverse">
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2000" alt="Optimization" />
+              </div>
+              <div className="detail-text">
+                <h2 className="h2-style">Gas Optimization & Efficiency</h2>
+                <p className="p-style">User adoption is directly tied to transaction costs. We optimize your contracts at the opcode level to reduce gas consumption by up to 30%, making your DApp or Token more attractive to the end-user.</p>
+                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
+                  {["Yul/Assembly Optimization", "Storage Layout Efficiency", "L2 State-Diff Optimization"].map((li, i) => (
+                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
+                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="cta-box-section">
+        <div className="container-xl">
+          <h2 className="h2-style" style={{color: '#000'}}>Build Code That Investors and Users Can Trust</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>
+            Your project's reputation starts with its smart contract. Let our lead engineers build your secure, optimized core.
+          </p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Get Engineering Plan</a>
+        </div>
+      </section>
+
+      <section className="section-padding">
+        <div className="container-xl">
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
+          <div style={{maxWidth: '850px', margin: '0 auto'}}>
+            {faqs.map((f, i) => (
+              <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
+                <div className="faq-accordion-header h4-style">
+                  <span>{f.q}</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
+                </div>
+                <div className="faq-accordion-body p-style"><p>{f.a}</p></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div style={{ padding: '60px 0', textAlign: 'center', background: '#000' }}>
+        <button onClick={() => window.location.hash = '#services/token-and-blockchain-development'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

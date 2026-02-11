@@ -23,14 +23,14 @@ const TokenBlockchainDetailView: React.FC = () => {
   };
 
   const roadmapSteps = [
-    { title: "Token Project Consulting", desc: "Technical and business model analysis.", icon: "💎" },
-    { title: "Blockchain & Network Selection", desc: "Determining the most suitable network.", icon: "🔗" },
-    { title: "Smart Contract Development", desc: "Secure and optimized code.", icon: "💻" },
-    { title: "Tokenomics Design", desc: "Sustainable economy.", icon: "📊" },
-    { title: "Whitepaper & Litepaper", desc: "Professional documents.", icon: "📄" },
-    { title: "Pitch Deck Presentations", desc: "Investor-oriented presentations.", icon: "📈" },
-    { title: "Roadmap & GTM Plan", desc: "Go-to-market strategy.", icon: "🗺️" },
-    { title: "Audit Preparation Processes", desc: "Contract pre-checks.", icon: "🛡️" }
+    { title: "Token Project Consulting", desc: "Technical and business model analysis.", icon: "💎", link: "#services/token-and-blockchain-development/token-consulting" },
+    { title: "Blockchain & Network Selection", desc: "Determining the most suitable network.", icon: "🔗", link: "#services/token-and-blockchain-development/network-selection" },
+    { title: "Smart Contract Development", desc: "Secure and optimized code.", icon: "💻", link: "#services/token-and-blockchain-development/smart-contract" },
+    { title: "Tokenomics Design", desc: "Sustainable economy.", icon: "📊", link: "#services/token-and-blockchain-development/tokenomics-design" },
+    { title: "Whitepaper & Litepaper Preparation", desc: "Professional documents.", icon: "📄", link: "#services/token-and-blockchain-development/whitepaper" },
+    { title: "Pitch Deck & Investor Presentations", desc: "Investor-oriented presentations.", icon: "📈", link: "#services/token-and-blockchain-development/pitch-deck" },
+    { title: "Roadmap & Go-To-Market (GTM) Planning", desc: "Go-to-market strategy.", icon: "🗺️", link: "#services/token-and-blockchain-development/gtm-planning" },
+    { title: "Audit Preparation Processes (Partner-Based)", desc: "Contract pre-checks.", icon: "🛡️", link: "#services/token-and-blockchain-development/audit-preparation" }
   ];
 
   const reasons = [
@@ -128,7 +128,7 @@ const TokenBlockchainDetailView: React.FC = () => {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 24px;
+            margin: 0 auto 28px;
             transition: 0.3s;
             box-shadow: 0 10px 20px rgba(255, 177, 0, 0.2);
         }
@@ -148,6 +148,7 @@ const TokenBlockchainDetailView: React.FC = () => {
         @media (min-width: 768px) { .scope-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 1024px) { .scope-grid { grid-template-columns: repeat(4, 1fr); } }
         
+        .scope-link { text-decoration: none; display: block; height: 100%; }
         .scope-card {
             padding: 32px;
             border-radius: 12px;
@@ -161,6 +162,7 @@ const TokenBlockchainDetailView: React.FC = () => {
             transition: 0.3s;
             background: rgba(0,0,0,0.4);
             backdrop-filter: blur(8px);
+            height: 100%;
         }
         .scope-card:hover {
             background: rgba(255, 177, 0, 0.05);
@@ -293,11 +295,13 @@ const TokenBlockchainDetailView: React.FC = () => {
 
           <div className="scope-grid">
             {roadmapSteps.map((step, i) => (
-              <div key={i} className="scope-card">
-                <div className="scope-icon">{step.icon}</div>
-                <h4 className="scope-name h4-style">{step.title}</h4>
-                <p className="scope-summary p-style">{step.desc}</p>
-              </div>
+              <a href={step.link} key={i} className="scope-link">
+                <div className="scope-card">
+                  <div className="scope-icon">{step.icon}</div>
+                  <h4 className="scope-name h4-style">{step.title}</h4>
+                  <p className="scope-summary p-style">{step.desc}</p>
+                </div>
+              </a>
             ))}
           </div>
         </div>

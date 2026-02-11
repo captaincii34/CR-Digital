@@ -22,6 +22,12 @@ const Web3MarketingAutomationSubDetailView: React.FC = () => {
     { title: 'Automated Rewards', desc: 'Instantly distribute tokens or NFTs to users who complete community tasks.', icon: <path d="M13 10V3L4 14h7v7l9-11h-7z"/> }
   ];
 
+  const faqs = [
+    { q: "What processes can we automate?", a: "Community welcome sequences, airdrop eligibility checking, dynamic tier-based messaging, and targeted follow-ups based on wallet activity." },
+    { q: "Does this require technical integration?", a: "Yes, we use API connections and on-chain listeners to sync your marketing tools with real-time blockchain data." },
+    { q: "How does it improve conversion?", a: "By delivering the right message exactly when a user interacts with your project on-chain, drastically increasing engagement and trust." }
+  ];
+
   return (
     <div className="crypto-detail-page">
       <style>{`
@@ -49,6 +55,16 @@ const Web3MarketingAutomationSubDetailView: React.FC = () => {
         .reason-card { padding: 48px 32px; border-radius: 24px; text-align: center; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); transition: 0.4s; }
         .reason-card:hover { transform: translateY(-10px); border-color: var(--cray-gold); background: rgba(255, 177, 0, 0.1); }
         .reason-icon-box { width: 60px; height: 60px; background-color: var(--cray-gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.3); }
+
+        .detail-row { display: flex; flex-direction: column; gap: 100px; }
+        .detail-item { display: flex; flex-direction: column; gap: 60px; align-items: center; width: 100%; }
+        @media (min-width: 1024px) { 
+            .detail-item { flex-direction: row; } 
+            .detail-item.reverse { flex-direction: row-reverse; } 
+            .detail-text, .detail-visual { width: 50%; flex: 1; }
+        }
+        .detail-visual { border-radius: 32px; overflow: hidden; height: 500px; border: 1px solid rgba(255,177,0,0.2); position: relative; width: 100%; }
+        .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
       `}</style>
 
       <section id="h-hero">
@@ -65,8 +81,8 @@ const Web3MarketingAutomationSubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Automation Plan</h3>
               {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Current User Base" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Which marketing processes would you like to automate?" required />
+                  <input type="text" className="form-control" placeholder="Current User Base" required />
+                  <textarea className="form-control" rows={3} placeholder="Which marketing processes would you like to automate?" required />
                   <button type="submit" disabled={loading} className="form-button">{loading ? 'DESIGNING...' : 'GENERATE AUTOMATION'}</button>
                 </form>
               )}
@@ -85,6 +101,72 @@ const Web3MarketingAutomationSubDetailView: React.FC = () => {
                 </div>
                 <h4 className="h2-style" style={{fontSize: '20px !important', marginBottom: '15px'}}>{r.title}</h4>
                 <p className="p-style" style={{fontSize: '14px'}}>{r.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding" style={{background: '#050505'}}>
+        <div className="container-xl">
+          <div className="detail-row">
+            <div className="detail-item">
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc51?q=80&w=2000" alt="Bot" />
+              </div>
+              <div className="detail-text">
+                <h2 className="h2-style">On-Chain Triggered Workflows</h2>
+                <p className="p-style">Your marketing shouldn't be static. We build workflows that react to live blockchain events. If a user mints your NFT, they get an instant tailored welcome message. If a whale swaps your token, your team gets an alert. Automation makes your project feel alive.</p>
+                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
+                  {["Real-Time Wallet Monitoring", "Automated Airdrop Fulfillment", "Dynamic Whitelist Access"].map((li, i) => (
+                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
+                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div className="detail-item reverse">
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2000" alt="CRM" />
+              </div>
+              <div className="detail-text">
+                <h2 className="h2-style">Intelligent Web3 CRM</h2>
+                <p className="p-style">Stop treating every wallet address the same. Our automation tools segment your users based on their on-chain behavior, allowing you to send targeted incentives to dormant holders or VIP rewards to your project's top contributors automatically.</p>
+                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
+                  {["Wallet Activity Segmentation", "Loyalty Tier Automation", "Predictive Churn Alerts"].map((li, i) => (
+                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
+                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="cta-box-section">
+        <div className="container-xl">
+          <h2 className="h2-style" style={{color: '#000'}}>Scale Your Operations without Scaling Your Team</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>
+            Increase your project's efficiency with automated workflows. Contact our engineering team to build your smart marketing infrastructure today.
+          </p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Plan Automation Strategy</a>
+        </div>
+      </section>
+
+      <section className="section-padding">
+        <div className="container-xl">
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
+          <div style={{maxWidth: '850px', margin: '0 auto'}}>
+            {faqs.map((f, i) => (
+              <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
+                <div className="faq-accordion-header h4-style">
+                  <span>{f.q}</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
+                </div>
+                <div className="faq-accordion-body p-style"><p>{f.a}</p></div>
               </div>
             ))}
           </div>

@@ -226,9 +226,21 @@ const Header: React.FC = () => {
     closeAll();
   };
 
+  const handleServicesClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.location.hash = 'services';
+    closeAll();
+  };
+
   const handleWorksClick = (e: React.MouseEvent) => {
     e.preventDefault();
     window.location.hash = 'works';
+    closeAll();
+  };
+
+  const handlePricingClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.location.hash = 'pricing';
     closeAll();
   };
 
@@ -266,14 +278,29 @@ const Header: React.FC = () => {
             gap: 12px; 
           }
         }
+
+        /* Specific Logo Parity Styling */
+        .logo-title {
+          color: #fff;
+          font-weight: 900 !important;
+          font-size: 20px !important;
+          letter-spacing: -0.5px;
+          text-transform: uppercase;
+          line-height: 1;
+        }
+        .logo-title-up {
+          color: var(--cray-gold) !important;
+          font-size: 20px !important;
+          font-weight: 900 !important;
+        }
       `}</style>
 
       <div className="nav-container">
         <a href="#" onClick={handleHomeClick} className="logo-box">
           <div className="logo-icon">CR</div>
           <div className="logo-text">
-            <span className="logo-title">CRAY</span>
-            <span className="logo-sub">Digital</span>
+            <span className="logo-title">CRAY<span className="logo-title-up">UP</span></span>
+            <span className="logo-sub">Crypto Agency</span>
           </div>
         </a>
 
@@ -283,7 +310,7 @@ const Header: React.FC = () => {
             <li><a href="#about-us" onClick={handleAboutClick} className="nav-link">ABOUT US</a></li>
             
             <li className="has-mega-menu" onMouseLeave={() => setActiveSubMenu(null)}>
-              <button className="nav-link mega-menu-trigger">
+              <button className="nav-link mega-menu-trigger" onClick={handleServicesClick}>
                 SERVICES
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
                   <path d="M19 9l-7 7-7-7" />
@@ -355,11 +382,12 @@ const Header: React.FC = () => {
             </li>
 
             <li><a href="#works" onClick={handleWorksClick} className="nav-link">WORKS</a></li>
+            <li><a href="#pricing" onClick={handlePricingClick} className="nav-link">PRICING</a></li>
             <li><a href="#contact" onClick={handleContactClick} className="nav-link">CONTACT</a></li>
           </ul>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-            <a href="#booking-section" onClick={closeAll} className="cta-button">CALENDAR</a>
+            <a href="#calendar" onClick={closeAll} className="cta-button">CALENDAR</a>
           </div>
         </div>
 
@@ -398,6 +426,11 @@ const Header: React.FC = () => {
 
             {mobileHizmetlerOpen && (
               <div className="mobile-sub-menu">
+                <a href="#services" onClick={handleServicesClick} className="mobile-sub-item-link">
+                  <span className="mobile-service-title" style={{ color: 'var(--cray-gold)' }}>
+                    Overview (All Services)
+                  </span>
+                </a>
                 {servicesList.map(s => (
                   <div key={s.id} style={{ marginBottom: '8px' }}>
                     <div onClick={() => {
@@ -453,6 +486,14 @@ const Header: React.FC = () => {
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 18l6-6-6-6"/></svg>
             </a>
           </li>
+
+          <li className="mobile-nav-item">
+            <a href="#pricing" onClick={handlePricingClick} className="mobile-nav-link">
+              PRICING
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 18l6-6-6-6"/></svg>
+            </a>
+          </li>
+
           <li className="mobile-nav-item">
             <a href="#contact" onClick={handleContactClick} className="mobile-nav-link">
               CONTACT
@@ -462,7 +503,7 @@ const Header: React.FC = () => {
         </ul>
 
         <div style={{ marginTop: '40px', paddingBottom: '20px' }}>
-          <a href="#booking-section" onClick={closeAll} className="cta-button" style={{ display: 'block', textAlign: 'center', fontSize: '13px', padding: '16px' }}>CALENDAR</a>
+          <a href="#calendar" onClick={closeAll} className="cta-button" style={{ display: 'block', textAlign: 'center', fontSize: '13px', padding: '16px' }}>CALENDAR</a>
         </div>
       </div>
     </header>

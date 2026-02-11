@@ -58,13 +58,25 @@ const ConsultancyDetailView: React.FC = () => {
         .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 48px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: 0 auto; }
         .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; background: #fff; color: #000; margin-bottom: 16px; }
         .form-button { width: 100%; background: var(--cray-gold); color: #000; padding: 20px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
+        
         .roadmap-wrapper { position: relative; max-width: 1000px; margin: 60px auto 0; padding: 40px 0; }
         .roadmap-track { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, transparent, var(--cray-gold), transparent); transform: translateX(-50%); opacity: 0.3; }
+        
+        /* Desktop Roadmap Grid */
         .roadmap-node { display: flex; justify-content: space-between; align-items: center; margin-bottom: 48px; position: relative; }
         .roadmap-node:nth-child(even) { flex-direction: row-reverse; }
         .roadmap-step-card { width: 44%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 32px; border-radius: 24px; transition: 0.3s; text-decoration: none; cursor: pointer; display: block; }
         .roadmap-step-card:hover { background: rgba(255,177,0,0.06); border-color: var(--cray-gold); transform: translateY(-5px); }
         .roadmap-marker { width: 18px; height: 18px; background: var(--cray-gold); border: 4px solid #000; border-radius: 50%; z-index: 5; position: absolute; left: 50%; transform: translateX(-50%); box-shadow: 0 0 15px var(--cray-gold); }
+
+        /* Mobile Adjustments */
+        @media (max-width: 1023px) {
+          .roadmap-track { display: none; }
+          .roadmap-node { flex-direction: column !important; margin-bottom: 24px; align-items: stretch; }
+          .roadmap-step-card { width: 100%; padding: 24px; }
+          .roadmap-marker { display: none; }
+        }
+
         .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
         .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
         .faq-accordion-body { padding: 0 32px 28px; color: #9ca3af; display: none; }
@@ -85,6 +97,7 @@ const ConsultancyDetailView: React.FC = () => {
               <div style={{marginTop: '32px'}}>
                 {["100% Confidentiality Under NDA", "Technical and Economic Architecture Design", "Global Exchange and Marketing Network"].map((item, i) => (
                   <div key={i} style={{display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px'}}>
+                    {/* Fixed typo 'justify-content: center' to 'justifyContent: "center"' and added quotes to value */}
                     <div style={{width: '24px', height: '24px', background: 'var(--cray-gold)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center'}}><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4"><polyline points="20 6 9 17 4 12" /></svg></div>
                     <span style={{fontSize: '11px', fontWeight: 700, textTransform: 'uppercase'}}>{item}</span>
                   </div>

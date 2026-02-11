@@ -23,14 +23,14 @@ const TokenListingDetailView: React.FC = () => {
   };
 
   const listingScope = [
-    { title: "Token Launch Strategy", desc: "Selecting the most correct timing and platform based on market conditions.", icon: "🚀" },
-    { title: "DEX Launch Management", desc: "Uniswap, PancakeSwap, and Raydium liquidity setup.", icon: "🥞" },
-    { title: "CEX Listing Consulting", desc: "Communication and application processes with Tier-1 and Tier-2 exchanges.", icon: "🏛️" },
-    { title: "Launchpad Prep Processes", desc: "Making the project compliant with launchpad criteria.", icon: "🛫" },
-    { title: "Pre-Listing Marketing", desc: "Community building, hype management, and pre-promotion.", icon: "📈" },
-    { title: "Post-Listing Growth", desc: "Sustainable volume and holder increase strategies.", icon: "💎" },
-    { title: "Exchange Comm & Process Management", desc: "Tracking all technical and commercial negotiations with exchanges.", icon: "📱" },
-    { title: "Listing Documentation", desc: "Preparing technical reviews and legal documents.", icon: "📋" }
+    { title: "Token Launch Strategy", desc: "Selecting the most correct timing and platform based on market conditions.", icon: "🚀", link: "#services/token-launch-and-listing/strategy" },
+    { title: "DEX Launch Management", desc: "Uniswap, PancakeSwap, and Raydium liquidity setup.", icon: "🥞", link: "#services/token-launch-and-listing/dex" },
+    { title: "CEX Listing Consulting", desc: "Communication and application processes with Tier-1 and Tier-2 exchanges.", icon: "🏛️", link: "#services/token-launch-and-listing/cex" },
+    { title: "Launchpad Prep Processes", desc: "Making the project compliant with launchpad criteria.", icon: "🛫", link: "#services/token-launch-and-listing/launchpad" },
+    { title: "Pre-Listing Marketing", desc: "Community building, hype management, and pre-promotion.", icon: "📈", link: "#services/token-launch-and-listing/pre-list-marketing" },
+    { title: "Post-Listing Growth", desc: "Sustainable volume and holder increase strategies.", icon: "💎", link: "#services/token-launch-and-listing/post-list-growth" },
+    { title: "Exchange Comm & Process Management", desc: "Tracking all technical and commercial negotiations with exchanges.", icon: "📱", link: "#services/token-launch-and-listing/exchange-comm" },
+    { title: "Listing Documentation", desc: "Preparing technical reviews and legal documents.", icon: "📋", link: "#services/token-launch-and-listing/docs" }
   ];
 
   const reasons = [
@@ -52,10 +52,10 @@ const TokenListingDetailView: React.FC = () => {
   ];
 
   const advantages = [
-    "Faster listing approval",
-    "Advantages in exchange commissions",
-    "Professional liquidity management",
-    "Stronger exchange relationships"
+    "Investor trust",
+    "Listing compliance",
+    "Sustainable growth",
+    "Strong technical infrastructure"
   ];
 
   const faqs = [
@@ -115,10 +115,11 @@ const TokenListingDetailView: React.FC = () => {
         @media (min-width: 768px) { .scope-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 1024px) { .scope-grid { grid-template-columns: repeat(4, 1fr); } }
         
-        .scope-card { padding: 36px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.15); text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 16px; transition: 0.3s; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); }
+        .scope-link { text-decoration: none; display: block; height: 100%; }
+        .scope-card { padding: 36px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.15); text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 16px; transition: 0.3s; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); height: 100%; }
         .scope-card:hover { background: rgba(255, 177, 0, 0.06); border-color: var(--cray-gold); transform: translateY(-5px); box-shadow: 0 12px 30px rgba(255, 177, 0, 0.25); }
         .scope-icon { font-size: 44px; transition: 0.3s; }
-        .scope-name { color: #fff; line-height: 1.2; font-weight: 700; }
+        .scope-name { color: #fff; line-height: 1.2; font-weight: 700; transition: color 0.3s; }
         .scope-card:hover .scope-name { color: var(--cray-gold); }
         .scope-summary { color: #9ca3af; font-size: 13px !important; }
 
@@ -238,11 +239,13 @@ const TokenListingDetailView: React.FC = () => {
 
           <div className="scope-grid">
             {listingScope.map((step, i) => (
-              <div key={i} className="scope-card">
-                <div className="scope-icon">{step.icon}</div>
-                <h4 className="scope-name h4-style">{step.title}</h4>
-                <p className="scope-summary p-style">{step.desc}</p>
-              </div>
+              <a href={step.link} key={i} className="scope-link">
+                <div className="scope-card">
+                  <div className="scope-icon">{step.icon}</div>
+                  <h4 className="scope-name h4-style">{step.title}</h4>
+                  <p className="scope-summary p-style">{step.desc}</p>
+                </div>
+              </a>
             ))}
           </div>
         </div>

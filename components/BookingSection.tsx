@@ -185,7 +185,13 @@ const BookingSection: React.FC = () => {
         .time-btn { width: 100%; padding: 16px; border: 1px solid rgba(77,166,255,0.3); border-radius: 8px; color: #4da6ff; font-weight: 800; transition: 0.2s; background: transparent; }
         .time-btn:hover { background: #4da6ff; color: #fff; border-color: #4da6ff; }
 
-        .form-label { display: block; font-size: 14px !important; font-weight: 700 !important; color: #fff; margin-bottom: 10px; }
+        .form-label {
+          display: block;
+          font-size: 14px !important;
+          font-weight: 700 !important;
+          color: #000000;
+          margin-bottom: 10px;
+        }
         .form-label span { color: #ef4444; margin-left: 2px; }
         .form-input-custom { width: 100%; background: #000; border: 1px solid #333; border-radius: 12px; padding: 14px 18px; color: #fff; transition: 0.3s; margin-bottom: 20px; }
         .form-input-custom:focus { border-color: var(--cray-gold); outline: none; }

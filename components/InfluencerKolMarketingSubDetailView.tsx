@@ -22,6 +22,12 @@ const InfluencerKolMarketingSubDetailView: React.FC = () => {
     { title: 'Conversion Tracking', desc: 'We measure exactly how much engagement and holder growth each KOL brings to your project.', icon: <path d="M9 19v-6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/> }
   ];
 
+  const faqs = [
+    { q: "How do you vet influencers?", a: "We use internal tools to analyze engagement quality, audience demographics, and past project performance to eliminate accounts with fake followers." },
+    { q: "Do you handle campaign management?", a: "Yes, we handle everything from content briefing to scheduling, payment, and performance reporting." },
+    { q: "Which platforms are best for KOLs?", a: "X (Twitter) is best for instant hype, YouTube for deep technical reviews, and Telegram for conversion-driven alpha calls." }
+  ];
+
   return (
     <div className="crypto-detail-page">
       <style>{`
@@ -49,6 +55,23 @@ const InfluencerKolMarketingSubDetailView: React.FC = () => {
         .reason-card { padding: 48px 32px; border-radius: 24px; text-align: center; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); transition: 0.4s; }
         .reason-card:hover { transform: translateY(-10px); border-color: var(--cray-gold); background: rgba(255, 177, 0, 0.1); }
         .reason-icon-box { width: 60px; height: 60px; background-color: var(--cray-gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.3); }
+
+        .detail-row { display: flex; flex-direction: column; gap: 100px; }
+        .detail-item { display: flex; flex-direction: column; gap: 60px; align-items: center; width: 100%; }
+        @media (min-width: 1024px) { 
+            .detail-item { flex-direction: row; } 
+            .detail-item.reverse { flex-direction: row-reverse; } 
+            .detail-text, .detail-visual { width: 50%; flex: 1; }
+        }
+        .detail-visual { border-radius: 32px; overflow: hidden; height: 500px; border: 1px solid rgba(255,177,0,0.2); position: relative; width: 100%; }
+        .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
+        .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
+        .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-accordion-body { padding: 0 32px 28px; color: #9ca3af; display: none; }
+        .faq-accordion-item.active .faq-accordion-body { display: block; }
+        .faq-accordion-item.active .faq-accordion-header { color: var(--cray-gold); }
       `}</style>
 
       <section id="h-hero">
@@ -85,6 +108,72 @@ const InfluencerKolMarketingSubDetailView: React.FC = () => {
                 </div>
                 <h4 className="h2-style" style={{fontSize: '20px !important', marginBottom: '15px'}}>{r.title}</h4>
                 <p className="p-style" style={{fontSize: '14px'}}>{r.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding" style={{background: '#050505'}}>
+        <div className="container-xl">
+          <div className="detail-row">
+            <div className="detail-item">
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=2000" alt="Podcast" />
+              </div>
+              <div className="detail-text">
+                <h2 className="h2-style">Vetted Influencer Excellence</h2>
+                <p className="p-style">The crypto influencer market is full of fake engagement. We use proprietary vetting processes to identify "Alpha" KOLs with real communities. We ensure your project is discussed in the right circles, driving legitimate interest and long-term holders.</p>
+                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
+                  {["Bot-Free Audience Verification", "Engagement Quality Scoring", "Past Campaign ROI Benchmarking"].map((li, i) => (
+                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
+                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div className="detail-item reverse">
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=2000" alt="Viral" />
+              </div>
+              <div className="detail-text">
+                <h2 className="h2-style">Multi-Channel Viral Loops</h2>
+                <p className="p-style">We coordinate KOL waves across multiple platforms simultaneously. A YouTube technical review followed by a series of X threads and Telegram alpha calls creates an "omnipresence" effect that validates your project's authority.</p>
+                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
+                  {["Cross-Platform Surge Management", "Alpha Call Coordination", "AMA & Live-Stream Strategy"].map((li, i) => (
+                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
+                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="cta-box-section">
+        <div className="container-xl">
+          <h2 className="h2-style" style={{color: '#000'}}>Leverage the World's Most Powerful Crypto Network</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>
+            Connect with verified authorities and scale your project's reputation globally. Let our management team build your custom KOL arsenal.
+          </p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Request KOL Strategy</a>
+        </div>
+      </section>
+
+      <section className="section-padding">
+        <div className="container-xl">
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
+          <div style={{maxWidth: '850px', margin: '0 auto'}}>
+            {faqs.map((f, i) => (
+              <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
+                <div className="faq-accordion-header h4-style">
+                  <span>{f.q}</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
+                </div>
+                <div className="faq-accordion-body p-style"><p>{f.a}</p></div>
               </div>
             ))}
           </div>

@@ -25,6 +25,13 @@ const DAppDevelopmentSubDetailView: React.FC = () => {
     { title: 'High Retention UI', desc: 'Web3 interfaces with accustomed Web2 simplicity that keep the user in the system.', icon: <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/> }
   ];
 
+  const faqs = [
+    { q: "Which wallets do you support?", a: "We integrate MetaMask, Phantom, WalletConnect v2, and all major MPC-based wallet systems like Safe." },
+    { q: "Do you have mobile app support?", a: "Yes, we develop your DApp cross-platform to work seamlessly on both web and mobile environments." },
+    { q: "How do you handle high data loads?", a: "We build custom indexers and caching layers to ensure that your DApp displays real-time on-chain data without lag." },
+    { q: "Is Social Login possible in Web3?", a: "Yes, through Account Abstraction (ERC-4337), we can allow your users to log in via Email or Google while keeping full custody." }
+  ];
+
   return (
     <div className="crypto-detail-page">
       <style>{`
@@ -48,6 +55,7 @@ const DAppDevelopmentSubDetailView: React.FC = () => {
         .reason-card { padding: 48px 32px; border-radius: 24px; text-align: center; background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); transition: 0.4s; }
         .reason-card:hover { transform: translateY(-10px); border-color: var(--cray-gold); background: rgba(255, 177, 0, 0.15); }
         .reason-icon-box { width: 60px; height: 60px; background-color: var(--cray-gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.3); }
+
         .detail-row { display: flex; flex-direction: column; gap: 100px; }
         .detail-item { display: flex; flex-direction: column; gap: 60px; align-items: center; width: 100%; }
         @media (min-width: 1024px) { 
@@ -57,6 +65,7 @@ const DAppDevelopmentSubDetailView: React.FC = () => {
         }
         .detail-visual { border-radius: 32px; overflow: hidden; height: 500px; border: 1px solid rgba(255,177,0,0.2); position: relative; width: 100%; }
         .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
+        
         .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
         .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
         .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
@@ -71,12 +80,12 @@ const DAppDevelopmentSubDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="hero-grid">
             <div style={{flex: 1.2}}>
-              <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Decentralized Future</h5>
+              <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Decentralized Fullstack</h5>
               <h1 className="h1-style">Decentralized Application (DApp) Development</h1>
               <p className="p-style">We envision a new generation of application world where users log in only with their wallet and all transactions occur transparently on-chain.</p>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Project Quote</h3>
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get DApp Analysis</h3>
               {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Try Again</button></div> : (
                 <form onSubmit={handleSubmit}>
                   <select className="form-control" required>
@@ -84,7 +93,7 @@ const DAppDevelopmentSubDetailView: React.FC = () => {
                   </select>
                   <textarea className="form-control" rows={3} placeholder="Specify the features you want..." value={goal} onChange={e=>setGoal(e.target.value)} required />
                   <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'PROCESSING...' : 'GET DAPP ANALYSIS'}</button>
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'PROCESSING...' : 'GET DAPP PLAN'}</button>
                 </form>
               )}
             </div>
@@ -93,8 +102,6 @@ const DAppDevelopmentSubDetailView: React.FC = () => {
       </section>
 
       <section className="section-padding">
-        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2000" className="bg-img" alt="Background" />
-        <div className="overlay" style={{background: 'rgba(0,0,0,0.85)'}}></div>
         <div className="container-xl">
           <div className="reasons-grid">
             {reasons.map((r, i) => (
@@ -120,6 +127,13 @@ const DAppDevelopmentSubDetailView: React.FC = () => {
               <div className="detail-text">
                 <h2 className="h2-style">Flawless Web3 Experience</h2>
                 <p className="p-style">We develop interfaces that work at Web2 speed, where users do not feel Web3 complexity. Lower the threshold with one-click wallet connection, social login, and Account Abstraction solutions.</p>
+                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
+                  {["Wallet SDK Integrations", "Social Authentication Layers", "Real-Time Transaction Feedback"].map((li, i) => (
+                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
+                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
             <div className="detail-item reverse">
@@ -127,8 +141,15 @@ const DAppDevelopmentSubDetailView: React.FC = () => {
                 <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc51?q=80&w=2000" alt="Backend" />
               </div>
               <div className="detail-text">
-                <h2 className="h2-style">Strong Data Infrastructure</h2>
+                <h2 className="h2-style">Robust Data Synchronization</h2>
                 <p className="p-style">The performance of your DApp depends on how quickly on-chain data is processed. With custom Indexer and API systems we develop, we present blockchain data to your user in milliseconds.</p>
+                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
+                  {["High-Performance Indexing", "Caching & Event Monitoring", "Reliable RPC Architecture"].map((li, i) => (
+                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
+                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
@@ -137,7 +158,10 @@ const DAppDevelopmentSubDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Let's Carry Your Application to the Next Generation Internet</h2>
+          <h2 className="h2-style" style={{color: '#000'}}>Let's Carry Your Application to the Next Generation Internet</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>
+            Build a DApp that users actually enjoy using. Start your journey with our fullstack engineering team today.
+          </p>
           <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Get DApp Quote</a>
         </div>
       </section>
@@ -146,10 +170,7 @@ const DAppDevelopmentSubDetailView: React.FC = () => {
         <div className="container-xl">
           <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
-            {[
-              { q: "Which wallets do you support?", a: "We integrate MetaMask, Phantom, WalletConnect, and all modern MPC-based wallet systems." },
-              { q: "Do you have mobile app support?", a: "Yes, we develop your DApp cross-platform to work on both web and mobile platforms." }
-            ].map((f, i) => (
+            {faqs.map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
                 <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
                   <span>{f.q}</span>
@@ -162,7 +183,7 @@ const DAppDevelopmentSubDetailView: React.FC = () => {
         </div>
       </section>
 
-      <div style={{ padding: '60px 0', textAlign: 'center' }}>
+      <div style={{ padding: '60px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
         <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>

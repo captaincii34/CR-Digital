@@ -22,6 +22,12 @@ const PrMediaPublicationsSubDetailView: React.FC = () => {
     { title: 'SEO Dominance', desc: 'High-authority backlinks from major news outlets push your project to the top of search results.', icon: <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/> }
   ];
 
+  const faqs = [
+    { q: "How long does it take for an article to go live?", a: "Depending on the outlet, a press release can go live within 48-72 hours, while a featured interview may take 1-2 weeks." },
+    { q: "Do you handle content writing?", a: "Yes, our team of specialized crypto journalists drafts your story in a professional academic style suitable for Tier-1 outlets." },
+    { q: "Which languages do you support?", a: "We provide global PR in English, and localization services in Turkish, Chinese, Korean, and Arabic." }
+  ];
+
   return (
     <div className="crypto-detail-page">
       <style>{`
@@ -49,6 +55,16 @@ const PrMediaPublicationsSubDetailView: React.FC = () => {
         .reason-card { padding: 48px 32px; border-radius: 24px; text-align: center; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); transition: 0.4s; }
         .reason-card:hover { transform: translateY(-10px); border-color: var(--cray-gold); background: rgba(255, 177, 0, 0.1); }
         .reason-icon-box { width: 60px; height: 60px; background-color: var(--cray-gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.3); }
+
+        .detail-row { display: flex; flex-direction: column; gap: 100px; }
+        .detail-item { display: flex; flex-direction: column; gap: 60px; align-items: center; width: 100%; }
+        @media (min-width: 1024px) { 
+            .detail-item { flex-direction: row; } 
+            .detail-item.reverse { flex-direction: row-reverse; } 
+            .detail-text, .detail-visual { width: 50%; flex: 1; }
+        }
+        .detail-visual { border-radius: 32px; overflow: hidden; height: 500px; border: 1px solid rgba(255,177,0,0.2); position: relative; width: 100%; }
+        .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
       `}</style>
 
       <section id="h-hero">
@@ -65,8 +81,8 @@ const PrMediaPublicationsSubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get PR Plan</h3>
               {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Priority News Outlets" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="What is the key announcement or milestone?" required />
+                  <input type="text" className="form-control" placeholder="Priority News Outlets" required />
+                  <textarea className="form-control" rows={3} placeholder="What is the key announcement or milestone?" required />
                   <button type="submit" disabled={loading} className="form-button">{loading ? 'STABILIZING...' : 'GET MEDIA STRATEGY'}</button>
                 </form>
               )}
@@ -85,6 +101,72 @@ const PrMediaPublicationsSubDetailView: React.FC = () => {
                 </div>
                 <h4 className="h2-style" style={{fontSize: '20px !important', marginBottom: '15px'}}>{r.title}</h4>
                 <p className="p-style" style={{fontSize: '14px'}}>{r.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding" style={{background: '#050505'}}>
+        <div className="container-xl">
+          <div className="detail-row">
+            <div className="detail-item">
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=2000" alt="News" />
+              </div>
+              <div className="detail-text">
+                <h2 className="h2-style">Institutional Presence</h2>
+                <p className="p-style">In a market driven by trust, where your project is mentioned matters. We don't just send press releases; we manage your story's placement in outlets that VCs, exchanges, and institutional investors trust daily.</p>
+                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
+                  {["Direct Newsroom Access", "Crisis PR Management", "Long-Form Interview Placement"].map((li, i) => (
+                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
+                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div className="detail-item reverse">
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2000" alt="Authority" />
+              </div>
+              <div className="detail-text">
+                <h2 className="h2-style">Dominating Search Visibility</h2>
+                <p className="p-style">Our PR strategy is built to dominate organic search. When potential investors search for your project, they should find positive, high-authority articles from globally recognized outlets that validate your technical and economic claims.</p>
+                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
+                  {["High-Authority Backlink Network", "Sentiment Drift Control", "Long-Tail Search Optimization"].map((li, i) => (
+                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
+                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="cta-box-section">
+        <div className="container-xl">
+          <h2 className="h2-style" style={{color: '#000'}}>Announce Your Project to the Whole World</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>
+            Establish your project's authority on the global stage. Partner with our media strategists to secure your Tier-1 placements.
+          </p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Request PR Roadmap</a>
+        </div>
+      </section>
+
+      <section className="section-padding">
+        <div className="container-xl">
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
+          <div style={{maxWidth: '850px', margin: '0 auto'}}>
+            {faqs.map((f, i) => (
+              <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
+                <div className="faq-accordion-header h4-style">
+                  <span>{f.q}</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
+                </div>
+                <div className="faq-accordion-body p-style"><p>{f.a}</p></div>
               </div>
             ))}
           </div>

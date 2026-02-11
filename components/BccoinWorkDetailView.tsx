@@ -1,23 +1,19 @@
 import React from 'react';
 
-const AixoviaWorkDetailView: React.FC = () => {
-  // Strategic map of .jpg images in the /gorsel folder
+const BccoinWorkDetailView: React.FC = () => {
   const galleryImages = [
-    { src: '/gorsel/7.jpg', title: 'Source Intelligence', desc: 'Price is just a shadow, we see the source.' },
-    { src: '/gorsel/1.jpg', title: 'The Momentum Engine', desc: 'Technical infrastructure scaling and strategy.' },
-    { src: '/gorsel/3.jpg', title: 'Neural Re-Engineering', desc: 'Autonomous AI agent development and optimization.' },
-    { src: '/gorsel/2.jpg', title: 'Seasonal Campaigns', desc: 'Creative campaign management for community engagement.' },
-    { src: '/gorsel/5.jpg', title: 'Financial Machine', desc: 'Visualization of closed-loop financial engineering.' },
-    { src: '/gorsel/4.jpg', title: 'The Superxovia', desc: 'Brand character design and ecosystem utility.' },
-    { src: '/gorsel/6.jpg', title: 'Hybrid Intelligence', desc: 'A hybrid intelligence model running ahead of the market.' }
+    { src: '/gorsel/bc/11.jpg', title: 'Global Branding', desc: 'Unified visual identity across all digital touchpoints.' },
+    { src: '/gorsel/bc/13.jpg', title: 'Strategic Roadmap', desc: 'Planning and execution of ecosystem milestones.' },
+    { src: '/gorsel/bc/14.jpg', title: 'Marketing Excellence', desc: 'ROI-driven growth campaigns and influencer outreach.' },
+    { src: '/gorsel/bc/15.jpg', title: 'Ecosystem Utility', desc: 'Visualizing the core value of the BCCOIN token.' }
   ];
 
   const services = [
-    { icon: '📱', title: 'Telegram App Development', desc: 'AI-based Telegram Mini App software and bot integration producing exclusive trade signals for the community.' },
-    { icon: '🌐', title: 'Web Software & Platform', desc: 'Strategic design, UI/UX architecture, and full-stack development processes of the aixovia.com platform.' },
-    { icon: '📊', title: 'Listing Consultancy', desc: 'MEXC exchange listing processes, exchange communication, and technical documentation preparation.' },
-    { icon: '🎬', title: 'Content & Video Design', desc: 'Futuristic 3D designs and impactful video productions for social media management.' },
-    { icon: '👥', title: 'Community Management', desc: 'Global community growth architecture, 24/7 active channel moderation, and growth strategies.' }
+    { icon: '📣', title: '360° Digital Marketing', desc: 'High-performance growth hacking and global brand awareness campaigns across multiple channels.' },
+    { icon: '🎬', title: 'Visual & Content Design', desc: 'Premium content production, including high-end graphics and video assets for social media.' },
+    { icon: '👥', title: 'Community Management', desc: 'Professional 24/7 moderation and organic growth strategies for a thriving global community.' },
+    { icon: '📊', title: 'Listing Consultancy', desc: 'Strategic management of listing processes on Tier-1 exchanges like Gate.io and MEXC.' },
+    { icon: '💻', title: 'Software & Account Ops', desc: 'End-to-end management of all technical infrastructures and digital account security.' }
   ];
 
   return (
@@ -25,7 +21,7 @@ const AixoviaWorkDetailView: React.FC = () => {
       <style>{`
         .work-detail-page { background: #000; color: #fff; min-height: 100vh; padding-top: 100px; }
         .hero-section { position: relative; height: 70vh; display: flex; align-items: center; overflow: hidden; border-bottom: 1px solid rgba(255,177,0,0.15); }
-        .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.6; filter: brightness(0.7) contrast(1.1); transition: transform 10s linear; }
+        .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.6; filter: brightness(0.5) contrast(1.1); transition: transform 10s linear; }
         .hero-section:hover .hero-bg { transform: scale(1.1); }
         .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #000 0%, transparent 60%, rgba(0,0,0,0.5) 100%); }
         
@@ -130,18 +126,18 @@ const AixoviaWorkDetailView: React.FC = () => {
       </div>
 
       <section className="hero-section">
-        <img src="/gorsel/1.jpg" className="hero-bg" alt="Aixovia Hero" />
+        <img src="/gorsel/bc/12.jpg" className="hero-bg" alt="BCCOIN Hero" />
         <div className="hero-overlay"></div>
         <div className="container-xl">
           <div style={{maxWidth: '900px'}}>
-            <h5 style={{color: 'var(--cray-gold)', letterSpacing: '6px', textTransform: 'uppercase', marginBottom: '20px', fontWeight: 800, fontSize: '12px !important'}}>AI Web3 Innovation</h5>
-            <h1 className="h1-style" style={{marginBottom: '30px'}}>AIXOVIA</h1>
-            <p className="p-style" style={{color: '#eee', maxWidth: '750px'}}>The world's first Web3 project to establish a <span className="highlight-text">fully autonomous AI agent</span> mining infrastructure. As CRAY Digital, we transformed this autonomous vision into a global brand.</p>
+            <h5 style={{color: 'var(--cray-gold)', letterSpacing: '6px', textTransform: 'uppercase', marginBottom: '20px', fontWeight: 800, fontSize: '12px !important'}}>Enterprise Token Management</h5>
+            <h1 className="h1-style" style={{marginBottom: '30px'}}>BlackCardCoin (BCCOIN)</h1>
+            <p className="p-style" style={{color: '#eee', maxWidth: '750px'}}>A high-performance crypto asset serving a global ecosystem. As CRAY Digital, we manage the <span className="highlight-text">360-degree digital expansion</span> of BCCOIN, from Tier-1 listing strategies to elite community growth.</p>
             <div style={{marginTop: '40px', display: 'flex', flexWrap: 'wrap', gap: '20px'}}>
-              <a href="https://aixovia.com" target="_blank" rel="noopener noreferrer" className="cta-button" style={{padding: '18px 45px', fontSize: '13px !important'}}>Visit Website</a>
+              <a href="https://blackcardcoin.com" target="_blank" rel="noopener noreferrer" className="cta-button" style={{padding: '18px 45px', fontSize: '13px !important'}}>Explore Ecosystem</a>
               <div className="mexc-badge">
                 <span style={{fontSize: '10px', fontWeight: 900, color: 'var(--cray-gold)', letterSpacing: '2px'}}>LISTED ON:</span>
-                <span style={{fontSize: '15px', fontWeight: 900, color: '#fff'}}>MEXC GLOBAL</span>
+                <span style={{fontSize: '15px', fontWeight: 900, color: '#fff'}}>GATE.IO & MEXC</span>
               </div>
             </div>
           </div>
@@ -166,23 +162,23 @@ const AixoviaWorkDetailView: React.FC = () => {
           <div className="case-text-box">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div>
-                <h2 className="h2-style" style={{color: 'var(--cray-gold)', marginBottom: '25px'}}>Strategic Partnership and Web3 Engineering</h2>
+                <h2 className="h2-style" style={{color: 'var(--cray-gold)', marginBottom: '25px'}}>Strategic Digital Architecture</h2>
                 <p className="p-style" style={{color: '#eee', marginBottom: '25px'}}>
-                  We undertook 360-degree strategic responsibility to build the entire digital ecosystem of the Aixovia project. We implemented social media management, digital content production, and community management at CRAY Digital standards.
+                  BlackCardCoin (BCCOIN) required an institutional-grade digital foundation to match its ambitious market goals. CRAY Digital took the lead in constructing and managing the entire digital footprint, including professional marketing, viral content production, and global community management.
                 </p>
                 <p className="p-style" style={{color: '#999'}}>
-                  On the technical side, we successfully completed the complex <strong>Telegram Application software</strong> providing real-time trade signals and the development of the <strong>official website</strong>. We increased the project's market value by providing consultancy in token listing (MEXC) processes and ecosystem developments.
+                  Beyond just promotion, we manage the <strong>technical and operational core</strong> of the project's digital presence. This includes the setup and maintenance of official accounts, strategic listing consultancy for Tier-1 and Tier-2 exchanges, and the continuous refinement of the brand's global strategy to ensure long-term stability and growth.
                 </p>
               </div>
               <div style={{position: 'relative', borderRadius: '32px', overflow: 'hidden', border: '1px solid rgba(255,177,0,0.2)'}}>
-                <img src="/gorsel/5.jpg" alt="Aixovia Analytics" style={{width: '100%', height: 'auto', display: 'block'}} />
+                <img src="/gorsel/bc/11.jpg" alt="BCCOIN Strategy" style={{width: '100%', height: 'auto', display: 'block'}} />
               </div>
             </div>
           </div>
 
           <div className="section-header">
-            <h2 className="h2-style">Visual Identity & Creative Universe</h2>
-            <p className="p-style text-zinc-500 max-w-2xl">Discover the visual world we created for the Aixovia ecosystem, blending technology and art.</p>
+            <h2 className="h2-style">Brand Assets & Creative Universe</h2>
+            <p className="p-style text-zinc-500 max-w-2xl">Discover the high-end visual language and strategic assets crafted for the BCCOIN global ecosystem.</p>
           </div>
           
           <div className="gallery-grid">
@@ -202,13 +198,13 @@ const AixoviaWorkDetailView: React.FC = () => {
       {/* CTA Section */}
       <section className="section-padding" style={{background: 'linear-gradient(rgba(255,177,0,0.05), transparent)', borderTop: '1px solid rgba(255,177,0,0.1)'}}>
         <div className="container-xl text-center">
-          <h2 className="h2-style mb-6">Write Your Own Success Story</h2>
-          <p className="p-style text-zinc-400 mb-10 max-w-2xl mx-auto">Need a Web3 strategy that resonates globally like Aixovia? Let's build your success architecture together.</p>
-          <a href="#calendar" className="cta-button">Schedule a Discovery Meeting</a>
+          <h2 className="h2-style mb-6" style={{ padding: '20px 0' }}>Scale Your Token with Professional Power</h2>
+          <p className="p-style text-zinc-400 mb-10 max-w-2xl mx-auto">Ready to take your crypto project to global exchanges and institutional standards? Let's build your success architecture together.</p>
+          <a href="#calendar" className="cta-button">Schedule a Strategy Call</a>
         </div>
       </section>
     </div>
   );
 };
 
-export default AixoviaWorkDetailView;
+export default BccoinWorkDetailView;

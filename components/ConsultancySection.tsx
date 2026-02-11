@@ -203,12 +203,10 @@ const ConsultancySection: React.FC = () => {
 
         .form-label {
           display: block;
-          font-size: 12px;
-          font-weight: 700;
-          color: #4b5563;
-          margin-bottom: 6px;
-          text-transform: capitalize;
-          letter-spacing: 0px;
+          font-size: 14px !important;
+          font-weight: 700 !important;
+          color: #000000;
+          margin-bottom: 10px;
         }
 
         .form-field {
@@ -295,10 +293,10 @@ const ConsultancySection: React.FC = () => {
             </p>
 
             <div className="consultancy-buttons">
-              <a href="#" className="btn-main">
+              <a href="#services" className="btn-main">
                 I Have a New Crypto Project
               </a>
-              <a href="#" className="btn-outline">
+              <a href="#services/end-to-end-crypto-project-consulting" className="btn-outline">
                 I Want to Improve My Existing Project
               </a>
             </div>

@@ -21,14 +21,14 @@ const SocialCommunityDetailView: React.FC = () => {
   };
 
   const scope = [
-    { title: "X (Twitter) Management", desc: "Daily content flow, growth strategies, and engagement tracking.", icon: "✖️" },
-    { title: "Telegram Management", desc: "Community setup, bot configuration, and group health.", icon: "✈️" },
-    { title: "Discord Management", desc: "Server architecture, role management, and event designs.", icon: "👾" },
-    { title: "7/24 Moderation", desc: "Keeping the community active at all times with global moderators.", icon: "🕒" },
-    { title: "Ambassador Program", desc: "Organic spread and loyal audience building with project ambassadors.", icon: "🎖️" },
-    { title: "Engagement Campaigns", desc: "Contests, airdrop designs, and community events.", icon: "🤝" },
-    { title: "FUD & Crisis Management", desc: "Instant response to negative situations and reputation management.", icon: "🛡️" },
-    { title: "Community Analytics", desc: "Regular reporting of growth and engagement metrics.", icon: "📈" }
+    { title: "X (Twitter) Management", desc: "Daily content flow, growth strategies, and engagement tracking.", icon: "✖️", link: "#services/community-management/twitter" },
+    { title: "Telegram Management", desc: "Community setup, bot configuration, and group health.", icon: "✈️", link: "#services/community-management/telegram" },
+    { title: "Discord Management", desc: "Server architecture, role management, and event designs.", icon: "👾", link: "#services/community-management/discord" },
+    { title: "7/24 Moderation", desc: "Keeping the community active at all times with global moderators.", icon: "🕒", link: "#services/community-management/mod" },
+    { title: "Ambassador Program", desc: "Organic spread and loyal audience building with project ambassadors.", icon: "🎖️", link: "#services/community-management/ambassador" },
+    { title: "Engagement Campaigns", desc: "Contests, airdrop designs, and community events.", icon: "🤝", link: "#services/community-management/engagement" },
+    { title: "FUD & Crisis Management", desc: "Instant response to negative situations and reputation management.", icon: "🛡️", link: "#services/community-management/crisis" },
+    { title: "Community Analytics", desc: "Regular reporting of growth and engagement metrics.", icon: "📈", link: "#services/community-management/analytics" }
   ];
 
   const reasons = [
@@ -88,12 +88,16 @@ const SocialCommunityDetailView: React.FC = () => {
         .reason-card:hover { transform: translateY(-10px); border-color: var(--cray-gold); background: rgba(255, 177, 0, 0.08); }
         .reason-icon-box { width: 60px; height: 60px; background-color: var(--cray-gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.3); }
         
-        .scope-section { position: relative; padding: 120px 0; background-color: #000; }
+        .scope-section { position: relative; padding: 120px 0; background-color: #000; color: #fff; }
         .scope-grid { display: grid; grid-template-columns: 1fr; gap: 24px; position: relative; z-index: 10; }
         @media (min-width: 768px) { .scope-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 1024px) { .scope-grid { grid-template-columns: repeat(4, 1fr); } }
-        .scope-card { padding: 36px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.15); text-align: center; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); transition: 0.3s; }
-        .scope-card:hover { border-color: var(--cray-gold); transform: translateY(-5px); }
+        
+        .scope-link { text-decoration: none; display: block; height: 100%; }
+        .scope-card { padding: 36px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.15); text-align: center; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); transition: 0.3s; height: 100%; display: flex; flex-direction: column; align-items: center; }
+        .scope-card:hover { border-color: var(--cray-gold); transform: translateY(-5px); background: rgba(255, 177, 0, 0.05); }
+        .scope-card-title { color: #fff; transition: color 0.3s; }
+        .scope-card:hover .scope-card-title { color: var(--cray-gold); }
         
         .bant-section { background: #f9f9f9; padding: 80px 0; text-align: center; }
         .bant-btn { background: var(--cray-gold); color: #000; padding: 18px 40px; border-radius: 12px; font-weight: 700 !important; text-decoration: none; display: inline-block; box-shadow: 0 10px 25px rgba(255,177,0,0.4); }
@@ -160,17 +164,20 @@ const SocialCommunityDetailView: React.FC = () => {
         </div>
       </section>
 
-      <section className="scope-section">
+      <section className="scope-section section-padding">
         <img src="/gorsel/ag1.jpg" alt="Scope Background" className="bg-img" />
-        <div className="overlay"></div><div className="grad"></div>
+        <div className="overlay" style={{ background: 'rgba(0,0,0,0.75)' }}></div><div className="grad"></div>
         <div className="container-xl">
           <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '60px'}}>Our Service Scope</h2>
           <div className="scope-grid">
             {scope.map((s, i) => (
-              <div key={i} className="scope-card">
-                <div style={{fontSize: '40px', marginBottom: '20px'}}>{s.icon}</div>
-                <h4 className="h4-style">{s.title}</h4><p className="p-style" style={{fontSize: '13px'}}>{s.desc}</p>
-              </div>
+              <a href={s.link} key={i} className="scope-link">
+                <div className="scope-card">
+                  <div style={{fontSize: '40px', marginBottom: '20px'}}>{s.icon}</div>
+                  <h4 className="h4-style scope-card-title">{s.title}</h4>
+                  <p className="p-style" style={{fontSize: '13px', color: '#9ca3af'}}>{s.desc}</p>
+                </div>
+              </a>
             ))}
           </div>
         </div>
@@ -223,7 +230,7 @@ const SocialCommunityDetailView: React.FC = () => {
         </div>
       </section>
 
-      <div style={{ padding: '80px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
+      <div style={{ padding: '60px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
         <button onClick={() => window.location.hash = ''} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Homepage</button>
       </div>
     </div>

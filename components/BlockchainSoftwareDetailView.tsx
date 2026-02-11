@@ -26,30 +26,30 @@ const BlockchainSoftwareDetailView: React.FC = () => {
     {
       title: "Blockchain Development",
       items: [
-        { name: "Smart Contract Development", desc: "Secure architecture with Solidity and Rust.", icon: "📜" },
-        { name: "Token & NFT Contracts", desc: "ERC-20, ERC-721 and custom standards.", icon: "🎨" },
-        { name: "Decentralized Application (DApp)", desc: "End-to-end Web3 based solutions.", icon: "🌐" },
-        { name: "DAO Infrastructure Setup", desc: "Governance and voting systems.", icon: "🏛️" },
-        { name: "Wallet Integrations", desc: "MetaMask, WalletConnect and more.", icon: "👛" }
+        { name: "Smart Contract Development", desc: "Secure architecture with Solidity and Rust.", icon: "📜", link: "#services/blockchain-and-software-development/smart-contract-dev" },
+        { name: "Token & NFT Contracts", desc: "ERC-20, ERC-721 and custom standards.", icon: "🎨", link: "#services/blockchain-and-software-development/token-nft-contracts" },
+        { name: "Decentralized Application (DApp)", desc: "End-to-end Web3 based solutions.", icon: "🌐", link: "#services/blockchain-and-software-development/dapp-development" },
+        { name: "DAO Infrastructure Setup", desc: "Governance and voting systems.", icon: "🏛️", link: "#services/blockchain-and-software-development/dao-infrastructure" },
+        { name: "Wallet Integrations", desc: "MetaMask, WalletConnect and more.", icon: "👛", link: "#services/blockchain-and-software-development/wallet-integration" }
       ]
     },
     {
       title: "Web3 & Platform Software",
       items: [
-        { name: "Web3 Compliant Website", desc: "Modern and connection-oriented interfaces.", icon: "💻" },
-        { name: "Custom Admin Dashboards", desc: "Blockchain data-driven admin tools.", icon: "📊" },
-        { name: "Analytics & Reporting", desc: "On-chain data monitoring and visualization.", icon: "📈" },
-        { name: "Backend & API", desc: "Scalable Web3 API services.", icon: "⚙️" }
+        { name: "Web3 Compliant Website", desc: "Modern and connection-oriented interfaces.", icon: "💻", link: "#services/web3-platform-software/website-development" },
+        { name: "Custom Admin Dashboards", desc: "Blockchain data-driven admin tools.", icon: "📊", link: "#services/web3-platform-software/custom-dashboards" },
+        { name: "Analytics & Reporting", desc: "On-chain data monitoring and visualization.", icon: "📈", link: "#services/web3-platform-software/analytics-reporting" },
+        { name: "Backend & API", desc: "Scalable Web3 API services.", icon: "⚙️", link: "#services/web3-platform-software/backend-api" }
       ]
     },
     {
       title: "App & Game Development",
       items: [
-        { name: "Web3 Mobile App", desc: "Web3 experience for iOS and Android.", icon: "📱" },
-        { name: "Telegram Bot & Mini App", desc: "Viral solutions on the TON ecosystem.", icon: "✈️" },
-        { name: "Blockchain Based Gaming", desc: "On-chain game mechanics.", icon: "🎮" },
-        { name: "GameFi Systems", desc: "Play-to-Earn and economy designs.", icon: "🪙" },
-        { name: "Server & Infrastructure", desc: "High-performance node and server management.", icon: "🖥️" }
+        { name: "Web3 Mobile App", desc: "Web3 experience for iOS and Android.", icon: "📱", link: "#services/app-game-development/mobile-app" },
+        { name: "Telegram Bot & Mini App", desc: "Viral solutions on the TON ecosystem.", icon: "✈️", link: "#services/app-game-development/telegram-mini-app" },
+        { name: "Blockchain Based Gaming", desc: "On-chain game mechanics.", icon: "🎮", link: "#services/app-game-development/game-development" },
+        { name: "GameFi Systems", desc: "Play-to-Earn and economy designs.", icon: "🪙", link: "#services/app-game-development/gamefi-p2e" },
+        { name: "Server & Infrastructure", desc: "High-performance node and server management.", icon: "🖥️", link: "#services/app-game-development/server-infrastructure" }
       ]
     }
   ];
@@ -121,7 +121,7 @@ const BlockchainSoftwareDetailView: React.FC = () => {
         
         .reason-card { padding: 40px 32px; border-radius: 20px; text-align: center; transition: 0.4s; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); }
         .reason-card:hover { background: rgba(255, 177, 0, 0.06); border-color: rgba(255, 177, 0, 0.3); transform: translateY(-8px); }
-        .reason-icon-box { width: 54px; height: 54px; background-color: var(--cray-gold); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.2); }
+        .reason-icon-box { width: 54px; height: 54px; background-color: var(--cray-gold); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.2); }
 
         .scope-section { position: relative; padding: 100px 0; background-color: #000; }
         .scope-cat-title { color: var(--cray-gold); text-transform: uppercase; letter-spacing: 2px; font-weight: 800; margin: 48px 0 24px; border-bottom: 2px solid rgba(255,177,0,0.2); padding-bottom: 10px; }
@@ -129,10 +129,12 @@ const BlockchainSoftwareDetailView: React.FC = () => {
         @media (min-width: 768px) { .scope-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 1024px) { .scope-grid { grid-template-columns: repeat(3, 1fr); } }
         
-        .scope-card { padding: 24px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(255,255,255,0.02); transition: 0.3s; display: flex; gap: 16px; align-items: flex-start; }
+        .scope-link { text-decoration: none; display: block; }
+        .scope-card { padding: 24px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(255,255,255,0.02); transition: 0.3s; display: flex; gap: 16px; align-items: flex-start; height: 100%; }
         .scope-card:hover { border-color: var(--cray-gold); background: rgba(255,177,0,0.03); transform: translateX(5px); }
         .scope-card-icon { font-size: 24px; }
-        .scope-card-name { font-weight: 700; color: #fff; margin-bottom: 4px; }
+        .scope-card-name { font-weight: 700; color: #fff; margin-bottom: 4px; transition: color 0.3s; }
+        .scope-card:hover .scope-card-name { color: var(--cray-gold); }
         .scope-card-desc { font-size: 13px !important; color: #9ca3af; }
 
         .bant-section { background: #f9f9f9; padding: 60px 0; text-align: center; }
@@ -245,13 +247,15 @@ const BlockchainSoftwareDetailView: React.FC = () => {
               <h3 className="scope-cat-title">{cat.title}</h3>
               <div className="scope-grid">
                 {cat.items.map((item, ii) => (
-                  <div key={ii} className="scope-card">
-                    <div className="scope-card-icon">{item.icon}</div>
-                    <div>
-                      <h4 className="scope-card-name h4-style">{item.name}</h4>
-                      <p className="scope-card-desc p-style">{item.desc}</p>
+                  <a href={item.link} key={ii} className="scope-link">
+                    <div className="scope-card">
+                      <div className="scope-card-icon">{item.icon}</div>
+                      <div>
+                        <h4 className="scope-card-name h4-style">{item.name}</h4>
+                        <p className="scope-card-desc p-style">{item.desc}</p>
+                      </div>
                     </div>
-                  </div>
+                  </a>
                 ))}
               </div>
             </div>
@@ -325,5 +329,4 @@ const BlockchainSoftwareDetailView: React.FC = () => {
   );
 };
 
-/* Added missing default export */
 export default BlockchainSoftwareDetailView;

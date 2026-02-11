@@ -22,6 +22,12 @@ const FudCrisisManagementSubDetailView: React.FC = () => {
     { title: 'Recovery Strategy', desc: 'Post-crisis, we run PR and sentiment rebuilding campaigns to restore your project’s market value.', icon: <path d="M13 10V3L4 14h7v7l9-11h-7z"/> }
   ];
 
+  const faqs = [
+    { q: "What is FUD and why is it dangerous?", a: "FUD stands for Fear, Uncertainty, and Doubt. In crypto, even a small rumor can trigger massive sell-offs if not addressed instantly and professionally." },
+    { q: "How do you detect a crisis early?", a: "We use advanced sentiment tracking tools that monitor keywords and volume anomalies across X, Telegram, and Reddit." },
+    { q: "Do you handle negative PR in major media?", a: "Yes, we work directly with newsroom contacts to issue corrections, clarifications, and counter-narratives in Tier-1 outlets." }
+  ];
+
   return (
     <div className="crypto-detail-page">
       <style>{`
@@ -39,11 +45,29 @@ const FudCrisisManagementSubDetailView: React.FC = () => {
         @media (min-width: 1024px) { .hero-grid { grid-template-columns: 1.2fr 1fr; align-items: center; } }
         .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; color: #000; width: 100%; max-width: 480px; margin: 0 auto; box-shadow: 0 40px 80px rgba(0,0,0,0.7); }
         .form-button { width: 100%; background: #ef4444; color: #fff; padding: 18px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
+        
         .reasons-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
         @media (min-width: 768px) { .reasons-grid { grid-template-columns: repeat(3, 1fr); } }
         .reason-card { padding: 48px 32px; border-radius: 24px; text-align: center; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); transition: 0.4s; }
         .reason-card:hover { transform: translateY(-10px); border-color: #ef4444; background: rgba(239, 68, 68, 0.05); }
         .reason-icon-box { width: 60px; height: 60px; background-color: #ef4444; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3); }
+
+        .detail-row { display: flex; flex-direction: column; gap: 100px; }
+        .detail-item { display: flex; flex-direction: column; gap: 60px; align-items: center; width: 100%; }
+        @media (min-width: 1024px) { 
+            .detail-item { flex-direction: row; } 
+            .detail-item.reverse { flex-direction: row-reverse; } 
+            .detail-text, .detail-visual { width: 50%; flex: 1; }
+        }
+        .detail-visual { border-radius: 32px; overflow: hidden; height: 500px; border: 1px solid rgba(255,177,0,0.2); position: relative; width: 100%; }
+        .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
+        .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
+        .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-accordion-body { padding: 0 32px 28px; color: #9ca3af; display: none; }
+        .faq-accordion-item.active .faq-accordion-body { display: block; }
+        .faq-accordion-item.active .faq-accordion-header { color: var(--cray-gold); }
       `}</style>
 
       <section id="h-hero">
@@ -80,6 +104,72 @@ const FudCrisisManagementSubDetailView: React.FC = () => {
                 </div>
                 <h4 className="h2-style" style={{fontSize: '20px !important', marginBottom: '15px'}}>{r.title}</h4>
                 <p className="p-style" style={{fontSize: '14px'}}>{r.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding" style={{background: '#050505'}}>
+        <div className="container-xl">
+          <div className="detail-row">
+            <div className="detail-item">
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2000" alt="Response Team" />
+              </div>
+              <div className="detail-text">
+                <h2 className="h2-style">Professional Narrative Shield</h2>
+                <p className="p-style">During a crisis, silence is a mistake, but the wrong statement is a disaster. We manage your project's public response, ensuring every word is technically accurate and legally sound while maintaining empathy for your community.</p>
+                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
+                  {["Official Statement Drafting", "Founder Interview Management", "Stakeholder Alignment"].map((li, i) => (
+                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
+                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div className="detail-item reverse">
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2000" alt="Sentiment Recovery" />
+              </div>
+              <div className="detail-text">
+                <h2 className="h2-style">Rebuilding Ecosystem Trust</h2>
+                <p className="p-style">After the storm passes, the real work begins. We implement sentiment-rebuilding campaigns that highlight project resilience, technical milestones, and future vision to win back investors and users.</p>
+                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
+                  {["Post-Crisis Sentiment Audits", "Positive PR Waves", "Transparency Reporting"].map((li, i) => (
+                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
+                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="cta-box-section">
+        <div className="container-xl">
+          <h2 className="h2-style" style={{color: '#000'}}>Protect Your Hard-Earned Reputation</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>
+            Don't leave your crisis response to chance. Get professional emergency management support before it's too late.
+          </p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Secure Crisis Plan</a>
+        </div>
+      </section>
+
+      <section className="section-padding">
+        <div className="container-xl">
+          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
+          <div style={{maxWidth: '850px', margin: '0 auto'}}>
+            {faqs.map((f, i) => (
+              <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
+                <div className="faq-accordion-header h4-style">
+                  <span>{f.q}</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
+                </div>
+                <div className="faq-accordion-body p-style"><p>{f.a}</p></div>
               </div>
             ))}
           </div>

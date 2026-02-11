@@ -9,7 +9,8 @@ const InfoSection: React.FC<{
   image: string;
   reverse?: boolean;
   cta: string;
-}> = ({ id, className, title, desc, points, image, reverse, cta }) => {
+  ctaLink?: string;
+}> = ({ id, className, title, desc, points, image, reverse, cta, ctaLink }) => {
   return (
     <section id={id} className={className}>
       <style>{`
@@ -138,7 +139,7 @@ const InfoSection: React.FC<{
                 </li>
               ))}
             </ul>
-            <a href="#section1" className="btn-cta">
+            <a href={ctaLink || "#section1"} className="btn-cta">
               {cta}
             </a>
           </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const Footer: React.FC = () => {
   return (
@@ -19,8 +19,7 @@ const Footer: React.FC = () => {
 
         .footer-grid {
           display: grid;
-          grid-template-columns: 1fr;
-          gap: 48px;
+          grid-template-columns: 1fr; gap: 48px;
           margin-bottom: 60px;
         }
 
@@ -57,7 +56,7 @@ const Footer: React.FC = () => {
           display: flex;
           align-items: center;
           justify-content: center;
-          font-weight: 800 !important;
+          font-weight: 900 !important;
           font-size: 18px !important;
           border-radius: 4px;
         }
@@ -69,9 +68,16 @@ const Footer: React.FC = () => {
 
         .footer-logo-main {
           color: #fff;
-          font-weight: 800 !important;
-          font-size: 18px !important;
+          font-weight: 900 !important;
+          font-size: 20px !important;
           line-height: 1;
+          text-transform: uppercase;
+        }
+
+        .footer-logo-up {
+          color: var(--cray-gold) !important;
+          font-weight: 900 !important;
+          font-size: 20px !important;
         }
 
         .footer-logo-sub {
@@ -88,6 +94,21 @@ const Footer: React.FC = () => {
           line-height: 1.6;
           margin: 0;
           font-weight: 300 !important;
+        }
+
+        .footer-email-link {
+          color: var(--cray-gold);
+          text-decoration: none;
+          font-weight: 700 !important;
+          font-size: 14px !important;
+          transition: 0.3s;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .footer-email-link:hover {
+          filter: brightness(1.2);
         }
 
         .footer-social-list {
@@ -150,26 +171,6 @@ const Footer: React.FC = () => {
           padding-left: 4px;
         }
 
-        .footer-contact-item {
-          display: flex;
-          align-items: flex-start;
-          gap: 12px;
-          margin-bottom: 16px;
-        }
-
-        .footer-contact-icon {
-          color: var(--cray-gold);
-          font-size: 14px !important;
-        }
-
-        .footer-contact-text {
-          color: #9ca3af;
-          font-size: 14px !important;
-          font-weight: 400 !important;
-          text-decoration: none;
-          line-height: 1.4;
-        }
-
         .footer-bottom {
           border-top: 1px solid rgba(255, 177, 0, 0.1);
           padding-top: 32px;
@@ -219,13 +220,16 @@ const Footer: React.FC = () => {
             <a href="#" onClick={(e) => { e.preventDefault(); window.location.hash = ''; }} className="footer-logo-box">
               <div className="footer-logo-icon">CR</div>
               <div className="footer-logo-text">
-                <span className="footer-logo-main">CRAY</span>
-                <span className="footer-logo-sub">Digital</span>
+                <span className="footer-logo-main">CRAY<span className="footer-logo-up">UP</span></span>
+                <span className="footer-logo-sub">Crypto Agency</span>
               </div>
             </a>
             <p className="footer-brand-desc">
               Leading agency providing digital marketing and consultancy services in the crypto industry. 360-degree solutions for your token projects.
             </p>
+            <a href="mailto:info@crayup.com" className="footer-email-link">
+              ✉ info@crayup.com
+            </a>
             <div className="footer-social-list">
               <a href="#" className="footer-social-link">𝕏</a>
               <a href="#" className="footer-social-link">in</a>
@@ -233,15 +237,27 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Services Column */}
+          {/* Our Services Column */}
           <div>
             <h4 className="footer-title">Our Services</h4>
             <ul className="footer-links-list">
-              <li><a href="#services/end-to-end-crypto-project-consulting" className="footer-link">360° Consultancy</a></li>
-              <li><a href="#services/token-and-blockchain-development" className="footer-link">Token & Blockchain Dev</a></li>
-              <li><a href="#services/crypto-marketing" className="footer-link">Web3 Marketing</a></li>
-              <li><a href="#services/market-making" className="footer-link">Market Making</a></li>
-              <li><a href="#services/investment-consulting" className="footer-link">Investment Advisory</a></li>
+              <li><a href="#services/end-to-end-crypto-project-consulting" className="footer-link">End-to-End Crypto Project Consulting</a></li>
+              <li><a href="#services/token-and-blockchain-development" className="footer-link">Token & Blockchain Development</a></li>
+              <li><a href="#services/blockchain-and-software-development" className="footer-link">Blockchain & Software Development</a></li>
+              <li><a href="#services/token-launch-and-listing" className="footer-link">Token Launch & Listing Services</a></li>
+              <li><a href="#services/crypto-marketing" className="footer-link">Crypto & Web3 Marketing Services</a></li>
+            </ul>
+          </div>
+
+          {/* Other Services Column */}
+          <div>
+            <h4 className="footer-title">Other Services</h4>
+            <ul className="footer-links-list">
+              <li><a href="#services/community-management" className="footer-link">Social Media & Community Management</a></li>
+              <li><a href="#services/content-production" className="footer-link">Content Production (Video & Design)</a></li>
+              <li><a href="#services/market-making" className="footer-link">Market Making & Liquidity Solutions</a></li>
+              <li><a href="#services/investment-consulting" className="footer-link">Investment Consulting & Fundraising</a></li>
+              <li><a href="#services/partnerships" className="footer-link">Partnerships & Business Development</a></li>
             </ul>
           </div>
 
@@ -250,37 +266,20 @@ const Footer: React.FC = () => {
             <h4 className="footer-title">Corporate</h4>
             <ul className="footer-links-list">
               <li><a href="#about-us" className="footer-link">About Us</a></li>
-              <li><a href="#contact" className="footer-link">Contact</a></li>
+              <li><a href="#services" className="footer-link">Services</a></li>
               <li><a href="#works" className="footer-link">Works</a></li>
-              <li><a href="#" className="footer-link">Resources</a></li>
-              <li><a href="#" className="footer-link">Solutions</a></li>
+              <li><a href="#pricing" className="footer-link">Pricing</a></li>
+              <li><a href="#contact" className="footer-link">Contact</a></li>
             </ul>
-          </div>
-
-          {/* Contact Column */}
-          <div>
-            <h4 className="footer-title">Contact</h4>
-            <div className="footer-contact-item">
-              <span className="footer-contact-icon">✉</span>
-              <a href="mailto:info@craydigital.com" className="footer-contact-text">info@craydigital.com</a>
-            </div>
-            <div className="footer-contact-item">
-              <span className="footer-contact-icon">☎</span>
-              <a href="tel:+442071234567" className="footer-contact-text">+44 20 7123 4567</a>
-            </div>
-            <div className="footer-contact-item">
-              <span className="footer-contact-icon">📍</span>
-              <span className="footer-contact-text">London, England</span>
-            </div>
           </div>
         </div>
 
         <div className="footer-bottom">
-          <p className="footer-copyright">© 2024 CRAY Digital. All rights reserved.</p>
+          <p className="footer-copyright">© 2024 CrayUp. All rights reserved.</p>
           <div className="footer-legal-links">
-            <a href="#" className="footer-legal-link">Privacy Policy</a>
-            <a href="#" className="footer-legal-link">Terms of Service</a>
-            <a href="#" className="footer-legal-link">GDPR</a>
+            <a href="#privacy-policy" className="footer-legal-link">Privacy Policy</a>
+            <a href="#terms-of-service" className="footer-legal-link">Terms of Service</a>
+            <a href="#gdpr" className="footer-legal-link">GDPR</a>
           </div>
         </div>
       </div>

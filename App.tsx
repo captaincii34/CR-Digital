@@ -21,7 +21,14 @@ import AboutUsView from './components/AboutUsView';
 import WorksView from './components/WorksView';
 import AixoviaWorkDetailView from './components/AixoviaWorkDetailView';
 import AixoviaPlayWorkDetailView from './components/AixoviaPlayWorkDetailView';
+import BccoinWorkDetailView from './components/BccoinWorkDetailView';
 import ContactView from './components/ContactView';
+import PricingView from './components/PricingView';
+import CalendarView from './components/CalendarView';
+import ServicesView from './components/ServicesView';
+import PrivacyPolicyView from './components/PrivacyPolicyView';
+import TermsOfServiceView from './components/TermsOfServiceView';
+import GDPRView from './components/GDPRView';
 
 // Alt Sayfalar - Grup A
 import CryptoProjectConsultancySubDetailView from './components/CryptoProjectConsultancySubDetailView';
@@ -147,8 +154,20 @@ const App: React.FC = () => {
       return <AboutUsView />;
     }
 
+    if (normalizedView === '#services') {
+      return <ServicesView />;
+    }
+
     if (normalizedView === '#works') {
       return <WorksView />;
+    }
+
+    if (normalizedView === '#pricing') {
+      return <PricingView />;
+    }
+
+    if (normalizedView === '#calendar') {
+      return <CalendarView />;
     }
 
     if (normalizedView === '#works/aixovia') {
@@ -159,8 +178,24 @@ const App: React.FC = () => {
       return <AixoviaPlayWorkDetailView />;
     }
 
+    if (normalizedView === '#works/bccoin') {
+      return <BccoinWorkDetailView />;
+    }
+
     if (normalizedView === '#contact') {
       return <ContactView />;
+    }
+
+    if (normalizedView === '#privacy-policy') {
+      return <PrivacyPolicyView />;
+    }
+
+    if (normalizedView === '#terms-of-service') {
+      return <TermsOfServiceView />;
+    }
+
+    if (normalizedView === '#gdpr') {
+      return <GDPRView />;
     }
 
     switch(normalizedView) {
@@ -293,7 +328,8 @@ const App: React.FC = () => {
               points={["We analyze your project", "We identify the gaps", "We reposition and scale it", "Confidentiality is our core principle!"]} 
               image="/gorsel/y.jpg" 
               reverse 
-              cta="Evaluate My Project" 
+              cta="Evaluate My Project"
+              ctaLink="#contact"
             />
             <ServicesSection />
             <InfoSection 
@@ -304,12 +340,13 @@ const App: React.FC = () => {
               points={["We analyze investment opportunities", "We evaluate risks", "We determine suitable models", "Get end-to-end consulting!"]} 
               image="/gorsel/z.jpg" 
               cta="Get Strategy Consulting" 
+              ctaLink="#services/crypto-marketing"
             />
             <BookingSection />
             <section className="final-cta-section" style={{padding: '60px 0', textAlign: 'center', background: 'rgba(255, 177, 0, 0.05)'}}>
               <div className="container-xl">
                 <h2 className="h2-style" style={{marginBottom: '40px'}}>Are You Ready to Take Your Crypto Project to the Next Level?</h2>
-                <a href="#section1" className="cta-button" style={{padding: '20px 40px'}}>Get a Free Pre-Evaluation</a>
+                <a href="#contact" className="cta-button" style={{padding: '20px 40px'}}>Get a Free Pre-Evaluation</a>
               </div>
             </section>
           </main>

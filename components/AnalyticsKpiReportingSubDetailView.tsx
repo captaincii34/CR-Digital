@@ -22,6 +22,12 @@ const AnalyticsKpiReportingSubDetailView: React.FC = () => {
     { title: 'Data-Driven Strategy', desc: 'Our analytical approach allows us to pivot your strategy in real-time based on actual performance.', icon: <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/> }
   ];
 
+  const faqs = [
+    { q: "What analytics tools do you use?", a: "We combine Web2 tools like GA4 with Web3 native analytics platforms like Dune, Footprint Network, and custom on-chain indexers." },
+    { q: "How often do we receive reports?", a: "We provide weekly deep-dive reports and 24/7 access to a real-time analytics dashboard." },
+    { q: "Can you track influencer marketing ROI?", a: "Yes, we use unique tracking IDs and wallet-matching scripts to measure exactly how many holders each influencer has brought to your project." }
+  ];
+
   return (
     <div className="crypto-detail-page">
       <style>{`
@@ -49,6 +55,16 @@ const AnalyticsKpiReportingSubDetailView: React.FC = () => {
         .reason-card { padding: 48px 32px; border-radius: 24px; text-align: center; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); transition: 0.4s; }
         .reason-card:hover { transform: translateY(-10px); border-color: var(--cray-gold); background: rgba(255, 177, 0, 0.1); }
         .reason-icon-box { width: 60px; height: 60px; background-color: var(--cray-gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.3); }
+
+        .detail-row { display: flex; flex-direction: column; gap: 100px; }
+        .detail-item { display: flex; flex-direction: column; gap: 60px; align-items: center; width: 100%; }
+        @media (min-width: 1024px) { 
+            .detail-item { flex-direction: row; } 
+            .detail-item.reverse { flex-direction: row-reverse; } 
+            .detail-text, .detail-visual { width: 50%; flex: 1; }
+        }
+        .detail-visual { border-radius: 32px; overflow: hidden; height: 500px; border: 1px solid rgba(255,177,0,0.2); position: relative; width: 100%; }
+        .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
       `}</style>
 
       <section id="h-hero">
@@ -65,8 +81,8 @@ const AnalyticsKpiReportingSubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Request Reporting</h3>
               {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Current Tracking Tools" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Which metrics are most critical to your project?" required />
+                  <input type="text" className="form-control" placeholder="Current Tracking Tools" required />
+                  <textarea className="form-control" rows={3} placeholder="Which metrics are most critical to your project?" required />
                   <button type="submit" disabled={loading} className="form-button">{loading ? 'ANALYZING...' : 'GET KPI PLAN'}</button>
                 </form>
               )}
@@ -88,6 +104,55 @@ const AnalyticsKpiReportingSubDetailView: React.FC = () => {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="section-padding" style={{background: '#050505'}}>
+        <div className="container-xl">
+          <div className="detail-row">
+            <div className="detail-item">
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2000" alt="Metrics" />
+              </div>
+              <div className="detail-text">
+                <h2 className="h2-style">Unified On-Chain Visibility</h2>
+                <p className="p-style">Traditional analytics stop at the website visit. We go deeper, providing a unified view that links social engagement to on-chain actions. See how your marketing efforts directly impact wallet growth, TVL, and token velocity in real-time.</p>
+                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
+                  {["Wallet-Level Attribution", "DEX Volume Analysis", "Liquidity Depth Monitoring"].map((li, i) => (
+                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
+                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div className="detail-item reverse">
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=2000" alt="Data" />
+              </div>
+              <div className="detail-text">
+                <h2 className="h2-style">Strategic Performance Audits</h2>
+                <p className="p-style">Data is useless without interpretation. We provide senior-level analysis that turns numbers into strategic pivots. We identify hidden opportunities in your user behavior patterns and help you double down on what truly drives project value.</p>
+                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
+                  {["Monthly Strategy Re-alignment", "Sentiment Drift Analysis", "Regional ROI Comparison"].map((li, i) => (
+                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
+                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="cta-box-section">
+        <div className="container-xl">
+          <h2 className="h2-style" style={{color: '#000'}}>Know Exactly What Drives Your Growth</h2>
+          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>
+            End the guesswork in your marketing. Get an institutional-grade KPI framework built for your project's specific goals.
+          </p>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Request Analytics Dashboard</a>
         </div>
       </section>
 
