@@ -1,19 +1,48 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const EcosystemCollaborationsSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
+  // Form states
+  const [network, setNetwork] = useState("");
+  const [supportNeed, setSupportNeed] = useState("");
+
   const toggleFaq = (index: number) => setOpenFaq(openFaq === index ? null : index);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject('Ecosystem Collaboration', 'L1/L2 network integration and grant consultancy analysis.');
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Blockchain Network": network,
+        "Support/Grant Needs": supportNeed,
+        "Type": "Ecosystem Collaboration Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject('Ecosystem Collaboration', `Network: ${network}. Needs: ${supportNeed}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -97,12 +126,14 @@ const EcosystemCollaborationsSubDetailView: React.FC = () => {
               </div>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Ecosystem Analysis</h3>
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Ecosystem Brief</h3>
               {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Which network are you developing on?" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Summarize your grant or technical support needs..." required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'CALCULATING...' : 'GET ROADMAP'}</button>
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Target Network*</p>
+                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="e.g. Solana, TON, Ethereum" value={network} onChange={e=>setNetwork(e.target.value)} required />
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Support/Grant Needs*</p>
+                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="What type of support do you need from the foundation?" value={supportNeed} onChange={e=>setSupportNeed(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GET ROADMAP'}</button>
                 </form>
               )}
             </div>
@@ -153,7 +184,7 @@ const EcosystemCollaborationsSubDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Strengthen Your Project in Its Home Base</h2>
+          <h2 className="h2-style" style={{color: '#000'}}>Strengthen Your Project in Its Home Base</h2>
           <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Secure the massive opportunities offered by networks for your project. Plan grant and integration processes with our ecosystem experts today.</p>
           <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Request Ecosystem Analysis</a>
         </div>

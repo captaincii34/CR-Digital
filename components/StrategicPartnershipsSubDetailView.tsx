@@ -1,24 +1,53 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const StrategicPartnershipsSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
+  // Form states
+  const [category, setCategory] = useState("");
+  const [partnershipType, setPartnershipType] = useState("");
+
   const toggleFaq = (index: number) => setOpenFaq(openFaq === index ? null : index);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject('Strategic Partnership', 'Collaboration with industry leaders and value-add analysis.');
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Project Category": category,
+        "Desired Partnership Type": partnershipType,
+        "Type": "Strategic Partnership Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject('Strategic Partnership', `Category: ${category}. Goal: ${partnershipType}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
     { title: 'Curated Partner Network', desc: 'We select partners that bring real value, liquidity, and users to your project, not just a logo.', icon: <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/> },
-    { title: 'Negotiation & Contract Management', desc: 'We optimize partnership terms in your project\'s favor, managing both commercial and technical protocols.', icon: <path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2z"/> },
+    { title: 'Negotiation & Contract Management', desc: 'We optimize partnership terms in your project\'s favor, managing both commercial and technical protocols.', icon: <path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/> },
     { title: 'Sustainable Synergy', desc: 'Instead of one-time announcements, we design integrations that ensure long-term growth for both projects.', icon: <path d="M13 10V3L4 14h7v7l9-11h-7z"/> }
   ];
 
@@ -97,12 +126,14 @@ const StrategicPartnershipsSubDetailView: React.FC = () => {
               </div>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Partnership Analysis</h3>
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Partnership Brief</h3>
               {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Project Category (DeFi, GameFi, etc.)" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="What type of partnership (Technical, Liquidity, Marketing) are you looking for?" required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'RESEARCHING...' : 'GET PARTNERSHIP PLAN'}</button>
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Project Category*</p>
+                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="e.g. DeFi, AI, Gaming" value={category} onChange={e=>setCategory(e.target.value)} required />
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Desired Partnership*</p>
+                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="What type of partnership are you looking for?" value={partnershipType} onChange={e=>setPartnershipType(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GET PARTNERSHIP PLAN'}</button>
                 </form>
               )}
             </div>
@@ -153,7 +184,7 @@ const StrategicPartnershipsSubDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Grow Your Ecosystem with Industry Giants</h2>
+          <h2 className="h2-style" style={{color: '#000'}}>Grow Your Ecosystem with Industry Giants</h2>
           <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>The right partnership can change your project's fate overnight. Meet professional BD (Business Development) support.</p>
           <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Start Partnership Line</a>
         </div>

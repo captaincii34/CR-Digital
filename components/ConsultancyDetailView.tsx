@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const ConsultancyDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [status, setStatus] = useState('');
   const [goal, setGoal] = useState('');
-  const [contact, setContact] = useState('');
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
@@ -15,10 +15,39 @@ const ConsultancyDetailView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject(status, goal);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const statusLabels: { [key: string]: string } = {
+        'new': 'New Project',
+        'existing': 'Existing Project'
+      };
+
+      const formObj = {
+        "Project Status": statusLabels[status] || status,
+        "Goal Description": goal,
+        "Type": "End-to-End Consulting Detail Page",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject(status, goal);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const roadmapSteps = [
@@ -97,7 +126,6 @@ const ConsultancyDetailView: React.FC = () => {
               <div style={{marginTop: '32px'}}>
                 {["100% Confidentiality Under NDA", "Technical and Economic Architecture Design", "Global Exchange and Marketing Network"].map((item, i) => (
                   <div key={i} style={{display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px'}}>
-                    {/* Fixed typo 'justify-content: center' to 'justifyContent: "center"' and added quotes to value */}
                     <div style={{width: '24px', height: '24px', background: 'var(--cray-gold)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center'}}><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4"><polyline points="20 6 9 17 4 12" /></svg></div>
                     <span style={{fontSize: '11px', fontWeight: 700, textTransform: 'uppercase'}}>{item}</span>
                   </div>
@@ -113,9 +141,8 @@ const ConsultancyDetailView: React.FC = () => {
                     <option value="new">New Project</option>
                     <option value="existing">Existing Project</option>
                   </select>
-                  <textarea className="form-control" rows={3} placeholder="What is your goal?" value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="Email / Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'PROCESSING...' : 'GET EVALUATION'}</button>
+                  <textarea className="form-control" rows={4} placeholder="What is your goal?" value={goal} onChange={e=>setGoal(e.target.value)} required style={{ resize: 'none' }} />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'SEND'}</button>
                 </form>
               )}
             </div>

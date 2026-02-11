@@ -1,19 +1,47 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const AmbassadorProgramSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
+  const [size, setSize] = useState('');
+  const [rewards, setRewards] = useState('');
+
   const toggleFaq = (index: number) => setOpenFaq(openFaq === index ? null : index);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject('Ambassador Program', 'Organic growth via brand advocates.');
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Community Size": size,
+        "Reward Structure": rewards,
+        "Type": "Ambassador Program Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject('Ambassador Program', `Size: ${size}. Rewards: ${rewards}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -84,9 +112,11 @@ const AmbassadorProgramSubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Program Blueprint</h3>
               {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Current Community Size" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="What rewards (Tokens, NFTs, Early Access) are available?" required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'DESIGNING...' : 'GET AMBASSADOR PLAN'}</button>
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Community Size*</p>
+                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Total current members" value={size} onChange={e=>setSize(e.target.value)} required />
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Reward Potentials*</p>
+                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="What rewards (Tokens, NFTs, Early Access) are available?" value={rewards} onChange={e=>setRewards(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GET AMBASSADOR PLAN'}</button>
                 </form>
               )}
             </div>

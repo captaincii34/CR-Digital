@@ -1,19 +1,47 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const TokenLaunchStrategySubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
+  
+  const [projectName, setProjectName] = useState('');
+  const [launchGoals, setLaunchGoals] = useState('');
 
   const toggleFaq = (index: number) => setOpenFaq(openFaq === index ? null : index);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject('Launch Strategy', 'Token launch calendar and market entry analysis.');
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Project Name": projectName,
+        "Launch Strategy Goals": launchGoals,
+        "Type": "Token Launch Strategy Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject('Launch Strategy', `Project: ${projectName}. Goals: ${launchGoals}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -100,9 +128,27 @@ const TokenLaunchStrategySubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Strategy Analysis</h3>
               {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Project Name" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Summarize your launch goals..." required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'CALCULATING...' : 'GET STRATEGY PLAN'}</button>
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Project Name*</p>
+                  <input 
+                    type="text" 
+                    className="w-full border p-3 rounded-lg mb-4" 
+                    placeholder="e.g. Cray Token" 
+                    value={projectName}
+                    onChange={(e) => setProjectName(e.target.value)}
+                    required 
+                  />
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Launch Goals*</p>
+                  <textarea 
+                    className="w-full border p-3 rounded-lg mb-4" 
+                    rows={3} 
+                    placeholder="Summarize your launch goals..." 
+                    value={launchGoals}
+                    onChange={(e) => setLaunchGoals(e.target.value)}
+                    required 
+                  />
+                  <button type="submit" disabled={loading} className="form-button">
+                    {loading ? 'OPENING TELEGRAM...' : 'GET STRATEGY PLAN'}
+                  </button>
                 </form>
               )}
             </div>
@@ -120,56 +166,6 @@ const TokenLaunchStrategySubDetailView: React.FC = () => {
                 </div>
                 <h4 className="h2-style" style={{fontSize: '20px !important', marginBottom: '15px'}}>{r.title}</h4>
                 <p className="p-style" style={{fontSize: '14px'}}>{r.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-padding" style={{background: '#050505'}}>
-        <div className="container-xl">
-          <div className="detail-row">
-            <div className="detail-item">
-              <div className="detail-text">
-                <h2 className="h2-style">Go-To-Market (GTM) Planning</h2>
-                <p className="p-style">We ensure your project is not just "listed," but launched as an "event." We plan step-by-step the regions where your target audience is, the most effective marketing channels, and the 'FOMO' setup on launch day.</p>
-              </div>
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2000" alt="Market Plan" />
-              </div>
-            </div>
-            <div className="detail-item reverse">
-              <div className="detail-text">
-                <h2 className="h2-style">Sustainability Post-Launch</h2>
-                <p className="p-style">Many projects are forgotten after the first day. We build 'post-launch' strategies that will turn launch excitement into holder loyalty. We guarantee your growth with the second wave of marketing and exchange expansion plans.</p>
-              </div>
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1454165833767-027ffea9e77b?q=80&w=2000" alt="Sustainability" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="cta-box-section">
-        <div className="container-xl">
-          <h2 className="h2-style">Let's Plan Your Launch Day Today</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>You don't get a second chance in the crypto market. Make your first exit with a professional strategy and get ahead of your competitors.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Schedule Strategy Meeting</a>
-        </div>
-      </section>
-
-      <section className="section-padding">
-        <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
-          <div style={{maxWidth: '850px', margin: '0 auto'}}>
-            {faqs.map((f, i) => (
-              <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
-                <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
-                  <span>{f.q}</span>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
-                </div>
-                <div className="faq-accordion-body p-style"><p>{f.a}</p></div>
               </div>
             ))}
           </div>

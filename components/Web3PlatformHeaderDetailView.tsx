@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const Web3PlatformHeaderDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [status, setStatus] = useState('');
   const [goal, setGoal] = useState('');
-  const [contact, setContact] = useState('');
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
@@ -13,10 +13,34 @@ const Web3PlatformHeaderDetailView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject(status, `Web3 Platform: ${goal}`);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Platform Goal": status,
+        "Vision Summary": goal,
+        "Type": "Web3 Platform Software Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject(status, `Web3 Platform: ${goal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -52,6 +76,7 @@ const Web3PlatformHeaderDetailView: React.FC = () => {
         .reason-card { padding: 48px 32px; border-radius: 24px; text-align: center; background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); transition: 0.4s; }
         .reason-card:hover { transform: translateY(-10px); border-color: var(--cray-gold); background: rgba(255, 177, 0, 0.15); }
         .reason-icon-box { width: 60px; height: 60px; background-color: var(--cray-gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.3); }
+
         .detail-row { display: flex; flex-direction: column; gap: 100px; }
         .detail-item { display: flex; flex-direction: column; gap: 60px; align-items: center; width: 100%; }
         @media (min-width: 1024px) { 
@@ -61,12 +86,6 @@ const Web3PlatformHeaderDetailView: React.FC = () => {
         }
         .detail-visual { border-radius: 32px; overflow: hidden; height: 500px; border: 1px solid rgba(255,177,0,0.2); position: relative; width: 100%; }
         .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
-        .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
-        .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
-        .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        .faq-accordion-body { padding: 0 32px 28px; color: #9ca3af; display: none; }
-        .faq-accordion-item.active .faq-accordion-body { display: block; }
-        .faq-accordion-item.active .faq-accordion-header { color: var(--cray-gold); }
       `}</style>
 
       <section id="h-hero">
@@ -83,12 +102,13 @@ const Web3PlatformHeaderDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Platform Analysis</h3>
               {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <select className="form-control" required>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Platform Goal*</p>
+                  <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
                     <option value="">Goal</option><option value="saas">Web3 SaaS</option><option value="eco">Ecosystem</option>
                   </select>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Vision Summary*</p>
                   <textarea className="form-control" rows={3} placeholder="Summarize your platform vision..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'ANALYZING...' : 'GET QUOTE'}</button>
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GET QUOTE'}</button>
                 </form>
               )}
             </div>
@@ -133,34 +153,6 @@ const Web3PlatformHeaderDetailView: React.FC = () => {
                 <p className="p-style">The success of a platform depends on its sustainability. We support the software we develop with modern DevOps processes and ensure 24/7 uninterrupted operation with automatic backup and cyber security layers.</p>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="cta-box-section">
-        <div className="container-xl">
-          <h2 className="h2-style">Let's Prepare Your Platform for the Future</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Web3 transformation is not an option, it is now a necessity. Plan your strategy appointment now to move your business model to a decentralized infrastructure and lead the ecosystem.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Plan Platform Now</a>
-        </div>
-      </section>
-
-      <section className="section-padding">
-        <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
-          <div style={{maxWidth: '850px', margin: '0 auto'}}>
-            {[
-              { q: "How do I integrate my existing system with Web3?", a: "We provide Web3 capabilities to your existing system without breaking it, using API layers and wallet connection modules." },
-              { q: "Do you have enterprise solutions?", a: "Yes, we develop private blockchain networks and closed-circuit systems for large-scale companies." }
-            ].map((f, i) => (
-              <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
-                <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
-                  <span>{f.q}</span>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
-                </div>
-                <div className="faq-accordion-body p-style"><p>{f.a}</p></div>
-              </div>
-            ))}
           </div>
         </div>
       </section>

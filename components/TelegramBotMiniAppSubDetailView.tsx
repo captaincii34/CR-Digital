@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const TelegramBotMiniAppSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [status, setStatus] = useState('');
   const [goal, setGoal] = useState('');
-  const [contact, setContact] = useState('');
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
@@ -13,10 +13,34 @@ const TelegramBotMiniAppSubDetailView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject(status, `Telegram Mini App: ${goal}`);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "App Type": status,
+        "Viral Mechanism": goal,
+        "Type": "Telegram Mini App Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject(status, `Telegram Mini App: ${goal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -48,6 +72,7 @@ const TelegramBotMiniAppSubDetailView: React.FC = () => {
         .reason-card { padding: 48px 32px; border-radius: 24px; text-align: center; background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); transition: 0.4s; }
         .reason-card:hover { transform: translateY(-10px); border-color: var(--cray-gold); background: rgba(255, 177, 0, 0.15); }
         .reason-icon-box { width: 60px; height: 60px; background-color: var(--cray-gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.3); }
+
         .detail-row { display: flex; flex-direction: column; gap: 100px; }
         .detail-item { display: flex; flex-direction: column; gap: 60px; align-items: center; width: 100%; }
         @media (min-width: 1024px) { 
@@ -57,12 +82,6 @@ const TelegramBotMiniAppSubDetailView: React.FC = () => {
         }
         .detail-visual { border-radius: 32px; overflow: hidden; height: 500px; border: 1px solid rgba(255,177,0,0.2); position: relative; width: 100%; }
         .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
-        .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
-        .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
-        .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        .faq-accordion-body { padding: 0 32px 28px; color: #9ca3af; display: none; }
-        .faq-accordion-item.active .faq-accordion-body { display: block; }
-        .faq-accordion-item.active .faq-accordion-header { color: var(--cray-gold); }
       `}</style>
 
       <section id="h-hero">
@@ -79,12 +98,13 @@ const TelegramBotMiniAppSubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Telegram Analysis</h3>
               {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Try Again</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <select className="form-control" required>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Type*</p>
+                  <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
                     <option value="">Need</option><option value="tma">Mini App (TMA)</option><option value="bot">Trading Bot</option>
                   </select>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Viral Mechanism*</p>
                   <textarea className="form-control" rows={3} placeholder="Summarize your viral mechanism..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'CALCULATING...' : 'GET TELEGRAM PLAN'}</button>
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GET TELEGRAM PLAN'}</button>
                 </form>
               )}
             </div>
@@ -102,59 +122,6 @@ const TelegramBotMiniAppSubDetailView: React.FC = () => {
                 </div>
                 <h4 className="h2-style" style={{fontSize: '20px !important', marginBottom: '15px'}}>{r.title}</h4>
                 <p className="p-style" style={{fontSize: '14px'}}>{r.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-padding" style={{background: '#050505'}}>
-        <div className="container-xl">
-          <div className="detail-row">
-            <div className="detail-item">
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2000" alt="TON" />
-              </div>
-              <div className="detail-text">
-                <h2 className="h2-style">TON Network Integration</h2>
-                <p className="p-style">We ensure your application works flawlessly with TON wallets (Telegram Wallet, Tonkeeper). We integrate Jetton trading, NFT collections, and on-chain tasks into your Mini App.</p>
-              </div>
-            </div>
-            <div className="detail-item reverse">
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1614680376739-414d95ff43df?q=80&w=2000" alt="Viral" />
-              </div>
-              <div className="detail-text">
-                <h2 className="h2-style">Viral Tapper & Mini Game Mechanics</h2>
-                <p className="p-style">Using 'Tap-to-Earn' mechanics loved by communities, daily tasks, and friend invitation systems (referral), we ensure your application spreads organically and rapidly.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="cta-box-section">
-        <div className="container-xl">
-          <h2 className="h2-style">Ready to Go Viral on Telegram?</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>The TON ecosystem and Telegram Mini Apps world is currently the biggest growth area in crypto. Get professional development support to take your place in this revolution.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Start Mini App Now</a>
-        </div>
-      </section>
-
-      <section className="section-padding">
-        <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
-          <div style={{maxWidth: '850px', margin: '0 auto'}}>
-            {[
-              { q: "How does the TMA approval process work?", a: "Telegram Mini Apps do not require centralized approval, but we perform optimization for bot store and search visibility." },
-              { q: "Can we add game mechanics?", a: "Yes, we integrate all P2E kurgular from tapper games to games of chance with the TON network." }
-            ].map((f, i) => (
-              <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
-                <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
-                  <span>{f.q}</span>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
-                </div>
-                <div className="faq-accordion-body p-style"><p>{f.a}</p></div>
               </div>
             ))}
           </div>

@@ -1,19 +1,47 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const MarketMakingStrategySubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
+  const [ticker, setTicker] = useState('');
+  const [statusDesc, setStatusDesc] = useState('');
+
   const toggleFaq = (index: number) => setOpenFaq(openFaq === index ? null : index);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject('MM Strategy', 'Liquidity depth and price stability analysis.');
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Token Ticker / Exchanges": ticker,
+        "Order Book Status": statusDesc,
+        "Type": "Market Making Strategy Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject('MM Strategy', `Ticker/Exchanges: ${ticker}. Status: ${statusDesc}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -79,9 +107,11 @@ const MarketMakingStrategySubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>MM Audit</h3>
               {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Token Ticker / Exchanges" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Current order book status and volume targets?" required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'ANALYZING...' : 'GET MM PLAN'}</button>
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Token / Exchanges*</p>
+                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="e.g. CRAY / Gate.io" value={ticker} onChange={e=>setTicker(e.target.value)} required />
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Order Book Details*</p>
+                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Current order book status and volume targets?" value={statusDesc} onChange={e=>setStatusDesc(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GET MM PLAN'}</button>
                 </form>
               )}
             </div>
@@ -99,54 +129,6 @@ const MarketMakingStrategySubDetailView: React.FC = () => {
                 </div>
                 <h4 className="h2-style" style={{fontSize: '20px !important', marginBottom: '15px'}}>{r.title}</h4>
                 <p className="p-style" style={{fontSize: '14px'}}>{r.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-padding" style={{background: '#050505'}}>
-        <div className="container-xl">
-          <div className="detail-item">
-            <div className="detail-text">
-              <h2 className="h2-style">Algorithmic Precision</h2>
-              <p className="p-style">Our strategies are powered by advanced proprietary algorithms that monitor market depth and adjust liquidity in real-time. This prevents sharp price drops and creates a safe environment for new investors to enter your project.</p>
-            </div>
-            <div className="detail-visual">
-              <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2000" alt="Tech" />
-            </div>
-          </div>
-          <div className="detail-item reverse" style={{marginTop: '100px'}}>
-            <div className="detail-text">
-              <h2 className="h2-style">Price Discovery Control</h2>
-              <p className="p-style">We assist in the natural price discovery process by reducing artificial volatility. By managing the spread and placing defensive walls, we ensure your token chart looks professional and attracts institutional interest.</p>
-            </div>
-            <div className="detail-visual">
-              <img src="https://images.unsplash.com/photo-1611974714851-eb6053e623e4?q=80&w=2000" alt="Finance" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="cta-box-section">
-        <div className="container-xl">
-          <h2 className="h2-style">Secure Your Project's Financial Future</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Professional liquidity is not an option; it is a requirement for long-term success. Contact us to design your custom market-making strategy.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Request Strategy Call</a>
-        </div>
-      </section>
-
-      <section className="section-padding">
-        <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
-          <div style={{maxWidth: '850px', margin: '0 auto'}}>
-            {faqs.map((f, i) => (
-              <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
-                <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
-                  <span>{f.q}</span>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
-                </div>
-                <div className="faq-accordion-body p-style"><p>{f.a}</p></div>
               </div>
             ))}
           </div>

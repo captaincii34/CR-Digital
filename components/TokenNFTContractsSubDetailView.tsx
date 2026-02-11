@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const TokenNFTContractsSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [status, setStatus] = useState('');
   const [goal, setGoal] = useState('');
-  const [contact, setContact] = useState('');
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
@@ -13,23 +13,40 @@ const TokenNFTContractsSubDetailView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject(status, `Token & NFT Contract: ${goal}`);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Asset Type": status,
+        "Supply & Mechanism": goal,
+        "Type": "Token & NFT Contracts Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject(status, `Token & NFT Contract: ${goal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
     { title: 'Standard Compliance', desc: '100% compliance with ERC-20, ERC-721, and ERC-1155 standards.', icon: <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/> },
     { title: 'Custom Logic', desc: 'Code fortified with burn, reflection, and special tax mechanisms.', icon: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/> },
     { title: 'Multi-Airdrop', desc: 'Low-cost simultaneous distribution infrastructure for thousands of wallets.', icon: <path d="M22 12h-4l-3 9L9 3l-3 9H2"/> }
-  ];
-
-  const faqs = [
-    { q: "Do you offer a ready interface for NFT minting?", a: "Yes, we develop custom web-based minting pages that work fully integrated with the smart contract and IPFS." },
-    { q: "Which network should I release my token on?", a: "We determine the most suitable network (ETH, SOL, BSC, etc.) together based on your target audience and liquidity needs." },
-    { q: "Can we implement complex tax mechanisms?", a: "Absolutely. We specialize in custom token logic including buy/sell taxes, burn rates, and holder reflections." },
-    { q: "Do you handle metadata management?", a: "Yes, we provide end-to-end support for NFT metadata generation and permanent storage on IPFS/Arweave." }
   ];
 
   return (
@@ -65,13 +82,6 @@ const TokenNFTContractsSubDetailView: React.FC = () => {
         }
         .detail-visual { border-radius: 32px; overflow: hidden; height: 500px; border: 1px solid rgba(255,177,0,0.2); position: relative; width: 100%; }
         .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
-        
-        .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
-        .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
-        .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        .faq-accordion-body { padding: 0 32px 28px; color: #9ca3af; display: none; }
-        .faq-accordion-item.active .faq-accordion-body { display: block; }
-        .faq-accordion-item.active .faq-accordion-header { color: var(--cray-gold); }
       `}</style>
 
       <section id="h-hero">
@@ -88,12 +98,13 @@ const TokenNFTContractsSubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Asset Analysis</h3>
               {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Try Again</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <select className="form-control" required>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Asset Type*</p>
+                  <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
                     <option value="">Asset Type</option><option value="token">Standard Token</option><option value="nft">NFT Collection</option>
                   </select>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Supply & Mechanism*</p>
                   <textarea className="form-control" rows={3} placeholder="State supply and mechanism details..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'CALCULATING...' : 'GET ASSET PLAN'}</button>
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GET ASSET PLAN'}</button>
                 </form>
               )}
             </div>
@@ -127,13 +138,6 @@ const TokenNFTContractsSubDetailView: React.FC = () => {
               <div className="detail-text">
                 <h2 className="h2-style">Dynamic NFT Architectures</h2>
                 <p className="p-style">We construct smart NFT structures that are more than just visuals. Build assets that are usable in games, evolve according to on-chain data, and feature permanent storage with IPFS/Arweave integration.</p>
-                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
-                  {["On-Chain Metadata", "IPFS Integration", "Marketplace Compatibility"].map((li, i) => (
-                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
-                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
-                    </li>
-                  ))}
-                </ul>
               </div>
             </div>
             <div className="detail-item reverse">
@@ -143,13 +147,6 @@ const TokenNFTContractsSubDetailView: React.FC = () => {
               <div className="detail-text">
                 <h2 className="h2-style">RWA & Defi Integration</h2>
                 <p className="p-style">We carry real-world assets onto the blockchain. We provide technical compliant contracts for fractional ownership of real estate, commodities, or specialized financial instruments.</p>
-                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
-                  {["Fractional Asset Logic", "Stake & Yield Mechanisms", "Advanced Tokenomics Implementation"].map((li, i) => (
-                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
-                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
-                    </li>
-                  ))}
-                </ul>
               </div>
             </div>
           </div>
@@ -163,23 +160,6 @@ const TokenNFTContractsSubDetailView: React.FC = () => {
             Establish a professional and secure foundation for your token or NFT collection. Our development team is ready to architect your vision.
           </p>
           <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Request Asset Plan</a>
-        </div>
-      </section>
-
-      <section className="section-padding">
-        <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
-          <div style={{maxWidth: '850px', margin: '0 auto'}}>
-            {faqs.map((f, i) => (
-              <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
-                <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
-                  <span>{f.q}</span>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
-                </div>
-                <div className="faq-accordion-body p-style"><p>{f.a}</p></div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 

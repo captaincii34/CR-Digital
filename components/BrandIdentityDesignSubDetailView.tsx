@@ -1,19 +1,48 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const BrandIdentityDesignSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
+  // Form states
+  const [projectName, setProjectName] = useState("");
+  const [emotions, setEmotions] = useState("");
+
   const toggleFaq = (index: number) => setOpenFaq(openFaq === index ? null : index);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject('Brand Identity', 'Web3 visual language and logo design analysis.');
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Project Name": projectName,
+        "Desired Brand Emotions": emotions,
+        "Type": "Brand Identity Design Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject('Brand Identity', `Project: ${projectName}. Emotions: ${emotions}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -83,9 +112,11 @@ const BrandIdentityDesignSubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Design Brief</h3>
               {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Project Name" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="What emotions should your brand evoke (e.g., trust, fun, tech)?" required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'DESIGNING...' : 'GET DESIGN STRATEGY'}</button>
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Project Name*</p>
+                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Enter Project Name" value={projectName} onChange={e=>setProjectName(e.target.value)} required />
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Brand Emotions*</p>
+                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="What emotions should your brand evoke (e.g., trust, tech)?" value={emotions} onChange={e=>setEmotions(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GET DESIGN STRATEGY'}</button>
                 </form>
               )}
             </div>

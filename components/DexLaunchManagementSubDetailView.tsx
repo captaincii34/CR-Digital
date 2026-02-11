@@ -1,19 +1,47 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const DexLaunchManagementSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
+  
+  const [network, setNetwork] = useState('');
+  const [liquidityTarget, setLiquidityTarget] = useState('');
 
   const toggleFaq = (index: number) => setOpenFaq(openFaq === index ? null : index);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject('DEX Launch', 'Liquidity pool setup and slippage control analysis.');
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Target Network": network,
+        "Liquidity Target": liquidityTarget,
+        "Type": "DEX Launch Management Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject('DEX Launch', `Network: ${network}. Liquidity: ${liquidityTarget}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -52,21 +80,6 @@ const DexLaunchManagementSubDetailView: React.FC = () => {
         .reason-card { padding: 48px 32px; border-radius: 24px; text-align: center; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); transition: 0.4s; }
         .reason-card:hover { transform: translateY(-10px); border-color: var(--cray-gold); background: rgba(255, 177, 0, 0.1); }
         .reason-icon-box { width: 60px; height: 60px; background-color: var(--cray-gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.3); }
-        .detail-row { display: flex; flex-direction: column; gap: 100px; }
-        .detail-item { display: flex; flex-direction: column; gap: 60px; align-items: center; width: 100%; }
-        @media (min-width: 1024px) { 
-            .detail-item { flex-direction: row; } 
-            .detail-item.reverse { flex-direction: row-reverse; } 
-            .detail-text, .detail-visual { width: 50%; flex: 1; }
-        }
-        .detail-visual { border-radius: 32px; overflow: hidden; height: 500px; border: 1px solid rgba(255,177,0,0.2); position: relative; width: 100%; }
-        .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
-        .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
-        .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
-        .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; width: 100%; text-align: left; }
-        .faq-accordion-body { padding: 0 32px 28px; color: #9ca3af; display: none; }
-        .faq-accordion-item.active .faq-accordion-body { display: block; }
-        .faq-accordion-item.active .faq-accordion-header { color: var(--cray-gold); }
         .bullet-point { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
         .bullet-icon { width: 20px; height: 20px; background: var(--cray-gold); border-radius: 50%; display: flex; align-items: center; justifyContent: center; flex-shrink: 0; }
         .bullet-text { font-size: 11px !important; font-weight: 700 !important; text-transform: uppercase; letter-spacing: 1px; color: #fff; }
@@ -100,9 +113,27 @@ const DexLaunchManagementSubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Pool Analysis</h3>
               {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Network (ETH, BSC, SOL etc.)" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="State your liquidity target..." required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'PROCESSING...' : 'GET LIQUIDITY PLAN'}</button>
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Target Network*</p>
+                  <input 
+                    type="text" 
+                    className="w-full border p-3 rounded-lg mb-4" 
+                    placeholder="e.g. ETH, BSC, SOL" 
+                    value={network}
+                    onChange={(e) => setNetwork(e.target.value)}
+                    required 
+                  />
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Liquidity Goal*</p>
+                  <textarea 
+                    className="w-full border p-3 rounded-lg mb-4" 
+                    rows={3} 
+                    placeholder="State your liquidity target (e.g. $50k initial LP)..." 
+                    value={liquidityTarget}
+                    onChange={(e) => setLiquidityTarget(e.target.value)}
+                    required 
+                  />
+                  <button type="submit" disabled={loading} className="form-button">
+                    {loading ? 'OPENING TELEGRAM...' : 'GET LIQUIDITY PLAN'}
+                  </button>
                 </form>
               )}
             </div>
@@ -123,39 +154,6 @@ const DexLaunchManagementSubDetailView: React.FC = () => {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="section-padding" style={{background: '#050505'}}>
-        <div className="container-xl">
-          <div className="detail-row">
-            <div className="detail-item">
-              <div className="detail-text">
-                <h2 className="h2-style">Pool Depth and Balancing</h2>
-                <p className="p-style">We perform mathematical pool balancing so that the intense buying demand at the time of launch does not unhealthy inflate the price or drop it excessively due to lack of depth. We prepare a fair transaction environment for your users.</p>
-              </div>
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d?q=80&w=2000" alt="Pool Depth" />
-              </div>
-            </div>
-            <div className="detail-item reverse">
-              <div className="detail-text">
-                <h2 className="h2-style">Anti-Bot and Whale Protection</h2>
-                <p className="p-style">We establish technical barriers at the smart contract level and in pool management against 'sniper bots', the biggest enemy of DEX launches. We ensure that your project's real community reaches the token.</p>
-              </div>
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2000" alt="Anti-Bot" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="cta-box-section">
-        <div className="container-xl">
-          <h2 className="h2-style">Manage Your DEX Launch with Experts</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Let us take over the entire technical process from pool setup to anti-bot protection, so you can focus on growing your community.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Get Liquidity Quote</a>
         </div>
       </section>
 

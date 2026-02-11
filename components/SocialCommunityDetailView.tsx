@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const SocialCommunityDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [status, setStatus] = useState('');
   const [platforms, setPlatforms] = useState('');
   const [goal, setGoal] = useState('');
-  const [contact, setContact] = useState('');
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
@@ -14,10 +14,40 @@ const SocialCommunityDetailView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject(status, `Platforms: ${platforms}. Goal: ${goal}`);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const statusLabels: { [key: string]: string } = {
+        'yok': 'Setup from Scratch',
+        'var': 'Revitalize Existing Community'
+      };
+
+      const formObj = {
+        "Community Status": statusLabels[status] || status,
+        "Primary Platforms": platforms,
+        "Growth Goal Description": goal,
+        "Type": "Social Media & Community Management Detail Page",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject(status, `Platforms: ${platforms}. Goal: ${goal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const scope = [
@@ -135,9 +165,8 @@ const SocialCommunityDetailView: React.FC = () => {
                   <option value="">Community Status</option><option value="yok">Setup from Scratch</option><option value="var">Revitalize Existing Community</option>
                 </select>
                 <input type="text" className="form-control" placeholder="Primary Platforms (X, TG, etc.)" value={platforms} onChange={e=>setPlatforms(e.target.value)} />
-                <textarea className="form-control" rows={3} placeholder="What is your growth goal?" value={goal} onChange={e=>setGoal(e.target.value)} required />
-                <input type="text" className="form-control" placeholder="Telegram / Email" value={contact} onChange={e=>setContact(e.target.value)} required />
-                <button type="submit" className="form-button">{loading ? 'PROCESSING...' : 'GET MANAGEMENT PLAN'}</button>
+                <textarea className="form-control" rows={4} placeholder="What is your growth goal?" value={goal} onChange={e=>setGoal(e.target.value)} required style={{ resize: 'none' }} />
+                <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'SEND'}</button>
               </form>
             </div>
           </div>
@@ -188,7 +217,7 @@ const SocialCommunityDetailView: React.FC = () => {
           <div className="flex flex-col lg:flex-row items-center gap-20">
             <div className="flex-1">
               <h2 className="h2-style" style={{marginBottom: '28px'}}>Community Loyalty and Trust</h2>
-              <p className="p-style" style={{marginBottom: '24px', color: '#d1d5db'}}>
+              <p className="p-style" style={{marginBottom: '24px', color: '#d1d5db', lineHeight: '1.8'}}>
                 The secret of on-chain success is a community that believes in your project and defends it on every platform. We build this trust with professional moderation and content.
               </p>
               <ul style={{listStyle: 'none', padding: 0, margin: 0}}>

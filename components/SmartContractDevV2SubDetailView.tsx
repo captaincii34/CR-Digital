@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const SmartContractDevV2SubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [status, setStatus] = useState('');
   const [goal, setGoal] = useState('');
-  const [contact, setContact] = useState('');
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
@@ -13,23 +13,40 @@ const SmartContractDevV2SubDetailView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject(status, `Smart Contract V2: ${goal}`);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Network": status,
+        "Mechanism Details": goal,
+        "Type": "Smart Contract Dev V2 Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject(status, `Smart Contract V2: ${goal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
     { title: 'Zero Vulnerability', desc: 'Mathematically verified contracts that leave no margin for error.', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> },
     { title: 'Gas Optimization', desc: 'Efficient code structures that minimize transaction costs.', icon: <circle cx="12" cy="12" r="10"/><path d="M16 12l-4-4-4 4M12 8v8"/> },
     { title: 'Upgradeable', desc: 'Flexible structures that can be updated in the future with proxy architecture.', icon: <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/> }
-  ];
-
-  const faqs = [
-    { q: "Which networks do you support?", a: "We develop on Ethereum, Solana, BNB Chain, TON, and all L2 networks like Arbitrum, Base, and Optimism." },
-    { q: "Can you update my existing contract?", a: "Yes, we check if your contract uses proxy patterns and provide the necessary improvements for upgradability." },
-    { q: "How do you handle security?", a: "We perform multiple rounds of internal testing, static analysis, and formal verification before delivery." },
-    { q: "Do you offer post-deployment support?", a: "Yes, we provide monitoring and maintenance services to ensure your contracts operate correctly in production." }
   ];
 
   return (
@@ -88,12 +105,13 @@ const SmartContractDevV2SubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Code Review Request</h3>
               {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Try Again</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <select className="form-control" required>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Target Network*</p>
+                  <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
                     <option value="">Network</option><option value="eth">Ethereum / L2</option><option value="sol">Solana / Rust</option>
                   </select>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Mechanism Description*</p>
                   <textarea className="form-control" rows={3} placeholder="Summarize the mechanism to be developed..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'SCANNING CODE...' : 'GET ANALYSIS PLAN'}</button>
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GET ANALYSIS PLAN'}</button>
                 </form>
               )}
             </div>
@@ -163,23 +181,6 @@ const SmartContractDevV2SubDetailView: React.FC = () => {
             Don't risk your project's future with unverified contracts. Get a technical quote from our lead engineers today.
           </p>
           <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Get Code Quote</a>
-        </div>
-      </section>
-
-      <section className="section-padding">
-        <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
-          <div style={{maxWidth: '850px', margin: '0 auto'}}>
-            {faqs.map((f, i) => (
-              <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
-                <div className="faq-accordion-header h4-style">
-                  <span>{f.q}</span>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
-                </div>
-                <div className="faq-accordion-body p-style"><p>{f.a}</p></div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 

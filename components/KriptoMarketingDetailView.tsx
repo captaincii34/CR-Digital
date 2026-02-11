@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const KriptoMarketingDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [status, setStatus] = useState('');
   const [budget, setBudget] = useState('');
   const [goal, setGoal] = useState('');
-  const [contact, setContact] = useState('');
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
@@ -14,10 +14,40 @@ const KriptoMarketingDetailView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject(status, `Marketing Budget: ${budget}. Goal: ${goal}`);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const statusLabels: { [key: string]: string } = {
+        'yeni': 'Launch Preparation',
+        'mevcut': 'Growth / Scaling'
+      };
+
+      const formObj = {
+        "Project Status": statusLabels[status] || status,
+        "Monthly Budget Goal": budget,
+        "Target Audience / Goals": goal,
+        "Type": "Crypto & Web3 Marketing Detail Page",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject(status, `Marketing Budget: ${budget}. Goal: ${goal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const marketingScope = [
@@ -136,9 +166,8 @@ const KriptoMarketingDetailView: React.FC = () => {
                     <option value="">Project Status</option><option value="yeni">Launch Preparation</option><option value="mevcut">Growth / Scaling</option>
                   </select>
                   <input type="text" className="form-control" placeholder="Monthly Budget Goal" value={budget} onChange={e=>setBudget(e.target.value)} />
-                  <textarea className="form-control" rows={3} placeholder="Where is your target audience?" value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="Telegram / Email" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'PROCESSING...' : 'GET STRATEGY'}</button>
+                  <textarea className="form-control" rows={4} placeholder="Where is your target audience?" value={goal} onChange={e=>setGoal(e.target.value)} required style={{ resize: 'none' }} />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'SEND'}</button>
                 </form>
               )}
             </div>

@@ -1,19 +1,47 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const MmSystemConsultancySubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
+  const [teamSize, setTeamSize] = useState('');
+  const [stage, setStage] = useState('');
+
   const toggleFaq = (index: number) => setOpenFaq(openFaq === index ? null : index);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject('MM System Consulting', 'Internal MM department setup and technical architecture analysis.');
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Current Internal Team Size": teamSize,
+        "Current Support Stage Needed": stage,
+        "Type": "MM System Consulting Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject('MM System Consulting', `Team: ${teamSize}. Stage: ${stage}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -79,9 +107,11 @@ const MmSystemConsultancySubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Request System Audit</h3>
               {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Current Team Size" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="At what stage do you need support?" required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'DESIGNING...' : 'GET SYSTEM PLAN'}</button>
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Internal Team Size*</p>
+                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Current Team Size" value={teamSize} onChange={e=>setTeamSize(e.target.value)} required />
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Support Goal*</p>
+                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="At what stage do you need support?" value={stage} onChange={e=>setStage(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GET SYSTEM PLAN'}</button>
                 </form>
               )}
             </div>
@@ -105,56 +135,8 @@ const MmSystemConsultancySubDetailView: React.FC = () => {
         </div>
       </section>
 
-      <section className="section-padding" style={{background: '#050505'}}>
-        <div className="container-xl">
-          <div className="detail-item">
-            <div className="detail-text">
-              <h2 className="h2-style">Institutional Sovereignty</h2>
-              <p className="p-style">Building your own market-making system removes dependency on third-party providers. We provide the blueprint for a professional desk, including accounting software, reporting modules, and secure API management layers that protect your internal data.</p>
-            </div>
-            <div className="detail-visual">
-              <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2000" alt="Office" />
-            </div>
-          </div>
-          <div className="detail-item reverse" style={{marginTop: '100px'}}>
-            <div className="detail-text">
-              <h2 className="h2-style">Technical Knowledge Transfer</h2>
-              <p className="p-style">Our consultancy includes a rigorous training program for your staff. We cover everything from technical bot monitoring to interpreting market sentiment and adjusting liquidity walls during high-volatility events, ensuring your team is ready for any market condition.</p>
-            </div>
-            <div className="detail-visual">
-              <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2000" alt="Tech" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="cta-box-section">
-        <div className="container-xl">
-          <h2 className="h2-style">Bring Your Liquidity Operations In-House</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Stop paying monthly fees to external providers. Build your own high-end market-making infrastructure with our guidance.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Build In-House Now</a>
-        </div>
-      </section>
-
-      <section className="section-padding">
-        <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
-          <div style={{maxWidth: '850px', margin: '0 auto'}}>
-            {faqs.map((f, i) => (
-              <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
-                <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
-                  <span>{f.q}</span>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
-                </div>
-                <div className="faq-accordion-body p-style"><p>{f.a}</p></div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/piyasa-yapiciligi-ve-likidite'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
+        <button onClick={() => window.location.hash = '#hizmetler/piyasa-yapiciligi-ve-likidite'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back</button>
       </div>
     </div>
   );

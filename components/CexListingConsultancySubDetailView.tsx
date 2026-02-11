@@ -1,19 +1,47 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const CexListingConsultancySubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
+  
+  const [exchangeGoal, setExchangeGoal] = useState('');
+  const [stats, setStats] = useState('');
 
   const toggleFaq = (index: number) => setOpenFaq(openFaq === index ? null : index);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject('CEX Listing', 'Borsa application and communication processes analysis.');
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Target Exchanges": exchangeGoal,
+        "Current Stats (Holders/Volume)": stats,
+        "Type": "CEX Listing Consulting Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject('CEX Listing', `Exchange: ${exchangeGoal}. Stats: ${stats}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -52,21 +80,6 @@ const CexListingConsultancySubDetailView: React.FC = () => {
         .reason-card { padding: 48px 32px; border-radius: 24px; text-align: center; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); transition: 0.4s; }
         .reason-card:hover { transform: translateY(-10px); border-color: var(--cray-gold); background: rgba(255, 177, 0, 0.1); }
         .reason-icon-box { width: 60px; height: 60px; background-color: var(--cray-gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.3); }
-        .detail-row { display: flex; flex-direction: column; gap: 100px; }
-        .detail-item { display: flex; flex-direction: column; gap: 60px; align-items: center; width: 100%; }
-        @media (min-width: 1024px) { 
-            .detail-item { flex-direction: row; } 
-            .detail-item.reverse { flex-direction: row-reverse; } 
-            .detail-text, .detail-visual { width: 50%; flex: 1; }
-        }
-        .detail-visual { border-radius: 32px; overflow: hidden; height: 500px; border: 1px solid rgba(255,177,0,0.2); position: relative; width: 100%; }
-        .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
-        .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
-        .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
-        .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; width: 100%; text-align: left; }
-        .faq-accordion-body { padding: 0 32px 28px; color: #9ca3af; display: none; }
-        .faq-accordion-item.active .faq-accordion-body { display: block; }
-        .faq-accordion-item.active .faq-accordion-header { color: var(--cray-gold); }
         .bullet-point { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
         .bullet-icon { width: 20px; height: 20px; background: var(--cray-gold); border-radius: 50%; display: flex; align-items: center; justifyContent: center; flex-shrink: 0; }
         .bullet-text { font-size: 11px !important; font-weight: 700 !important; text-transform: uppercase; letter-spacing: 1px; color: #fff; }
@@ -100,9 +113,27 @@ const CexListingConsultancySubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Exchange Analysis</h3>
               {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Target Exchange (Tier 1/2)" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Share your current holder and volume data..." required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'ANALYZING...' : 'GET LISTING PLAN'}</button>
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Target Exchange*</p>
+                  <input 
+                    type="text" 
+                    className="w-full border p-3 rounded-lg mb-4" 
+                    placeholder="e.g. Gate.io, Bybit, Binance" 
+                    value={exchangeGoal}
+                    onChange={(e) => setExchangeGoal(e.target.value)}
+                    required 
+                  />
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Metrics & Stats*</p>
+                  <textarea 
+                    className="w-full border p-3 rounded-lg mb-4" 
+                    rows={3} 
+                    placeholder="Share your current holder and volume data..." 
+                    value={stats}
+                    onChange={(e) => setStats(e.target.value)}
+                    required 
+                  />
+                  <button type="submit" disabled={loading} className="form-button">
+                    {loading ? 'OPENING TELEGRAM...' : 'GET LISTING PLAN'}
+                  </button>
                 </form>
               )}
             </div>
@@ -120,56 +151,6 @@ const CexListingConsultancySubDetailView: React.FC = () => {
                 </div>
                 <h4 className="h2-style" style={{fontSize: '20px !important', marginBottom: '15px'}}>{r.title}</h4>
                 <p className="p-style" style={{fontSize: '14px'}}>{r.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-padding" style={{background: '#050505'}}>
-        <div className="container-xl">
-          <div className="detail-row">
-            <div className="detail-item">
-              <div className="detail-text">
-                <h2 className="h2-style">Strategic Communication with Exchanges</h2>
-                <p className="p-style">We don't just send a form to exchanges. We negotiate with them in a professional language that explains the value of your project, community strength, and technical soundness. We follow the process from within with our partners in the listing committees.</p>
-              </div>
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1521791136064-7986c2959210?q=80&w=2000" alt="Communication" />
-              </div>
-            </div>
-            <div className="detail-item reverse">
-              <div className="detail-text">
-                <h2 className="h2-style">Full Legal and Technical Compliance</h2>
-                <p className="p-style">Security and legal compliance are the topics exchanges pay the most attention to. From audit reports of your smart contract to the fairness of token distribution (vesting), we revise every detail according to the exchanges' 'listing criteria' list.</p>
-              </div>
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2000" alt="Legal Compliance" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="cta-box-section">
-        <div className="container-xl">
-          <h2 className="h2-style">Let's Prepare Your Project for Global Exchanges</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>The listing process is not just a matter of money, but prestige and trust. Take professional support to open the right doors with the right keys.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Book Exchange Appointment</a>
-        </div>
-      </section>
-
-      <section className="section-padding">
-        <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
-          <div style={{maxWidth: '850px', margin: '0 auto'}}>
-            {faqs.map((f, i) => (
-              <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
-                <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
-                  <span>{f.q}</span>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
-                </div>
-                <div className="faq-accordion-body p-style"><p>{f.a}</p></div>
               </div>
             ))}
           </div>

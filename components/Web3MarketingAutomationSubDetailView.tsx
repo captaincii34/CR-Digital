@@ -1,19 +1,52 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const Web3MarketingAutomationSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
+  
+  // Form states
+  const [userBase, setUserBase] = useState('');
+  const [automationNeeds, setAutomationNeeds] = useState('');
 
   const toggleFaq = (index: number) => setOpenFaq(openFaq === index ? null : index);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject('Marketing Automation', 'On-chain triggered marketing workflows.');
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Current User Base": userBase,
+        "Desired Automations": automationNeeds,
+        "Type": "Web3 Marketing Automation Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      // 1) Start Telegram connection and open link
+      const code = await startTelegramConnectWithForm(formObj);
+
+      // 2) Wait for user to press Start in Telegram
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      // 3) Proceed with AI evaluation
+      const result = await evaluateProject('Marketing Automation', `User Base: ${userBase}. Needs: ${automationNeeds}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -81,9 +114,27 @@ const Web3MarketingAutomationSubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Automation Plan</h3>
               {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="form-control" placeholder="Current User Base" required />
-                  <textarea className="form-control" rows={3} placeholder="Which marketing processes would you like to automate?" required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'DESIGNING...' : 'GENERATE AUTOMATION'}</button>
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Current User Base*</p>
+                  <input 
+                    type="text" 
+                    className="form-control" 
+                    placeholder="e.g. 5,000 active wallets" 
+                    value={userBase}
+                    onChange={(e) => setUserBase(e.target.value)}
+                    required 
+                  />
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Desired Automations*</p>
+                  <textarea 
+                    className="form-control" 
+                    rows={3} 
+                    placeholder="Which marketing processes would you like to automate?" 
+                    value={automationNeeds}
+                    onChange={(e) => setAutomationNeeds(e.target.value)}
+                    required 
+                  />
+                  <button type="submit" disabled={loading} className="form-button">
+                    {loading ? 'OPENING TELEGRAM...' : 'GENERATE AUTOMATION'}
+                  </button>
                 </form>
               )}
             </div>
@@ -174,7 +225,7 @@ const Web3MarketingAutomationSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/kripto-ve-web3-pazarlama'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
+        <button onClick={() => window.location.hash = '#services/crypto-marketing'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Category</button>
       </div>
     </div>
   );

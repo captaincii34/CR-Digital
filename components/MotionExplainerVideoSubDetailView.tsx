@@ -1,19 +1,48 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const MotionExplainerVideoSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
+  // Form states
+  const [concept, setConcept] = useState("");
+  const [goal, setGoal] = useState("");
+
   const toggleFaq = (index: number) => setOpenFaq(openFaq === index ? null : index);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject('Motion Video', 'Explaining complex tech via high-end motion.');
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Project Concept": concept,
+        "Video Goal": goal,
+        "Type": "Motion Explainer Video Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject('Motion Video', `Concept: ${concept}. Goal: ${goal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -83,9 +112,11 @@ const MotionExplainerVideoSubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Video Quote</h3>
               {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Project Concept" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="What is the main goal of this video (Intro, Technical, Hype)?" required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'STORYBOARDING...' : 'GET VIDEO PLAN'}</button>
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Project Concept*</p>
+                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="e.g. AI-Mining DApp" value={concept} onChange={e=>setConcept(e.target.value)} required />
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Video Goal*</p>
+                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="What is the main goal (Intro, Technical, Hype)?" value={goal} onChange={e=>setGoal(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GET VIDEO PLAN'}</button>
                 </form>
               )}
             </div>

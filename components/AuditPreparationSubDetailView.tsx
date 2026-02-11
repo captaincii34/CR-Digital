@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const AuditPreparationSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [status, setStatus] = useState('');
   const [goal, setGoal] = useState('');
-  const [contact, setContact] = useState('');
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
@@ -13,10 +13,39 @@ const AuditPreparationSubDetailView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject(status, `Audit Preparation: ${goal}`);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const typeLabels: { [key: string]: string } = {
+        'new': 'Pre-Launch',
+        'existing': 'Existing Contract Revision'
+      };
+
+      const formObj = {
+        "Security Stage": typeLabels[status] || status,
+        "Contract/Structure Info": goal,
+        "Type": "Audit Preparation Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject(status, `Audit Preparation: ${goal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -47,7 +76,7 @@ const AuditPreparationSubDetailView: React.FC = () => {
     <div className="crypto-detail-page">
       <style>{`
         .crypto-detail-page { background-color: #000; color: #fff; overflow-x: hidden; }
-        .section-padding { padding: 120px 0; position: relative; }
+        .section-padding { padding: 100px 0; position: relative; }
         .container-xl { max-width: 1280px; margin: 0 auto; padding: 0 32px; width: 100%; position: relative; z-index: 10; }
         .bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
         .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.85); z-index: 1; }
@@ -66,16 +95,7 @@ const AuditPreparationSubDetailView: React.FC = () => {
         .reason-card { padding: 48px 32px; border-radius: 24px; text-align: center; background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); transition: 0.4s; }
         .reason-card:hover { transform: translateY(-10px); border-color: var(--cray-gold); background: rgba(255, 177, 0, 0.15); }
         .reason-icon-box { width: 60px; height: 60px; background-color: var(--cray-gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.3); }
-        .info-detail-section { background: #050505; }
-        .detail-row { display: flex; flex-direction: column; gap: 100px; }
-        .detail-item { display: flex; flex-direction: column; gap: 60px; align-items: center; width: 100%; }
-        @media (min-width: 1024px) { 
-            .detail-item { flex-direction: row; } 
-            .detail-item.reverse { flex-direction: row-reverse; } 
-            .detail-text, .detail-visual { width: 50%; flex: 1; }
-        }
-        .detail-visual { border-radius: 32px; overflow: hidden; height: 500px; border: 1px solid rgba(255,177,0,0.2); position: relative; width: 100%; }
-        .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
+
         .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
         .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
         .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
@@ -94,21 +114,20 @@ const AuditPreparationSubDetailView: React.FC = () => {
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Cyber Security Certification</h5>
               <h1 className="h1-style">Audit Preparation Processes</h1>
               <p className="p-style" style={{marginTop: '20px', lineHeight: '1.7'}}>A project without a security certificate is incomplete. We manage your technical audit and preparation process to ensure you receive flawless reports from industry-leading audit firms.</p>
-              <div style={{marginTop: '32px', display: 'flex', flexWrap: 'wrap', gap: '15px'}}>
-                <span style={{background: 'rgba(255,177,0,0.1)', color: 'var(--cray-gold)', padding: '8px 16px', borderRadius: '30px', fontSize: '12px', fontWeight: 700}}>✓ CODE AUDIT</span>
-                <span style={{background: 'rgba(255,177,0,0.1)', color: 'var(--cray-gold)', padding: '8px 16px', borderRadius: '30px', fontSize: '12px', fontWeight: 700}}>✓ LOGICAL ANALYSIS</span>
-              </div>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Start Security Scan</h3>
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Security Assessment</h3>
               {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Try Again</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <select className="form-control" required>
-                    <option value="">Stage</option><option value="new">Pre-Launch</option><option value="existing">Existing Contract Revision</option>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Security Stage*</p>
+                  <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
+                    <option value="">Select Stage</option>
+                    <option value="new">Pre-Launch</option>
+                    <option value="existing">Existing Contract Revision</option>
                   </select>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Contract Info*</p>
                   <textarea className="form-control" rows={3} placeholder="Provide information about your contract address (if any) or code structure..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'SCANNING...' : 'REQUEST PRE-AUDIT'}</button>
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'REQUEST PRE-AUDIT'}</button>
                 </form>
               )}
             </div>
@@ -133,48 +152,6 @@ const AuditPreparationSubDetailView: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. Detailed Content */}
-      <section className="info-detail-section section-padding">
-        <div className="container-xl">
-          <div className="detail-row">
-            <div className="detail-item">
-              <div className="detail-text">
-                <h2 className="h2-style">Protection Against Cyber Threats</h2>
-                <p className="p-style" style={{marginTop: '24px', lineHeight: '1.8'}}>We don't just perform static code analysis; we also conduct manual inspections against logical errors. We close every vulnerability that might endanger your project's liquidity.</p>
-                <ul style={{marginTop: '32px', listStyle: 'none', padding: 0}}>
-                   {["Re-entrancy Protection", "Oracle Manipulation Analysis", "Advanced Contract Tests"].map((item, i) => (
-                    <li key={i} className="p-style" style={{marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '12px'}}>
-                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2000" alt="Cyber Security" />
-              </div>
-            </div>
-
-            <div className="detail-item reverse">
-              <div className="detail-text">
-                <h2 className="h2-style">Cost and Time Management</h2>
-                <p className="p-style" style={{marginTop: '24px', lineHeight: '1.8'}}>Thanks to our strategic partnerships with major audit firms, we complete your project's certification process at more affordable prices and in a much faster timeline.</p>
-                <ul style={{marginTop: '32px', listStyle: 'none', padding: 0}}>
-                   {["Tier-1 Audit Partnerships", "Fast Reporting Calendar", "Post-Certification Support"].map((item, i) => (
-                    <li key={i} className="p-style" style={{marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '12px'}}>
-                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1454165833767-027ffea9e77b?q=80&w=2000" alt="Partnerships" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. CTA */}
       <section className="cta-box-section">
         <div className="container-xl">
           <h2 className="h2-style">Crown Your Credibility with Certification</h2>
@@ -183,7 +160,6 @@ const AuditPreparationSubDetailView: React.FC = () => {
         </div>
       </section>
 
-      {/* 5. FAQ */}
       <section className="section-padding">
         <div className="container-xl">
           <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
@@ -202,7 +178,7 @@ const AuditPreparationSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/token-ve-blokzincir-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
+        <button onClick={() => window.location.hash = '#services/token-and-blockchain-development'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const AboutUsView: React.FC = () => {
   const [isApplying, setIsApplying] = useState(false);
   const [loading, setLoading] = useState(false);
   const [applied, setApplied] = useState(false);
   const [finalFormSent, setFinalFormSent] = useState(false);
+
+  // Get In Touch Form States
+  const [finalName, setFinalName] = useState("");
+  const [finalEmail, setFinalEmail] = useState("");
+  const [finalMessage, setFinalMessage] = useState("");
 
   const stats = [
     { value: '40+', label: 'Award Winning Campaigns', desc: "Our strategic excellence has been recognized with over 40 prestigious industry awards." },
@@ -58,13 +64,33 @@ const AboutUsView: React.FC = () => {
     }, 2000);
   };
 
-  const handleFinalSubmit = (e: React.FormEvent) => {
+  const handleFinalSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+
+    try {
+      const formObj = {
+        name: finalName,
+        email: finalEmail,
+        message: finalMessage,
+        type: "About Us Get In Touch",
+        sentAt: new Date().toISOString(),
+        page: window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        return;
+      }
       setFinalFormSent(true);
-    }, 1500);
+    } catch (err: any) {
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const closeCareerModal = () => {
@@ -238,7 +264,7 @@ const AboutUsView: React.FC = () => {
         /* Final CTA Styles (Text Left, Form Right) */
         .final-cta-about { background: #0a0a0a; border-top: 1px solid rgba(255,177,0,0.1); }
         .final-form-box { background: rgba(255,255,255,0.02); padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.05); }
-        .region-item { display: inline-block; padding: 6px 15px; background: rgba(255,177,0,0.1); border-radius: 100px; color: var(--cray-gold); font-size: 10px !important; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-right: 100px; margin-bottom: 10px; }
+        .region-item { display: inline-block; padding: 6px 15px; background: rgba(255,177,0,0.1); border-radius: 100px; color: var(--cray-gold); font-size: 10px !important; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-right: 10px; margin-bottom: 10px; }
       `}</style>
 
       {/* 1. Hero Section */}
@@ -432,16 +458,36 @@ const AboutUsView: React.FC = () => {
               ) : (
                 <form onSubmit={handleFinalSubmit}>
                   <label className="form-label-min">Your Name</label>
-                  <input type="text" className="form-input-about" required placeholder="John Doe" />
+                  <input 
+                    type="text" 
+                    className="form-input-about" 
+                    required 
+                    placeholder="John Doe"
+                    value={finalName}
+                    onChange={(e) => setFinalName(e.target.value)}
+                  />
                   
                   <label className="form-label-min">Email Address</label>
-                  <input type="email" className="form-input-about" required placeholder="john@example.com" />
+                  <input 
+                    type="email" 
+                    className="form-input-about" 
+                    required 
+                    placeholder="john@example.com"
+                    value={finalEmail}
+                    onChange={(e) => setFinalEmail(e.target.value)}
+                  />
                   
                   <label className="form-label-min">Brief Message</label>
-                  <textarea className="form-input-about h-24 resize-none" required placeholder="Tell us about your goals..."></textarea>
+                  <textarea 
+                    className="form-input-about h-24 resize-none" 
+                    required 
+                    placeholder="Tell us about your goals..."
+                    value={finalMessage}
+                    onChange={(e) => setFinalMessage(e.target.value)}
+                  ></textarea>
                   
                   <button type="submit" disabled={loading} className="btn-submit-gold mt-4">
-                    {loading ? 'SENDING...' : 'GET IN TOUCH'}
+                    {loading ? 'OPENING TELEGRAM...' : 'GET IN TOUCH'}
                   </button>
                 </form>
               )}

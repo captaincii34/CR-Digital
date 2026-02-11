@@ -1,19 +1,47 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const PostListingGrowthSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
+  
+  const [holderCount, setHolderCount] = useState('');
+  const [growthGoal, setGrowthGoal] = useState('');
 
   const toggleFaq = (index: number) => setOpenFaq(openFaq === index ? null : index);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject('Post-Listing Growth', 'Price stability and continuous user acquisition analysis.');
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Current Holder Count": holderCount,
+        "6-Month Growth Objective": growthGoal,
+        "Type": "Post-Listing Growth Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject('Post-Listing Growth', `Holders: ${holderCount}. Goal: ${growthGoal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -52,21 +80,6 @@ const PostListingGrowthSubDetailView: React.FC = () => {
         .reason-card { padding: 48px 32px; border-radius: 24px; text-align: center; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); transition: 0.4s; }
         .reason-card:hover { transform: translateY(-10px); border-color: var(--cray-gold); background: rgba(255, 177, 0, 0.1); }
         .reason-icon-box { width: 60px; height: 60px; background-color: var(--cray-gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.3); }
-        .detail-row { display: flex; flex-direction: column; gap: 100px; }
-        .detail-item { display: flex; flex-direction: column; gap: 60px; align-items: center; width: 100%; }
-        @media (min-width: 1024px) { 
-            .detail-item { flex-direction: row; } 
-            .detail-item.reverse { flex-direction: row-reverse; } 
-            .detail-text, .detail-visual { width: 50%; flex: 1; }
-        }
-        .detail-visual { border-radius: 32px; overflow: hidden; height: 500px; border: 1px solid rgba(255,177,0,0.2); position: relative; width: 100%; }
-        .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
-        .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
-        .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
-        .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; width: 100%; text-align: left; }
-        .faq-accordion-body { padding: 0 32px 28px; color: #9ca3af; display: none; }
-        .faq-accordion-item.active .faq-accordion-body { display: block; }
-        .faq-accordion-item.active .faq-accordion-header { color: var(--cray-gold); }
         .bullet-point { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
         .bullet-icon { width: 20px; height: 20px; background: var(--cray-gold); border-radius: 50%; display: flex; align-items: center; justifyContent: center; flex-shrink: 0; }
         .bullet-text { font-size: 11px !important; font-weight: 700 !important; text-transform: uppercase; letter-spacing: 1px; color: #fff; }
@@ -100,9 +113,27 @@ const PostListingGrowthSubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Growth Analysis</h3>
               {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Current Holder Count" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="What is your goal for the next 6 months?" required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'PROCESSING...' : 'GET GROWTH PLAN'}</button>
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Current Holder Count*</p>
+                  <input 
+                    type="text" 
+                    className="w-full border p-3 rounded-lg mb-4" 
+                    placeholder="e.g. 5,000" 
+                    value={holderCount}
+                    onChange={(e) => setHolderCount(e.target.value)}
+                    required 
+                  />
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">6-Month Target*</p>
+                  <textarea 
+                    className="w-full border p-3 rounded-lg mb-4" 
+                    rows={3} 
+                    placeholder="What is your goal for the next 6 months?" 
+                    value={growthGoal}
+                    onChange={(e) => setGrowthGoal(e.target.value)}
+                    required 
+                  />
+                  <button type="submit" disabled={loading} className="form-button">
+                    {loading ? 'OPENING TELEGRAM...' : 'GET GROWTH PLAN'}
+                  </button>
                 </form>
               )}
             </div>
@@ -120,56 +151,6 @@ const PostListingGrowthSubDetailView: React.FC = () => {
                 </div>
                 <h4 className="h2-style" style={{fontSize: '20px !important', marginBottom: '15px'}}>{r.title}</h4>
                 <p className="p-style" style={{fontSize: '14px'}}>{r.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-padding" style={{background: '#050505'}}>
-        <div className="container-xl">
-          <div className="detail-row">
-            <div className="detail-item">
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1611974714851-eb6053e623e4?q=80&w=2000" alt="Market Stability" />
-              </div>
-              <div className="detail-text">
-                <h2 className="h2-style">Price Stability and Board Management</h2>
-                <p className="p-style">We balance panic sales or uncontrolled movements occurring after listing with professional market making support. We constantly check liquidity depth so that your project exhibits a reliable, healthy chart.</p>
-              </div>
-            </div>
-            <div className="detail-item reverse">
-              <div className="detail-text">
-                <h2 className="h2-style">Continuous User and Holder Acquisition</h2>
-                <p className="p-style">We do not cut off marketing efforts after launch. With new region-oriented campaigns, global influencer collaborations, and joint competitions with exchanges, we regularly increase your number of token holders.</p>
-              </div>
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=2000" alt="Holder Growth" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="cta-box-section">
-        <div className="container-xl">
-          <h2 className="h2-style">Transform Your Project into a Long-Term Success Story</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Don't be among the projects that fade after launch. Update your roadmap with our expert team for sustainable growth and a strong holder base.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Get Growth Consulting</a>
-        </div>
-      </section>
-
-      <section className="section-padding">
-        <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
-          <div style={{maxWidth: '850px', margin: '0 auto'}}>
-            {faqs.map((f, i) => (
-              <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
-                <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
-                  <span>{f.q}</span>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
-                </div>
-                <div className="faq-accordion-body p-style"><p>{f.a}</p></div>
               </div>
             ))}
           </div>

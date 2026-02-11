@@ -1,19 +1,54 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const ConsultancySection: React.FC = () => {
   const [status, setStatus] = useState('');
   const [goal, setGoal] = useState('');
-  const [contact, setContact] = useState('');
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject(status, goal);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      // Teknik değerleri okunabilir etiketlere dönüştürelim
+      const statusLabels: { [key: string]: string } = {
+        'yeni': 'New Project',
+        'mevcut': 'Existing Project',
+        'yatirim': 'Investment Stage'
+      };
+
+      const formObj = {
+        "Project Status": statusLabels[status] || status,
+        "Brief Goal Description": goal,
+        "Type": "Homepage Free Pre-Evaluation",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      // 1) Formu backend'e ilet ve Telegram linkini aç
+      const code = await startTelegramConnectWithForm(formObj);
+
+      // 2) Kullanıcı Telegram'da botu başlatana kadar bekle
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      // 3) Bağlantı kurulduysa Gemini AI analizini çalıştır
+      const result = await evaluateProject(status, goal);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -58,7 +93,7 @@ const ConsultancySection: React.FC = () => {
           left: 0;
           width: 100%;
           height: 100%;
-          background: linear-gradient(to bottom, #000, transparent, #000);
+          background: linear-gradient(to bottom, #000, transparent 40%, transparent 60%, #000);
           z-index: 2;
         }
 
@@ -353,11 +388,11 @@ const ConsultancySection: React.FC = () => {
                   </select>
                 </div>
 
-                <div className="mb-2">
+                <div className="mb-6">
                   <label className="form-label">Brief Goal Description</label>
                   <textarea 
                     className="form-field"
-                    rows={3}
+                    rows={4}
                     placeholder="What would you like to achieve?"
                     value={goal}
                     onChange={(e) => setGoal(e.target.value)}
@@ -366,24 +401,12 @@ const ConsultancySection: React.FC = () => {
                   />
                 </div>
 
-                <div className="mb-4">
-                  <label className="form-label">Email / Telegram</label>
-                  <input 
-                    type="text"
-                    className="form-field"
-                    placeholder="Your contact info"
-                    value={contact}
-                    onChange={(e) => setContact(e.target.value)}
-                    required
-                  />
-                </div>
-
                 <button 
                   type="submit" 
                   disabled={loading}
                   className="btn-submit"
                 >
-                  {loading ? 'ANALYZING...' : 'SEND'}
+                  {loading ? 'OPENING TELEGRAM...' : 'SEND'}
                 </button>
               </form>
             )}

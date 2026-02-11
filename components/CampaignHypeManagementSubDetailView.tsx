@@ -1,19 +1,46 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const CampaignHypeManagementSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
+  const [goal, setGoal] = useState('');
+  const [reach, setReach] = useState('');
 
   const toggleFaq = (index: number) => setOpenFaq(openFaq === index ? null : index);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject('Hype Management', 'Viral campaign and community excitement analysis.');
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Announcement Goal": goal,
+        "Community Reach Targets": reach,
+        "Type": "Campaign & Hype Management Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject('Hype Management', `Goal: ${goal}. Reach: ${reach}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -81,9 +108,13 @@ const CampaignHypeManagementSubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Hype Strategy</h3>
               {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="form-control" placeholder="Announcement Goal (Launch, Mint, etc.)" required />
-                  <textarea className="form-control" rows={3} placeholder="Current community size and target reach?" required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'IDEATING...' : 'GENERATE CAMPAIGN'}</button>
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Announcement Goal*</p>
+                  <input type="text" className="form-control" placeholder="e.g. Launch, Mint, Listing" value={goal} onChange={e=>setGoal(e.target.value)} required />
+                  
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Community Reach*</p>
+                  <textarea className="form-control" rows={3} placeholder="Current community size and target reach?" value={reach} onChange={e=>setReach(e.target.value)} required />
+                  
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GENERATE CAMPAIGN'}</button>
                 </form>
               )}
             </div>
@@ -174,7 +205,7 @@ const CampaignHypeManagementSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/kripto-ve-web3-pazarlama'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
+        <button onClick={() => window.location.hash = '#services/crypto-marketing'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

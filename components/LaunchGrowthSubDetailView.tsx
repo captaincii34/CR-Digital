@@ -1,16 +1,45 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const LaunchGrowthSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [userCount, setUserCount] = useState('');
+  const [growthGoal, setGrowthGoal] = useState('');
   const [loading, setLoading] = useState(false);
   
   const toggleFaq = (index: number) => setOpenFaq(openFaq === index ? null : index);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    setTimeout(() => setLoading(false), 2000);
+
+    try {
+      const formObj = {
+        "Current User Base": userCount,
+        "Growth Objective": growthGoal,
+        "Type": "Launch & Growth Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      await evaluateProject('growth', `Users: ${userCount}. Goal: ${growthGoal}`);
+      alert("Connected! Our growth team will contact you shortly.");
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -55,6 +84,7 @@ const LaunchGrowthSubDetailView: React.FC = () => {
         .hero-grid { display: grid; grid-template-columns: 1fr; gap: 60px; position: relative; z-index: 10; width: 100%; }
         @media (min-width: 1024px) { .hero-grid { grid-template-columns: 1.2fr 1fr; align-items: center; } }
         .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; color: #000; width: 100%; max-width: 480px; margin: 0 auto; box-shadow: 0 40px 80px rgba(0,0,0,0.7); }
+        .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; color: #000; margin-bottom: 16px; font-size: 14px; }
         .form-button { width: 100%; background: var(--cray-gold); color: #000; padding: 18px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
 
         .reasons-grid { display: grid; grid-template-columns: 1fr; gap: 32px; position: relative; z-index: 10; }
@@ -91,14 +121,35 @@ const LaunchGrowthSubDetailView: React.FC = () => {
           <div className="hero-grid">
             <div>
               <h1 className="h1-style">Launch & Growth Consulting</h1>
-              <p className="hero-desc p-style">Enter the market like a storm and stay there. We make your project permanent with the right timing and scalable growth engines.</p>
+              <p className="p-style">Enter the market like a storm and stay there. We make your project permanent with the right timing and scalable growth engines.</p>
             </div>
             <div className="form-card">
               <h3 className="h2-style" style={{textAlign: 'center', marginBottom: '20px', fontSize: '20px !important', color: '#000'}}>Growth Plan</h3>
               <form onSubmit={handleSubmit}>
-                <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Current User Count" required />
-                <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="What is your 3-month growth target?" required />
-                <button type="submit" disabled={loading} className="form-button">{loading ? 'PREPARING STRATEGY...' : 'GET LISTING & GROWTH PLAN'}</button>
+                <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Current User Count*</p>
+                <input 
+                  type="text" 
+                  className="form-control" 
+                  placeholder="Total current users" 
+                  value={userCount}
+                  onChange={e => setUserCount(e.target.value)}
+                  required 
+                />
+
+                <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Growth Target*</p>
+                <textarea 
+                  className="form-control" 
+                  rows={4} 
+                  placeholder="What is your 3-month growth target?" 
+                  value={growthGoal}
+                  onChange={e => setGrowthGoal(e.target.value)}
+                  required 
+                  style={{ resize: 'none' }}
+                />
+
+                <button type="submit" disabled={loading} className="form-button">
+                  {loading ? 'OPENING TELEGRAM...' : 'GET LISTING & GROWTH PLAN'}
+                </button>
               </form>
             </div>
           </div>
@@ -182,8 +233,8 @@ const LaunchGrowthSubDetailView: React.FC = () => {
         </div>
       </section>
 
-      <div style={{ padding: '80px 0', textAlign: 'center', background: '#000' }}>
-        <button onClick={() => window.location.hash = 'services/end-to-end-crypto-project-consulting'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
+      <div style={{ padding: '60px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
+        <button onClick={() => window.location.hash = 'services/end-to-end-crypto-project-consulting'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Category</button>
       </div>
     </div>
   );

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const WhitepaperPreparationSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [status, setStatus] = useState('');
   const [goal, setGoal] = useState('');
-  const [contact, setContact] = useState('');
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
@@ -13,10 +13,40 @@ const WhitepaperPreparationSubDetailView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject(status, `Whitepaper: ${goal}`);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const typeLabels: { [key: string]: string } = {
+        'white': 'Whitepaper',
+        'lite': 'Litepaper',
+        'pitch': 'Pitch Deck (Content)'
+      };
+
+      const formObj = {
+        "Document Category": typeLabels[status] || status,
+        "Technical Main Headings": goal,
+        "Type": "Whitepaper Preparation Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject(status, `Whitepaper: ${goal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -67,16 +97,6 @@ const WhitepaperPreparationSubDetailView: React.FC = () => {
         .reason-card:hover { transform: translateY(-10px); border-color: var(--cray-gold); background: rgba(255, 177, 0, 0.15); }
         .reason-icon-box { width: 60px; height: 60px; background-color: var(--cray-gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.3); }
 
-        .detail-row { display: flex; flex-direction: column; gap: 100px; }
-        .detail-item { display: flex; flex-direction: column; gap: 60px; align-items: center; width: 100%; }
-        @media (min-width: 1024px) { 
-            .detail-item { flex-direction: row; } 
-            .detail-item.reverse { flex-direction: row-reverse; } 
-            .detail-text, .detail-visual { width: 50%; flex: 1; }
-        }
-        .detail-visual { border-radius: 32px; overflow: hidden; height: 500px; border: 1px solid rgba(255,177,0,0.2); position: relative; width: 100%; }
-        .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
-        
         .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
         .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
         .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
@@ -97,15 +117,19 @@ const WhitepaperPreparationSubDetailView: React.FC = () => {
               <p className="p-style" style={{marginTop: '20px', lineHeight: '1.7'}}>We write your project’s manifesto. Stand out with professional documents that have high technical depth, are visionary, and prompt investors to take action.</p>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Draft Analysis</h3>
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Manifesto Drafting</h3>
               {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Try Again</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <select className="form-control" required>
-                    <option value="">Document Type</option><option value="white">Whitepaper</option><option value="lite">Litepaper</option><option value="pitch">Pitch Deck (Content)</option>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Document Category*</p>
+                  <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
+                    <option value="">Select Type</option>
+                    <option value="white">Whitepaper</option>
+                    <option value="lite">Litepaper</option>
+                    <option value="pitch">Pitch Deck (Content)</option>
                   </select>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Technical Headings*</p>
                   <textarea className="form-control" rows={3} placeholder="State the technical main headings of your project..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'PROCESSING...' : 'CREATE DRAFT PLAN'}</button>
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'CREATE DRAFT PLAN'}</button>
                 </form>
               )}
             </div>
@@ -126,45 +150,6 @@ const WhitepaperPreparationSubDetailView: React.FC = () => {
                 <p className="p-style" style={{fontSize: '14px'}}>{r.desc}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-padding" style={{background: '#050505'}}>
-        <div className="container-xl">
-          <div className="detail-row">
-            <div className="detail-item">
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?q=80&w=2000" alt="MANIFESTO" />
-              </div>
-              <div className="detail-text">
-                <h2 className="h2-style">Technical Manifesto Drafting</h2>
-                <p className="p-style">A great project needs a solid constitutional document. We draft comprehensive technical manifestos that explain your consensus mechanisms, cryptographic protocols, and core architectural innovations in a way that establishes industry-leading authority.</p>
-                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
-                  {["Architecture Deep-Dives", "Network Governance Specs", "Mathematical Proof Annexes"].map((li, i) => (
-                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
-                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div className="detail-item reverse">
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2000" alt="STORYTELLING" />
-              </div>
-              <div className="detail-text">
-                <h2 className="h2-style">Visionary Storytelling for VCs</h2>
-                <p className="p-style">Investors look for vision, not just variables. We refine your message to highlight the "Why" behind your technology, using powerful storytelling and clear logic to prove your project's potential for mass adoption and high-tier market dominance.</p>
-                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
-                  {["Product-Market Fit Narrative", "Scalable Growth Projection", "Competitive Moat Strategy"].map((li, i) => (
-                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
-                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
           </div>
         </div>
       </section>

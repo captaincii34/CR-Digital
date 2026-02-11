@@ -1,19 +1,46 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const CryptoPerformanceMarketingSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
+  const [budget, setBudget] = useState('');
+  const [goal, setGoal] = useState('');
 
   const toggleFaq = (index: number) => setOpenFaq(openFaq === index ? null : index);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject('Performance Marketing', 'ROI analysis for Web3 ad networks.');
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Monthly Budget ($)": budget,
+        "Primary Conversion Goal": goal,
+        "Type": "Crypto Performance Marketing Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject('Performance Marketing', `Budget: ${budget}. Goal: ${goal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -88,9 +115,13 @@ const CryptoPerformanceMarketingSubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get ROI Quote</h3>
               {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="form-control" placeholder="Estimated Monthly Budget ($)" required />
-                  <textarea className="form-control" rows={3} placeholder="What is your primary conversion goal?" required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'ANALYZING...' : 'GET PERFORMANCE PLAN'}</button>
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Estimated Monthly Budget ($)*</p>
+                  <input type="text" className="form-control" placeholder="e.g. 10000" value={budget} onChange={e=>setBudget(e.target.value)} required />
+                  
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Conversion Goal*</p>
+                  <textarea className="form-control" rows={3} placeholder="What is your primary conversion goal?" value={goal} onChange={e=>setGoal(e.target.value)} required />
+                  
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GET PERFORMANCE PLAN'}</button>
                 </form>
               )}
             </div>
@@ -181,7 +212,7 @@ const CryptoPerformanceMarketingSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/kripto-ve-web3-pazarlama'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
+        <button onClick={() => window.location.hash = '#services/crypto-marketing'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Category</button>
       </div>
     </div>
   );

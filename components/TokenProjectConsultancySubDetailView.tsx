@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const TokenProjectConsultancySubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [status, setStatus] = useState('');
   const [goal, setGoal] = useState('');
-  const [contact, setContact] = useState('');
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
@@ -13,10 +13,39 @@ const TokenProjectConsultancySubDetailView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject(status, `Token Project Consulting: ${goal}`);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const statusLabels: { [key: string]: string } = {
+        'new': 'New Project',
+        'current': 'Current Project Optimization'
+      };
+
+      const formObj = {
+        "Need Status": statusLabels[status] || status,
+        "Project Goal Description": goal,
+        "Type": "Token Project Consulting Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject(status, `Token Project Consulting: ${goal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -102,12 +131,15 @@ const TokenProjectConsultancySubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Free Pre-Evaluation</h3>
               {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Try Again</button></div> : (
                 <form onSubmit={handleSubmit}>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Need Status*</p>
                   <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
-                    <option value="">Need Status</option><option value="new">New Project</option><option value="current">Current Project Optimization</option>
+                    <option value="">Select Status</option>
+                    <option value="new">New Project</option>
+                    <option value="current">Current Project Optimization</option>
                   </select>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Goal Summary*</p>
                   <textarea className="form-control" rows={3} placeholder="Briefly describe the main goal of your project..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'ANALYZING...' : 'GET ANALYSIS REPORT'}</button>
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GET ANALYSIS REPORT'}</button>
                 </form>
               )}
             </div>
@@ -198,7 +230,7 @@ const TokenProjectConsultancySubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
-        <button onClick={() => window.location.hash = '#services/end-to-end-crypto-project-consulting'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
+        <button onClick={() => window.location.hash = '#services/token-and-blockchain-development'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Category</button>
       </div>
     </div>
   );

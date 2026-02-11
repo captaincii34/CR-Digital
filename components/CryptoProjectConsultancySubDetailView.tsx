@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const CryptoProjectConsultancySubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [status, setStatus] = useState('');
   const [goal, setGoal] = useState('');
-  const [contact, setContact] = useState('');
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
@@ -13,17 +13,47 @@ const CryptoProjectConsultancySubDetailView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject(status, goal);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const statusLabels: { [key: string]: string } = {
+        'new': 'New Idea / Concept',
+        'development': 'Under Development',
+        'ready': 'Ready for Launch'
+      };
+
+      const formObj = {
+        "Project Phase": statusLabels[status] || status,
+        "Primary Goal": goal,
+        "Type": "Crypto Project Consulting Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject(status, goal);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
     {
       icon: <><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></>,
       title: 'NDA & Confidentiality Priority',
-      desc: 'The security of your projects and the protection of your ideas is our most sacred rule.'
+      desc: 'The security of your projects and the protection of your ideas is our most important concern.'
     },
     {
       icon: <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>,
@@ -70,7 +100,7 @@ const CryptoProjectConsultancySubDetailView: React.FC = () => {
         .feature-item-text { color: #fff; font-weight: 700 !important; font-size: 11px !important; text-transform: uppercase; letter-spacing: 1px; }
 
         .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: 0 auto; }
-        .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; color: #000; margin-bottom: 16px; }
+        .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; color: #000; margin-bottom: 16px; font-size: 14px; }
         .form-button { width: 100%; background: var(--cray-gold); color: #000; padding: 18px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
         
         .why-us-section { position: relative; }
@@ -92,7 +122,7 @@ const CryptoProjectConsultancySubDetailView: React.FC = () => {
         .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
 
         .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
-        .cta-btn { background: var(--cray-gold); color: #000; padding: 20px 48px; border-radius: 12px; font-weight: 700 !important; display: inline-block; transition: 0.3s; margin-top: 32px; }
+        .cta-btn { background: var(--cray-gold); color: #000; padding: 20px 48px; border-radius: 12px; font-weight: 700 !important; display: inline-block; transition: 0.3s; margin-top: 32px; text-decoration: none; }
         .cta-btn:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(255,177,0,0.4); }
 
         .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
@@ -125,17 +155,35 @@ const CryptoProjectConsultancySubDetailView: React.FC = () => {
             </div>
             <div className="form-card">
               <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px'}}>Project Analysis</h3>
-              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
+              {aiResult ? (
+                <div className="p-style text-center" style={{color: '#000'}}>
+                  {aiResult.summary}
+                  <button onClick={()=>setAiResult(null)} className="form-button mt-10">Reset Analysis</button>
+                </div>
+              ) : (
                 <form onSubmit={handleSubmit}>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Project Phase*</p>
                   <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
-                    <option value="">Need Stage</option>
+                    <option value="">Select Phase</option>
                     <option value="new">New Idea / Concept</option>
                     <option value="development">Under Development</option>
                     <option value="ready">Ready for Launch</option>
                   </select>
-                  <textarea className="form-control" rows={3} placeholder="Briefly describe the main goal of your project..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'ANALYZING...' : 'GET STRATEGIC ANALYSIS'}</button>
+
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Main Goal Description*</p>
+                  <textarea 
+                    className="form-control" 
+                    rows={4} 
+                    placeholder="Briefly describe the main goal of your project..." 
+                    value={goal} 
+                    onChange={e=>setGoal(e.target.value)} 
+                    required 
+                    style={{ resize: 'none' }}
+                  />
+
+                  <button type="submit" disabled={loading} className="form-button">
+                    {loading ? 'OPENING TELEGRAM...' : 'GET STRATEGIC ANALYSIS'}
+                  </button>
                 </form>
               )}
             </div>
@@ -239,7 +287,7 @@ const CryptoProjectConsultancySubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
-        <button onClick={() => window.location.hash = 'services/end-to-end-crypto-project-consulting'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
+        <button onClick={() => window.location.hash = 'services/end-to-end-crypto-project-consulting'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Category</button>
       </div>
     </div>
   );

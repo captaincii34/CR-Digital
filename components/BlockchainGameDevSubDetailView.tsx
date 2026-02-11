@@ -1,12 +1,11 @@
-
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const BlockchainGameDevSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [status, setStatus] = useState('');
   const [goal, setGoal] = useState('');
-  const [contact, setContact] = useState('');
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
@@ -14,10 +13,34 @@ const BlockchainGameDevSubDetailView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject(status, `Blockchain Game: ${goal}`);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Development Status": status,
+        "Core Loop/Features": goal,
+        "Type": "Blockchain Game Dev Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject(status, `Blockchain Game: ${goal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -49,6 +72,7 @@ const BlockchainGameDevSubDetailView: React.FC = () => {
         .reason-card { padding: 48px 32px; border-radius: 24px; text-align: center; background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); transition: 0.4s; }
         .reason-card:hover { transform: translateY(-10px); border-color: var(--cray-gold); background: rgba(255, 177, 0, 0.15); }
         .reason-icon-box { width: 60px; height: 60px; background-color: var(--cray-gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.3); }
+
         .detail-row { display: flex; flex-direction: column; gap: 100px; }
         .detail-item { display: flex; flex-direction: column; gap: 60px; align-items: center; width: 100%; }
         @media (min-width: 1024px) { 
@@ -58,15 +82,8 @@ const BlockchainGameDevSubDetailView: React.FC = () => {
         }
         .detail-visual { border-radius: 32px; overflow: hidden; height: 500px; border: 1px solid rgba(255,177,0,0.2); position: relative; width: 100%; }
         .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
-        .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
-        .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
-        .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        .faq-accordion-body { padding: 0 32px 28px; color: #9ca3af; display: none; }
-        .faq-accordion-item.active .faq-accordion-body { display: block; }
-        .faq-accordion-item.active .faq-accordion-header { color: var(--cray-gold); }
       `}</style>
 
-      {/* Hero Section */}
       <section id="h-hero">
         <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2832" className="bg-img" alt="Game Development" />
         <div className="overlay"></div><div className="grad"></div>
@@ -81,15 +98,16 @@ const BlockchainGameDevSubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Game Analysis</h3>
               {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Status*</p>
                   <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
                     <option value="">Status</option>
                     <option value="concept">Concept Only</option>
                     <option value="dev">In Development</option>
                     <option value="live">Live / Refactoring</option>
                   </select>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Core Loop/Features*</p>
                   <textarea className="form-control" rows={3} placeholder="Describe your game's core loop and Web3 features..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'ANALYZING...' : 'GET GAME PLAN'}</button>
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GET GAME PLAN'}</button>
                 </form>
               )}
             </div>
@@ -97,7 +115,6 @@ const BlockchainGameDevSubDetailView: React.FC = () => {
         </div>
       </section>
 
-      {/* Reasons Section */}
       <section className="section-padding">
         <div className="container-xl">
           <div className="reasons-grid">
@@ -114,51 +131,8 @@ const BlockchainGameDevSubDetailView: React.FC = () => {
         </div>
       </section>
 
-      {/* Detailed Info Section */}
-      <section className="info-detail-section section-padding" style={{background: '#050505'}}>
-        <div className="container-xl">
-          <div className="detail-row">
-            <div className="detail-item">
-              <div className="detail-text">
-                <h2 className="h2-style" style={{marginBottom: '20px'}}>True Asset Ownership</h2>
-                <p className="p-style" style={{color: '#d1d5db', lineHeight: '1.8'}}>
-                  In blockchain gaming, items aren't just pixels; they are assets. We integrate NFT standards that allow players to trade, sell, or even use their game items across different platforms, creating real economic value.
-                </p>
-              </div>
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2000" alt="Game Asset" />
-              </div>
-            </div>
-
-            <div className="detail-item reverse">
-              <div className="detail-text">
-                <h2 className="h2-style" style={{marginBottom: '20px'}}>Advanced Game Economies</h2>
-                <p className="p-style" style={{color: '#d1d5db', lineHeight: '1.8'}}>
-                  We design Play-to-Earn (P2E) models that prioritize sustainability. By balancing token emissions with utility and burn mechanisms, we ensure your game's economy thrives over the long term.
-                </p>
-              </div>
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?q=80&w=2000" alt="Game Economy" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="cta-box-section">
-        <div className="container-xl">
-          <h2 className="h2-style" style={{color: '#000'}}>Build the Next Generation of Gaming</h2>
-          <p className="p-style" style={{color: '#555', maxWidth: '800px', margin: '20px auto 0'}}>
-            Whether you're building a hyper-casual mobile game or a AAA metaverse, our team has the expertise to integrate Web3 features seamlessly.
-          </p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Request Game Consultation</a>
-        </div>
-      </section>
-
-      {/* Back Button */}
-      <div style={{ padding: '60px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
+      <div style={{ padding: '60px 0', textAlign: 'center' }}>
+        <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

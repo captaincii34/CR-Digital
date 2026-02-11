@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const PitchDeckPreparationSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [status, setStatus] = useState('');
   const [goal, setGoal] = useState('');
-  const [contact, setContact] = useState('');
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
@@ -13,10 +13,40 @@ const PitchDeckPreparationSubDetailView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject(status, `Pitch Deck: ${goal}`);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const typeLabels: { [key: string]: string } = {
+        'seed': 'Seed',
+        'private': 'Private',
+        'strategic': 'Strategic'
+      };
+
+      const formObj = {
+        "Investment Round": typeLabels[status] || status,
+        "Vision Summary": goal,
+        "Type": "Pitch Deck Preparation Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject(status, `Pitch Deck: ${goal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -52,7 +82,7 @@ const PitchDeckPreparationSubDetailView: React.FC = () => {
         .bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
         .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.85); z-index: 1; }
         .grad { position: absolute; inset: 0; background: linear-gradient(to bottom, #000, transparent 40%, transparent 60%, #000); z-index: 2; }
-        .h1-style { font-size: 40px !important; font-weight: 700 !important; }
+        .h1-style { font-size: 40px !important; font-weight: 700 !important; line-height: 1.2; }
         .h2-style { font-size: 32px !important; font-weight: 700 !important; }
         .p-style { font-size: 16px !important; font-weight: 300 !important; color: #d1d5db; line-height: 1.8; }
         #h-hero { position: relative; padding: 220px 0 120px; min-height: 85vh; display: flex; align-items: center; }
@@ -66,25 +96,13 @@ const PitchDeckPreparationSubDetailView: React.FC = () => {
         .reason-card { padding: 48px 32px; border-radius: 24px; text-align: center; background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); transition: 0.4s; }
         .reason-card:hover { transform: translateY(-10px); border-color: var(--cray-gold); background: rgba(255, 177, 0, 0.15); }
         .reason-icon-box { width: 60px; height: 60px; background-color: var(--cray-gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.3); }
-        .info-detail-section { background: #050505; }
-        .detail-row { display: flex; flex-direction: column; gap: 100px; }
-        .detail-item { display: flex; flex-direction: column; gap: 60px; align-items: center; width: 100%; }
-        @media (min-width: 1024px) { 
-            .detail-item { flex-direction: row; } 
-            .detail-item.reverse { flex-direction: row-reverse; } 
-            .detail-text, .detail-visual { width: 50%; flex: 1; }
-        }
-        .detail-visual { border-radius: 32px; overflow: hidden; height: 500px; border: 1px solid rgba(255,177,0,0.2); position: relative; width: 100%; }
-        .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
+
         .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
         .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
         .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; width: 100%; text-align: left; }
         .faq-accordion-body { padding: 0 32px 28px; color: #9ca3af; display: none; }
         .faq-accordion-item.active .faq-accordion-body { display: block; }
         .faq-accordion-item.active .faq-accordion-header { color: var(--cray-gold); }
-        .bullet-point { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-        .bullet-icon { width: 20px; height: 20px; background: var(--cray-gold); border-radius: 50%; display: flex; align-items: center; justifyContent: center; flex-shrink: 0; }
-        .bullet-text { font-size: 11px !important; font-weight: 700 !important; text-transform: uppercase; letter-spacing: 1px; color: #fff; }
       `}</style>
 
       {/* 1. Hero */}
@@ -97,21 +115,21 @@ const PitchDeckPreparationSubDetailView: React.FC = () => {
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Investor-Oriented Presentation</h5>
               <h1 className="h1-style">Pitch Deck & Investor Presentations</h1>
               <p className="p-style" style={{marginTop: '20px', lineHeight: '1.7'}}>Your most powerful weapon to put on the investor's table. Present the potential of your project with professional designs and convincing data.</p>
-              <div style={{marginTop: '32px', display: 'flex', flexWrap: 'wrap', gap: '15px'}}>
-                <span style={{background: 'rgba(255,177,0,0.1)', color: 'var(--cray-gold)', padding: '8px 16px', borderRadius: '30px', fontSize: '12px', fontWeight: 700}}>✓ VC COMPLIANT</span>
-                <span style={{background: 'rgba(255,177,0,0.1)', color: 'var(--cray-gold)', padding: '8px 16px', borderRadius: '30px', fontSize: '12px', fontWeight: 700}}>✓ STRATEGIC STORY</span>
-              </div>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Presentation Analysis</h3>
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Presentation Plan</h3>
               {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Try Again</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <select className="form-control" required>
-                    <option value="">Investment Round</option><option value="seed">Seed</option><option value="private">Private</option><option value="strategic">Strategic</option>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Investment Round*</p>
+                  <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
+                    <option value="">Select Round</option>
+                    <option value="seed">Seed</option>
+                    <option value="private">Private</option>
+                    <option value="strategic">Strategic</option>
                   </select>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Vision Summary*</p>
                   <textarea className="form-control" rows={3} placeholder="Summarize your project and targeted investment amount..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'PROCESSING...' : 'GET STRATEGIC ANALYSIS'}</button>
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GET STRATEGIC ANALYSIS'}</button>
                 </form>
               )}
             </div>
@@ -121,8 +139,6 @@ const PitchDeckPreparationSubDetailView: React.FC = () => {
 
       {/* 2. Box Section */}
       <section className="section-padding">
-        <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=2000" className="bg-img" alt="Boxes Background" />
-        <div className="overlay" style={{background: 'rgba(0,0,0,0.85)'}}></div>
         <div className="container-xl">
           <div className="reasons-grid">
             {reasons.map((r, i) => (
@@ -138,48 +154,6 @@ const PitchDeckPreparationSubDetailView: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. Detailed Content (Z-Pattern %50-%50) */}
-      <section className="info-detail-section section-padding">
-        <div className="container-xl">
-          <div className="detail-row">
-            <div className="detail-item">
-              <div className="detail-text">
-                <h2 className="h2-style">Storytelling</h2>
-                <p className="p-style" style={{marginTop: '24px', lineHeight: '1.8'}}>Investors don’t just invest in numbers, they invest in a vision. We construct the story of your project so it resonates with VCs and strategic partners alike, focusing on the problem you solve and the future you are building.</p>
-                <ul style={{marginTop: '32px', listStyle: 'none', padding: 0}}>
-                   {["Market Analysis", "Competitive Advantage", "Financial Projections"].map((item, i) => (
-                    <li key={i} className="p-style" style={{marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '12px'}}>
-                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2000" alt="Pitch Content" />
-              </div>
-            </div>
-
-            <div className="detail-item reverse">
-              <div className="detail-text">
-                <h2 className="h2-style">Data-Driven Insights</h2>
-                <p className="p-style" style={{marginTop: '24px', lineHeight: '1.8'}}>A great design must be backed by solid numbers. We ensure your deck includes clear market analysis, revenue projections, and technical milestones that demonstrate a clear path to success and profitability.</p>
-                <ul style={{marginTop: '32px', listStyle: 'none', padding: 0}}>
-                   {["Tokenomics Deep Dive", "Go-To-Market Roadmap", "Risk Mitigation Strategy"].map((item, i) => (
-                    <li key={i} className="p-style" style={{marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '12px'}}>
-                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=2000" alt="Data Structure" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. CTA Band */}
       <section className="cta-box-section">
         <div className="container-xl">
           <h2 className="h2-style">Ready to Impress Your Next Investor?</h2>
@@ -188,7 +162,6 @@ const PitchDeckPreparationSubDetailView: React.FC = () => {
         </div>
       </section>
 
-      {/* 5. FAQ Section */}
       <section className="section-padding">
         <div className="container-xl">
           <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>

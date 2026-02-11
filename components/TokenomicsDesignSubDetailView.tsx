@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const TokenomicsDesignSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [status, setStatus] = useState('');
   const [goal, setGoal] = useState('');
-  const [contact, setContact] = useState('');
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
@@ -13,10 +13,40 @@ const TokenomicsDesignSubDetailView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject(status, `Tokenomics: ${goal}`);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const typeLabels: { [key: string]: string } = {
+        'utility': 'Utility',
+        'governance': 'Governance',
+        'reward': 'Reward'
+      };
+
+      const formObj = {
+        "Economic Focus": typeLabels[status] || status,
+        "Supply & Distribution Plan": goal,
+        "Type": "Tokenomics Design Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject(status, `Tokenomics: ${goal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -67,16 +97,6 @@ const TokenomicsDesignSubDetailView: React.FC = () => {
         .reason-card:hover { transform: translateY(-10px); border-color: var(--cray-gold); background: rgba(255, 177, 0, 0.15); }
         .reason-icon-box { width: 60px; height: 60px; background-color: var(--cray-gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.3); }
 
-        .detail-row { display: flex; flex-direction: column; gap: 100px; }
-        .detail-item { display: flex; flex-direction: column; gap: 60px; align-items: center; width: 100%; }
-        @media (min-width: 1024px) { 
-            .detail-item { flex-direction: row; } 
-            .detail-item.reverse { flex-direction: row-reverse; } 
-            .detail-text, .detail-visual { width: 50%; flex: 1; }
-        }
-        .detail-visual { border-radius: 32px; overflow: hidden; height: 500px; border: 1px solid rgba(255,177,0,0.2); position: relative; width: 100%; }
-        .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
-        
         .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
         .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
         .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
@@ -85,7 +105,7 @@ const TokenomicsDesignSubDetailView: React.FC = () => {
         .faq-accordion-item.active .faq-accordion-header { color: var(--cray-gold); }
       `}</style>
 
-      {/* 1. Hero */}
+      {/* Hero */}
       <section id="h-hero">
         <img src="https://images.unsplash.com/photo-1611974714851-eb6053e623e4?q=80&w=2832" className="bg-img" alt="Tokenomics" />
         <div className="overlay"></div><div className="grad"></div>
@@ -97,15 +117,19 @@ const TokenomicsDesignSubDetailView: React.FC = () => {
               <p className="p-style" style={{marginTop: '20px', lineHeight: '1.7'}}>The success of a token depends not only on technology but also on the economic model behind it. Secure your project by constructing a sustainable token economy.</p>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Economy Analysis</h3>
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Economy Analysis</h3>
               {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Try Again</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <select className="form-control" required>
-                    <option value="">Token Goal</option><option value="utility">Utility</option><option value="governance">Governance</option><option value="reward">Reward</option>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Token Goal*</p>
+                  <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
+                    <option value="">Select Focus</option>
+                    <option value="utility">Utility</option>
+                    <option value="governance">Governance</option>
+                    <option value="reward">Reward</option>
                   </select>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Supply & Distribution*</p>
                   <textarea className="form-control" rows={3} placeholder="State targeted total supply and distribution plan if available..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'CALCULATING...' : 'GET TOKENOMICS PLAN'}</button>
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GET TOKENOMICS PLAN'}</button>
                 </form>
               )}
             </div>
@@ -113,7 +137,7 @@ const TokenomicsDesignSubDetailView: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. Box Section */}
+      {/* Reasons */}
       <section className="section-padding">
         <div className="container-xl">
           <div className="reasons-grid">
@@ -126,45 +150,6 @@ const TokenomicsDesignSubDetailView: React.FC = () => {
                 <p className="p-style" style={{fontSize: '14px'}}>{r.desc}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-padding" style={{background: '#050505'}}>
-        <div className="container-xl">
-          <div className="detail-row">
-            <div className="detail-item">
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1611974714851-eb6053e623e4?q=80&w=2000" alt="Scarcity" />
-              </div>
-              <div className="detail-text">
-                <h2 className="h2-style">Mathematical Simulation of Scarcity</h2>
-                <p className="p-style">We don't guess; we simulate. We model your token's supply-demand curve across multiple market scenarios to ensure that your scarcity mechanisms (like burns and rewards) maintain healthy price pressure even during bearish cycles.</p>
-                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
-                  {["Deflationary Mechanism Design", "Emission Velocity Modeling", "Supply Shock Analysis"].map((li, i) => (
-                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
-                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div className="detail-item reverse">
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1642104704074-907c0698bcd9?q=80&w=2000" alt="Incentives" />
-              </div>
-              <div className="detail-text">
-                <h2 className="h2-style">Dynamic Incentive Structures</h2>
-                <p className="p-style">User retention is built on rewards that matter. We design stake-to-earn, participate-to-earn, and governance reward models that align user behavior with the long-term success of the project.</p>
-                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
-                  {["Multi-Tiered Staking Models", "Governance Power Architecture", "Ecosystem Grant Allocations"].map((li, i) => (
-                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
-                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
           </div>
         </div>
       </section>

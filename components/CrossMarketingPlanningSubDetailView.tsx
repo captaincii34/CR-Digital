@@ -1,19 +1,48 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const CrossMarketingPlanningSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
+  // Form states
+  const [channel, setChannel] = useState("");
+  const [partnerType, setPartnerType] = useState("");
+
   const toggleFaq = (index: number) => setOpenFaq(openFaq === index ? null : index);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject('Cross Marketing', 'Shared audience sharing and joint campaign analysis.');
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Primary Social Channel": channel,
+        "Partner Project Type": partnerType,
+        "Type": "Cross-Marketing Planning Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject('Cross Marketing', `Channel: ${channel}. Target Partner: ${partnerType}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -97,12 +126,14 @@ const CrossMarketingPlanningSubDetailView: React.FC = () => {
               </div>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Campaign Analysis</h3>
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Cross-Marketing Brief</h3>
               {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Your Primary Social Channel" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="What type of project would you like to partner with?" required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'MATCHING...' : 'GET JOINT CAMPAIGN PLAN'}</button>
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Primary Social Channel*</p>
+                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="e.g. X (Twitter), Telegram" value={channel} onChange={e=>setChannel(e.target.value)} required />
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Partner Target*</p>
+                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="What type of project would you like to partner with?" value={partnerType} onChange={e=>setPartnerType(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GET JOINT CAMPAIGN PLAN'}</button>
                 </form>
               )}
             </div>
@@ -130,21 +161,21 @@ const CrossMarketingPlanningSubDetailView: React.FC = () => {
         <div className="container-xl">
           <div className="detail-row">
             <div className="detail-item">
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2000" alt="Audience Growth" />
+              </div>
               <div className="detail-text">
                 <h2 className="h2-style">Build a Trust Bridge Between Communities</h2>
                 <p className="p-style">A crypto investor is far more likely to believe a partnership announcement from a project they already trust than to respond to an ad. We kurgu this "social proof" mechanism for your brand in the most efficient way.</p>
               </div>
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2000" alt="Audience Growth" />
-              </div>
             </div>
             <div className="detail-item reverse">
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2000" alt="Gamified Marketing" />
+              </div>
               <div className="detail-text">
                 <h2 className="h2-style">Gamifying Engagement</h2>
                 <p className="p-style">We go beyond ordinary "follow - RT" tasks. We make waves with gamified kurgular that add value to the ecosystems of both projects, providing special advantages to holders of both tokens and exciting the community.</p>
-              </div>
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2000" alt="Gamified Marketing" />
               </div>
             </div>
           </div>
@@ -153,7 +184,7 @@ const CrossMarketingPlanningSubDetailView: React.FC = () => {
 
       <section className="cta-box-section">
         <div className="container-xl">
-          <h2 className="h2-style">Grow Stronger Together</h2>
+          <h2 className="h2-style" style={{color: '#000'}}>Grow Stronger Together</h2>
           <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Increase your loyal user base while saving on ad spend with the right "Cross-Marketing" move. Let us introduce you to projects that will create synergy.</p>
           <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Request Campaign Package</a>
         </div>

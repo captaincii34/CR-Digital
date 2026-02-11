@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const CryptoRoadmapTokenomicsSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [status, setStatus] = useState('');
   const [goal, setGoal] = useState('');
-  const [contact, setContact] = useState('');
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
@@ -13,10 +13,40 @@ const CryptoRoadmapTokenomicsSubDetailView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject(status, `Roadmap and Tokenomics Goal: ${goal}`);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const statusLabels: { [key: string]: string } = {
+        'idea': 'Idea Only',
+        'draft': 'Draft Ready',
+        'live': 'Live / Pivot'
+      };
+
+      const formObj = {
+        "Asset Status": statusLabels[status] || status,
+        "Token Use Case & Utility": goal,
+        "Type": "Crypto Roadmap Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject(status, `Roadmap and Tokenomics Goal: ${goal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -69,7 +99,7 @@ const CryptoRoadmapTokenomicsSubDetailView: React.FC = () => {
         .feature-item-text { color: #fff; font-weight: 700 !important; font-size: 11px !important; text-transform: uppercase; letter-spacing: 1px; }
 
         .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: 0 auto; }
-        .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; color: #000; margin-bottom: 16px; }
+        .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; color: #000; margin-bottom: 16px; font-size: 14px; }
         .form-button { width: 100%; background: var(--cray-gold); color: #000; padding: 18px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
         
         .reasons-grid { display: grid; grid-template-columns: 1fr; gap: 32px; position: relative; z-index: 10; }
@@ -119,14 +149,35 @@ const CryptoRoadmapTokenomicsSubDetailView: React.FC = () => {
             </div>
             <div className="form-card">
               <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px', color: '#000'}}>Economy Analysis</h3>
-              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
+              {aiResult ? (
+                <div className="p-style text-center" style={{color: '#000'}}>
+                  {aiResult.summary}
+                  <button onClick={()=>setAiResult(null)} className="form-button mt-10">Reset Analysis</button>
+                </div>
+              ) : (
                 <form onSubmit={handleSubmit}>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Token Status*</p>
                   <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
-                    <option value="">Token Status</option><option value="idea">Idea Only</option><option value="draft">Draft Ready</option><option value="live">Live / Pivot</option>
+                    <option value="">Select Status</option>
+                    <option value="idea">Idea Only</option>
+                    <option value="draft">Draft Ready</option>
+                    <option value="live">Live / Pivot</option>
                   </select>
-                  <textarea className="form-control" rows={3} placeholder="What is your token's intended utility?" value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="Telegram / Email" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'ANALYZING...' : 'GET ECONOMY PLAN'}</button>
+
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Utility & Goals*</p>
+                  <textarea 
+                    className="form-control" 
+                    rows={4} 
+                    placeholder="What is your token's intended utility?" 
+                    value={goal} 
+                    onChange={e=>setGoal(e.target.value)} 
+                    required 
+                    style={{ resize: 'none' }}
+                  />
+
+                  <button type="submit" disabled={loading} className="form-button">
+                    {loading ? 'OPENING TELEGRAM...' : 'GET ECONOMY PLAN'}
+                  </button>
                 </form>
               )}
             </div>
@@ -210,7 +261,7 @@ const CryptoRoadmapTokenomicsSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
-        <button onClick={() => window.location.hash = 'services/end-to-end-crypto-project-consulting'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
+        <button onClick={() => window.location.hash = 'services/end-to-end-crypto-project-consulting'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Category</button>
       </div>
     </div>
   );

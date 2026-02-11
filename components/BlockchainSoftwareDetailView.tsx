@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const BlockchainSoftwareDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [status, setStatus] = useState('');
   const [techStack, setTechStack] = useState('');
   const [goal, setGoal] = useState('');
-  const [contact, setContact] = useState('');
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
@@ -16,10 +16,41 @@ const BlockchainSoftwareDetailView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject(status, `Tech Need: ${techStack}. Goal: ${goal}`);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const statusLabels: { [key: string]: string } = {
+        'concept': 'Concept Only',
+        'development': 'Under Development',
+        'refactor': 'Refactoring Existing System'
+      };
+
+      const formObj = {
+        "Project Stage": statusLabels[status] || status,
+        "Required Tech Stack": techStack,
+        "Technical Goal": goal,
+        "Type": "Blockchain & Software Development Detail Page",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject(status, `Tech Need: ${techStack}. Goal: ${goal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const scopeCategories = [
@@ -201,13 +232,10 @@ const BlockchainSoftwareDetailView: React.FC = () => {
                       />
                     </div>
                     <div className="form-group">
-                      <textarea className="form-control p-style" rows={3} placeholder="What is your technical goal?" value={goal} onChange={(e) => setGoal(e.target.value)} required style={{resize: 'none'}} />
-                    </div>
-                    <div className="form-group">
-                      <input type="text" className="form-control p-style" placeholder="Email / Telegram" value={contact} onChange={(e) => setContact(e.target.value)} required />
+                      <textarea className="form-control p-style" rows={4} placeholder="What is your technical goal?" value={goal} onChange={(e) => setGoal(e.target.value)} required style={{resize: 'none'}} />
                     </div>
                     <button type="submit" disabled={loading} className="form-button">
-                      {loading ? 'ANALYZING...' : 'GET TECHNICAL PLAN'}
+                      {loading ? 'OPENING TELEGRAM...' : 'SEND'}
                     </button>
                   </form>
                 )}

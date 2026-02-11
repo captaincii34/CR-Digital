@@ -1,19 +1,47 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const InvestmentReadinessSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
+  const [url, setUrl] = useState('');
+  const [docsReady, setDocsReady] = useState('');
+
   const toggleFaq = (index: number) => setOpenFaq(openFaq === index ? null : index);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject('Investment Readiness', 'Internal audit and scoring for VC compatibility.');
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Project Website URL": url,
+        "Documentation Readiness": docsReady,
+        "Type": "Investment Readiness Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject('Investment Readiness', `URL: ${url}. Status: ${docsReady}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -23,10 +51,9 @@ const InvestmentReadinessSubDetailView: React.FC = () => {
   ];
 
   const faqs = [
-    { q: "What is an 'Investment Readiness Score'?", a: "It is an objective evaluation metric we calculate based on your tokenomics, technical documentation, community strength, and legal compliance. A high score significantly increases your success rate in VC meetings." },
-    { q: "How long does a full readiness audit take?", a: "Typically, a deep-dive internal audit takes 7-10 business days to complete, depending on the complexity of your project's architecture." },
-    { q: "Do you help us fix the identified red flags?", a: "Yes. Our audit doesn't just list problems; we provide a concrete improvement roadmap and can assist with technical or strategic adjustments through our expert team." },
-    { q: "Is this audit shared with investors?", a: "This is an internal audit for your own improvement. However, having a 'pre-audit' completed by CRAY Digital gives you a massive credibility boost when presenting to strategic partners." }
+    { q: "What is an 'Investment Readiness Score'?", a: "It is an objective evaluation metric we calculate based on your tokenomics, technical documentation, community strength, and legal compliance." },
+    { q: "How long does a full readiness audit take?", a: "Typically, a deep-dive internal audit takes 7-10 business days to complete, depending on project complexity." },
+    { q: "Do you help us fix the identified red flags?", a: "Yes. Our audit doesn't just list problems; we provide a concrete improvement roadmap and assist with adjustments." }
   ];
 
   return (
@@ -42,13 +69,9 @@ const InvestmentReadinessSubDetailView: React.FC = () => {
         .h2-style { font-size: 32px !important; font-weight: 700 !important; }
         .p-style { font-size: 16px !important; font-weight: 300 !important; color: #d1d5db; line-height: 1.8; }
         #h-hero { position: relative; padding: 220px 0 120px; min-height: 85vh; display: flex; align-items: center; }
-        .hero-grid { display: flex; flex-direction: column; gap: 60px; position: relative; z-index: 10; width: 100%; }
-        @media (min-width: 1024px) { 
-          .hero-grid { flex-direction: row; align-items: center; justify-content: space-between; } 
-        }
-        .hero-text { flex: 1.2; }
+        .hero-grid { display: grid; grid-template-columns: 1fr; gap: 60px; position: relative; z-index: 10; width: 100%; }
+        @media (min-width: 1024px) { .hero-grid { grid-template-columns: 1.2fr 0.8fr; align-items: center; } }
         .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; color: #000; width: 100%; max-width: 480px; margin: 0 auto; box-shadow: 0 40px 80px rgba(0,0,0,0.7); }
-        @media (min-width: 1024px) { .form-card { margin: 0; flex: 0.8; } }
         .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; color: #000; margin-bottom: 16px; }
         .form-button { width: 100%; background: var(--cray-gold); color: #000; padding: 18px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
         .reasons-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
@@ -56,16 +79,6 @@ const InvestmentReadinessSubDetailView: React.FC = () => {
         .reason-card { padding: 48px 32px; border-radius: 24px; text-align: center; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); transition: 0.4s; }
         .reason-card:hover { transform: translateY(-10px); border-color: var(--cray-gold); background: rgba(255, 177, 0, 0.1); }
         .reason-icon-box { width: 60px; height: 60px; background-color: var(--cray-gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: 0 10px 20px rgba(255, 177, 0, 0.3); }
-        .bullet-point { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-        .bullet-icon { width: 20px; height: 20px; background: var(--cray-gold); border-radius: 50%; display: flex; align-items: center; justifyContent: center; flex-shrink: 0; }
-        .bullet-text { font-size: 11px !important; font-weight: 700 !important; text-transform: uppercase; letter-spacing: 1px; color: #fff; }
-
-        .detail-item { display: flex; flex-direction: column; gap: 60px; align-items: center; }
-        @media (min-width: 1024px) { .detail-item { flex-direction: row; } .detail-item.reverse { flex-direction: row-reverse; } }
-        .detail-text { flex: 1; }
-        .detail-visual { flex: 1; border-radius: 32px; overflow: hidden; height: 400px; border: 1px solid rgba(255,177,0,0.2); position: relative; }
-        .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
-        .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
         .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
         .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; text-align: left; }
         .faq-accordion-body { padding: 0 32px 28px; color: #9ca3af; display: none; }
@@ -78,32 +91,20 @@ const InvestmentReadinessSubDetailView: React.FC = () => {
         <div className="overlay"></div><div className="grad"></div>
         <div className="container-xl">
           <div className="hero-grid">
-            <div className="hero-text">
+            <div>
               <h5 style={{color: 'var(--cray-gold)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px'}}>Internal Audit & Scoring</h5>
               <h1 className="h1-style">Investment Readiness Analysis</h1>
               <p className="p-style">We stress-test your project before you meet investors. By auditing every technical, financial, and strategic detail, we ensure you sit at the table in your strongest form.</p>
-              <div style={{marginTop: '30px'}}>
-                <div className="bullet-point">
-                  <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">360-DEGREE DUE DILIGENCE REPORT</span>
-                </div>
-                <div className="bullet-point">
-                  <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">INVESTOR REJECTION CRITERIA ANALYSIS</span>
-                </div>
-                <div className="bullet-point">
-                  <div className="bullet-icon"><svg viewBox="0 0 24 24" width="12" height="12" stroke="#000" strokeWidth="4" fill="none"><polyline points="20 6 9 17 4 12" /></svg></div>
-                  <span className="bullet-text">TECHNICAL & FINANCIAL IMPROVEMENT PLAN</span>
-                </div>
-              </div>
             </div>
             <div className="form-card">
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Readiness Audit</h3>
               {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="form-control" placeholder="Project Website URL" required />
-                  <textarea className="form-control" rows={3} placeholder="Are your current investor documents ready?" required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'AUDITING...' : 'GET READINESS SCORE'}</button>
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Website URL*</p>
+                  <input type="text" className="form-control" placeholder="https://..." value={url} onChange={e=>setUrl(e.target.value)} required />
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Docs Status*</p>
+                  <textarea className="form-control" rows={3} placeholder="Are your Whitepaper and Deck ready?" value={docsReady} onChange={e=>setDocsReady(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GET READINESS SCORE'}</button>
                 </form>
               )}
             </div>
@@ -127,58 +128,13 @@ const InvestmentReadinessSubDetailView: React.FC = () => {
         </div>
       </section>
 
-      <section className="section-padding" style={{background: '#050505'}}>
-        <div className="container-xl">
-          <div className="detail-item">
-            <div className="detail-text">
-              <h2 className="h2-style">Bridging the Gap to Institutional Funding</h2>
-              <p className="p-style">Most crypto projects fail during due diligence not because their technology is bad, but because their internal documentation and economic models don't meet institutional standards. We perform a comprehensive internal audit that covers legal structures, tokenomics scalability, and market positioning.</p>
-              <ul style={{marginTop: '32px', listStyle: 'none', padding: 0}}>
-                   {["Legal Compliance Review", "Scalability Stress Tests", "Competitor Comparison Matrix"].map((item, i) => (
-                    <li key={i} className="p-style" style={{marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '12px'}}>
-                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {item}
-                    </li>
-                  ))}
-                </ul>
-            </div>
-            <div className="detail-visual">
-              <img src="https://images.unsplash.com/photo-1554224155-8d04182258f5?q=80&w=2000" alt="Audit Process" />
-            </div>
-          </div>
-          <div className="detail-item reverse" style={{marginTop: '100px'}}>
-            <div className="detail-text">
-              <h2 className="h2-style">Eliminating Rejection Red Flags</h2>
-              <p className="p-style">We look at your project through the cold, analytical eyes of a VC fund manager. We identify missing links in your roadmap, vulnerabilities in your smart contracts, or gaps in your team composition that could derail an investment round before it even starts.</p>
-              <ul style={{marginTop: '32px', listStyle: 'none', padding: 0}}>
-                   {["Vulnerability Assessment", "Financial Burn-Rate Analysis", "Team Competency Benchmarking"].map((item, i) => (
-                    <li key={i} className="p-style" style={{marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '12px'}}>
-                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {item}
-                    </li>
-                  ))}
-                </ul>
-            </div>
-            <div className="detail-visual">
-              <img src="https://images.unsplash.com/photo-1454165833767-027ffea9e77b?q=80&w=2000" alt="Consulting Analysis" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="cta-box-section">
-        <div className="container-xl">
-          <h2 className="h2-style">Is Your Project Truly Ready for the Big Leagues?</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Don't go into an investment meeting unprepared. Get a professional readiness audit and increase your funding chances exponentially.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Request Full Readiness Audit</a>
-        </div>
-      </section>
-
       <section className="section-padding">
         <div className="container-xl">
           <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqs.map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
-                <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
+                <div className="faq-accordion-header h4-style">
                   <span>{f.q}</span>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
                 </div>

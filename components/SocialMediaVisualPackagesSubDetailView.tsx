@@ -1,19 +1,48 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const SocialMediaVisualPackagesSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
+  // Form states
+  const [channel, setChannel] = useState("");
+  const [style, setStyle] = useState("");
+
   const toggleFaq = (index: number) => setOpenFaq(openFaq === index ? null : index);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject('Visual Package', 'Unified social media assets and template sets.');
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Primary Social Channel": channel,
+        "Design Style Preference": style,
+        "Type": "Social Media Visual Asset Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject('Visual Package', `Channel: ${channel}. Style: ${style}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -83,9 +112,11 @@ const SocialMediaVisualPackagesSubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Asset Plan</h3>
               {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="form-control" placeholder="Project Primary Social Channel" required />
-                  <textarea className="form-control" rows={3} placeholder="What is your design style (Minimalist, Neon, Cyberpunk etc.)?" required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'DESIGNING...' : 'GET ASSET BUNDLE'}</button>
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Primary Social Channel*</p>
+                  <input type="text" className="form-control" placeholder="e.g. X (Twitter)" value={channel} onChange={e=>setChannel(e.target.value)} required />
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Style Preference*</p>
+                  <textarea className="form-control" rows={3} placeholder="What is your design style (Minimalist, Cyberpunk etc.)?" value={style} onChange={e=>setStyle(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GET ASSET BUNDLE'}</button>
                 </form>
               )}
             </div>

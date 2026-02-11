@@ -1,19 +1,47 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const LiquidityPlanningSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
+  const [supply, setSupply] = useState('');
+  const [budget, setBudget] = useState('');
+
   const toggleFaq = (index: number) => setOpenFaq(openFaq === index ? null : index);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject('Liquidity Planning', 'Capital allocation and pool depth analysis.');
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Total Supply": supply,
+        "Liquidity Budget & Platforms": budget,
+        "Type": "Liquidity Planning Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject('Liquidity Planning', `Supply: ${supply}. Budget/Platforms: ${budget}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -79,9 +107,11 @@ const LiquidityPlanningSubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Liquidity Audit</h3>
               {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Total Token Supply" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Estimated liquidity budget and target platforms?" required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'CALCULATING...' : 'GET LIQUIDITY PLAN'}</button>
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Total Token Supply*</p>
+                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="e.g. 100,000,000" value={supply} onChange={e=>setSupply(e.target.value)} required />
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Liquidity Goal*</p>
+                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Estimated liquidity budget and target platforms?" value={budget} onChange={e=>setBudget(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GET LIQUIDITY PLAN'}</button>
                 </form>
               )}
             </div>
@@ -105,56 +135,8 @@ const LiquidityPlanningSubDetailView: React.FC = () => {
         </div>
       </section>
 
-      <section className="section-padding" style={{background: '#050505'}}>
-        <div className="container-xl">
-          <div className="detail-item">
-            <div className="detail-text">
-              <h2 className="h2-style">Resource Allocation</h2>
-              <p className="p-style">We help you determine the optimal ratio of stablecoins to project tokens for your initial liquidity. By analyzing competitor benchmarks and expected trade volume, we ensure your pools are deep enough to handle institutional buy-ins without excessive slippage.</p>
-            </div>
-            <div className="detail-visual">
-              <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=2000" alt="Capital" />
-            </div>
-          </div>
-          <div className="detail-item reverse" style={{marginTop: '100px'}}>
-            <div className="detail-text">
-              <h2 className="h2-style">Risk & Stability Control</h2>
-              <p className="p-style">Liquidity is the backbone of your project's reputation. We implement risk-mitigation layers that protect project funds from external arbitrage drains and ensure that your liquidity providers are incentivized for the long term.</p>
-            </div>
-            <div className="detail-visual">
-              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2000" alt="Risk" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="cta-box-section">
-        <div className="container-xl">
-          <h2 className="h2-style">Build a Liquidity Foundation that Lasts</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Don't leave your project's lifeblood to chance. Let our experts architect a professional liquidity plan tailored to your roadmap.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Plan Liquidity Now</a>
-        </div>
-      </section>
-
-      <section className="section-padding">
-        <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
-          <div style={{maxWidth: '850px', margin: '0 auto'}}>
-            {faqs.map((f, i) => (
-              <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
-                <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
-                  <span>{f.q}</span>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
-                </div>
-                <div className="faq-accordion-body p-style"><p>{f.a}</p></div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/piyasa-yapiciligi-ve-likidite'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
+        <button onClick={() => window.location.hash = '#hizmetler/piyasa-yapiciligi-ve-likidite'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back</button>
       </div>
     </div>
   );

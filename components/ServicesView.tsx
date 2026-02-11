@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const ServicesView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [selectedService, setSelectedService] = useState<string>("");
-  const [telegram, setTelegram] = useState("");
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
   const [isServiceOpen, setIsServiceOpen] = useState(false);
@@ -31,16 +31,41 @@ const ServicesView: React.FC = () => {
     { q: "How do you track the success of marketing campaigns?", a: "We focus on on-chain data. We track real holder growth, DEX volume increases, and community sentiment shifts rather than just empty 'likes' and 'follows'." }
   ];
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      alert("Application sent successfully! We will contact you on Telegram.");
-      setTelegram("");
+
+    try {
+      const formObj = {
+        "Service Interest": selectedService || "Not Selected",
+        "Describe your needs": description,
+        "Type": "Services Page Project Consultation",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      // 1) Formu backend'e taslak olarak gönder ve Telegram linkini aç
+      const code = await startTelegramConnectWithForm(formObj);
+
+      // 2) Kullanıcı Telegram'da botu başlatana kadar bekle
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      // Başarılı durum
+      alert("Telegram connection established and request transmitted! Our team will contact you shortly.");
       setDescription("");
       setSelectedService("");
-    }, 1500);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -77,7 +102,7 @@ const ServicesView: React.FC = () => {
 
         .form-input-s { width: 100%; background: #fff; border: 1px solid #ddd; padding: 14px 18px; border-radius: 12px; color: #000; margin-bottom: 16px; font-size: 14px; outline: none; transition: 0.3s; }
         .form-input-s:focus { border-color: var(--cray-gold); }
-        .form-textarea-s { height: 100px; resize: none; }
+        .form-textarea-s { height: 120px; resize: none; }
 
         .btn-submit-gold { 
           width: 100%; 
@@ -122,7 +147,6 @@ const ServicesView: React.FC = () => {
         }
         .service-box:hover { transform: translateY(-8px); border-color: var(--cray-gold); background: rgba(255,177,0,0.05); }
         
-        /* Portfolio Specific Headings */
         .service-box h4.portfolio-h4 { 
           color: var(--cray-gold) !important; 
           margin-bottom: 15px; 
@@ -193,16 +217,6 @@ const ServicesView: React.FC = () => {
                   )}
                 </div>
 
-                <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Telegram Username / Link*</p>
-                <input 
-                  type="text" 
-                  className="form-input-s" 
-                  placeholder="@username or t.me/link" 
-                  value={telegram}
-                  onChange={(e) => setTelegram(e.target.value)}
-                  required 
-                />
-
                 <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Describe your needs*</p>
                 <textarea 
                   className="form-input-s form-textarea-s" 
@@ -213,7 +227,7 @@ const ServicesView: React.FC = () => {
                 />
 
                 <button type="submit" disabled={loading} className="btn-submit-gold">
-                  {loading ? 'SENDING...' : 'SUBMIT APPLICATION'}
+                  {loading ? 'OPENING TELEGRAM...' : 'SUBMIT APPLICATION'}
                 </button>
               </form>
             </div>

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const PartnershipBusinessDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [status, setStatus] = useState('');
   const [targetSector, setTargetSector] = useState('');
   const [goal, setGoal] = useState('');
-  const [contact, setContact] = useState('');
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
@@ -14,10 +14,40 @@ const PartnershipBusinessDetailView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject(status, `Target Sector: ${targetSector}. Goal: ${goal}`);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const statusLabels: { [key: string]: string } = {
+        'baslangıc': 'Network Setup',
+        'buyume': 'Expanding Partnerships'
+      };
+
+      const formObj = {
+        "Business Dev Stage": statusLabels[status] || status,
+        "Target Sector/Ecosystem": targetSector,
+        "Desired Partner Types / Goals": goal,
+        "Type": "Partnerships & Business Development Detail Page",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject(status, `Target Sector: ${targetSector}. Goal: ${goal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const scope = [
@@ -105,7 +135,7 @@ const PartnershipBusinessDetailView: React.FC = () => {
       `}</style>
 
       <section id="h-hero">
-        <img src="https://images.unsplash.com/photo-1556761175-5b413da4baf72?q=80&w=2000&auto=format&fit=crop" className="bg-img" alt="Partnerships & Business Development" />
+        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=2000&auto=format&fit=crop" className="bg-img" alt="Partnerships & Business Development" />
         <div className="overlay"></div><div className="grad"></div>
         <div className="container-xl">
           <div className="hero-grid">
@@ -132,9 +162,8 @@ const PartnershipBusinessDetailView: React.FC = () => {
                   <option value="">Business Dev Stage</option><option value="baslangıc">Network Setup</option><option value="buyume">Expanding Partnerships</option>
                 </select>
                 <input type="text" className="form-control" placeholder="Target Sector/Ecosystem" value={targetSector} onChange={e=>setTargetSector(e.target.value)} />
-                <textarea className="form-control" rows={3} placeholder="What kind of partners are you looking for?" value={goal} onChange={e=>setGoal(e.target.value)} required />
-                <input type="text" className="form-control" placeholder="Telegram / Email" value={contact} onChange={e=>setContact(e.target.value)} required />
-                <button type="submit" className="form-button">{loading ? 'PROCESSING...' : 'GET BD STRATEGY'}</button>
+                <textarea className="form-control" rows={4} placeholder="What kind of partners are you looking for?" value={goal} onChange={e=>setGoal(e.target.value)} required style={{ resize: 'none' }} />
+                <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'SEND'}</button>
               </form>
             </div>
           </div>
@@ -185,7 +214,7 @@ const PartnershipBusinessDetailView: React.FC = () => {
           <div className="flex flex-col lg:flex-row items-center gap-20">
             <div className="flex-1">
               <h2 className="h2-style" style={{marginBottom: '28px'}}>Ecosystem Expansion</h2>
-              <p className="p-style" style={{marginBottom: '24px', color: '#d1d5db'}}>
+              <p className="p-style" style={{marginBottom: '24px', color: '#d1d5db', lineHeight: '1.8'}}>
                 Business development in Web3 is not just about making a sale, it's about being part of an ecosystem. We build the connections that will carry your project to the big leagues.
               </p>
               <ul style={{listStyle: 'none', padding: 0, margin: 0}}>
@@ -228,7 +257,7 @@ const PartnershipBusinessDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
-        <button onClick={() => window.location.hash = ''} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Homepage</button>
+        <button onClick={() => window.location.hash = ''} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Homepage</button>
       </div>
     </div>
   );

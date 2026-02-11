@@ -1,19 +1,47 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const MmSelectionSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
+  const [exchanges, setExchanges] = useState('');
+  const [expectations, setExpectations] = useState('');
+
   const toggleFaq = (index: number) => setOpenFaq(openFaq === index ? null : index);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject('MM Selection', 'Choosing the right market maker partner and criteria analysis.');
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Active Exchanges": exchanges,
+        "MM Partner Expectations": expectations,
+        "Type": "MM Selection Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject('MM Selection', `Exchanges: ${exchanges}. Expectations: ${expectations}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -79,9 +107,11 @@ const MmSelectionSubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>MM Match Analysis</h3>
               {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Exchanges You Are Listed On" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Are you satisfied with your current MM partner? What are your expectations?" required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'MATCHING...' : 'GET PARTNER SUGGESTION'}</button>
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Target Exchanges*</p>
+                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Exchanges You Are Listed On" value={exchanges} onChange={e=>setExchanges(e.target.value)} required />
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Expectations*</p>
+                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Are you satisfied with your current MM partner? What are your expectations?" value={expectations} onChange={e=>setExpectations(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GET PARTNER SUGGESTION'}</button>
                 </form>
               )}
             </div>
@@ -105,56 +135,8 @@ const MmSelectionSubDetailView: React.FC = () => {
         </div>
       </section>
 
-      <section className="section-padding" style={{background: '#050505'}}>
-        <div className="container-xl">
-          <div className="detail-item">
-            <div className="detail-text">
-              <h2 className="h2-style">Unbiased Due Diligence</h2>
-              <p className="p-style">We act as your internal liquidity department to vet potential Market Makers. We look beyond marketing pitches and evaluate their technical architecture, capitalization, and track record in your specific project niche.</p>
-            </div>
-            <div className="detail-visual">
-              <img src="https://images.unsplash.com/photo-1521791136064-7986c2959210?q=80&w=2000" alt="Audit" />
-            </div>
-          </div>
-          <div className="detail-item reverse" style={{marginTop: '100px'}}>
-            <div className="detail-text">
-              <h2 className="h2-style">Contract Optimization</h2>
-              <p className="p-style">MM contracts can be highly favorable to the vendor if not negotiated correctly. We ensure that KPIs are set in stone, token loans are protected by collateral, and termination rights are balanced to keep you in control of your project's economy.</p>
-            </div>
-            <div className="detail-visual">
-              <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2000" alt="Legal" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="cta-box-section">
-        <div className="container-xl">
-          <h2 className="h2-style">Find the Perfect Liquidity Partner</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>Don't sign a contract that traps your project. Let us help you select and negotiate with the world's leading market makers.</p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Match with a Partner</a>
-        </div>
-      </section>
-
-      <section className="section-padding">
-        <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
-          <div style={{maxWidth: '850px', margin: '0 auto'}}>
-            {faqs.map((f, i) => (
-              <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
-                <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
-                  <span>{f.q}</span>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
-                </div>
-                <div className="faq-accordion-body p-style"><p>{f.a}</p></div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/piyasa-yapiciligi-ve-likidite'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
+        <button onClick={() => window.location.hash = '#hizmetler/piyasa-yapiciligi-ve-likidite'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back</button>
       </div>
     </div>
   );

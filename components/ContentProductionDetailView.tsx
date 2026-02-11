@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const ContentProductionDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [status, setStatus] = useState('');
   const [contentType, setContentType] = useState('');
   const [goal, setGoal] = useState('');
-  const [contact, setContact] = useState('');
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
@@ -14,10 +14,40 @@ const ContentProductionDetailView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject(status, `Content Type: ${contentType}. Goal: ${goal}`);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const statusLabels: { [key: string]: string } = {
+        'yeni': 'New Brand Identity',
+        'kampanya': 'Campaign-Based Content'
+      };
+
+      const formObj = {
+        "Need Stage": statusLabels[status] || status,
+        "Required Content Type": contentType,
+        "Visual Style Expectations": goal,
+        "Type": "Content Production Detail Page",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject(status, `Content Type: ${contentType}. Goal: ${goal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const scope = [
@@ -108,7 +138,7 @@ const ContentProductionDetailView: React.FC = () => {
       `}</style>
 
       <section id="h-hero">
-        <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=2070&auto=format&fit=crop" className="bg-img" alt="Content Production" />
+        <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=2832" className="bg-img" alt="Content Production" />
         <div className="overlay"></div><div className="grad"></div>
         <div className="container-xl">
           <div className="hero-grid">
@@ -134,9 +164,8 @@ const ContentProductionDetailView: React.FC = () => {
                   <option value="">Need Stage</option><option value="yeni">New Brand Identity</option><option value="kampanya">Campaign-Based Content</option>
                 </select>
                 <input type="text" className="form-control" placeholder="Required Content Type" value={contentType} onChange={e=>setContentType(e.target.value)} />
-                <textarea className="form-control" rows={3} placeholder="What is your visual style expectation?" value={goal} onChange={e=>setGoal(e.target.value)} required />
-                <input type="text" className="form-control" placeholder="Telegram / Email" value={contact} onChange={e=>setContact(e.target.value)} required />
-                <button type="submit" className="form-button">{loading ? 'PROCESSING...' : 'GET DESIGN PLAN'}</button>
+                <textarea className="form-control" rows={4} placeholder="What is your visual style expectation?" value={goal} onChange={e=>setGoal(e.target.value)} required style={{ resize: 'none' }} />
+                <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'SEND'}</button>
               </form>
             </div>
           </div>
@@ -186,7 +215,7 @@ const ContentProductionDetailView: React.FC = () => {
           <div className="flex flex-col lg:flex-row items-center gap-20">
             <div className="flex-1">
               <h2 className="h2-style" style={{marginBottom: '28px'}}>Visual Storytelling</h2>
-              <p className="p-style" style={{marginBottom: '24px', color: '#d1d5db'}}>
+              <p className="p-style" style={{marginBottom: '24px', color: '#d1d5db', lineHeight: '1.8'}}>
                 We transform complex technological concepts into simple and impressive visuals that everyone can understand. Create your project's 'wow' effect with our design team.
               </p>
               <ul style={{listStyle: 'none', padding: 0, margin: 0}}>
@@ -197,7 +226,7 @@ const ContentProductionDetailView: React.FC = () => {
                 ))}
               </ul>
             </div>
-            <div className="flex-1" style={{position: 'relative', borderRadius: '32px', overflow: 'hidden', height: '400px', border: '1px solid rgba(255,177,0,0.2)'}}>
+            <div className="flex-1" style={{position: 'relative', borderRadius: '32px', overflow: 'hidden', height: '440px', border: '1px solid rgba(255,177,0,0.2)'}}>
               <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop" className="bg-img" alt="Creative" />
             </div>
           </div>

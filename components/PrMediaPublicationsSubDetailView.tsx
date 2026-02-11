@@ -1,19 +1,46 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const PrMediaPublicationsSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
+  const [outlets, setOutlets] = useState('');
+  const [announcement, setAnnouncement] = useState('');
 
   const toggleFaq = (index: number) => setOpenFaq(openFaq === index ? null : index);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject('PR Strategy', 'Tier-1 media placement and authority building.');
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Priority News Outlets": outlets,
+        "Key Announcement/Milestone": announcement,
+        "Type": "PR & Media Publications Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject('PR Strategy', `Outlets: ${outlets}. Announcement: ${announcement}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -81,9 +108,13 @@ const PrMediaPublicationsSubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get PR Plan</h3>
               {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="form-control" placeholder="Priority News Outlets" required />
-                  <textarea className="form-control" rows={3} placeholder="What is the key announcement or milestone?" required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'STABILIZING...' : 'GET MEDIA STRATEGY'}</button>
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Priority News Outlets*</p>
+                  <input type="text" className="form-control" placeholder="e.g. Cointelegraph, Forbes" value={outlets} onChange={e=>setOutlets(e.target.value)} required />
+                  
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Announcement Milestone*</p>
+                  <textarea className="form-control" rows={3} placeholder="What is the key announcement or milestone?" value={announcement} onChange={e=>setAnnouncement(e.target.value)} required />
+                  
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GET MEDIA STRATEGY'}</button>
                 </form>
               )}
             </div>
@@ -127,9 +158,6 @@ const PrMediaPublicationsSubDetailView: React.FC = () => {
               </div>
             </div>
             <div className="detail-item reverse">
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2000" alt="Authority" />
-              </div>
               <div className="detail-text">
                 <h2 className="h2-style">Dominating Search Visibility</h2>
                 <p className="p-style">Our PR strategy is built to dominate organic search. When potential investors search for your project, they should find positive, high-authority articles from globally recognized outlets that validate your technical and economic claims.</p>
@@ -140,6 +168,9 @@ const PrMediaPublicationsSubDetailView: React.FC = () => {
                     </li>
                   ))}
                 </ul>
+              </div>
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2000" alt="Authority" />
               </div>
             </div>
           </div>
@@ -174,7 +205,7 @@ const PrMediaPublicationsSubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center' }}>
-        <button onClick={() => window.location.hash = '#hizmetler/kripto-ve-web3-pazarlama'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
+        <button onClick={() => window.location.hash = '#services/crypto-marketing'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>
   );

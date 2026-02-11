@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const TokenListingDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [status, setStatus] = useState('');
   const [listingType, setListingType] = useState('');
   const [goal, setGoal] = useState('');
-  const [contact, setContact] = useState('');
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
@@ -16,10 +16,46 @@ const TokenListingDetailView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject(status, `Listing Goal: ${listingType}. Goal: ${goal}`);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const statusLabels: { [key: string]: string } = {
+        'new': 'Pre-Launch',
+        'existing': 'Listed / New Exchange Goal'
+      };
+
+      const typeLabels: { [key: string]: string } = {
+        'dex': 'DEX Only (Uniswap etc.)',
+        'cex': 'CEX Listing',
+        'both': 'Both DEX and CEX'
+      };
+
+      const formObj = {
+        "Project Phase": statusLabels[status] || status,
+        "Target Listing Type": typeLabels[listingType] || listingType,
+        "Target Exchanges / Goals": goal,
+        "Type": "Token Launch & Listing Detail Page",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject(status, `Listing Goal: ${listingType}. Goal: ${goal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const listingScope = [
@@ -77,7 +113,7 @@ const TokenListingDetailView: React.FC = () => {
         .grad { position: absolute; inset: 0; background: linear-gradient(to bottom, #000, transparent 40%, transparent 60%, #000); z-index: 2; }
 
         .h1-style { font-size: 40px !important; font-weight: 700 !important; }
-        .h2-style { font-size: 30px !important; font-weight: 700 !important; }
+        .h2-style { font-size: 32px !important; font-weight: 700 !important; }
         .h3-style { font-size: 22px !important; font-weight: 600 !important; }
         .h4-style { font-size: 18px !important; font-weight: 600 !important; }
         .p-style { font-size: 16px !important; font-weight: 300 !important; }
@@ -185,13 +221,10 @@ const TokenListingDetailView: React.FC = () => {
                       </select>
                     </div>
                     <div className="form-group">
-                      <textarea className="form-control p-style" rows={3} placeholder="Are there target exchanges?" value={goal} onChange={(e) => setGoal(e.target.value)} required style={{resize: 'none'}} />
-                    </div>
-                    <div className="form-group">
-                      <input type="text" className="form-control p-style" placeholder="Email / Telegram" value={contact} onChange={(e) => setContact(e.target.value)} required />
+                      <textarea className="form-control p-style" rows={4} placeholder="Are there target exchanges?" value={goal} onChange={(e) => setGoal(e.target.value)} required style={{resize: 'none'}} />
                     </div>
                     <button type="submit" disabled={loading} className="form-button">
-                      {loading ? 'ANALYZING...' : 'GET LISTING ANALYSIS'}
+                      {loading ? 'OPENING TELEGRAM...' : 'SEND'}
                     </button>
                   </form>
                 )}

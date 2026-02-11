@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const SmartContractDevelopmentSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [status, setStatus] = useState('');
   const [goal, setGoal] = useState('');
-  const [contact, setContact] = useState('');
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
@@ -13,10 +13,40 @@ const SmartContractDevelopmentSubDetailView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject(status, `Contract Need: ${goal}`);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const typeLabels: { [key: string]: string } = {
+        'token': 'Token / NFT',
+        'dex': 'DEX / Liquidity',
+        'staking': 'Staking / DAO'
+      };
+
+      const formObj = {
+        "Contract Category": typeLabels[status] || status,
+        "Mechanism Description": goal,
+        "Type": "Smart Contract Development Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject(status, `Contract Need: ${goal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -97,15 +127,19 @@ const SmartContractDevelopmentSubDetailView: React.FC = () => {
               <p className="p-style" style={{marginTop: '20px', lineHeight: '1.7'}}>Your code is your law. We develop high-performance smart contracts that leave no room for error and are resilient against cyber attacks.</p>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Technical Review Request</h3>
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Contract Engineering</h3>
               {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Try Again</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <select className="form-control" required>
-                    <option value="">Contract Type</option><option value="token">Token / NFT</option><option value="dex">DEX / Liquidity</option><option value="staking">Staking / DAO</option>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Contract Category*</p>
+                  <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
+                    <option value="">Select Type</option>
+                    <option value="token">Token / NFT</option>
+                    <option value="dex">DEX / Liquidity</option>
+                    <option value="staking">Staking / DAO</option>
                   </select>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Mechanism Summary*</p>
                   <textarea className="form-control" rows={3} placeholder="Summarize the mechanism you want to be developed..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'PROCESSING...' : 'TALK TO A DEVELOPER'}</button>
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'TALK TO A DEVELOPER'}</button>
                 </form>
               )}
             </div>
@@ -126,45 +160,6 @@ const SmartContractDevelopmentSubDetailView: React.FC = () => {
                 <p className="p-style" style={{fontSize: '14px'}}>{r.desc}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-padding" style={{background: '#050505'}}>
-        <div className="container-xl">
-          <div className="detail-row">
-            <div className="detail-item">
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2000" alt="Clean Code" />
-              </div>
-              <div className="detail-text">
-                <h2 className="h2-style">Security-First Coding</h2>
-                <p className="p-style">Our developers follow the most rigorous security protocols in the industry. Every contract undergoes rigorous internal logic testing and fuzzing to ensure that project liquidity is shielded from known exploits like flash loan attacks and re-entrancy bugs.</p>
-                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
-                  {["Formal Verification", "Static Analysis Integration", "Logic Boundary Testing"].map((li, i) => (
-                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
-                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div className="detail-item reverse">
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2000" alt="Optimization" />
-              </div>
-              <div className="detail-text">
-                <h2 className="h2-style">Gas Optimization & Efficiency</h2>
-                <p className="p-style">User adoption is directly tied to transaction costs. We optimize your contracts at the opcode level to reduce gas consumption by up to 30%, making your DApp or Token more attractive to the end-user.</p>
-                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
-                  {["Yul/Assembly Optimization", "Storage Layout Efficiency", "L2 State-Diff Optimization"].map((li, i) => (
-                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
-                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
           </div>
         </div>
       </section>

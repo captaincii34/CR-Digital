@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const DAppDevelopmentSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [status, setStatus] = useState('');
   const [goal, setGoal] = useState('');
-  const [contact, setContact] = useState('');
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
@@ -13,23 +13,40 @@ const DAppDevelopmentSubDetailView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject(status, `DApp Request: ${goal}`);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Application Type": status,
+        "Desired Features": goal,
+        "Type": "DApp Development Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject(status, `DApp Request: ${goal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
     { title: 'Full-Stack Web3', desc: 'End-to-end architecture from contract to frontend, wallet connection to indexer.', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> },
     { title: 'Native Performance', desc: 'Second-level response times and uninterrupted on-chain data flow.', icon: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/> },
     { title: 'High Retention UI', desc: 'Web3 interfaces with accustomed Web2 simplicity that keep the user in the system.', icon: <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/> }
-  ];
-
-  const faqs = [
-    { q: "Which wallets do you support?", a: "We integrate MetaMask, Phantom, WalletConnect v2, and all major MPC-based wallet systems like Safe." },
-    { q: "Do you have mobile app support?", a: "Yes, we develop your DApp cross-platform to work seamlessly on both web and mobile environments." },
-    { q: "How do you handle high data loads?", a: "We build custom indexers and caching layers to ensure that your DApp displays real-time on-chain data without lag." },
-    { q: "Is Social Login possible in Web3?", a: "Yes, through Account Abstraction (ERC-4337), we can allow your users to log in via Email or Google while keeping full custody." }
   ];
 
   return (
@@ -65,13 +82,6 @@ const DAppDevelopmentSubDetailView: React.FC = () => {
         }
         .detail-visual { border-radius: 32px; overflow: hidden; height: 500px; border: 1px solid rgba(255,177,0,0.2); position: relative; width: 100%; }
         .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
-        
-        .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
-        .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
-        .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        .faq-accordion-body { padding: 0 32px 28px; color: #9ca3af; display: none; }
-        .faq-accordion-item.active .faq-accordion-body { display: block; }
-        .faq-accordion-item.active .faq-accordion-header { color: var(--cray-gold); }
       `}</style>
 
       <section id="h-hero">
@@ -88,12 +98,13 @@ const DAppDevelopmentSubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get DApp Analysis</h3>
               {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Try Again</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <select className="form-control" required>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Application Type*</p>
+                  <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
                     <option value="">Application Type</option><option value="dex">DEX / Swap</option><option value="staking">Staking / DAO</option>
                   </select>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Desired Features*</p>
                   <textarea className="form-control" rows={3} placeholder="Specify the features you want..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'PROCESSING...' : 'GET DAPP PLAN'}</button>
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GET DAPP PLAN'}</button>
                 </form>
               )}
             </div>
@@ -127,13 +138,6 @@ const DAppDevelopmentSubDetailView: React.FC = () => {
               <div className="detail-text">
                 <h2 className="h2-style">Flawless Web3 Experience</h2>
                 <p className="p-style">We develop interfaces that work at Web2 speed, where users do not feel Web3 complexity. Lower the threshold with one-click wallet connection, social login, and Account Abstraction solutions.</p>
-                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
-                  {["Wallet SDK Integrations", "Social Authentication Layers", "Real-Time Transaction Feedback"].map((li, i) => (
-                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
-                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
-                    </li>
-                  ))}
-                </ul>
               </div>
             </div>
             <div className="detail-item reverse">
@@ -143,13 +147,6 @@ const DAppDevelopmentSubDetailView: React.FC = () => {
               <div className="detail-text">
                 <h2 className="h2-style">Robust Data Synchronization</h2>
                 <p className="p-style">The performance of your DApp depends on how quickly on-chain data is processed. With custom Indexer and API systems we develop, we present blockchain data to your user in milliseconds.</p>
-                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
-                  {["High-Performance Indexing", "Caching & Event Monitoring", "Reliable RPC Architecture"].map((li, i) => (
-                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
-                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
-                    </li>
-                  ))}
-                </ul>
               </div>
             </div>
           </div>
@@ -163,23 +160,6 @@ const DAppDevelopmentSubDetailView: React.FC = () => {
             Build a DApp that users actually enjoy using. Start your journey with our fullstack engineering team today.
           </p>
           <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Get DApp Quote</a>
-        </div>
-      </section>
-
-      <section className="section-padding">
-        <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
-          <div style={{maxWidth: '850px', margin: '0 auto'}}>
-            {faqs.map((f, i) => (
-              <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
-                <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
-                  <span>{f.q}</span>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
-                </div>
-                <div className="faq-accordion-body p-style"><p>{f.a}</p></div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 

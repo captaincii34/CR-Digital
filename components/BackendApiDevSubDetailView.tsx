@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const BackendApiDevSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [status, setStatus] = useState('');
   const [goal, setGoal] = useState('');
-  const [contact, setContact] = useState('');
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
@@ -13,23 +13,40 @@ const BackendApiDevSubDetailView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject(status, `Backend API: ${goal}`);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Requirement Type": status,
+        "Traffic/Data Goals": goal,
+        "Type": "Backend & API Development Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject(status, `Backend API: ${goal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
     { title: 'High Performance', desc: 'Node.js and Go based infrastructures with millisecond response times.', icon: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/> },
     { title: 'On-chain Indexer', desc: 'Services that filter blockchain data instantly and process it into the database.', icon: <path d="M22 12h-4l-3 9L9 3l-3 9H2"/> },
     { title: 'Secure Gateway', desc: 'API layers protected against cyber attacks and bots.', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/> }
-  ];
-
-  const faqs = [
-    { q: "Which backend languages do you specialize in?", a: "We primarily use Node.js (TypeScript), Go, and Rust for high-performance Web3 backend systems." },
-    { q: "How do you sync with the blockchain?", a: "We build custom indexing services that monitor blockchain events via RPC or WebSockets and store processed data in optimized databases like PostgreSQL or Redis." },
-    { q: "Do you offer API documentation?", a: "Yes, we provide full Swagger/OpenAPI documentation for all endpoints to ensure easy integration for frontend and third-party partners." },
-    { q: "How do you handle high-traffic scalability?", a: "We use microservices architecture, horizontal scaling, and advanced load balancing techniques to handle millions of requests." }
   ];
 
   return (
@@ -65,13 +82,6 @@ const BackendApiDevSubDetailView: React.FC = () => {
         }
         .detail-visual { border-radius: 32px; overflow: hidden; height: 500px; border: 1px solid rgba(255,177,0,0.2); position: relative; width: 100%; }
         .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
-        
-        .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
-        .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
-        .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        .faq-accordion-body { padding: 0 32px 28px; color: #9ca3af; display: none; }
-        .faq-accordion-item.active .faq-accordion-body { display: block; }
-        .faq-accordion-item.active .faq-accordion-header { color: var(--cray-gold); }
       `}</style>
 
       <section id="h-hero">
@@ -88,12 +98,13 @@ const BackendApiDevSubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Technical Quote</h3>
               {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Try Again</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <select className="form-control" required>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Requirement*</p>
+                  <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
                     <option value="">Need</option><option value="api">API Only</option><option value="full">Full Backend</option>
                   </select>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Traffic/Volume Goals*</p>
                   <textarea className="form-control" rows={3} placeholder="Expected traffic and data volume..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'CALCULATING...' : 'GET TECHNICAL PLAN'}</button>
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GET TECHNICAL PLAN'}</button>
                 </form>
               )}
             </div>
@@ -117,73 +128,7 @@ const BackendApiDevSubDetailView: React.FC = () => {
         </div>
       </section>
 
-      <section className="section-padding" style={{background: '#050505'}}>
-        <div className="container-xl">
-          <div className="detail-row">
-            <div className="detail-item">
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2000" alt="Architecture" />
-              </div>
-              <div className="detail-text">
-                <h2 className="h2-style">High-Performance Indexing</h2>
-                <p className="p-style">Raw blockchain data is often slow to retrieve. We build custom indexers and GraphQL layers that process and store on-chain events in real-time, allowing your users to view transaction history and assets instantly.</p>
-                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
-                  {["Sub-second Data Retrieval", "Event-Driven Architecture", "Scalable Database Strategy"].map((li, i) => (
-                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
-                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div className="detail-item reverse">
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2000" alt="Secure API" />
-              </div>
-              <div className="detail-text">
-                <h2 className="h2-style">Secure API Gateways</h2>
-                <p className="p-style">Security doesn't stop at the smart contract. We implement enterprise-grade API security, including Rate Limiting, DDoS protection, and secure JWT-based authentication to protect your off-chain data and server resources.</p>
-                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
-                  {["Auth-Layer Management", "DDoS Mitigation", "Audit-Ready Logs"].map((li, i) => (
-                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
-                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="cta-box-section">
-        <div className="container-xl">
-          <h2 className="h2-style" style={{color: '#000'}}>Build a Backend That Can Handle Web3 Scale</h2>
-          <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>
-            Don't let technical debt slow down your growth. Hire our expert backend engineers to build a solid, high-performance foundation for your platform.
-          </p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Request Technical Plan</a>
-        </div>
-      </section>
-
-      <section className="section-padding">
-        <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
-          <div style={{maxWidth: '850px', margin: '0 auto'}}>
-            {faqs.map((f, i) => (
-              <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
-                <div className="faq-accordion-header h2-style" style={{fontSize: '18px !important'}}>
-                  <span>{f.q}</span>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
-                </div>
-                <div className="faq-accordion-body p-style"><p>{f.a}</p></div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <div style={{ padding: '60px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
+      <div style={{ padding: '60px 0', textAlign: 'center' }}>
         <button onClick={() => window.location.hash = '#hizmetler/blokzincir-ve-yazilim-gelistirme'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
       </div>
     </div>

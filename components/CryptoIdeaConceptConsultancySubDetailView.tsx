@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const CryptoIdeaConceptConsultancySubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [status, setStatus] = useState('');
   const [goal, setGoal] = useState('');
-  const [contact, setContact] = useState('');
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
@@ -13,10 +13,40 @@ const CryptoIdeaConceptConsultancySubDetailView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject(status, `Idea/Concept Goal: ${goal}`);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const statusLabels: { [key: string]: string } = {
+        'raw': 'Raw Idea / Draft',
+        'advanced': 'Advanced Concept',
+        'pivot': 'Pivoting Existing Project'
+      };
+
+      const formObj = {
+        "Concept Stage": statusLabels[status] || status,
+        "Project Vision Summary": goal,
+        "Type": "Crypto Idea & Concept Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject(status, `Idea/Concept Goal: ${goal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -69,7 +99,7 @@ const CryptoIdeaConceptConsultancySubDetailView: React.FC = () => {
         .feature-item-text { color: #fff; font-weight: 700 !important; font-size: 11px !important; text-transform: uppercase; letter-spacing: 1px; }
 
         .form-card { background-color: #f7f7f7; border-radius: 24px; padding: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); color: #000; width: 100%; max-width: 480px; margin: 0 auto; }
-        .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; color: #000; margin-bottom: 16px; }
+        .form-control { width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; background: #fff; color: #000; margin-bottom: 16px; font-size: 14px; }
         .form-button { width: 100%; background: var(--cray-gold); color: #000; padding: 18px; border-radius: 12px; font-weight: 700 !important; cursor: pointer; border: none; text-transform: uppercase; }
         
         .why-us-section { position: relative; }
@@ -91,7 +121,7 @@ const CryptoIdeaConceptConsultancySubDetailView: React.FC = () => {
         .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
 
         .cta-box-section { background: #f7f7f7; padding: 100px 0; color: #000; text-align: center; }
-        .cta-btn { background: var(--cray-gold); color: #000; padding: 20px 48px; border-radius: 12px; font-weight: 700 !important; display: inline-block; transition: 0.3s; margin-top: 32px; }
+        .cta-btn { background: var(--cray-gold); color: #000; padding: 20px 48px; border-radius: 12px; font-weight: 700 !important; display: inline-block; transition: 0.3s; margin-top: 32px; text-decoration: none; }
         .cta-btn:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(255,177,0,0.4); }
 
         .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
@@ -124,17 +154,35 @@ const CryptoIdeaConceptConsultancySubDetailView: React.FC = () => {
             </div>
             <div className="form-card">
               <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px'}}>Idea Analysis</h3>
-              {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
+              {aiResult ? (
+                <div className="p-style text-center" style={{color: '#000'}}>
+                  {aiResult.summary}
+                  <button onClick={()=>setAiResult(null)} className="form-button mt-10">Reset Analysis</button>
+                </div>
+              ) : (
                 <form onSubmit={handleSubmit}>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Idea Stage*</p>
                   <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
-                    <option value="">Idea Stage</option>
+                    <option value="">Select Stage</option>
                     <option value="raw">Raw Idea / Draft</option>
                     <option value="advanced">Advanced Concept</option>
                     <option value="pivot">Pivoting Existing Project</option>
                   </select>
-                  <textarea className="form-control" rows={3} placeholder="Briefly summarize your vision..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'ANALYZING...' : 'GET CONCEPT ANALYSIS'}</button>
+
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Vision Summary*</p>
+                  <textarea 
+                    className="form-control" 
+                    rows={4} 
+                    placeholder="Briefly summarize your vision..." 
+                    value={goal} 
+                    onChange={e=>setGoal(e.target.value)} 
+                    required 
+                    style={{ resize: 'none' }}
+                  />
+
+                  <button type="submit" disabled={loading} className="form-button">
+                    {loading ? 'OPENING TELEGRAM...' : 'GET CONCEPT ANALYSIS'}
+                  </button>
                 </form>
               )}
             </div>
@@ -238,7 +286,7 @@ const CryptoIdeaConceptConsultancySubDetailView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
-        <button onClick={() => window.location.hash = 'services/end-to-end-crypto-project-consulting'} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Services</button>
+        <button onClick={() => window.location.hash = 'services/end-to-end-crypto-project-consulting'} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Category</button>
       </div>
     </div>
   );

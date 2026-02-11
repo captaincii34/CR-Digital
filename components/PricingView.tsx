@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 type PricingStep = 'initial' | 'services' | 'company' | 'description' | 'goals' | 'budget' | 'email' | 'permission' | 'success';
 
@@ -73,27 +74,45 @@ const PricingView: React.FC = () => {
     else if (step === 'permission') setStep('email');
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
     
-    // Simulating email send to info@craydigital.com
-    const finalData = {
-      services: selectedServices,
-      company,
-      description,
-      goal: goal === 'Other' ? otherGoal : goal,
-      budget,
-      email,
-      permission
-    };
-    
-    console.log("Form submitted to info@craydigital.com:", finalData);
+    try {
+      // Prepare detailed payload for Telegram
+      const finalData = {
+        "Company/Website": company,
+        "Email": email,
+        "Selected Services": selectedServices.join(", "),
+        "Project Description": description,
+        "Primary Goal": goal === 'Other' ? otherGoal : goal,
+        "Monthly Budget": budget,
+        "Type": "Full Marketing Plan Request",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
 
-    setTimeout(() => {
-      setLoading(false);
+      // 1) Submit draft and redirect to Telegram
+      const code = await startTelegramConnectWithForm(finalData);
+
+      // 2) Poll for connection status (Handshake)
+      const isConnected = await waitUntilConnected(code);
+      
+      if (!isConnected) {
+        alert("Please open the Telegram bot and press Start to verify your request. Then you can try submitting again.");
+        setLoading(false);
+        return;
+      }
+
+      // 3) Success
       setStep('success');
-    }, 1500);
+    } catch (err: any) {
+      console.error(err);
+      alert("Telegram bridge connection failed. Please try again or contact support at info@crayup.com");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const renderContent = () => {
@@ -320,7 +339,7 @@ const PricingView: React.FC = () => {
                   disabled={loading}
                   className="cta-button !py-4 !px-10 flex items-center gap-3"
                 >
-                  {loading ? 'SENDING...' : 'SUBMIT'}
+                  {loading ? 'OPENING TELEGRAM...' : 'SUBMIT'}
                   {!loading && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="3"><path d="M5 12h14M12 5l7 7-7-7"/></svg>}
                 </button>
               )}

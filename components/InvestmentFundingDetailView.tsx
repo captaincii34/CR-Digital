@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const InvestmentFundingDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [status, setStatus] = useState('');
   const [fundingGoal, setFundingGoal] = useState('');
   const [goal, setGoal] = useState('');
-  const [contact, setContact] = useState('');
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
@@ -14,10 +14,40 @@ const InvestmentFundingDetailView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject(status, `Funding Goal: ${fundingGoal}. Goal: ${goal}`);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const statusLabels: { [key: string]: string } = {
+        'pre-seed': 'Idea / Pre-seed',
+        'seed': 'Seed / Private'
+      };
+
+      const formObj = {
+        "Investment Stage": statusLabels[status] || status,
+        "Target Funding Amount ($)": fundingGoal,
+        "Focus Sectors / Goals": goal,
+        "Type": "Investment Consulting & Fundraising Detail Page",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject(status, `Funding Goal: ${fundingGoal}. Goal: ${goal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const scope = [
@@ -94,7 +124,7 @@ const InvestmentFundingDetailView: React.FC = () => {
         @media (min-width: 1024px) { .scope-grid { grid-template-columns: repeat(4, 1fr); } }
         
         .scope-link { text-decoration: none; display: block; height: 100%; }
-        .scope-card { padding: 36px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.15); text-align: center; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); transition: 0.3s; height: 100%; display: flex; flex-direction: column; align-items: center; }
+        .scope-card { padding: 36px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.15); text-align: center; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); transition: 0.3s; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .scope-card:hover { border-color: var(--cray-gold); transform: translateY(-5px); background: rgba(255, 177, 0, 0.05); }
         .scope-card-title { color: #fff; transition: color 0.3s; }
         .scope-card:hover .scope-card-title { color: var(--cray-gold); }
@@ -129,15 +159,14 @@ const InvestmentFundingDetailView: React.FC = () => {
               </div>
             </div>
             <div className="form-card">
-              <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px'}}>Investment Evaluation</h3>
+              <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Investment Evaluation</h3>
               <form onSubmit={handleSubmit}>
                 <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
                   <option value="">Investment Stage</option><option value="pre-seed">Idea / Pre-seed</option><option value="seed">Seed / Private</option>
                 </select>
                 <input type="text" className="form-control" placeholder="Target Investment Amount ($)" value={fundingGoal} onChange={e=>setFundingGoal(e.target.value)} />
-                <textarea className="form-control" rows={3} placeholder="Which sectors are you focusing on?" value={goal} onChange={e=>setGoal(e.target.value)} required />
-                <input type="text" className="form-control" placeholder="Telegram / Email" value={contact} onChange={e=>setContact(e.target.value)} required />
-                <button type="submit" className="form-button">{loading ? 'PROCESSING...' : 'GET INVESTMENT ANALYSIS'}</button>
+                <textarea className="form-control" rows={4} placeholder="Which sectors are you focusing on?" value={goal} onChange={e=>setGoal(e.target.value)} required style={{ resize: 'none' }} />
+                <button type="submit" className="form-button" disabled={loading}>{loading ? 'OPENING TELEGRAM...' : 'SEND'}</button>
               </form>
             </div>
           </div>
@@ -188,7 +217,7 @@ const InvestmentFundingDetailView: React.FC = () => {
           <div className="flex flex-col lg:flex-row items-center gap-20">
             <div className="flex-1">
               <h2 className="h2-style" style={{marginBottom: '28px'}}>Strategic Capital and Network</h2>
-              <p className="p-style" style={{marginBottom: '24px', color: '#d1d5db'}}>
+              <p className="p-style" style={{marginBottom: '24px', color: '#d1d5db', lineHeight: '1.8'}}>
                 We don't just help you raise funds; we connect you with the right VC and angel investor network that will add value to your project.
               </p>
               <ul style={{listStyle: 'none', padding: 0, margin: 0}}>
@@ -217,13 +246,13 @@ const InvestmentFundingDetailView: React.FC = () => {
         <div className="container-xl">
           <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
-            {faqs.map((faq, i) => (
+            {faqs.map((f, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
                 <div className="faq-accordion-header h4-style">
-                  <span>{faq.q}</span>
+                  <span>{f.q}</span>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
                 </div>
-                <div className="faq-accordion-body p-style"><p>{faq.a}</p></div>
+                <div className="faq-accordion-body p-style"><p>{f.a}</p></div>
               </div>
             ))}
           </div>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const CorporateBusinessDevSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -14,10 +15,41 @@ const CorporateBusinessDevSubDetailView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject('Corporate BD', `Target Sector: ${targetSector}. Goal: ${goal}`);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const statusLabels: { [key: string]: string } = {
+        'baslangıc': 'Network Setup',
+        'buyume': 'Expanding Partnerships'
+      };
+
+      const formObj = {
+        "Business Dev Stage": statusLabels[status] || status,
+        "Target Corporate Sector": targetSector,
+        "Synergy Goal": goal,
+        "Provided Contact": contact,
+        "Type": "Corporate Business Development Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject(status, `Target Sector: ${targetSector}. Goal: ${goal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -110,10 +142,13 @@ const CorporateBusinessDevSubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Corporate Analysis</h3>
               {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Target Sector*</p>
                   <input type="text" className="form-control" placeholder="Target Sector (Finance, Retail, etc.)" value={targetSector} onChange={e => setTargetSector(e.target.value)} required />
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Synergy Goal*</p>
                   <textarea className="form-control" rows={3} placeholder="What type of synergy do you target with a traditional company?" value={goal} onChange={e => setGoal(e.target.value)} required />
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Contact Info (Email/TG)*</p>
                   <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e => setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'RESEARCHING...' : 'GET CORPORATE PLAN'}</button>
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GET CORPORATE PLAN'}</button>
                 </form>
               )}
             </div>
@@ -139,36 +174,38 @@ const CorporateBusinessDevSubDetailView: React.FC = () => {
 
       <section className="section-padding" style={{background: '#050505'}}>
         <div className="container-xl">
-          <div className="detail-item">
-            <div className="detail-text">
-              <h2 className="h2-style">Bridging Traditional Industry & Web3</h2>
-              <p className="p-style">Most Web3 projects struggle to communicate with traditional enterprises due to differing operational languages. We act as your specialized BD department, translating your project’s value proposition into a corporate-friendly narrative that highlights ROI, security, and scalability.</p>
-              <ul style={{marginTop: '32px', listStyle: 'none', padding: 0}}>
+          <div className="detail-row">
+            <div className="detail-item">
+              <div className="detail-text">
+                <h2 className="h2-style">Bridging Traditional Industry & Web3</h2>
+                <p className="p-style">Most Web3 projects struggle to communicate with traditional enterprises due to differing operational languages. We act as your specialized BD department, translating your project’s value proposition into a corporate-friendly narrative that highlights ROI, security, and scalability.</p>
+                <ul style={{marginTop: '32px', listStyle: 'none', padding: 0}}>
                    {["Enterprise Level Compliance", "B2B Partnership Frameworks", "Technical Integration Roadmaps"].map((item, i) => (
                     <li key={i} className="p-style" style={{marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '12px'}}>
                       <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {item}
                     </li>
                   ))}
                 </ul>
+              </div>
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=2000" alt="Enterprise Sync" />
+              </div>
             </div>
-            <div className="detail-visual">
-              <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=2000" alt="Enterprise Sync" />
-            </div>
-          </div>
-          <div className="detail-item reverse" style={{marginTop: '100px'}}>
-            <div className="detail-text">
-              <h2 className="h2-style">Corporate Grade Trust & Security</h2>
-              <p className="p-style">Traditional brands prioritize risk mitigation. We refine your project's technical documentation and legal frameworks to meet institutional standards, making you a safe and attractive partner for global brands looking to enter the blockchain space.</p>
-              <ul style={{marginTop: '32px', listStyle: 'none', padding: 0}}>
+            <div className="detail-item reverse" style={{marginTop: '100px'}}>
+              <div className="detail-text">
+                <h2 className="h2-style">Corporate Grade Trust & Security</h2>
+                <p className="p-style">Traditional brands prioritize risk mitigation. We refine your project's technical documentation and legal frameworks to meet institutional standards, making you a safe and attractive partner for global brands looking to enter the blockchain space.</p>
+                <ul style={{marginTop: '32px', listStyle: 'none', padding: 0}}>
                    {["Risk Mitigation Dossiers", "Brand Alignment Analysis", "Scalability Proofing"].map((item, i) => (
                     <li key={i} className="p-style" style={{marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '12px'}}>
                       <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {item}
                     </li>
                   ))}
                 </ul>
-            </div>
-            <div className="detail-visual">
-              <img src="https://images.unsplash.com/photo-1521791136064-7986c2959210?q=80&w=2000" alt="Institutional Trust" />
+              </div>
+              <div className="detail-visual">
+                <img src="https://images.unsplash.com/photo-1521791136064-7986c2959210?q=80&w=2000" alt="Institutional Trust" />
+              </div>
             </div>
           </div>
         </div>

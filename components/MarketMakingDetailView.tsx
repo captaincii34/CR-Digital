@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const MarketMakingDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [status, setStatus] = useState('');
   const [exchanges, setExchanges] = useState('');
   const [goal, setGoal] = useState('');
-  const [contact, setContact] = useState('');
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
@@ -14,10 +14,40 @@ const MarketMakingDetailView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject(status, `Exchanges: ${exchanges}. Goal: ${goal}`);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const statusLabels: { [key: string]: string } = {
+        'yeni': 'Pre-Launch',
+        'aktif': 'Currently Trading'
+      };
+
+      const formObj = {
+        "Trading Status": statusLabels[status] || status,
+        "Active Exchanges": exchanges,
+        "Volume Target / Goal": goal,
+        "Type": "Market Making & Liquidity Detail Page",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject(status, `Exchanges: ${exchanges}. Goal: ${goal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const scope = [
@@ -130,15 +160,16 @@ const MarketMakingDetailView: React.FC = () => {
             </div>
             <div className="form-card">
               <h3 className="h3-style" style={{textAlign: 'center', marginBottom: '20px'}}>Liquidity Analysis</h3>
-              <form onSubmit={handleSubmit}>
-                <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
-                  <option value="">Trading Status</option><option value="yeni">Pre-Launch</option><option value="aktif">Currently Trading</option>
-                </select>
-                <input type="text" className="form-control" placeholder="Active Exchanges" value={exchanges} onChange={e=>setExchanges(e.target.value)} />
-                <textarea className="form-control" rows={3} placeholder="What is your volume target?" value={goal} onChange={e=>setGoal(e.target.value)} required />
-                <input type="text" className="form-control" placeholder="Telegram / Email" value={contact} onChange={e=>setContact(e.target.value)} required />
-                <button type="submit" className="form-button">{loading ? 'PROCESSING...' : 'GET LIQUIDITY PLAN'}</button>
-              </form>
+              {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
+                <form onSubmit={handleSubmit}>
+                  <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
+                    <option value="">Trading Status</option><option value="yeni">Pre-Launch</option><option value="aktif">Currently Trading</option>
+                  </select>
+                  <input type="text" className="form-control" placeholder="Active Exchanges" value={exchanges} onChange={e=>setExchanges(e.target.value)} />
+                  <textarea className="form-control" rows={4} placeholder="What is your volume target?" value={goal} onChange={e=>setGoal(e.target.value)} required style={{ resize: 'none' }} />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'SEND'}</button>
+                </form>
+              )}
             </div>
           </div>
         </div>
@@ -188,7 +219,7 @@ const MarketMakingDetailView: React.FC = () => {
           <div className="flex flex-col lg:flex-row items-center gap-20">
             <div className="flex-1">
               <h2 className="h2-style" style={{marginBottom: '28px'}}>Price Stability and Depth</h2>
-              <p className="p-style" style={{marginBottom: '24px', color: '#d1d5db'}}>
+              <p className="p-style" style={{marginBottom: '24px', color: '#d1d5db', lineHeight: '1.8'}}>
                 The success of a token in the market depends not just on the price, but on the depth in the order book. We minimize 'slippage' issues for your project and ensure it displays a healthy chart.
               </p>
               <ul style={{listStyle: 'none', padding: 0, margin: 0}}>
@@ -230,7 +261,7 @@ const MarketMakingDetailView: React.FC = () => {
         </div>
       </section>
 
-      <div style={{ padding: '80px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
+      <div style={{ padding: '60px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
         <button onClick={() => window.location.hash = ''} className="p-style" style={{ background: 'transparent', border: '1px solid #444', color: '#888', padding: '14px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase' }}>Back to Homepage</button>
       </div>
     </div>

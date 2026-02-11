@@ -1,19 +1,47 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const ModerationSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
+  const [link, setLink] = useState('');
+  const [languages, setLanguages] = useState('');
+
   const toggleFaq = (index: number) => setOpenFaq(openFaq === index ? null : index);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject('Moderation', '7/24 safety and interaction strategy.');
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Community Platform": link,
+        "Languages Required": languages,
+        "Type": "24/7 Moderation Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject('Moderation', `Link: ${link}. Languages: ${languages}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -83,9 +111,11 @@ const ModerationSubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Squad Quote</h3>
               {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Community Platform & Link" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Which languages do you require support for?" required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'ANALYZING...' : 'GET MODERATION PLAN'}</button>
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Platform & Link*</p>
+                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="t.me/yourgroup or discord.gg/yourserver" value={link} onChange={e=>setLink(e.target.value)} required />
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Languages Required*</p>
+                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Which languages do you require support for?" value={languages} onChange={e=>setLanguages(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GET MODERATION PLAN'}</button>
                 </form>
               )}
             </div>

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const TokenBlockchainDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [status, setStatus] = useState('');
   const [blockchain, setBlockchain] = useState('');
   const [goal, setGoal] = useState('');
-  const [contact, setContact] = useState('');
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
@@ -16,10 +16,49 @@ const TokenBlockchainDetailView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject(status, `Blockchain Preference: ${blockchain}. Goal: ${goal}`);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const statusLabels: { [key: string]: string } = {
+        'new': 'New Token Idea',
+        'development': 'Under Development',
+        'existing': 'Existing Token / Restructuring'
+      };
+      
+      const bcLabels: { [key: string]: string } = {
+        'undecided': 'Undecided',
+        'eth': 'Ethereum (ERC-20)',
+        'bnb': 'BNB Chain (BEP-20)',
+        'sol': 'Solana (SPL)',
+        'other': 'Other'
+      };
+
+      const formObj = {
+        "Project Status": statusLabels[status] || status,
+        "Blockchain Preference": bcLabels[blockchain] || blockchain,
+        "Project Goal Description": goal,
+        "Type": "Token & Blockchain Development Detail Page",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject(status, `Blockchain Preference: ${blockchain}. Goal: ${goal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const roadmapSteps = [
@@ -125,9 +164,7 @@ const TokenBlockchainDetailView: React.FC = () => {
             height: 54px;
             background-color: var(--cray-gold);
             border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             margin: 0 auto 28px;
             transition: 0.3s;
             box-shadow: 0 10px 20px rgba(255, 177, 0, 0.2);
@@ -241,13 +278,10 @@ const TokenBlockchainDetailView: React.FC = () => {
                       </select>
                     </div>
                     <div className="form-group">
-                      <textarea className="form-control p-style" rows={3} placeholder="What is your project goal?" value={goal} onChange={(e) => setGoal(e.target.value)} required style={{resize: 'none'}} />
-                    </div>
-                    <div className="form-group">
-                      <input type="text" className="form-control p-style" placeholder="Email / Telegram" value={contact} onChange={(e) => setContact(e.target.value)} required />
+                      <textarea className="form-control p-style" rows={4} placeholder="What is your project goal?" value={goal} onChange={(e) => setGoal(e.target.value)} required style={{resize: 'none'}} />
                     </div>
                     <button type="submit" disabled={loading} className="form-button">
-                      {loading ? 'ANALYZING...' : 'GET EVALUATION'}
+                      {loading ? 'OPENING TELEGRAM...' : 'SEND'}
                     </button>
                   </form>
                 )}

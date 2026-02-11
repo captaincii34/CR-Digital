@@ -1,19 +1,48 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const MemeTrendContentSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
+  // Form states
+  const [category, setCategory] = useState("");
+  const [tone, setTone] = useState("");
+
   const toggleFaq = (index: number) => setOpenFaq(openFaq === index ? null : index);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject('Meme Marketing', 'Degen culture and viral trend analysis.');
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Project Category": category,
+        "Desired Brand Tone": tone,
+        "Type": "Meme & Trend Content Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject('Meme Marketing', `Category: ${category}. Tone: ${tone}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -83,9 +112,11 @@ const MemeTrendContentSubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Get Meme Plan</h3>
               {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Project Category (Meme, AI, etc.)" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="What is your desired tone (Corporate vs Full Degen)?" required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'IDEATING...' : 'GENERATE CAMPAIGN'}</button>
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Project Category*</p>
+                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="e.g. Meme, AI, DApp" value={category} onChange={e=>setCategory(e.target.value)} required />
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Brand Tone*</p>
+                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Desired tone (Corporate vs Full Degen)?" value={tone} onChange={e=>setTone(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GENERATE CAMPAIGN'}</button>
                 </form>
               )}
             </div>

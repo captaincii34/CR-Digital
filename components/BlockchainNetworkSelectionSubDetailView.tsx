@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const BlockchainNetworkSelectionSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [status, setStatus] = useState('');
   const [goal, setGoal] = useState('');
-  const [contact, setContact] = useState('');
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
@@ -13,10 +13,40 @@ const BlockchainNetworkSelectionSubDetailView: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject(status, `Network Selection: ${goal}`);
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const typeLabels: { [key: string]: string } = {
+        'defi': 'DeFi / Finance',
+        'gamefi': 'GameFi / Gaming',
+        'rwa': 'RWA (Real World Assets)'
+      };
+
+      const formObj = {
+        "Project Type": typeLabels[status] || status,
+        "Transaction/User Goals": goal,
+        "Type": "Network Selection Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject(status, `Network Selection: ${goal}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -85,7 +115,7 @@ const BlockchainNetworkSelectionSubDetailView: React.FC = () => {
         .faq-accordion-item.active .faq-accordion-header { color: var(--cray-gold); }
       `}</style>
 
-      {/* 1. Hero */}
+      {/* Hero */}
       <section id="h-hero">
         <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=2832" className="bg-img" alt="Network Selection" />
         <div className="overlay"></div><div className="grad"></div>
@@ -97,15 +127,19 @@ const BlockchainNetworkSelectionSubDetailView: React.FC = () => {
               <p className="p-style" style={{marginTop: '20px', lineHeight: '1.7'}}>Choosing the wrong network can be the end of your project. We determine the most suitable blockchain for your technical needs and budget with data-driven analysis.</p>
             </div>
             <div className="form-card">
-              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Network Compatibility Test</h3>
+              <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Network Analysis</h3>
               {aiResult ? <div className="p-style" style={{color: '#000'}}>{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Try Again</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <select className="form-control" required>
-                    <option value="">Project Type</option><option value="defi">DeFi / Finance</option><option value="gamefi">GameFi / Gaming</option><option value="rwa">RWA (Real World Assets)</option>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Project Type*</p>
+                  <select className="form-control" value={status} onChange={e=>setStatus(e.target.value)} required>
+                    <option value="">Select Category</option>
+                    <option value="defi">DeFi / Finance</option>
+                    <option value="gamefi">GameFi / Gaming</option>
+                    <option value="rwa">RWA (Real World Assets)</option>
                   </select>
+                  <p className="text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Volume & Goals*</p>
                   <textarea className="form-control" rows={3} placeholder="Expected daily transaction volume and user count..." value={goal} onChange={e=>setGoal(e.target.value)} required />
-                  <input type="text" className="form-control" placeholder="Email or Telegram" value={contact} onChange={e=>setContact(e.target.value)} required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'CALCULATING...' : 'FIND THE MOST SUITABLE NETWORK'}</button>
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'FIND THE MOST SUITABLE NETWORK'}</button>
                 </form>
               )}
             </div>
@@ -113,7 +147,7 @@ const BlockchainNetworkSelectionSubDetailView: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. Box Section */}
+      {/* Reasons */}
       <section className="section-padding">
         <div className="container-xl">
           <div className="reasons-grid">
@@ -149,22 +183,6 @@ const BlockchainNetworkSelectionSubDetailView: React.FC = () => {
                 </ul>
               </div>
             </div>
-            <div className="detail-item reverse">
-              <div className="detail-visual">
-                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000" alt="Global Network" />
-              </div>
-              <div className="detail-text">
-                <h2 className="h2-style">Ecosystem Liquidity Matching</h2>
-                <p className="p-style">Launching on a fast network is useless if there's no money there. We match your project with networks that have active TVL (Total Value Locked) and existing user bases relevant to your specific project goals.</p>
-                <ul style={{listStyle: 'none', padding: 0, marginTop: '24px'}}>
-                  {["TVL Heatmap Analysis", "On-Chain Active User Stats", "Grant Opportunity Mapping"].map((li, i) => (
-                    <li key={i} className="p-style" style={{marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}>
-                      <span style={{color: 'var(--cray-gold)', fontWeight: 800}}>✓</span> {li}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -176,23 +194,6 @@ const BlockchainNetworkSelectionSubDetailView: React.FC = () => {
             Don't get trapped on the wrong chain. Let our infrastructure experts guide your technical roadmap.
           </p>
           <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Get Network Analysis</a>
-        </div>
-      </section>
-
-      <section className="section-padding">
-        <div className="container-xl">
-          <h2 className="h2-style" style={{textAlign: 'center', marginBottom: '48px'}}>Frequently Asked Questions</h2>
-          <div style={{maxWidth: '850px', margin: '0 auto'}}>
-            {faqs.map((f, i) => (
-              <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
-                <div className="faq-accordion-header h4-style">
-                  <span>{f.q}</span>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7" /></svg>
-                </div>
-                <div className="faq-accordion-body p-style"><p>{f.a}</p></div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 

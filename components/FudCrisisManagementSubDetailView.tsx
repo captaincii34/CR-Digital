@@ -1,19 +1,47 @@
 import React, { useState } from 'react';
 import { evaluateProject } from '../services/geminiService';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const FudCrisisManagementSubDetailView: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<any>(null);
 
+  const [link, setLink] = useState('');
+  const [threat, setThreat] = useState('');
+
   const toggleFaq = (index: number) => setOpenFaq(openFaq === index ? null : index);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
-    const result = await evaluateProject('Crisis Management', 'Vulnerability assessment and response strategy.');
-    setAiResult(result);
-    setLoading(false);
+
+    try {
+      const formObj = {
+        "Project/Community Link": link,
+        "Crisis Threat Level": threat,
+        "Type": "FUD & Crisis Management Sub-Detail",
+        "Sent At": new Date().toISOString(),
+        "Page": window.location.href,
+      };
+
+      const code = await startTelegramConnectWithForm(formObj);
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Please open the bot in Telegram and press Start. Then you can try again.");
+        setLoading(false);
+        return;
+      }
+
+      const result = await evaluateProject('Crisis Management', `Link: ${link}. Threat: ${threat}`);
+      setAiResult(result);
+    } catch (err: any) {
+      console.error(err);
+      alert("Could not initiate Telegram connection. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reasons = [
@@ -84,9 +112,11 @@ const FudCrisisManagementSubDetailView: React.FC = () => {
               <h3 style={{textAlign: 'center', marginBottom: '20px', fontWeight: 800}}>Crisis Assessment</h3>
               {aiResult ? <div className="p-style">{aiResult.summary} <button onClick={()=>setAiResult(null)} className="form-button mt-4">Reset</button></div> : (
                 <form onSubmit={handleSubmit}>
-                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="Project Name / Community Link" required />
-                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Describe the current FUD or threat level?" required />
-                  <button type="submit" disabled={loading} className="form-button">{loading ? 'STABILIZING...' : 'GET CRISIS PLAN'}</button>
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Project/Community Link*</p>
+                  <input type="text" className="w-full border p-3 rounded-lg mb-4" placeholder="t.me/yourgroup or website" value={link} onChange={e=>setLink(e.target.value)} required />
+                  <p className="text-[10px] font-bold text-zinc-500 mb-2 uppercase tracking-widest">Current Threat Level*</p>
+                  <textarea className="w-full border p-3 rounded-lg mb-4" rows={3} placeholder="Describe the current FUD or threat level?" value={threat} onChange={e=>setThreat(e.target.value)} required />
+                  <button type="submit" disabled={loading} className="form-button">{loading ? 'OPENING TELEGRAM...' : 'GET CRISIS PLAN'}</button>
                 </form>
               )}
             </div>
@@ -155,7 +185,7 @@ const FudCrisisManagementSubDetailView: React.FC = () => {
           <p className="p-style" style={{color: '#555', marginTop: '15px', maxWidth: '800px', margin: '15px auto 0'}}>
             Don't leave your crisis response to chance. Get professional emergency management support before it's too late.
           </p>
-          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none'}}>Secure Crisis Plan</a>
+          <a href="#h-hero" className="form-button" style={{display: 'inline-block', width: 'auto', padding: '18px 48px', marginTop: '30px', textDecoration: 'none', background: '#ef4444', color: '#fff'}}>Secure Crisis Plan</a>
         </div>
       </section>
 
