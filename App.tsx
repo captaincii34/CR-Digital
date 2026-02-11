@@ -24,6 +24,7 @@ import AixoviaPlayWorkDetailView from './components/AixoviaPlayWorkDetailView';
 import BccoinWorkDetailView from './components/BccoinWorkDetailView';
 import ContactView from './components/ContactView';
 import PricingView from './components/PricingView';
+import InfluencersView from './components/InfluencersView';
 import CalendarView from './components/CalendarView';
 import ServicesView from './components/ServicesView';
 import PrivacyPolicyView from './components/PrivacyPolicyView';
@@ -164,6 +165,10 @@ const App: React.FC = () => {
 
     if (normalizedView === '#pricing') {
       return <PricingView />;
+    }
+
+    if (normalizedView === '#influencers') {
+      return <InfluencersView />;
     }
 
     if (normalizedView === '#calendar') {

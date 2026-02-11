@@ -111,7 +111,7 @@ app.post("/api/form/submit", async (req, res) => {
     // Kullanıcıya bilgilendirme (opsiyonel)
     await tg("sendMessage", {
       chat_id: userChatId,
-      text: "✅ Formunu aldım. Buradan yazışmaya devam edebiliriz.",
+      text: "✅ Thank you. We have received your message. A suitable colleague will respond to you here as soon as possible and assist you.",
     });
 
     // Routing: admin son kullanıcı = bu
@@ -154,7 +154,7 @@ app.post("/webhook/telegram", async (req, res) => {
 
         await tg("sendMessage", {
           chat_id: chatId,
-          text: "✅ Telegram bağlantın tamamlandı. Şimdi siteye geri dönüp formu gönderebilirsin.",
+          text: "✅ Your Telegram connection is complete.",
         });
 
         // Admin’e bilgi
@@ -175,7 +175,7 @@ app.post("/webhook/telegram", async (req, res) => {
         // code yoksa da normal karşılama
         await tg("sendMessage", {
           chat_id: chatId,
-          text: "Merhaba! Site üzerinden bağlanıp form gönderdiğinde buradan konuşabiliriz.",
+          text: "Hi! I'll put you in touch with our colleagues as soon as possible. This won't take long.",
         });
       }
       return;
@@ -204,7 +204,7 @@ app.post("/webhook/telegram", async (req, res) => {
         await tg("sendMessage", {
           chat_id: ADMIN_CHAT_ID,
           text:
-            "⚠️ Henüz hedef kullanıcı yok. Şu formatla cevapla:\n/r <userChatId> mesaj",
+            "⚠️ There are no target users yet. Reply in this format:\n/r <userChatId> meesaage",
         });
       }
       return;

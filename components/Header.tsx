@@ -244,6 +244,12 @@ const Header: React.FC = () => {
     closeAll();
   };
 
+  const handleInfluencersClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.location.hash = 'influencers';
+    closeAll();
+  };
+
   const handleContactClick = (e: React.MouseEvent) => {
     e.preventDefault();
     window.location.hash = 'contact';
@@ -383,6 +389,7 @@ const Header: React.FC = () => {
 
             <li><a href="#works" onClick={handleWorksClick} className="nav-link">WORKS</a></li>
             <li><a href="#pricing" onClick={handlePricingClick} className="nav-link">PRICING</a></li>
+            <li><a href="#influencers" onClick={handleInfluencersClick} className="nav-link">INFLUENCERS</a></li>
             <li><a href="#contact" onClick={handleContactClick} className="nav-link">CONTACT</a></li>
           </ul>
 
@@ -490,6 +497,13 @@ const Header: React.FC = () => {
           <li className="mobile-nav-item">
             <a href="#pricing" onClick={handlePricingClick} className="mobile-nav-link">
               PRICING
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 18l6-6-6-6"/></svg>
+            </a>
+          </li>
+
+          <li className="mobile-nav-item">
+            <a href="#influencers" onClick={handleInfluencersClick} className="mobile-nav-link">
+              INFLUENCERS
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 18l6-6-6-6"/></svg>
             </a>
           </li>
