@@ -1,16 +1,58 @@
 import React, { useState } from 'react';
+import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
 const ContactView: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Form states
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [projectType, setProjectType] = useState("token");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
+
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+
+    try {
+      const formObj = {
+        name,
+        email,
+        projectType,
+        message,
+        sentAt: new Date().toISOString(),
+        page: window.location.href,
+      };
+
+      // 1) Formu backend'e draft olarak gönder + telegram linkini aç
+      const code = await startTelegramConnectWithForm(formObj);
+
+      // 2) Kullanıcı Telegram'da Start'a basınca connected olur
+      const ok = await waitUntilConnected(code);
+      if (!ok) {
+        alert("Telegram’da botu açıp Start’a bas. Sonra tekrar deneyebilirsin.");
+        return;
+      }
+
+      // 3) Bizim tarafta success ekranını göster
       setSent(true);
-    }, 1500);
+    } catch (err: any) {
+      alert("Telegram bağlantısı başlatılamadı. Lütfen tekrar dene.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const resetForm = () => {
+    setSent(false);
+    setLoading(false);
+    setName("");
+    setEmail("");
+    setProjectType("token");
+    setMessage("");
   };
 
   return (
@@ -127,10 +169,17 @@ const ContactView: React.FC = () => {
       `}</style>
 
       <section className="contact-hero">
-        <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=2832&auto=format&fit=crop" className="hero-bg" alt="Contact BG" />
+        <img
+          src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=2832&auto=format&fit=crop"
+          className="hero-bg"
+          alt="Contact BG"
+        />
         <div className="container-xl">
           <h1 className="h1-style">Get in Touch</h1>
-          <p className="p-style">Ready to revolutionize the Web3 world? Our expert team is here to guide you through every stage of your project.</p>
+          <p className="p-style">
+            Ready to revolutionize the Web3 world? Our expert team is here to guide you through every stage of your
+            project.
+          </p>
         </div>
       </section>
 
@@ -162,29 +211,59 @@ const ContactView: React.FC = () => {
                 {sent ? (
                   <div className="success-box animate-in zoom-in duration-500">
                     <div className="w-12 h-12 bg-cray-gold rounded-full flex items-center justify-center mx-auto mb-4">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="3">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
                     </div>
                     <h3 className="text-xl font-bold text-white mb-2">Message Received</h3>
-                    <p className="text-zinc-400 text-sm">Thank you! Our strategic team will get back to you shortly.</p>
-                    <button onClick={() => setSent(false)} className="text-cray-gold font-bold mt-6 underline text-sm">Send another message</button>
+                    <p className="text-zinc-400 text-sm">
+                      Thank you! Our strategic team will get back to you shortly.
+                    </p>
+                    <button
+                      onClick={resetForm}
+                      className="text-cray-gold font-bold mt-6 underline text-sm"
+                      type="button"
+                    >
+                      Send another message
+                    </button>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit}>
                     <h3 className="form-title">Start Your Journey</h3>
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6">
                       <div className="input-group">
                         <label className="input-label">Your Name</label>
-                        <input type="text" className="custom-input" placeholder="Full Name" required />
+                        <input
+                          type="text"
+                          className="custom-input"
+                          placeholder="Full Name"
+                          required
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                        />
                       </div>
+
                       <div className="input-group">
                         <label className="input-label">Email Address</label>
-                        <input type="email" className="custom-input" placeholder="example@mail.com" required />
+                        <input
+                          type="email"
+                          className="custom-input"
+                          placeholder="example@mail.com"
+                          required
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                        />
                       </div>
                     </div>
 
                     <div className="input-group">
                       <label className="input-label">Project Type</label>
-                      <select className="custom-input">
+                      <select
+                        className="custom-input"
+                        value={projectType}
+                        onChange={(e) => setProjectType(e.target.value)}
+                      >
                         <option value="token">Token Launch</option>
                         <option value="gamefi">GameFi / P2E</option>
                         <option value="consultancy">360° Consultancy</option>
@@ -195,11 +274,17 @@ const ContactView: React.FC = () => {
 
                     <div className="input-group">
                       <label className="input-label">Your Message</label>
-                      <textarea className="custom-input custom-textarea" placeholder="Tell us about your project..." required></textarea>
+                      <textarea
+                        className="custom-input custom-textarea"
+                        placeholder="Tell us about your project..."
+                        required
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                      />
                     </div>
 
                     <button type="submit" disabled={loading} className="submit-btn">
-                      {loading ? 'SENDING...' : 'TRANSMIT MESSAGE'}
+                      {loading ? 'OPENING TELEGRAM...' : 'TRANSMIT MESSAGE'}
                     </button>
                   </form>
                 )}
@@ -210,7 +295,23 @@ const ContactView: React.FC = () => {
       </section>
 
       <div style={{ padding: '60px 0', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
-        <button onClick={() => window.location.hash = ''} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 30px', borderRadius: '10px', cursor: 'pointer', textTransform: 'uppercase', fontSize: '14px !important' }}>Back to Homepage</button>
+        <button
+          onClick={() => (window.location.hash = '')}
+          className="p-style"
+          style={{
+            background: 'transparent',
+            border: '1px solid #333',
+            color: '#888',
+            padding: '12px 30px',
+            borderRadius: '10px',
+            cursor: 'pointer',
+            textTransform: 'uppercase',
+            fontSize: '14px !important'
+          }}
+          type="button"
+        >
+          Back to Homepage
+        </button>
       </div>
     </div>
   );
