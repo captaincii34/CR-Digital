@@ -4,28 +4,28 @@ import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/teleg
 type InfluencerStep = 1 | 2 | 3 | 4 | 5 | 6 | 'success';
 
 const faqData = [
-  { q: "Katılım için herhangi bir ücret ödemem gerekiyor mu?", a: "Hayır, CrayUp Influencer Ağı'na katılmak tamamen ücretsizdir. Biz bir köprü görevi görüyoruz ve fenomenlerimizden herhangi bir maddi talepte bulunmuyoruz." },
-  { q: "Hangi platformlardaki influencer'lar başvurabilir?", a: "X (Twitter), Telegram, YouTube ve Discord platformlarında kripto/Web3 odaklı içerik üreten tüm fenomenler başvurabilir." },
-  { q: "Takipçi sınırı var mı?", a: "Belirli bir sayı sınırımız yok. Bizim için önemli olan takipçi sayısından ziyade kitlenizin gerçekliği, etkileşim oranınız ve projelere sağlayabileceğiniz niş katkıdır." },
-  { q: "Ödemelerimi nasıl ve ne zaman alacağım?", a: "İş birliği bazlı çalışıyoruz. Ödemelerinizi tercihinize göre kripto para (USDT/Stablecoin) veya banka transferi ile iş bitiminde hızlıca alırsınız." },
-  { q: "İş birliği süreci nasıl işliyor?", a: "Başvurunuz onaylandıktan sonra uygun bir proje geldiğinde ekibimiz sizinle Telegram üzerinden iletişime geçer, şartları konuşur ve onayınızla süreci başlatırız." },
-  { q: "Gizli Telegram kanalına nasıl katılırım?", a: "Kayıt işleminiz tamamlanıp profiliniz doğrulandıktan sonra, sadece onaylı influencer'ların bulunduğu özel davet linki size bizzat iletilir." },
-  { q: "CrayDEX ve Crayus Game öncelikleri nelerdir?", a: "CrayUp'ın kendi projelerinde (borsa ve oyun) en yüksek kademe VIP haklar, özel token airdrop'ları ve beta test süreçlerine öncelikli katılım hakkı kazanırsınız." },
-  { q: "Markalarla iletişimi kim kuruyor?", a: "Tüm operasyonel yükü, bütçe görüşmelerini ve teknik detayları CrayUp yönetir. Siz sadece projenin tanıtımına ve topluluğunuza odaklanırsınız." },
-  { q: "Sadece Türkiye odaklı mı çalışıyorsunuz?", a: "Hayır, global bir ajansız. Bybit, MEXC ve Gate.io gibi devlerle olan partnerliklerimiz sayesinde dünyanın her yerinden projelerle iş birliği yapma fırsatınız olur." },
-  { q: "Başvuru yaptıktan sonra ne kadar sürede dönüş yapılır?", a: "Ekibimiz başvurunuzu ve kanallarınızı inceler. Genellikle 24-48 saat içerisinde Telegram üzerinden sizinle ilk temas kurulur." }
+  { q: "Do I need to pay any fee to participate?", a: "No, joining the CrayUp Influencer Network is completely free. We act as a bridge and do not demand any financial payment from our influencers." },
+  { q: "Influencers from which platforms can apply?", a: "All influencers producing crypto/Web3 focused content on X (Twitter), Telegram, YouTube, and Discord platforms can apply." },
+  { q: "Is there a follower limit?", a: "We do not have a specific numerical limit. What matters most to us is the authenticity of your audience, your engagement rate, and the niche contribution you can provide to projects." },
+  { q: "How and when will I receive my payments?", a: "We work on a collaboration basis. You receive your payments quickly at the end of the job via cryptocurrency (USDT/Stablecoin) or bank transfer, depending on your preference." },
+  { q: "How does the collaboration process work?", a: "After your application is approved and a suitable project arrives, our team will contact you via Telegram, discuss the terms, and start the process with your approval." },
+  { q: "How can I join the private Telegram channel?", a: "Once your registration is complete and your profile is verified, a special invitation link for approved influencers will be sent to you personally." },
+  { q: "What are the priorities for CrayDEX and Crayus Game?", a: "You gain high-tier VIP rights, exclusive token airdrops, and priority access to beta test processes in CrayUp's own projects (exchange and game)." },
+  { q: "Who communicates with the brands?", a: "CrayUp manages all operational burdens, budget negotiations, and technical details. You only focus on promoting the project and your community." },
+  { q: "Do you only focus on Turkey?", a: "No, we are a global agency. Thanks to our partnerships with giants like Bybit, MEXC, and Gate.io, you have the opportunity to collaborate with projects from all over the world." },
+  { q: "How long does it take to get a response after applying?", a: "Our team reviews your application and channels. Usually, the first contact is established via Telegram within 24-48 hours." }
 ];
 
-// Genişletilmiş Seçenekler
-const twitterOptions = ["Retweet", "Tanıtım postu paylaş", "Tweet dizisi (Flood)", "Twitter Space / Sesli", "Sabitlenmiş tweet", "Belirli tweet’e yorum", "Profil Header Kiralama", "Bio Link Kiralama", "Etiket/Trending Topic", "Uzun Süreli Ambassadorluk"];
-const telegramOptions = ["Grup/Kanal paylaşımı", "Tanıtım postu paylaş", "Kendi kanalında sesli (VC)", "Resmi kanalımızda etkinlik", "Soru-cevap mini etkinlik", "Grup Sabitleme (Pin)", "Bot Butonu Reklamı", "Klasör Ekleme (Folder add)", "Shilling Desteği"];
-const youtubeOptions = ["5+ dakikalık video", "Shorts (1 dk)", "Canlı yayın", "Coin analizi", "Video içi sponsorluk", "Community Post paylaşımı", "Eğitim serisi katılımı", "Podcast / Röportaj"];
+// Expanded Options
+const twitterOptions = ["Retweet", "Share promotional post", "Tweet series (Flood)", "Twitter Space / Audio", "Pinned tweet", "Comment on specific tweet", "Profile Header Rental", "Bio Link Rental", "Tag/Trending Topic", "Long-term Ambassadorship"];
+const telegramOptions = ["Group/Channel sharing", "Share promotional post", "Voice chat (VC) in own channel", "Event in our official channel", "Q&A mini-event", "Group Pinning", "Bot Button Ad", "Folder add", "Shilling Support"];
+const youtubeOptions = ["5+ minute video", "Shorts (1 min)", "Live stream", "Coin analysis", "In-video sponsorship", "Community Post sharing", "Educational series participation", "Podcast / Interview"];
 const otherPlatformOptions = [
-  "CoinMarketCap yorum", "Binance Square paylaşımı", "Reddit (r/Crypto vb.)", "Discord topluluk paylaşımı", "TikTok videosu", "Medium makalesi", 
-  "Dextools yorum/pin", "Quora paylaşımı", "TradingView analiz", "CoinGecko yorum", "LinkedIn post", "Dexscanner paylaşımı", 
-  "Warpcast (Farcaster)", "Lens Protocol", "Debank Stream", "Galxe Campaign Support", "Zealy/QuestN Yönetimi"
+  "CoinMarketCap comment", "Binance Square post", "Reddit (r/Crypto etc.)", "Discord community post", "TikTok video", "Medium article", 
+  "Dextools comment/pin", "Quora post", "TradingView analysis", "CoinGecko comment", "LinkedIn post", "Dexscanner sharing", 
+  "Warpcast (Farcaster)", "Lens Protocol", "Debank Stream", "Galxe Campaign Support", "Zealy/QuestN Management"
 ];
-const durationOptions = ["Tek Seferlik", "Haftalık", "Aylık / Devamlı"];
+const durationOptions = ["One-Time", "Weekly", "Monthly / Ongoing"];
 
 const InfluencersView: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -96,16 +96,16 @@ const InfluencersView: React.FC = () => {
         "YouTube": formData.youtubeLink,
         "Other Channels": formData.otherSocials,
         "Twitter Choices": formData.selectedTwitter.join(", "),
-        "Twitter Fee (USDT)": formData.twitterFee || "Belirtilmedi",
+        "Twitter Fee (USDT)": formData.twitterFee || "Not Specified",
         "Telegram Choices": formData.selectedTelegram.join(", "),
-        "Telegram Fee (USDT)": formData.telegramFee || "Belirtilmedi",
+        "Telegram Fee (USDT)": formData.telegramFee || "Not Specified",
         "YouTube Choices": formData.selectedYoutube.join(", "),
-        "YouTube Fee (USDT)": formData.youtubeFee || "Belirtilmedi",
+        "YouTube Fee (USDT)": formData.youtubeFee || "Not Specified",
         "Other Platform Choices": formData.selectedOthers.join(", "),
-        "Extra Platform Text": formData.otherPlatformText || "Yok",
-        "Other Platforms Fee (USDT)": formData.othersFee || "Belirtilmedi",
+        "Extra Platform Text": formData.otherPlatformText || "None",
+        "Other Platforms Fee (USDT)": formData.othersFee || "Not Specified",
         "Partnership Duration": formData.duration,
-        "Package/Consultancy Fee (USDT)": formData.durationFee || "Görüşülecek",
+        "Package/Consultancy Fee (USDT)": formData.durationFee || "To be discussed",
         "Suggestions/Notes": formData.suggestions,
         "Type": "Advanced Influencer Onboarding V2",
         "Sent At": new Date().toISOString(),
@@ -114,7 +114,7 @@ const InfluencersView: React.FC = () => {
       const code = await startTelegramConnectWithForm(formPayload);
       const ok = await waitUntilConnected(code);
       if (!ok) {
-        alert("Bağlantı doğrulanamadı. Lütfen Telegram botunu açıp Start'a basın.");
+        alert("Connection could not be verified. Please open the Telegram bot and press Start.");
         setLoading(false);
         return;
       }
@@ -122,7 +122,7 @@ const InfluencersView: React.FC = () => {
       setStep('success');
     } catch (err: any) {
       console.error(err);
-      alert("Telegram bağlantısı sırasında bir hata oluştu.");
+      alert("An error occurred during the Telegram connection.");
     } finally {
       setLoading(false);
     }
@@ -217,9 +217,9 @@ const InfluencersView: React.FC = () => {
         <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=2832" className="hero-bg" alt="Hero Background" />
         <div className="hero-overlay"></div>
         <div className="container-xl">
-          <h5 style={{color: 'var(--cray-gold)', letterSpacing: '8px', textTransform: 'uppercase', marginBottom: '20px', fontWeight: 800, fontSize: '12px !important'}}>CRAYUP INFLUENCER EKOSİSTEMİ</h5>
-          <h1 className="h1-style">Kripto Dünyasının En Güçlü <br/> Fenomen Ağına Katılın</h1>
-          <p className="p-style">CrayUp strategic ortakları arasında yerinizi alın. Global Web3 projeleriyle topluluğunuzu buluşturun.</p>
+          <h5 style={{color: 'var(--cray-gold)', letterSpacing: '8px', textTransform: 'uppercase', marginBottom: '20px', fontWeight: 800, fontSize: '12px !important'}}>CRAYUP INFLUENCER ECOSYSTEM</h5>
+          <h1 className="h1-style">Join the Most Powerful <br/> Influencer Network in Crypto</h1>
+          <p className="p-style">Take your place among CrayUp's strategic partners. Connect your community with global Web3 projects.</p>
 
           <div className="feature-list">
             <div className="feature-item">
@@ -227,8 +227,8 @@ const InfluencersView: React.FC = () => {
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="4"><polyline points="20 6 9 17 4 12"/></svg>
               </div>
               <div className="feature-content">
-                <h4>Gizli İş Akışı Kanalı</h4>
-                <p>Sadece kayıtlı influencerlarımıza özel bütçeli kampanya fırsatları.</p>
+                <h4>Private Workflow Channel</h4>
+                <p>Exclusive paid campaign opportunities only for our registered influencers.</p>
               </div>
             </div>
             <div className="feature-item">
@@ -236,32 +236,32 @@ const InfluencersView: React.FC = () => {
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="4"><polyline points="20 6 9 17 4 12"/></svg>
               </div>
               <div className="feature-content">
-                <h4>CrayBot İle Anında Bilgi, Anında Bildirim</h4>
-                <p>Sadece kayıtlı influencerlarımıza özel anında bilgi ve iş bildirim sistemi</p>
+                <h4>Instant Notifications with CrayBot</h4>
+                <p>Instant information and job notification system exclusive to our registered influencers.</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Kayıt Ol Section */}
+      {/* Apply Section */}
       <section id="apply-now" className="register-section">
         <div className="container-xl">
-          <h2 className="h2-style">Hemen Şimdi Başvurun</h2>
-          <p className="p-style mx-auto mb-10 max-w-2xl">Sadece kanallarinizi belirterek CrayUp'in global ağina dahil olun.</p>
-          <button onClick={handleRegisterClick} className="cta-button !px-24 !py-6 font-black text-lg">KAYIT OL</button>
+          <h2 className="h2-style">Apply Right Now</h2>
+          <p className="p-style mx-auto mb-10 max-w-2xl">Join CrayUp's global network just by specifying your channels.</p>
+          <button onClick={handleRegisterClick} className="cta-button !px-24 !py-6 font-black text-lg">REGISTER NOW</button>
         </div>
       </section>
 
       {/* Why Us Section */}
       <section className="why-us-section bg-black">
         <div className="container-xl">
-          <h2 className="h2-style text-center">Neden Bizimle Çalışmalısınız?</h2>
+          <h2 className="h2-style text-center">Why Should You Work With Us?</h2>
           <div className="why-grid">
-            <div className="why-card"><h4>Sıfır Komisyon</h4><p>Influencer ve marka arasındaki köprüde ek ücret talep edilmez.</p></div>
-            <div className="why-card"><h4>Doğrudan İletişim</h4><p>Resmi ekiplerimizle Telegram üzerinden anlık koordinasyon.</p></div>
-            <div className="why-card"><h4>Global Marka Gücü</h4><p>Bybit, Gate.io ve MEXC projelerinde yer alma fırsatı.</p></div>
-            <div className="why-card"><h4>Geleceğin Parçası</h4><p>Web3 devrimini bizim projelerimizle en önden takip edin.</p></div>
+            <div className="why-card"><h4>Zero Commission</h4><p>No additional fees are requested for the bridge between the influencer and the brand.</p></div>
+            <div className="why-card"><h4>Direct Communication</h4><p>Instant coordination via Telegram with our official teams.</p></div>
+            <div className="why-card"><h4>Global Brand Power</h4><p>Opportunity to participate in Bybit, Gate.io, and MEXC projects.</p></div>
+            <div className="why-card"><h4>Part of the Future</h4><p>Follow the Web3 revolution from the front row with our projects.</p></div>
           </div>
         </div>
       </section>
@@ -269,15 +269,15 @@ const InfluencersView: React.FC = () => {
       {/* CTA Band */}
       <section className="cta-band">
         <div className="container-xl text-center">
-          <h2 className="h2-style text-black">Hemen Aramıza Katıl</h2>
-          <button onClick={scrollToApply} className="btn-cta-dark">ARAMIZA KATIL</button>
+          <h2 className="h2-style text-black">Join Us Today</h2>
+          <button onClick={scrollToApply} className="btn-cta-dark">JOIN US</button>
         </div>
       </section>
 
       {/* FAQ */}
       <section className="faq-section">
         <div className="container-xl">
-          <h2 className="h2-style text-center mb-16">Sıkça Sorulan Sorular</h2>
+          <h2 className="h2-style text-center mb-16">Frequently Asked Questions</h2>
           <div style={{maxWidth: '850px', margin: '0 auto'}}>
             {faqData.map((faq, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
@@ -292,7 +292,7 @@ const InfluencersView: React.FC = () => {
         </div>
       </section>
 
-      {/* Kayıt Modalı */}
+      {/* Registration Modal */}
       {isModalOpen && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal-box no-scrollbar" onClick={e => e.stopPropagation()}>
@@ -306,33 +306,33 @@ const InfluencersView: React.FC = () => {
               </div>
             )}
 
-            {/* Step 1: Kanallar */}
+            {/* Step 1: Channels */}
             {step === 1 && (
               <div className="animate-in fade-in slide-in-from-right-4 duration-500">
-                <h3 className="text-2xl font-black mb-2">Kanallarınızı Ekleyin</h3>
-                <p className="text-zinc-500 text-sm mb-8">Hangi mecralarda kitlelere hitap ediyorsunuz?</p>
+                <h3 className="text-2xl font-black mb-2">Add Your Channels</h3>
+                <p className="text-zinc-500 text-sm mb-8">In which media do you address audiences?</p>
                 
-                <label className="form-label-min">Twitter (X) Kullanıcı Adı veya Link*</label>
+                <label className="form-label-min">Twitter (X) Username or Link*</label>
                 <input type="text" className="form-input-inf" placeholder="@username" value={formData.twitterHandle} onChange={e=>setFormData({...formData, twitterHandle: e.target.value})} required />
                 
-                <label className="form-label-min">YouTube Kanal Linki (İsteğe Bağlı)</label>
+                <label className="form-label-min">YouTube Channel Link (Optional)</label>
                 <input type="text" className="form-input-inf" placeholder="youtube.com/c/channel" value={formData.youtubeLink} onChange={e=>setFormData({...formData, youtubeLink: e.target.value})} />
                 
-                <label className="form-label-min">Diğer Sosyal Medya Kanalları</label>
-                <textarea className="form-input-inf h-20 resize-none" placeholder="Varsa TikTok, Instagram vb. adresleriniz..." value={formData.otherSocials} onChange={e=>setFormData({...formData, otherSocials: e.target.value})} />
+                <label className="form-label-min">Other Social Media Channels</label>
+                <textarea className="form-input-inf h-20 resize-none" placeholder="TikTok, Instagram etc. addresses if any..." value={formData.otherSocials} onChange={e=>setFormData({...formData, otherSocials: e.target.value})} />
                 
                 <div className="modal-nav">
                   <div style={{flex: 0.3}}></div>
-                  <button onClick={handleNext} disabled={!formData.twitterHandle} className="btn-modal-next">İLERLE</button>
+                  <button onClick={handleNext} disabled={!formData.twitterHandle} className="btn-modal-next">NEXT</button>
                 </div>
               </div>
             )}
 
-            {/* Step 2: Twitter Seçenekleri */}
+            {/* Step 2: Twitter Options */}
             {step === 2 && (
               <div className="animate-in fade-in slide-in-from-right-4 duration-500">
-                <h3 className="text-2xl font-black mb-2">Twitter Çalışma Seçenekleri</h3>
-                <p className="text-zinc-500 text-sm mb-8">Yapabileceklerinizi işaretleyin.</p>
+                <h3 className="text-2xl font-black mb-2">Twitter Collaboration Options</h3>
+                <p className="text-zinc-500 text-sm mb-8">Select what you can provide.</p>
                 
                 <div className="check-grid">
                   {twitterOptions.map(opt => (
@@ -344,23 +344,23 @@ const InfluencersView: React.FC = () => {
                 </div>
 
                 <div className="fee-input-wrap">
-                  <label className="form-label-min">Ücret Beklentisi (USDT - Opsiyonel)</label>
-                  <input type="number" className="form-input-inf mb-0" placeholder="Örn: 250" value={formData.twitterFee} onChange={e=>setFormData({...formData, twitterFee: e.target.value})} />
-                  <p className="text-[9px] text-zinc-500 mt-2 italic">Lütfen sadece sayı yazınız. Boş bırakırsanız süreçte konuşulacaktır.</p>
+                  <label className="form-label-min">Fee Expectation (USDT - Optional)</label>
+                  <input type="number" className="form-input-inf mb-0" placeholder="e.g., 250" value={formData.twitterFee} onChange={e=>setFormData({...formData, twitterFee: e.target.value})} />
+                  <p className="text-[9px] text-zinc-500 mt-2 italic">Please enter numbers only. If left blank, budget will be discussed during the process.</p>
                 </div>
 
                 <div className="modal-nav">
-                  <button onClick={handlePrev} className="btn-modal-prev">GERİ</button>
-                  <button onClick={handleNext} className="btn-modal-next">İLERLE (TELEGRAM)</button>
+                  <button onClick={handlePrev} className="btn-modal-prev">BACK</button>
+                  <button onClick={handleNext} className="btn-modal-next">NEXT (TELEGRAM)</button>
                 </div>
               </div>
             )}
 
-            {/* Step 3: Telegram Seçenekleri */}
+            {/* Step 3: Telegram Options */}
             {step === 3 && (
               <div className="animate-in fade-in slide-in-from-right-4 duration-500">
-                <h3 className="text-2xl font-black mb-2">Telegram Çalışma Seçenekleri</h3>
-                <p className="text-zinc-500 text-sm mb-8">Kanalınızda sunabileceğiniz hizmetler.</p>
+                <h3 className="text-2xl font-black mb-2">Telegram Collaboration Options</h3>
+                <p className="text-zinc-500 text-sm mb-8">Services you can offer on your channel.</p>
                 
                 <div className="check-grid">
                   {telegramOptions.map(opt => (
@@ -372,22 +372,22 @@ const InfluencersView: React.FC = () => {
                 </div>
 
                 <div className="fee-input-wrap">
-                  <label className="form-label-min">Ücret Beklentisi (USDT - Opsiyonel)</label>
-                  <input type="number" className="form-input-inf mb-0" placeholder="Örn: 150" value={formData.telegramFee} onChange={e=>setFormData({...formData, telegramFee: e.target.value})} />
+                  <label className="form-label-min">Fee Expectation (USDT - Optional)</label>
+                  <input type="number" className="form-input-inf mb-0" placeholder="e.g., 150" value={formData.telegramFee} onChange={e=>setFormData({...formData, telegramFee: e.target.value})} />
                 </div>
 
                 <div className="modal-nav">
-                  <button onClick={handlePrev} className="btn-modal-prev">GERİ</button>
-                  <button onClick={handleNext} className="btn-modal-next">İLERLE (YOUTUBE)</button>
+                  <button onClick={handlePrev} className="btn-modal-prev">BACK</button>
+                  <button onClick={handleNext} className="btn-modal-next">NEXT (YOUTUBE)</button>
                 </div>
               </div>
             )}
 
-            {/* Step 4: YouTube Seçenekleri */}
+            {/* Step 4: YouTube Options */}
             {step === 4 && (
               <div className="animate-in fade-in slide-in-from-right-4 duration-500">
-                <h3 className="text-2xl font-black mb-2">YouTube Çalışma Seçenekleri</h3>
-                <p className="text-zinc-500 text-sm mb-8">Video ve içerik üretim modelleri.</p>
+                <h3 className="text-2xl font-black mb-2">YouTube Collaboration Options</h3>
+                <p className="text-zinc-500 text-sm mb-8">Video and content production models.</p>
                 
                 <div className="check-grid">
                   {youtubeOptions.map(opt => (
@@ -399,22 +399,22 @@ const InfluencersView: React.FC = () => {
                 </div>
 
                 <div className="fee-input-wrap">
-                  <label className="form-label-min">Ücret Beklentisi (USDT - Opsiyonel)</label>
-                  <input type="number" className="form-input-inf mb-0" placeholder="Örn: 500" value={formData.youtubeFee} onChange={e=>setFormData({...formData, youtubeFee: e.target.value})} />
+                  <label className="form-label-min">Fee Expectation (USDT - Optional)</label>
+                  <input type="number" className="form-input-inf mb-0" placeholder="e.g., 500" value={formData.youtubeFee} onChange={e=>setFormData({...formData, youtubeFee: e.target.value})} />
                 </div>
 
                 <div className="modal-nav">
-                  <button onClick={handlePrev} className="btn-modal-prev">GERİ</button>
-                  <button onClick={handleNext} className="btn-modal-next">İLERLE (DİĞER)</button>
+                  <button onClick={handlePrev} className="btn-modal-prev">BACK</button>
+                  <button onClick={handleNext} className="btn-modal-next">NEXT (OTHERS)</button>
                 </div>
               </div>
             )}
 
-            {/* Step 5: Diğer Platformlar */}
+            {/* Step 5: Other Platforms */}
             {step === 5 && (
               <div className="animate-in fade-in slide-in-from-right-4 duration-500">
-                <h3 className="text-2xl font-black mb-2">Diğer Platform Seçenekleri</h3>
-                <p className="text-zinc-500 text-sm mb-8">Ekstra katkı sağlayabileceğiniz alanlar.</p>
+                <h3 className="text-2xl font-black mb-2">Other Platform Options</h3>
+                <p className="text-zinc-500 text-sm mb-8">Areas where you can provide extra value.</p>
                 
                 <div className="check-grid no-scrollbar" style={{ maxHeight: '220px', overflowY: 'auto' }}>
                   {otherPlatformOptions.map(opt => (
@@ -425,17 +425,17 @@ const InfluencersView: React.FC = () => {
                   ))}
                 </div>
 
-                <label className="form-label-min">Listede Olmayan Platformlar (Opsiyonel)</label>
-                <input type="text" className="form-input-inf" placeholder="Örn: Warpcast, Mastodon vb." value={formData.otherPlatformText} onChange={e=>setFormData({...formData, otherPlatformText: e.target.value})} />
+                <label className="form-label-min">Platforms Not Listed (Optional)</label>
+                <input type="text" className="form-input-inf" placeholder="e.g., Warpcast, Mastodon etc." value={formData.otherPlatformText} onChange={e=>setFormData({...formData, otherPlatformText: e.target.value})} />
 
                 <div className="fee-input-wrap">
-                  <label className="form-label-min">Diğer İşler İçin Ücret Beklentisi (USDT)</label>
-                  <input type="number" className="form-input-inf mb-0" placeholder="Örn: 100" value={formData.othersFee} onChange={e=>setFormData({...formData, othersFee: e.target.value})} />
+                  <label className="form-label-min">Fee Expectation for Other Jobs (USDT)</label>
+                  <input type="number" className="form-input-inf mb-0" placeholder="e.g., 100" value={formData.othersFee} onChange={e=>setFormData({...formData, othersFee: e.target.value})} />
                 </div>
 
                 <div className="modal-nav">
-                  <button onClick={handlePrev} className="btn-modal-prev">GERİ</button>
-                  <button onClick={handleNext} className="btn-modal-next">SON ADIM</button>
+                  <button onClick={handlePrev} className="btn-modal-prev">BACK</button>
+                  <button onClick={handleNext} className="btn-modal-next">FINAL STEP</button>
                 </div>
               </div>
             )}
@@ -443,10 +443,10 @@ const InfluencersView: React.FC = () => {
             {/* Step 6: Final Details */}
             {step === 6 && (
               <div className="animate-in fade-in slide-in-from-right-4 duration-500">
-                <h3 className="text-2xl font-black mb-2">İş Birliği Modeli</h3>
-                <p className="text-zinc-500 text-sm mb-8">Süreçleri ve bütçeyi netleştirelim.</p>
+                <h3 className="text-2xl font-black mb-2">Collaboration Model</h3>
+                <p className="text-zinc-500 text-sm mb-8">Let's clarify processes and budget.</p>
                 
-                <label className="form-label-min">İş Birliği Süresi*</label>
+                <label className="form-label-min">Collaboration Duration*</label>
                 <div className="check-grid">
                   {durationOptions.map(d => (
                     <div key={d} onClick={() => setFormData({...formData, duration: d})} className={`check-card ${formData.duration === d ? 'active' : ''}`}>
@@ -457,20 +457,20 @@ const InfluencersView: React.FC = () => {
                 </div>
 
                 <div className="fee-input-wrap">
-                  <label className="form-label-min">Genel Danışmanlık/Paket Ücreti (USDT)</label>
-                  <input type="number" className="form-input-inf mb-2" placeholder="Örn: 2000" value={formData.durationFee} onChange={e=>setFormData({...formData, durationFee: e.target.value})} />
+                  <label className="form-label-min">General Consultancy/Package Fee (USDT)</label>
+                  <input type="number" className="form-input-inf mb-2" placeholder="e.g., 2000" value={formData.durationFee} onChange={e=>setFormData({...formData, durationFee: e.target.value})} />
                   <p className="text-[10px] text-zinc-400 italic leading-relaxed">
-                    * Çalışma modelleri belirlenir, influencer ile tek fiyat tek paket üzerinden anlaşılır. Bunu bir aylık danışmanlık ücreti veya kampanya yönetim bedeli gibi düşünebilirsiniz.
+                    * Collaboration models are determined, and a single price single package is agreed upon with the influencer. You can think of this as a monthly consultancy fee or campaign management fee.
                   </p>
                 </div>
 
-                <label className="form-label-min mt-4">Ekstra Önerileriniz</label>
-                <textarea className="form-input-inf h-20 resize-none" placeholder="Size özel çalışma modelleri varsa yazın..." value={formData.suggestions} onChange={e=>setFormData({...formData, suggestions: e.target.value})} />
+                <label className="form-label-min mt-4">Extra Suggestions</label>
+                <textarea className="form-input-inf h-20 resize-none" placeholder="Write any specific collaboration models you have..." value={formData.suggestions} onChange={e=>setFormData({...formData, suggestions: e.target.value})} />
 
                 <div className="modal-nav">
-                  <button onClick={handlePrev} className="btn-modal-prev">GERİ</button>
+                  <button onClick={handlePrev} className="btn-modal-prev">BACK</button>
                   <button onClick={handleSubmit} disabled={loading || !formData.duration} className="btn-modal-next">
-                    {loading ? 'İLETİLİYOR...' : 'BAŞVURUYU TAMAMLA'}
+                    {loading ? 'SENDING...' : 'COMPLETE APPLICATION'}
                   </button>
                 </div>
               </div>
@@ -481,9 +481,9 @@ const InfluencersView: React.FC = () => {
                 <div className="w-20 h-20 bg-cray-gold rounded-full flex items-center justify-center mx-auto mb-8 shadow-[0_0_30px_rgba(255,177,0,0.4)]">
                   <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="4"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
-                <h3 className="text-3xl font-black mb-4">Harika!</h3>
-                <p className="text-zinc-400">Tüm verileriniz başarıyla kaydedildi ve Telegram bağlantınız doğrulandı. KOL departmanımız bütçe ve içerik planı için sizinle en kısa sürede iletişime geçecek.</p>
-                <button onClick={closeModal} className="btn-modal-next mt-10 !w-fit !px-12 mx-auto">Kapat</button>
+                <h3 className="text-3xl font-black mb-4">Great!</h3>
+                <p className="text-zinc-400">All your data has been successfully saved and your Telegram connection has been verified. Our KOL department will contact you as soon as possible for budget and content planning.</p>
+                <button onClick={closeModal} className="btn-modal-next mt-10 !w-fit !px-12 mx-auto">Close</button>
               </div>
             )}
           </div>
@@ -491,7 +491,7 @@ const InfluencersView: React.FC = () => {
       )}
 
       <div style={{ padding: '80px 0', textAlign: 'center', borderTop: '1px solid #111' }}>
-        <button onClick={() => window.location.hash = ''} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase', fontWeight: 700, fontSize: '14px !important' }}>Ana Sayfaya Dön</button>
+        <button onClick={() => window.location.hash = ''} className="p-style" style={{ background: 'transparent', border: '1px solid #333', color: '#888', padding: '12px 40px', borderRadius: '12px', cursor: 'pointer', textTransform: 'uppercase', fontWeight: 700, fontSize: '14px !important' }}>Return to Homepage</button>
       </div>
     </div>
   );
