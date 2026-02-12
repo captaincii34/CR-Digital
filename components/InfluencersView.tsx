@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { startTelegramConnectWithForm, waitUntilConnected } from "../utils/telegramBridge";
 
-type InfluencerStep = 1 | 2 | 3 | 4 | 'success';
+type InfluencerStep = 1 | 2 | 3 | 4 | 5 | 6 | 'success';
 
 const faqData = [
   { q: "Katılım için herhangi bir ücret ödemem gerekiyor mu?", a: "Hayır, CrayUp Influencer Ağı'na katılmak tamamen ücretsizdir. Biz bir köprü görevi görüyoruz ve fenomenlerimizden herhangi bir maddi talepte bulunmuyoruz." },
@@ -16,10 +16,16 @@ const faqData = [
   { q: "Başvuru yaptıktan sonra ne kadar sürede dönüş yapılır?", a: "Ekibimiz başvurunuzu ve kanallarınızı inceler. Genellikle 24-48 saat içerisinde Telegram üzerinden sizinle ilk temas kurulur." }
 ];
 
-const platformOptions = ["X (Twitter)", "YouTube", "Telegram", "Instagram", "TikTok", "LinkedIn", "Discord"];
-const nicheOptions = ["Meme Coins", "DeFi / Finance", "NFT / GameFi", "Altcoin Analysis", "Airdrop / Testnet", "Trading / Alpha", "Global News"];
-const workOptions = ["Paid Promotion", "Affiliate / RevShare", "Community Management", "Consultancy / Advisory", "Ambassador Program"];
-const followerOptions = ["< 10K", "10K - 50K", "50K - 100K", "100K - 500K", "500K+"];
+// Genişletilmiş Seçenekler
+const twitterOptions = ["Retweet", "Tanıtım postu paylaş", "Tweet dizisi (Flood)", "Twitter Space / Sesli", "Sabitlenmiş tweet", "Belirli tweet’e yorum", "Profil Header Kiralama", "Bio Link Kiralama", "Etiket/Trending Topic", "Uzun Süreli Ambassadorluk"];
+const telegramOptions = ["Grup/Kanal paylaşımı", "Tanıtım postu paylaş", "Kendi kanalında sesli (VC)", "Resmi kanalımızda etkinlik", "Soru-cevap mini etkinlik", "Grup Sabitleme (Pin)", "Bot Butonu Reklamı", "Klasör Ekleme (Folder add)", "Shilling Desteği"];
+const youtubeOptions = ["5+ dakikalık video", "Shorts (1 dk)", "Canlı yayın", "Coin analizi", "Video içi sponsorluk", "Community Post paylaşımı", "Eğitim serisi katılımı", "Podcast / Röportaj"];
+const otherPlatformOptions = [
+  "CoinMarketCap yorum", "Binance Square paylaşımı", "Reddit (r/Crypto vb.)", "Discord topluluk paylaşımı", "TikTok videosu", "Medium makalesi", 
+  "Dextools yorum/pin", "Quora paylaşımı", "TradingView analiz", "CoinGecko yorum", "LinkedIn post", "Dexscanner paylaşımı", 
+  "Warpcast (Farcaster)", "Lens Protocol", "Debank Stream", "Galxe Campaign Support", "Zealy/QuestN Yönetimi"
+];
+const durationOptions = ["Tek Seferlik", "Haftalık", "Aylık / Devamlı"];
 
 const InfluencersView: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,13 +35,26 @@ const InfluencersView: React.FC = () => {
   
   // Form states
   const [formData, setFormData] = useState({
-    name: "",
-    surname: "",
-    telegram: "",
-    platforms: [] as string[],
-    followers: "",
-    niches: [] as string[],
-    workTypes: [] as string[]
+    twitterHandle: "",
+    youtubeLink: "",
+    otherSocials: "",
+    
+    selectedTwitter: [] as string[],
+    twitterFee: "",
+    
+    selectedTelegram: [] as string[],
+    telegramFee: "",
+    
+    selectedYoutube: [] as string[],
+    youtubeFee: "",
+    
+    selectedOthers: [] as string[],
+    otherPlatformText: "", 
+    othersFee: "",
+    
+    suggestions: "",
+    duration: "",
+    durationFee: "" 
   });
 
   const handleRegisterClick = () => {
@@ -45,15 +64,7 @@ const InfluencersView: React.FC = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setFormData({
-      name: "",
-      surname: "",
-      telegram: "",
-      platforms: [],
-      followers: "",
-      niches: [],
-      workTypes: []
-    });
+    setStep(1);
   };
 
   const scrollToApply = () => {
@@ -61,16 +72,13 @@ const InfluencersView: React.FC = () => {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const toggleFaq = (index: number) => {
-    setOpenFaq(openFaq === index ? null : index);
-  };
+  const toggleFaq = (index: number) => setOpenFaq(openFaq === index ? null : index);
 
-  const toggleMultiSelect = (key: 'platforms' | 'niches' | 'workTypes', value: string) => {
+  const toggleSelection = (key: keyof typeof formData, value: string) => {
+    const current = formData[key] as string[];
     setFormData(prev => ({
       ...prev,
-      [key]: prev[key].includes(value) 
-        ? prev[key].filter(v => v !== value) 
-        : [...prev[key], value]
+      [key]: current.includes(value) ? current.filter(v => v !== value) : [...current, value]
     }));
   };
 
@@ -84,16 +92,23 @@ const InfluencersView: React.FC = () => {
 
     try {
       const formPayload = {
-        "First Name": formData.name,
-        "Last Name": formData.surname,
-        "Telegram": formData.telegram,
-        "Active Platforms": formData.platforms.join(", "),
-        "Follower Range": formData.followers,
-        "Primary Niches": formData.niches.join(", "),
-        "Work Preferences": formData.workTypes.join(", "),
-        "Type": "Full Influencer Registration",
+        "X (Twitter)": formData.twitterHandle,
+        "YouTube": formData.youtubeLink,
+        "Other Channels": formData.otherSocials,
+        "Twitter Choices": formData.selectedTwitter.join(", "),
+        "Twitter Fee (USDT)": formData.twitterFee || "Belirtilmedi",
+        "Telegram Choices": formData.selectedTelegram.join(", "),
+        "Telegram Fee (USDT)": formData.telegramFee || "Belirtilmedi",
+        "YouTube Choices": formData.selectedYoutube.join(", "),
+        "YouTube Fee (USDT)": formData.youtubeFee || "Belirtilmedi",
+        "Other Platform Choices": formData.selectedOthers.join(", "),
+        "Extra Platform Text": formData.otherPlatformText || "Yok",
+        "Other Platforms Fee (USDT)": formData.othersFee || "Belirtilmedi",
+        "Partnership Duration": formData.duration,
+        "Package/Consultancy Fee (USDT)": formData.durationFee || "Görüşülecek",
+        "Suggestions/Notes": formData.suggestions,
+        "Type": "Advanced Influencer Onboarding V2",
         "Sent At": new Date().toISOString(),
-        "Page": window.location.href,
       };
 
       const code = await startTelegramConnectWithForm(formPayload);
@@ -146,51 +161,55 @@ const InfluencersView: React.FC = () => {
         .why-card p { font-size: 14px !important; color: #999; margin: 0; line-height: 1.6; }
 
         .cta-band { background: var(--cray-gold); padding: 80px 0; color: #000; text-align: center; }
-        .cta-band h2 { color: #000 !important; margin-bottom: 15px; font-weight: 900 !important; font-size: 36px !important; }
-        .cta-band p { color: rgba(0,0,0,0.7) !important; font-weight: 600 !important; max-width: 600px; margin: 0 auto 30px; }
         .btn-cta-dark { background: #000; color: #fff; padding: 18px 50px; border-radius: 12px; font-weight: 800 !important; border: none; cursor: pointer; text-transform: uppercase; transition: 0.3s; }
-        .btn-cta-dark:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
 
         .faq-section { padding: 120px 0; background: #000; }
         .faq-accordion-item { background: #09090b; border: 1px solid #1a1a1a; border-radius: 16px; margin-bottom: 12px; }
-        .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; text-align: left; }
-        .faq-accordion-header span { font-weight: 700; font-size: 16px !important; }
+        .faq-accordion-header { padding: 24px 32px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
         .faq-accordion-body { padding: 0 32px 28px; color: #9ca3af; display: none; }
         .faq-accordion-item.active .faq-accordion-body { display: block; }
         .faq-accordion-item.active .faq-accordion-header { color: var(--cray-gold); }
 
-        /* Modal Yenilenmiş Aşamalı Yapı */
-        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.9); backdrop-filter: blur(20px); z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 20px; }
-        .modal-box { background: #111; border: 1px solid var(--cray-gold); border-radius: 32px; width: 100%; max-width: 550px; position: relative; padding: 50px 40px; box-shadow: 0 40px 100px rgba(0,0,0,0.8); overflow-y: auto; max-height: 90vh; }
+        /* Modal Styles */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.92); backdrop-filter: blur(25px); z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .modal-box { background: #111; border: 1px solid var(--cray-gold); border-radius: 32px; width: 100%; max-width: 650px; position: relative; padding: 50px 40px; box-shadow: 0 40px 100px rgba(0,0,0,0.8); overflow-y: auto; max-height: 90vh; }
         .modal-close { position: absolute; top: 25px; right: 25px; background: none; border: none; color: #555; cursor: pointer; transition: 0.3s; }
         .modal-close:hover { color: var(--cray-gold); transform: rotate(90deg); }
         
-        .step-indicator { display: flex; gap: 8px; margin-bottom: 30px; }
+        .step-indicator { display: flex; gap: 6px; margin-bottom: 40px; }
         .step-dot { height: 4px; flex: 1; background: #222; border-radius: 2px; }
-        .step-dot.active { background: var(--cray-gold); }
+        .step-dot.active { background: var(--cray-gold); box-shadow: 0 0 10px var(--cray-gold); }
 
-        .form-input-inf { width: 100%; background: #000; border: 1px solid #222; border-radius: 12px; padding: 16px; color: #fff; font-size: 15px !important; margin-bottom: 20px; outline: none; transition: 0.3s; }
+        .form-input-inf { width: 100%; background: #000; border: 1px solid #222; border-radius: 12px; padding: 14px 18px; color: #fff; font-size: 14px !important; margin-bottom: 20px; outline: none; transition: 0.3s; }
         .form-input-inf:focus { border-color: var(--cray-gold); }
 
-        .pill-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; }
-        .pill-item { 
-          padding: 10px 20px; 
-          border-radius: 100px; 
+        .check-grid { display: grid; grid-template-columns: repeat(1, 1fr); gap: 8px; margin-bottom: 20px; }
+        @media (min-width: 640px) { .check-grid { grid-template-columns: repeat(2, 1fr); } }
+        
+        .check-card { 
+          padding: 14px; 
           background: #1a1a1a; 
           border: 1px solid #222; 
-          font-size: 12px !important; 
-          font-weight: 700; 
+          border-radius: 12px; 
           cursor: pointer; 
           transition: 0.3s; 
+          display: flex; 
+          align-items: center; 
+          gap: 12px;
           color: #777;
         }
-        .pill-item:hover { border-color: var(--cray-gold); color: #fff; }
-        .pill-item.active { background: var(--cray-gold); border-color: var(--cray-gold); color: #000; }
-        
-        .modal-nav { display: flex; justify-content: space-between; gap: 15px; margin-top: 10px; }
-        .btn-modal-prev { flex: 0.4; background: transparent; border: 1px solid #333; color: #888; padding: 16px; border-radius: 12px; font-weight: 700; cursor: pointer; }
-        .btn-modal-next { flex: 1; background: var(--cray-gold); color: #000; border: none; padding: 16px; border-radius: 12px; font-weight: 800; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; }
-        .btn-modal-next:disabled { opacity: 0.5; }
+        .check-card:hover { border-color: var(--cray-gold); }
+        .check-card.active { border-color: var(--cray-gold); background: rgba(255,177,0,0.05); color: #fff; }
+        .check-circle { width: 18px; height: 18px; border-radius: 50%; border: 2px solid #333; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .active .check-circle { border-color: var(--cray-gold); background: var(--cray-gold); }
+
+        .modal-nav { display: flex; justify-content: space-between; gap: 15px; margin-top: 30px; }
+        .btn-modal-prev { flex: 0.3; background: transparent; border: 1px solid #333; color: #888; padding: 16px; border-radius: 12px; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 12px; }
+        .btn-modal-next { flex: 1; background: var(--cray-gold); color: #000; border: none; padding: 16px; border-radius: 12px; font-weight: 800; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; font-size: 13px; }
+        .btn-modal-next:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        .fee-input-wrap { background: #0a0a0a; padding: 20px; border-radius: 18px; border: 1px dashed #333; margin-top: 5px; margin-bottom: 15px; }
+        .form-label-min { font-size: 10px !important; font-weight: 800; text-transform: uppercase; color: #555; letter-spacing: 1.5px; margin-bottom: 8px; display: block; }
       `}</style>
 
       {/* Hero Section */}
@@ -200,9 +219,7 @@ const InfluencersView: React.FC = () => {
         <div className="container-xl">
           <h5 style={{color: 'var(--cray-gold)', letterSpacing: '8px', textTransform: 'uppercase', marginBottom: '20px', fontWeight: 800, fontSize: '12px !important'}}>CRAYUP INFLUENCER EKOSİSTEMİ</h5>
           <h1 className="h1-style">Kripto Dünyasının En Güçlü <br/> Fenomen Ağına Katılın</h1>
-          <p className="p-style">
-            CrayUp olarak, Web3 dünyasının sınırlarını birlikte aşıyoruz. Dev ekosistemimizde yer alan projelere ses, topluluklara ise güven veriyoruz. Bizimle çalışan fenomenler, sadece birer içerik üreticisi değil, CrayUp ailesinin stratejik ortaklarıdır.
-          </p>
+          <p className="p-style">CrayUp strategic ortakları arasında yerinizi alın. Global Web3 projeleriyle topluluğunuzu buluşturun.</p>
 
           <div className="feature-list">
             <div className="feature-item">
@@ -211,7 +228,7 @@ const InfluencersView: React.FC = () => {
               </div>
               <div className="feature-content">
                 <h4>Gizli İş Akışı Kanalı</h4>
-                <p>Sadece kayıtlı influencerlarımızın olduğu kapalı Telegram grubunda, her gün yeni iş fırsatlarını ve bütçeli kampanyaları paylaşıyoruz.</p>
+                <p>Sadece kayıtlı influencerlarımıza özel bütçeli kampanya fırsatları.</p>
               </div>
             </div>
             <div className="feature-item">
@@ -219,17 +236,8 @@ const InfluencersView: React.FC = () => {
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="4"><polyline points="20 6 9 17 4 12"/></svg>
               </div>
               <div className="feature-content">
-                <h4>VIP Lansman Hakları</h4>
-                <p>Gelecekteki CrayDEX lansmanlarında, Crayus Telegram oyununda ve özel token satışlarında en yüksek öncelik ve VIP paketler sizi bekliyor.</p>
-              </div>
-            </div>
-            <div className="feature-item">
-              <div className="feature-tick">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="4"><polyline points="20 6 9 17 4 12"/></svg>
-              </div>
-              <div className="feature-content">
-                <h4>Sürdürülebilir Gelir</h4>
-                <p>Çalıştığımız yüzlerce şirketle sizi tanıştırıyoruz. Portfolyonuzu güçlendiriyor ve düzenli bir iş trafiği sağlıyoruz.</p>
+                <h4>CrayBot İle Anında Bilgi, Anında Bildirim</h4>
+                <p>Sadece kayıtlı influencerlarımıza özel anında bilgi ve iş bildirim sistemi</p>
               </div>
             </div>
           </div>
@@ -238,51 +246,35 @@ const InfluencersView: React.FC = () => {
 
       {/* Kayıt Ol Section */}
       <section id="apply-now" className="register-section">
-        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070" className="register-bg" alt="Register BG" />
         <div className="container-xl">
           <h2 className="h2-style">Hemen Şimdi Başvurun</h2>
-          <p className="p-style mx-auto mb-10 max-w-2xl">
-            Hiçbir ücret ödemeden, sadece bilginizi bırakarak CrayUp'ın global influencer ağına dahil olun ve ekosistemdeki projelerle ilk siz tanışın.
-          </p>
+          <p className="p-style mx-auto mb-10 max-w-2xl">Sadece kanallarinizi belirterek CrayUp'in global ağina dahil olun.</p>
           <button onClick={handleRegisterClick} className="cta-button !px-24 !py-6 font-black text-lg">KAYIT OL</button>
         </div>
       </section>
 
-      {/* Neden Biz Section */}
+      {/* Why Us Section */}
       <section className="why-us-section bg-black">
         <div className="container-xl">
           <h2 className="h2-style text-center">Neden Bizimle Çalışmalısınız?</h2>
           <div className="why-grid">
-            <div className="why-card">
-              <h4>Sıfır Komisyon</h4>
-              <p>CrayUp, influencer ve marka arasındaki köprüdür. Fenomenlerden herhangi bir maddi talepte bulunmaz.</p>
-            </div>
-            <div className="why-card">
-              <h4>Doğrudan İletişim</h4>
-              <p>Resmi Telegram hesabımızdan bizzat sizinle iletişim kurar, size en uygun projeleri getiririz.</p>
-            </div>
-            <div className="why-card">
-              <h4>Global Marka Gücü</h4>
-              <p>Bybit, Gate.io ve MEXC gibi dev borsalarla olan bağımız sayesinde en prestijli işlerde yer alırsınız.</p>
-            </div>
-            <div className="why-card">
-              <h4>Geleceğin Parçası Olun</h4>
-              <p>Kendi oyunumuz ve borsamızla Web3 dünyasında devrim yaparken en büyük desteği sizlerden alacağız.</p>
-            </div>
+            <div className="why-card"><h4>Sıfır Komisyon</h4><p>Influencer ve marka arasındaki köprüde ek ücret talep edilmez.</p></div>
+            <div className="why-card"><h4>Doğrudan İletişim</h4><p>Resmi ekiplerimizle Telegram üzerinden anlık koordinasyon.</p></div>
+            <div className="why-card"><h4>Global Marka Gücü</h4><p>Bybit, Gate.io ve MEXC projelerinde yer alma fırsatı.</p></div>
+            <div className="why-card"><h4>Geleceğin Parçası</h4><p>Web3 devrimini bizim projelerimizle en önden takip edin.</p></div>
           </div>
         </div>
       </section>
 
       {/* CTA Band */}
       <section className="cta-band">
-        <div className="container-xl">
-          <h2>Hemen Aramıza Katıl</h2>
-          <p>Yüzlerce Web3 projesine ses olan influencer ağımızda yerini al. Geleceği birlikte inşa edelim.</p>
+        <div className="container-xl text-center">
+          <h2 className="h2-style text-black">Hemen Aramıza Katıl</h2>
           <button onClick={scrollToApply} className="btn-cta-dark">ARAMIZA KATIL</button>
         </div>
       </section>
 
-      {/* FAQ Section */}
+      {/* FAQ */}
       <section className="faq-section">
         <div className="container-xl">
           <h2 className="h2-style text-center mb-16">Sıkça Sorulan Sorular</h2>
@@ -290,21 +282,17 @@ const InfluencersView: React.FC = () => {
             {faqData.map((faq, i) => (
               <div key={i} className={`faq-accordion-item ${openFaq === i ? 'active' : ''}`} onClick={() => toggleFaq(i)}>
                 <div className="faq-accordion-header">
-                  <span>{faq.q}</span>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}>
-                    <path d="M19 9l-7 7-7-7" />
-                  </svg>
+                  <span className="font-bold">{faq.q}</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cray-gold)" strokeWidth="3" style={{transform: openFaq === i ? 'rotate(180deg)' : ''}}><path d="M19 9l-7 7-7-7"/></svg>
                 </div>
-                <div className="faq-accordion-body p-style">
-                  <p>{faq.a}</p>
-                </div>
+                <div className="faq-accordion-body p-style"><p>{faq.a}</p></div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Aşamalı Kayıt Modalı */}
+      {/* Kayıt Modalı */}
       {isModalOpen && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal-box no-scrollbar" onClick={e => e.stopPropagation()}>
@@ -314,101 +302,175 @@ const InfluencersView: React.FC = () => {
 
             {step !== 'success' && (
               <div className="step-indicator">
-                <div className={`step-dot ${step >= 1 ? 'active' : ''}`}></div>
-                <div className={`step-dot ${step >= 2 ? 'active' : ''}`}></div>
-                <div className={`step-dot ${step >= 3 ? 'active' : ''}`}></div>
-                <div className={`step-dot ${step >= 4 ? 'active' : ''}`}></div>
+                {[1,2,3,4,5,6].map(i => <div key={i} className={`step-dot ${step >= i ? 'active' : ''}`}></div>)}
               </div>
             )}
 
+            {/* Step 1: Kanallar */}
             {step === 1 && (
               <div className="animate-in fade-in slide-in-from-right-4 duration-500">
-                <h3 className="text-2xl font-black mb-2">Başlayalım</h3>
-                <p className="text-zinc-500 text-sm mb-8">Seninle iletişim kurabilmemiz için temel bilgilerin gerekli.</p>
+                <h3 className="text-2xl font-black mb-2">Kanallarınızı Ekleyin</h3>
+                <p className="text-zinc-500 text-sm mb-8">Hangi mecralarda kitlelere hitap ediyorsunuz?</p>
                 
-                <label className="text-[10px] font-bold text-zinc-500 uppercase mb-2 block">Adın*</label>
-                <input type="text" className="form-input-inf" placeholder="Örn: Mehmet" value={formData.name} onChange={e=>setFormData({...formData, name: e.target.value})} required />
+                <label className="form-label-min">Twitter (X) Kullanıcı Adı veya Link*</label>
+                <input type="text" className="form-input-inf" placeholder="@username" value={formData.twitterHandle} onChange={e=>setFormData({...formData, twitterHandle: e.target.value})} required />
                 
-                <label className="text-[10px] font-bold text-zinc-500 uppercase mb-2 block">Soyadın*</label>
-                <input type="text" className="form-input-inf" placeholder="Örn: Yılmaz" value={formData.surname} onChange={e=>setFormData({...formData, surname: e.target.value})} required />
+                <label className="form-label-min">YouTube Kanal Linki (İsteğe Bağlı)</label>
+                <input type="text" className="form-input-inf" placeholder="youtube.com/c/channel" value={formData.youtubeLink} onChange={e=>setFormData({...formData, youtubeLink: e.target.value})} />
                 
-                <label className="text-[10px] font-bold text-zinc-500 uppercase mb-2 block">Telegram Kullanıcı Adın*</label>
-                <input type="text" className="form-input-inf" placeholder="@kullaniciadi" value={formData.telegram} onChange={e=>setFormData({...formData, telegram: e.target.value})} required />
+                <label className="form-label-min">Diğer Sosyal Medya Kanalları</label>
+                <textarea className="form-input-inf h-20 resize-none" placeholder="Varsa TikTok, Instagram vb. adresleriniz..." value={formData.otherSocials} onChange={e=>setFormData({...formData, otherSocials: e.target.value})} />
                 
                 <div className="modal-nav">
-                  <button onClick={handleNext} disabled={!formData.name || !formData.surname || !formData.telegram} className="btn-modal-next">İLERLE</button>
+                  <div style={{flex: 0.3}}></div>
+                  <button onClick={handleNext} disabled={!formData.twitterHandle} className="btn-modal-next">İLERLE</button>
                 </div>
               </div>
             )}
 
+            {/* Step 2: Twitter Seçenekleri */}
             {step === 2 && (
               <div className="animate-in fade-in slide-in-from-right-4 duration-500">
-                <h3 className="text-2xl font-black mb-2">Platform ve Erişim</h3>
-                <p className="text-zinc-500 text-sm mb-8">Hangi mecralarda içerik üretiyorsun ve kitlen ne kadar?</p>
+                <h3 className="text-2xl font-black mb-2">Twitter Çalışma Seçenekleri</h3>
+                <p className="text-zinc-500 text-sm mb-8">Yapabileceklerinizi işaretleyin.</p>
                 
-                <label className="text-[10px] font-bold text-zinc-500 uppercase mb-3 block">Aktif Olduğun Mecralar (Çoklu Seçim)</label>
-                <div className="pill-grid">
-                  {platformOptions.map(p => (
-                    <div key={p} onClick={() => toggleMultiSelect('platforms', p)} className={`pill-item ${formData.platforms.includes(p) ? 'active' : ''}`}>{p}</div>
+                <div className="check-grid">
+                  {twitterOptions.map(opt => (
+                    <div key={opt} onClick={() => toggleSelection('selectedTwitter', opt)} className={`check-card ${formData.selectedTwitter.includes(opt) ? 'active' : ''}`}>
+                      <div className="check-circle">{formData.selectedTwitter.includes(opt) && <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="4"><polyline points="20 6 9 17 4 12"/></svg>}</div>
+                      <span className="text-[11px] font-bold uppercase">{opt}</span>
+                    </div>
                   ))}
                 </div>
 
-                <label className="text-[10px] font-bold text-zinc-500 uppercase mb-3 block">Toplam Takipçi Sayın (Tahmini)</label>
-                <div className="pill-grid">
-                  {followerOptions.map(f => (
-                    <div key={f} onClick={() => setFormData({...formData, followers: f})} className={`pill-item ${formData.followers === f ? 'active' : ''}`}>{f}</div>
-                  ))}
+                <div className="fee-input-wrap">
+                  <label className="form-label-min">Ücret Beklentisi (USDT - Opsiyonel)</label>
+                  <input type="number" className="form-input-inf mb-0" placeholder="Örn: 250" value={formData.twitterFee} onChange={e=>setFormData({...formData, twitterFee: e.target.value})} />
+                  <p className="text-[9px] text-zinc-500 mt-2 italic">Lütfen sadece sayı yazınız. Boş bırakırsanız süreçte konuşulacaktır.</p>
                 </div>
-                
+
                 <div className="modal-nav">
                   <button onClick={handlePrev} className="btn-modal-prev">GERİ</button>
-                  <button onClick={handleNext} disabled={formData.platforms.length === 0 || !formData.followers} className="btn-modal-next">İLERLE</button>
+                  <button onClick={handleNext} className="btn-modal-next">İLERLE (TELEGRAM)</button>
                 </div>
               </div>
             )}
 
+            {/* Step 3: Telegram Seçenekleri */}
             {step === 3 && (
               <div className="animate-in fade-in slide-in-from-right-4 duration-500">
-                <h3 className="text-2xl font-black mb-2">Niş ve Uzmanlık</h3>
-                <p className="text-zinc-500 text-sm mb-8">En çok hangi alanlarda içerik üretmeyi seviyorsun?</p>
+                <h3 className="text-2xl font-black mb-2">Telegram Çalışma Seçenekleri</h3>
+                <p className="text-zinc-500 text-sm mb-8">Kanalınızda sunabileceğiniz hizmetler.</p>
                 
-                <label className="text-[10px] font-bold text-zinc-500 uppercase mb-3 block">İçerik Odakların (Çoklu Seçim)</label>
-                <div className="pill-grid">
-                  {nicheOptions.map(n => (
-                    <div key={n} onClick={() => toggleMultiSelect('niches', n)} className={`pill-item ${formData.niches.includes(n) ? 'active' : ''}`}>{n}</div>
+                <div className="check-grid">
+                  {telegramOptions.map(opt => (
+                    <div key={opt} onClick={() => toggleSelection('selectedTelegram', opt)} className={`check-card ${formData.selectedTelegram.includes(opt) ? 'active' : ''}`}>
+                      <div className="check-circle">{formData.selectedTelegram.includes(opt) && <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="4"><polyline points="20 6 9 17 4 12"/></svg>}</div>
+                      <span className="text-[11px] font-bold uppercase">{opt}</span>
+                    </div>
                   ))}
                 </div>
 
-                <label className="text-[10px] font-bold text-zinc-500 uppercase mb-3 block">Çalışma Modeli Tercihlerin</label>
-                <div className="pill-grid">
-                  {workOptions.map(w => (
-                    <div key={w} onClick={() => toggleMultiSelect('workTypes', w)} className={`pill-item ${formData.workTypes.includes(w) ? 'active' : ''}`}>{w}</div>
-                  ))}
+                <div className="fee-input-wrap">
+                  <label className="form-label-min">Ücret Beklentisi (USDT - Opsiyonel)</label>
+                  <input type="number" className="form-input-inf mb-0" placeholder="Örn: 150" value={formData.telegramFee} onChange={e=>setFormData({...formData, telegramFee: e.target.value})} />
                 </div>
-                
+
                 <div className="modal-nav">
                   <button onClick={handlePrev} className="btn-modal-prev">GERİ</button>
-                  <button onClick={handleNext} disabled={formData.niches.length === 0 || formData.workTypes.length === 0} className="btn-modal-next">SON ADIM</button>
+                  <button onClick={handleNext} className="btn-modal-next">İLERLE (YOUTUBE)</button>
                 </div>
               </div>
             )}
 
+            {/* Step 4: YouTube Seçenekleri */}
             {step === 4 && (
               <div className="animate-in fade-in slide-in-from-right-4 duration-500">
-                <h3 className="text-2xl font-black mb-2">Başvuruyu Tamamla</h3>
-                <p className="text-zinc-500 text-sm mb-8">Telegram üzerinden kimliğini doğrula ve ağımıza katıl.</p>
+                <h3 className="text-2xl font-black mb-2">YouTube Çalışma Seçenekleri</h3>
+                <p className="text-zinc-500 text-sm mb-8">Video ve içerik üretim modelleri.</p>
                 
-                <div className="bg-zinc-900/50 p-6 rounded-2xl border border-white/5 mb-8">
-                  <div className="flex justify-between mb-2"><span className="text-xs text-zinc-500">İsim Soyisim:</span> <span className="text-xs font-bold">{formData.name} {formData.surname}</span></div>
-                  <div className="flex justify-between mb-2"><span className="text-xs text-zinc-500">Telegram:</span> <span className="text-xs font-bold">{formData.telegram}</span></div>
-                  <div className="flex justify-between mb-2"><span className="text-xs text-zinc-500">Platformlar:</span> <span className="text-xs font-bold">{formData.platforms.length} Seçildi</span></div>
-                  <div className="flex justify-between"><span className="text-xs text-zinc-500">Takipçi:</span> <span className="text-xs font-bold">{formData.followers}</span></div>
+                <div className="check-grid">
+                  {youtubeOptions.map(opt => (
+                    <div key={opt} onClick={() => toggleSelection('selectedYoutube', opt)} className={`check-card ${formData.selectedYoutube.includes(opt) ? 'active' : ''}`}>
+                      <div className="check-circle">{formData.selectedYoutube.includes(opt) && <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="4"><polyline points="20 6 9 17 4 12"/></svg>}</div>
+                      <span className="text-[11px] font-bold uppercase">{opt}</span>
+                    </div>
+                  ))}
                 </div>
-                
+
+                <div className="fee-input-wrap">
+                  <label className="form-label-min">Ücret Beklentisi (USDT - Opsiyonel)</label>
+                  <input type="number" className="form-input-inf mb-0" placeholder="Örn: 500" value={formData.youtubeFee} onChange={e=>setFormData({...formData, youtubeFee: e.target.value})} />
+                </div>
+
                 <div className="modal-nav">
-                  <button onClick={handlePrev} className="btn-modal-prev">DÜZENLE</button>
-                  <button onClick={handleSubmit} disabled={loading} className="btn-modal-next">
-                    {loading ? 'YÜKLENİYOR...' : 'BAŞVURUYU GÖNDER'}
+                  <button onClick={handlePrev} className="btn-modal-prev">GERİ</button>
+                  <button onClick={handleNext} className="btn-modal-next">İLERLE (DİĞER)</button>
+                </div>
+              </div>
+            )}
+
+            {/* Step 5: Diğer Platformlar */}
+            {step === 5 && (
+              <div className="animate-in fade-in slide-in-from-right-4 duration-500">
+                <h3 className="text-2xl font-black mb-2">Diğer Platform Seçenekleri</h3>
+                <p className="text-zinc-500 text-sm mb-8">Ekstra katkı sağlayabileceğiniz alanlar.</p>
+                
+                <div className="check-grid no-scrollbar" style={{ maxHeight: '220px', overflowY: 'auto' }}>
+                  {otherPlatformOptions.map(opt => (
+                    <div key={opt} onClick={() => toggleSelection('selectedOthers', opt)} className={`check-card ${formData.selectedOthers.includes(opt) ? 'active' : ''}`}>
+                      <div className="check-circle">{formData.selectedOthers.includes(opt) && <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="4"><polyline points="20 6 9 17 4 12"/></svg>}</div>
+                      <span className="text-[10px] font-bold uppercase">{opt}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <label className="form-label-min">Listede Olmayan Platformlar (Opsiyonel)</label>
+                <input type="text" className="form-input-inf" placeholder="Örn: Warpcast, Mastodon vb." value={formData.otherPlatformText} onChange={e=>setFormData({...formData, otherPlatformText: e.target.value})} />
+
+                <div className="fee-input-wrap">
+                  <label className="form-label-min">Diğer İşler İçin Ücret Beklentisi (USDT)</label>
+                  <input type="number" className="form-input-inf mb-0" placeholder="Örn: 100" value={formData.othersFee} onChange={e=>setFormData({...formData, othersFee: e.target.value})} />
+                </div>
+
+                <div className="modal-nav">
+                  <button onClick={handlePrev} className="btn-modal-prev">GERİ</button>
+                  <button onClick={handleNext} className="btn-modal-next">SON ADIM</button>
+                </div>
+              </div>
+            )}
+
+            {/* Step 6: Final Details */}
+            {step === 6 && (
+              <div className="animate-in fade-in slide-in-from-right-4 duration-500">
+                <h3 className="text-2xl font-black mb-2">İş Birliği Modeli</h3>
+                <p className="text-zinc-500 text-sm mb-8">Süreçleri ve bütçeyi netleştirelim.</p>
+                
+                <label className="form-label-min">İş Birliği Süresi*</label>
+                <div className="check-grid">
+                  {durationOptions.map(d => (
+                    <div key={d} onClick={() => setFormData({...formData, duration: d})} className={`check-card ${formData.duration === d ? 'active' : ''}`}>
+                      <div className="check-circle">{formData.duration === d && <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="4"><polyline points="20 6 9 17 4 12"/></svg>}</div>
+                      <span className="text-xs font-bold uppercase">{d}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="fee-input-wrap">
+                  <label className="form-label-min">Genel Danışmanlık/Paket Ücreti (USDT)</label>
+                  <input type="number" className="form-input-inf mb-2" placeholder="Örn: 2000" value={formData.durationFee} onChange={e=>setFormData({...formData, durationFee: e.target.value})} />
+                  <p className="text-[10px] text-zinc-400 italic leading-relaxed">
+                    * Çalışma modelleri belirlenir, influencer ile tek fiyat tek paket üzerinden anlaşılır. Bunu bir aylık danışmanlık ücreti veya kampanya yönetim bedeli gibi düşünebilirsiniz.
+                  </p>
+                </div>
+
+                <label className="form-label-min mt-4">Ekstra Önerileriniz</label>
+                <textarea className="form-input-inf h-20 resize-none" placeholder="Size özel çalışma modelleri varsa yazın..." value={formData.suggestions} onChange={e=>setFormData({...formData, suggestions: e.target.value})} />
+
+                <div className="modal-nav">
+                  <button onClick={handlePrev} className="btn-modal-prev">GERİ</button>
+                  <button onClick={handleSubmit} disabled={loading || !formData.duration} className="btn-modal-next">
+                    {loading ? 'İLETİLİYOR...' : 'BAŞVURUYU TAMAMLA'}
                   </button>
                 </div>
               </div>
@@ -420,7 +482,7 @@ const InfluencersView: React.FC = () => {
                   <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="4"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
                 <h3 className="text-3xl font-black mb-4">Harika!</h3>
-                <p className="text-zinc-400">Başvurunuz başarıyla alındı ve Telegram bağlantınız doğrulandı. KOL departmanımız en kısa sürede sizinle iletişime geçecek.</p>
+                <p className="text-zinc-400">Tüm verileriniz başarıyla kaydedildi ve Telegram bağlantınız doğrulandı. KOL departmanımız bütçe ve içerik planı için sizinle en kısa sürede iletişime geçecek.</p>
                 <button onClick={closeModal} className="btn-modal-next mt-10 !w-fit !px-12 mx-auto">Kapat</button>
               </div>
             )}
